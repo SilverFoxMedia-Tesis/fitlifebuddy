@@ -2,7 +2,7 @@ class AppRoutes {
   static const login = "/login";
   static const recoverAccount = "/recover-account";
   static const pacientHome = "/home";
-  static const nutritionistHome = "/home";
+  static const nutritionistHome = "/nutritionist-home";
   static const patients = "/patients";
   static const registerPacient = "/register-pacient";
   static const register = "/register";

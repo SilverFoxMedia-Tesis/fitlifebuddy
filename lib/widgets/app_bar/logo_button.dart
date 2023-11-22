@@ -1,3 +1,7 @@
+import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,23 +25,22 @@ class LogoButton extends StatelessWidget {
       () => InkWell(
         onTap: onTap,
         child: SizedBox(
-          width: expanded.value ? 204 : 64,
+          width: expanded.value 
+            ? ContainerSizes.logoButtonWitdthExpanded
+            : ContainerSizes.logoButtonWitdth,
           child: Row(
             children: [
               SvgPicture.asset(
                 icon,
-                width: 64,
-                height: 64,
+                width: ContainerSizes.logoButtonWitdth,
+                height: ContainerSizes.logoButtonWitdth,
               ),
               if (expanded.value) ...[
-                const SizedBox(width: 16),
+                AppSpacing.spacingHorizontalLg,
                 Text(
                   text,
-                  style: const TextStyle(
-                    color: Color(0xff3D5A80),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.70
+                  style: AppTextStyle.robotoSemibold20.copyWith(
+                    color: AppColors.secondary
                   ),
                 ),
               ]

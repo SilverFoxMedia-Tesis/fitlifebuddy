@@ -1,3 +1,9 @@
+import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,36 +29,28 @@ class AppButton extends StatelessWidget {
       () => InkWell(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: AppPadding.paddingLg,
           width: expanded.value ? 176 : 56,
           decoration: BoxDecoration(
             color: _getColor(colorNumber),
             borderRadius: expanded.value ? BorderRadius.circular(32) : null,
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xff3D5A80).withOpacity(0.25), 
-                blurRadius: 8,
-              )
-            ],
+            boxShadow: const [AppBoxShadows.secondary25Blur8],
             shape: expanded.value ? BoxShape.rectangle : BoxShape.circle,
           ),
           child: Row(
             children: [
               SvgPicture.asset(
                 icon,
-                width: 24,
-                height: 24,
+                width: ContainerSizes.appBarButtonWitdth,
+                height: ContainerSizes.appBarButtonWitdth,
               ),
               if (expanded.value) ...[
-                const SizedBox(width: 16),
+                AppSpacing.spacingHorizontalLg,
                 Text(
                   text,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.70
-                  ),
+                  style: AppTextStyle.robotoSemibold14.copyWith(
+                    color: AppColors.white,
+                  )
                 ),
               ]
             ],
@@ -65,9 +63,9 @@ class AppButton extends StatelessWidget {
   Color _getColor(num? colorNumber) {
     switch (colorNumber) {
       case 1:
-        return const Color(0xff3D5A80);
+        return AppColors.secondary;
       default:
-        return const Color(0xff80A1D4);
+        return AppColors.primary;
     }
   }
 }

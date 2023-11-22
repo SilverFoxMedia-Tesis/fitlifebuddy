@@ -4,8 +4,8 @@ import 'package:fitlifebuddy/pages/nutritionist_home_page.dart';
 import 'package:fitlifebuddy/pages/nutritionist_profile_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page.dart';
-import 'package:fitlifebuddy/pages/patients_page.dart';
-import 'package:fitlifebuddy/pages/plan_page.dart';
+import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
+import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
 import 'package:fitlifebuddy/pages/register_page.dart';
 import 'package:fitlifebuddy/pages/routine_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
@@ -23,20 +23,15 @@ final appPages = [
   GetPage(
     name: AppRoutes.pacientHome,
     page: () => const PatientHomePage(),
-    children: _patientChildren,
   ),
   GetPage(
     name: AppRoutes.nutritionistHome,
     page: () => const NutritionistHomePage(),
-    children: _nutritionistChildren,
   ),
   GetPage(
     name: AppRoutes.register,
     page: () => const RegisterPage(),
   ),
-];
-
-final _patientChildren = [
   GetPage(
     name: AppRoutes.pacientProfile,
     page: () => const PatientProfilePage(),
@@ -44,11 +39,7 @@ final _patientChildren = [
   GetPage(
     name: AppRoutes.plan,
     page: () => const PlanPage(),
-    children: _planChildren,
   ),
-];
-
-final _planChildren = [
   GetPage(
     name: AppRoutes.meal,
     page: () => const MealPage(),
@@ -57,9 +48,6 @@ final _planChildren = [
     name: AppRoutes.routine,
     page: () => const RoutinePage(),
   ),
-];
-
-final _nutritionistChildren = [
   GetPage(
     name: AppRoutes.nutritionistProfile,
     page: () => const NutritionistProfilePage(),
