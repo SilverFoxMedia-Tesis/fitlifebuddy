@@ -37,7 +37,6 @@ class PatientsPage extends StatelessWidget {
             ]
           ),
         ),
-        backgroundColor: AppColors.background,
       ),
     );
   }

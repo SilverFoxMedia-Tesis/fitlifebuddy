@@ -21,7 +21,7 @@ class MyAppBar extends StatelessWidget {
       padding: AppPadding.paddingVerticalXxxl,
       child: Obx(
         () => Container(
-          padding: AppPadding.paddingVerticalXxxlHorizontalLg,
+          padding: AppPadding.paddingAppBar,
           width: expanded.value 
             ? ContainerSizes.appBarWidthExpanded
             : ContainerSizes.appBarWidth,
@@ -38,7 +38,7 @@ class MyAppBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     LogoButton(
-                      icon: '../assets/images/logo.svg', 
+                      icon: '../assets/icons/logo.svg', 
                       text: 'fitlifebuddy'.tr,
                       onTap: () {
                         expanded.value = !expanded.value;
@@ -46,22 +46,22 @@ class MyAppBar extends StatelessWidget {
                     ),
                     AppSpacing.spacingVerticalXxxl,
                     AppButton(
-                      icon: '../assets/images/home.svg', 
+                      icon: '../assets/icons/home.svg', 
                       text: 'home'.tr,
                       onTap: () => Get.toNamed(AppRoutes.pacientHome),
                     ),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/images/person.svg', text: 'my_profile'.tr),
+                    AppButton(icon: '../assets/icons/person.svg', text: 'my_profile'.tr),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/images/notification.svg', text: 'notifications'.tr),
+                    AppButton(icon: '../assets/icons/notification.svg', text: 'notifications'.tr),
                   ],
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AppButton(icon: '../assets/images/settings.svg', text: 'settings'.tr, colorNumber: 1),
+                    AppButton(icon: '../assets/icons/settings.svg', text: 'settings'.tr, colorNumber: 1),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/images/help.svg', text: 'help'.tr, colorNumber: 1),
+                    AppButton(icon: '../assets/icons/help.svg', text: 'help'.tr, colorNumber: 1),
                   ],
                 ),
               ]

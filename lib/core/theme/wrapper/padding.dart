@@ -26,7 +26,8 @@ class AppPadding {
   static const paddingVerticalXxl = EdgeInsets.symmetric(vertical: Space.spaceXxl);
   static const paddingVerticalXxxl = EdgeInsets.symmetric(vertical: Space.spaceXxxl);
 
-  static const paddingVerticalXxxlHorizontalLg = EdgeInsets.symmetric(vertical: Space.spaceXxxl, horizontal: Space.spaceLg);
-  static const paddingHorizontal100 = EdgeInsets.symmetric(horizontal: 100);
-  static const paddingPage = EdgeInsets.symmetric(vertical: 32, horizontal: 48);
+  static const paddingAppBar = EdgeInsets.symmetric(vertical: Space.spaceXxxl, horizontal: Space.spaceLg);
+  static const paddingAppBanner = EdgeInsets.symmetric(horizontal: Space.spaceXl * 5);
+  static const paddingPage = EdgeInsets.symmetric(vertical: Space.spaceXxxl, horizontal: Space.spaceMd * 3);
+  static const paddingAppCard = EdgeInsets.symmetric(horizontal: Space.spaceMd * 3);
 }

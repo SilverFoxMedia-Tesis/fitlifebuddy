@@ -26,14 +26,14 @@ class LogoButton extends StatelessWidget {
         onTap: onTap,
         child: SizedBox(
           width: expanded.value 
-            ? ContainerSizes.logoButtonWitdthExpanded
-            : ContainerSizes.logoButtonWitdth,
+            ? ContainerSizes.logoButtonExpanded
+            : ContainerSizes.logoButtonSize,
           child: Row(
             children: [
               SvgPicture.asset(
                 icon,
-                width: ContainerSizes.logoButtonWitdth,
-                height: ContainerSizes.logoButtonWitdth,
+                height: ContainerSizes.logoButtonSize,
+                fit: BoxFit.fitHeight,
               ),
               if (expanded.value) ...[
                 AppSpacing.spacingHorizontalLg,

@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class BaseButtom extends StatelessWidget {
         height: ContainerSizes.baseButtonHeight,
         decoration: const BoxDecoration(
           color: AppColors.primary,
-          borderRadius: BorderRadius.all(Radius.circular(24)),
+          borderRadius: BorderRadiusWrapper.borderRadiusXxl,
         ),
         child: Text(
           text,

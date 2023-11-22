@@ -37,7 +37,6 @@ class PlanPage extends StatelessWidget {
             ]
           ),
         ),
-        backgroundColor: AppColors.background,
       ),
     );
   }

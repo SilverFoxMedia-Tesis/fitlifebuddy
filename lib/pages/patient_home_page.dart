@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
@@ -25,13 +26,12 @@ class PatientHomePage extends GetView {
               AppCard(
                 title: 'Mi plan actual', 
                 description: 'Revisa la información de tu plan alimentario y de ejercicios', 
-                icon: 'assets/images/person.svg',
+                icon: 'assets/icons/person.svg',
                 onTap: () => Get.toNamed(AppRoutes.plan),
               )
             ]
           ),
         ),
-        backgroundColor: AppColors.background,
       ),
     );
   }

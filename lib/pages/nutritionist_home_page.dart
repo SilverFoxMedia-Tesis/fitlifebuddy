@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
@@ -27,14 +26,14 @@ class NutritionistHomePage extends GetView {
                   AppCard(
                     title: 'Mis pacientes', 
                     description: 'Revisa la información de cada uno de tus pacientes', 
-                    icon: '..assets/images/person.svg',
+                    icon: '../assets/icons/person.svg',
                     onTap: () => Get.toNamed(AppRoutes.patients)
                   ),
                   AppSpacing.spacingHorizontalLg,
                   AppCard(
                     title: 'Registrar paciente', 
                     description: 'Inscribe a tu paciente', 
-                    icon: '../assets/images/person.svg',
+                    icon: '../assets/icons/person.svg',
                     onTap: () => Get.toNamed(AppRoutes.registerPacient)
                   ),
                 ],
@@ -42,7 +41,6 @@ class NutritionistHomePage extends GetView {
             ]
           ),
         ),
-        backgroundColor: AppColors.background,
       ),
     );
   }

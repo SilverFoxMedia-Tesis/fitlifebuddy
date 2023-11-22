@@ -1,6 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
@@ -33,7 +34,7 @@ class AppButton extends StatelessWidget {
           width: expanded.value ? 176 : 56,
           decoration: BoxDecoration(
             color: _getColor(colorNumber),
-            borderRadius: expanded.value ? BorderRadius.circular(32) : null,
+            borderRadius: expanded.value ? BorderRadiusWrapper.borderRadiusXxxl : null,
             boxShadow: const [AppBoxShadows.secondary25Blur8],
             shape: expanded.value ? BoxShape.rectangle : BoxShape.circle,
           ),
@@ -41,8 +42,8 @@ class AppButton extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 icon,
-                width: ContainerSizes.appBarButtonWitdth,
-                height: ContainerSizes.appBarButtonWitdth,
+                height: ContainerSizes.appBarButtonSize,
+                fit: BoxFit.fitHeight,
               ),
               if (expanded.value) ...[
                 AppSpacing.spacingHorizontalLg,

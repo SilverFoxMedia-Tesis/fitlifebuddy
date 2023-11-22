@@ -1,5 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
+import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
@@ -26,12 +28,12 @@ class AppCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        padding: AppPadding.paddingXxxl,
-        width: 592,
-        height: 160,
+        padding: AppPadding.paddingAppCard,
+        width: ContainerSizes.appCardWidth,
+        height: ContainerSizes.appCardHeight,
         decoration: const BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadiusWrapper.borderRadiusLg,
           boxShadow: [AppBoxShadows.secondary25Blur8],
         ),
         child: Row(
@@ -56,10 +58,14 @@ class AppCard extends StatelessWidget {
                 )
               ],
             ),
-            SvgPicture.asset(
-              icon,
-              width: 32,
-              height: 32,
+            Padding(
+              padding: AppPadding.paddingHorizontalLg,
+              child: SvgPicture.asset(
+                icon,
+                height: ContainerSizes.appCardIconSize,
+                fit: BoxFit.fitHeight,
+                colorFilter: const ColorFilter.mode(AppColors.secondary, BlendMode.srcIn),
+              ),
             )
           ],
         ),
