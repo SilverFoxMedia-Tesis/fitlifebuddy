@@ -1,0 +1,1 @@
+enum TypeFoodCondition {preference, restriction, allergy}

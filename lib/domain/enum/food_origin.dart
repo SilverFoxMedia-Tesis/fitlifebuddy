@@ -1,0 +1,1 @@
+enum FoodOrigin {animal, nonAnimal}

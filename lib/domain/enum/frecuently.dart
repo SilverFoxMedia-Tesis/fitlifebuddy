@@ -1,0 +1,1 @@
+enum Frecuently {monthly, bimonthly, quarterly}

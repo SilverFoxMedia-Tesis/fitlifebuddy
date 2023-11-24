@@ -1,0 +1,1 @@
+enum TypeHealthCondition {surgery, illness}
