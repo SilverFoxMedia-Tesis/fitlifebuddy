@@ -15,4 +15,11 @@ class AppBoxShadows {
     spreadRadius: 0,
   );
 
+  static const primary25Blur8 = BoxShadow(
+    color: Color(0x3f80a1d4),
+    offset: Offset(0, 0),
+    blurRadius: 8,
+    spreadRadius: 0,
+  );
+
 }

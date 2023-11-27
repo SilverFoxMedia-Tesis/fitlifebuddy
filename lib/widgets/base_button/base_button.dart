@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 
 class BaseButtom extends StatelessWidget {
   final String text;
+  final double width;
   final void Function()? onTap;
 
   const BaseButtom({
     super.key, 
-    required this.text, 
-    this.onTap
+    required this.text,
+    this.width = ContainerSizes.baseButtonWidth,
+    this.onTap,
   });
 
   @override
@@ -20,7 +22,7 @@ class BaseButtom extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        width: ContainerSizes.baseButtonWidth,
+        width: width,
         height: ContainerSizes.baseButtonHeight,
         decoration: const BoxDecoration(
           color: AppColors.primary,

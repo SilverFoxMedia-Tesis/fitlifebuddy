@@ -4,7 +4,9 @@ import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/empty_container/empty_container.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PlanPage extends StatelessWidget {
   const PlanPage({super.key});
@@ -26,11 +28,12 @@ class PlanPage extends StatelessWidget {
                   color: AppColors.secondary,
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Center(
                   child: EmptyContainer(
                     text: 'Aún no tienes un plan en curso. Dale clic al siguiente botón para generar un nuevo plan.', 
                     buttonTitle: 'Generar plan',
+                    onTap: () => Get.toNamed(AppRoutes.plan2),
                   ),
                 ),
               )

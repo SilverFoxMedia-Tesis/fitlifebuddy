@@ -1,4 +1,5 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
@@ -38,30 +39,34 @@ class MyAppBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     LogoButton(
-                      icon: '../assets/icons/logo.svg', 
-                      text: 'fitlifebuddy'.tr,
+                      icon: AppIcons.logo, 
+                      text: 'Fitlifebuddy'.tr,
                       onTap: () {
                         expanded.value = !expanded.value;
                       },
                     ),
                     AppSpacing.spacingVerticalXxxl,
                     AppButton(
-                      icon: '../assets/icons/home.svg', 
-                      text: 'home'.tr,
+                      icon: AppIcons.home, 
+                      text: 'Home'.tr,
                       onTap: () => Get.toNamed(AppRoutes.pacientHome),
                     ),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/icons/person.svg', text: 'my_profile'.tr),
+                    AppButton(
+                      icon: AppIcons.person, 
+                      text: 'My profile'.tr,
+                      onTap: () => Get.toNamed(AppRoutes.pacientProfile),
+                    ),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/icons/notification.svg', text: 'notifications'.tr),
+                    AppButton(icon: AppIcons.notification, text: 'Notifications'.tr),
                   ],
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AppButton(icon: '../assets/icons/settings.svg', text: 'settings'.tr, colorNumber: 1),
+                    AppButton(icon: AppIcons.settings, text: 'Settings'.tr, colorNumber: 1),
                     AppSpacing.spacingVerticalXxxl,
-                    AppButton(icon: '../assets/icons/help.svg', text: 'help'.tr, colorNumber: 1),
+                    AppButton(icon: AppIcons.help, text: 'Help'.tr, colorNumber: 1),
                   ],
                 ),
               ]

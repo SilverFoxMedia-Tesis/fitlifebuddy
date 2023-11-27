@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 class EmptyContainer extends StatelessWidget {
   final String text;
   final String buttonTitle;
+  final void Function()? onTap;
 
   const EmptyContainer({
     super.key,
     required this.text, 
     required this.buttonTitle,
+    this.onTap,
   });
 
   @override
@@ -33,6 +35,7 @@ class EmptyContainer extends StatelessWidget {
         AppSpacing.spacingVerticalXxl,
         BaseButtom(
           text: buttonTitle,
+          onTap: onTap,
         ),
       ],
     );

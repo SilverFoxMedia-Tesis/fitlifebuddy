@@ -33,6 +33,12 @@ class AppTextStyle {
     letterSpacing: 1.0,
   );
 
+  static const robotoMedium24 = TextStyle(
+    fontSize: AppFontSize.fontSizeXxl,
+    fontWeight: AppFontWeight.medium,
+    letterSpacing: 1.2,
+  );
+
   static const robotoSemibold24 = TextStyle(
     fontSize: AppFontSize.fontSizeXxl,
     fontWeight: AppFontWeight.semiBold,
@@ -43,6 +49,12 @@ class AppTextStyle {
     fontSize: AppFontSize.fontSizeXxxl,
     fontWeight: AppFontWeight.semiBold,
     letterSpacing: 1.6,
+  );
+
+  static const robotoSemibold36 = TextStyle(
+    fontSize: AppFontSize.fontSizeXxxl + 4,
+    fontWeight: AppFontWeight.semiBold,
+    letterSpacing: 1.8,
   );
 
 }

@@ -15,22 +15,20 @@ class PatientHomePage extends GetView {
   @override
   Widget build(BuildContext context) {
     return LauncherPage(
-      child: Scaffold(
-        body: Padding(
-          padding: AppPadding.paddingPage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const AppBanner(text: '¡Estás en el camino correcto hacia una vida saludable! Sigue adelante y mantén el enfoque en tu plan de alimentación y rutinas de ejercicio.'),
-              AppSpacing.spacingVerticalXxxl,
-              AppCard(
-                title: 'Mi plan actual', 
-                description: 'Revisa la información de tu plan alimentario y de ejercicios', 
-                icon: 'assets/icons/person.svg',
-                onTap: () => Get.toNamed(AppRoutes.plan),
-              )
-            ]
-          ),
+      child: Padding(
+        padding: AppPadding.paddingPage,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const AppBanner(text: '¡Estás en el camino correcto hacia una vida saludable! Sigue adelante y mantén el enfoque en tu plan de alimentación y rutinas de ejercicio.'),
+            AppSpacing.spacingVerticalXxxl,
+            AppCard(
+              title: 'Mi plan actual', 
+              description: 'Revisa la información de tu plan alimentario y de ejercicios', 
+              icon: 'assets/icons/person.svg',
+              onTap: () => Get.toNamed(AppRoutes.plan),
+            )
+          ]
         ),
       ),
     );

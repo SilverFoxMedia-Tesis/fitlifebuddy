@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: AppRoutes.pacientHome,
+      initialRoute: AppRoutes.login,
       getPages: appPages,
     );
   }

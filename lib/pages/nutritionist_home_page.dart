@@ -1,3 +1,4 @@
+import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
@@ -13,33 +14,31 @@ class NutritionistHomePage extends GetView {
   @override
   Widget build(BuildContext context) {
     return LauncherPage(
-      child: Scaffold(
-        body: Padding(
-          padding: AppPadding.paddingPage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const AppBanner(text: 'Bienvenido nutricionista!'),
-              AppSpacing.spacingVerticalXxxl,
-              Row(
-                children: [
-                  AppCard(
-                    title: 'Mis pacientes', 
-                    description: 'Revisa la información de cada uno de tus pacientes', 
-                    icon: '../assets/icons/person.svg',
-                    onTap: () => Get.toNamed(AppRoutes.patients)
-                  ),
-                  AppSpacing.spacingHorizontalLg,
-                  AppCard(
-                    title: 'Registrar paciente', 
-                    description: 'Inscribe a tu paciente', 
-                    icon: '../assets/icons/person.svg',
-                    onTap: () => Get.toNamed(AppRoutes.registerPacient)
-                  ),
-                ],
-              )
-            ]
-          ),
+      child: Padding(
+        padding: AppPadding.paddingPage,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const AppBanner(text: 'Bienvenido nutricionista!'),
+            AppSpacing.spacingVerticalXxxl,
+            Row(
+              children: [
+                AppCard(
+                  title: 'Mis pacientes', 
+                  description: 'Revisa la información de cada uno de tus pacientes', 
+                  icon: AppIcons.person,
+                  onTap: () => Get.toNamed(AppRoutes.patients)
+                ),
+                AppSpacing.spacingHorizontalLg,
+                AppCard(
+                  title: 'Registrar paciente', 
+                  description: 'Inscribe a tu paciente', 
+                  icon: AppIcons.person,
+                  onTap: () => Get.toNamed(AppRoutes.registerPacient)
+                ),
+              ],
+            )
+          ]
         ),
       ),
     );
