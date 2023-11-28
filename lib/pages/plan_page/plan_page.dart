@@ -3,7 +3,7 @@ import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/empty_container/empty_container.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/empty_container.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

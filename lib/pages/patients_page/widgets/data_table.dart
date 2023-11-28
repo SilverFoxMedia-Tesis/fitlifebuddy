@@ -35,14 +35,32 @@ class PatientsDataTable extends StatelessWidget {
           size: ColumnSize.L,
         ),
       ],
-      rows: List<DataRow>.generate(
-        4,
-        (index) => const DataRow(cells: [
-            DataCell(Text('Julissa')),
-            DataCell(Text('Ponte')),
-            DataCell(Text('Sí')),
-            DataCell(Text('Mensual')),
-          ]))
+      rows: const [
+        DataRow(cells: [
+          DataCell(Text('Mark')),
+          DataCell(Text('Smith')),
+          DataCell(Text('Sí')),
+          DataCell(Text('Mensual')),
+        ]),
+        DataRow(cells: [
+          DataCell(Text('John')),
+          DataCell(Text('Doe')),
+          DataCell(Text('No')),
+          DataCell(Text('Semanal')),
+        ]),
+        DataRow(cells: [
+          DataCell(Text('Jane')),
+          DataCell(Text('Obrien')),
+          DataCell(Text('Sí')),
+          DataCell(Text('Mensual')),
+        ]),
+        DataRow(cells: [
+          DataCell(Text('Mike')),
+          DataCell(Text('Johnson')),
+          DataCell(Text('No')),
+          DataCell(Text('Quincenal')),
+        ]),
+      ],
     );
   }
 }

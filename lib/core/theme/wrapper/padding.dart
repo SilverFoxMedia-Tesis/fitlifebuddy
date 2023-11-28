@@ -31,4 +31,5 @@ class AppPadding {
   static const paddingPage = EdgeInsets.symmetric(vertical: Space.spaceXxxl, horizontal: Space.spaceMd * 3);
   static const paddingAppCard = EdgeInsets.symmetric(horizontal: Space.spaceMd * 3);
   static const paddingPage2 = EdgeInsets.symmetric(vertical: Space.spaceXxxl * 4);
+  static const paddingDialog = EdgeInsets.symmetric(vertical: Space.spaceXxxl, horizontal: Space.spaceXxl);
 }

@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 class BaseButtom extends StatelessWidget {
   final String text;
   final double width;
+  final Color? color;
   final void Function()? onTap;
 
   const BaseButtom({
     super.key, 
     required this.text,
     this.width = ContainerSizes.baseButtonWidth,
+    this.color,
     this.onTap,
   });
 
@@ -24,8 +26,8 @@ class BaseButtom extends StatelessWidget {
         alignment: Alignment.center,
         width: width,
         height: ContainerSizes.baseButtonHeight,
-        decoration: const BoxDecoration(
-          color: AppColors.primary,
+        decoration: BoxDecoration(
+          color: color ?? AppColors.primary,
           borderRadius: BorderRadiusWrapper.borderRadiusXxl,
         ),
         child: Text(

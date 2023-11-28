@@ -13,4 +13,6 @@ class ContainerSizes {
   static const appCardWidth = 592.0;
   static const appCardHeight = 160.0;
   static const coverPhotoWeight = 590.0;
+  static const notificationCardWidth = 400.0;
+  static const notificationCardHeight = 112.0;
 }
