@@ -34,7 +34,7 @@ class NutritionistHomePage extends GetView {
                   title: 'Registrar paciente', 
                   description: 'Inscribe a tu paciente', 
                   icon: AppIcons.person,
-                  onTap: () => Get.toNamed(AppRoutes.registerPacient)
+                  onTap: () => Get.toNamed(AppRoutes.registerPatient)
                 ),
               ],
             )

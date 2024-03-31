@@ -51,7 +51,7 @@ class LoginForm extends StatelessWidget {
         AppSpacing.spacingVerticalXxl,
         BaseButtom(
           text: 'Iniciar sesión',
-          onTap: () => Get.toNamed(AppRoutes.pacientHome),
+          onTap: () => Get.toNamed(AppRoutes.home),
         ),
       ],
     );

@@ -58,7 +58,7 @@ class SuccesfulRegisterContainer extends StatelessWidget {
           AppSpacing.spacingVerticalXxl,
           BaseButtom(
           text: 'Ir a Inicio',
-          onTap: () => Get.toNamed(AppRoutes.nutritionistHome),
+          onTap: () => Get.toNamed(AppRoutes.home),
             ),
           
         ],

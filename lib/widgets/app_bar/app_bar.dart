@@ -49,13 +49,13 @@ class MyAppBar extends StatelessWidget {
                     AppButton(
                       icon: AppIcons.home, 
                       text: 'Home'.tr,
-                      onTap: () => Get.toNamed(AppRoutes.pacientHome),
+                      onTap: () => Get.toNamed(AppRoutes.home),
                     ),
                     AppSpacing.spacingVerticalXxxl,
                     AppButton(
                       icon: AppIcons.person, 
                       text: 'My profile'.tr,
-                      onTap: () => Get.toNamed(AppRoutes.pacientProfile),
+                      onTap: () => Get.toNamed(AppRoutes.profile),
                     ),
                     AppSpacing.spacingVerticalXxxl,
                     AppButton(icon: AppIcons.notification, text: 'Notifications'.tr),

@@ -1,12 +1,9 @@
 import 'package:fitlifebuddy/pages/login_page/login_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_page.dart';
-import 'package:fitlifebuddy/pages/nutritionist_home_page.dart';
-import 'package:fitlifebuddy/pages/nutritionist_profile_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_page.dart';
 import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
-import 'package:fitlifebuddy/pages/plan_page/plan_page_2.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
@@ -26,22 +23,17 @@ final appPages = [
     transition: Transition.noTransition,
   ),
   GetPage(
-    name: AppRoutes.pacientHome,
+    name: AppRoutes.home,
     page: () => const PatientHomePage(),
     transition: Transition.noTransition,
   ),
   GetPage(
-    name: AppRoutes.nutritionistHome,
-    page: () => const NutritionistHomePage(),
-    transition: Transition.noTransition,
-  ),
-  GetPage(
-    name: AppRoutes.register,
+    name: AppRoutes.registerPatient,
     page: () => const RegisterPatientPage(),
     transition: Transition.noTransition,
   ),
   GetPage(
-    name: AppRoutes.pacientProfile,
+    name: AppRoutes.profile,
     page: () => const PatientProfilePage(),
     transition: Transition.noTransition,
   ),
@@ -61,28 +53,18 @@ final appPages = [
     transition: Transition.noTransition,
   ),
   GetPage(
-    name: AppRoutes.nutritionistProfile,
-    page: () => const NutritionistProfilePage(),
-    transition: Transition.noTransition,
-  ),
-  GetPage(
     name: AppRoutes.patients,
     page: () => const PatientsPage(),
     transition: Transition.noTransition,
   ),
   GetPage(
-    name: AppRoutes.registerPacient,
+    name: AppRoutes.registerPatient,
     page: () => const RegisterPatientPage(),
     transition: Transition.noTransition,
   ),
   GetPage(
     name: AppRoutes.successfulRegister,
     page: () => const SuccesfulRegisterPage(),
-    transition: Transition.noTransition,
-  ),
-  GetPage(
-    name: AppRoutes.plan2,
-    page: () => const PlanPage2(),
     transition: Transition.noTransition,
   ),
 ];

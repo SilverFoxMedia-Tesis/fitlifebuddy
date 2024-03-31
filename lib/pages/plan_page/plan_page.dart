@@ -33,7 +33,7 @@ class PlanPage extends StatelessWidget {
                   child: EmptyContainer(
                     text: 'Aún no tienes un plan en curso. Dale clic al siguiente botón para generar un nuevo plan.', 
                     buttonTitle: 'Generar plan',
-                    onTap: () => Get.toNamed(AppRoutes.plan2),
+                    onTap: () => Get.toNamed(AppRoutes.plan),
                   ),
                 ),
               )
