@@ -1,1 +1,1 @@
-enum DietType {vegan, vegetarian, omnivorous}
+enum DietType { vegan, vegetarian, omnivorous }

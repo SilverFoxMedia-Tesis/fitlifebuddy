@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main({Widget? page}) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Languages.init();
+  runApp(page ?? const MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -1,0 +1,17 @@
+enum CategoryName {
+  dairyProducts,
+  fatsOilsShortenings,
+  meatPoultry,
+  fishSeaFood,
+  vegetablesAE,
+  vegetablesFP,
+  vegetablesRZ,
+  fruitsAF,
+  fruitsGP,
+  breadsCerealsFastfoodGrains,
+  soups,
+  dessertsSweets,
+  jamsJellies,
+  seedsAndNuts,
+  drinksAlcoholBeverages,
+}

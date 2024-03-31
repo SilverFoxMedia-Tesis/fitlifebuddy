@@ -1,1 +1,1 @@
-enum Frecuently {monthly, bimonthly, quarterly}
+enum Frecuently { monthly, bimonthly, quarterly }

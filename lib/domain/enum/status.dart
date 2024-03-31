@@ -1,0 +1,1 @@
+enum Status { actived, canceled, completed, unfilled, stopped }

@@ -1,1 +1,1 @@
-enum TypeFoodCondition {preference, restriction, allergy}
+enum TypeFoodCondition { preference, restriction, allergy }

@@ -1,1 +1,1 @@
-enum TypeHealthCondition {surgery, illness}
+enum TypeHealthCondition { surgery, illness }
