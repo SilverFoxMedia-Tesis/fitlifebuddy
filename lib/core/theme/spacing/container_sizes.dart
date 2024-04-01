@@ -16,4 +16,5 @@ class ContainerSizes {
   static const notificationCardWidth = 400.0;
   static const notificationCardHeight = 112.0;
   static const baseTextfieldWidth = 348.0;
+  static const baseContainerdWidth = 348.0;
 }

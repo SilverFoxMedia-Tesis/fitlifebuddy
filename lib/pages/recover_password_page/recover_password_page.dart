@@ -11,16 +11,17 @@ class RecoverPasswordPage extends GetView {
   Widget build(BuildContext context) {
     return LauncherPage(
       isLogged: false,
-      child: const Row(
+      child: Row(
         children: [
-          SizedBox(
-            width: 591,
+          const Expanded(
+            flex: 5,
             child: RecoverPasswordForm(),
             ),
           Cover(
-            title: 'Bienvenido a FitLifeBuddy', 
-            description: 'Combate el sobrepeso y mejora tus hábitos alimenticios y de ejercicio. ¡Únete ahora!'
-          )
+            title: 'welcome_to'.tr, 
+            description: 'phrase0'.tr,
+            image: '../assets/images/cover_photo.png',
+          ),
         ],
       ),
     );

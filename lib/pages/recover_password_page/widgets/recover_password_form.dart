@@ -1,4 +1,5 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
 import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
@@ -15,29 +16,32 @@ class RecoverPasswordForm extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'Recuperar contraseña',
-          style: AppTextStyle.robotoSemibold34.copyWith(
-            color: AppColors.secondary,
-          ),
-        ),
-        AppSpacing.spacingVerticalXxl,
         SizedBox(
-          width: 348,
+          width: ContainerSizes.baseContainerdWidth,
           child: Text(
-            'Ingresa el correo electrónico que utilizaste para registrarte y nosotros te enviaremos las instrucciones para recuperar tu contraseña.',
-            style: AppTextStyle.robotoSemibold14.copyWith(
+            'recover_password'.tr,
+            style: AppTextStyle.robotoSemibold20.copyWith(
               color: AppColors.secondary,
             ),
           ),
         ),
         AppSpacing.spacingVerticalXxl,
-        const AppTextfield(
-          title: 'Correo electrónico',
+        SizedBox(
+          width: ContainerSizes.baseContainerdWidth,
+          child: Text(
+            'recover_password_description'.tr,
+            style: AppTextStyle.robotoMedium14.copyWith(
+              color: AppColors.secondary,
+            ),
+          ),
+        ),
+        AppSpacing.spacingVerticalXxl,
+        AppTextfield(
+          title: 'email'.tr,
         ),
         AppSpacing.spacingVerticalXxl,
         BaseButtom(
-          text: 'Recuperar contraseña',
+          text: 'recover_password'.tr,
           onTap: () => Get.toNamed(AppRoutes.login),
         ),
       ],

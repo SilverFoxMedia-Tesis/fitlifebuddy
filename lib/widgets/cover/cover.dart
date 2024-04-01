@@ -13,7 +13,7 @@ class Cover extends StatelessWidget {
     super.key, 
     required this.title, 
     required this.description, 
-    this.image = '../assets/images/cover_photo.png', 
+    required this.image, 
   });
 
   @override

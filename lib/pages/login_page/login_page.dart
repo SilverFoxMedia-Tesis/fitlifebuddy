@@ -19,8 +19,9 @@ class LoginPage extends GetView {
           ),
           Cover(
             title: 'welcome_to'.tr, 
-            description: 'phrase0'.tr
-          )
+            description: 'phrase0'.tr,
+            image: '../assets/images/cover_photo.png',
+          ),
         ],
       ),
     );
