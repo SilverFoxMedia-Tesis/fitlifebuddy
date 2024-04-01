@@ -24,25 +24,27 @@ class LoginForm extends StatelessWidget {
         ),
         AppSpacing.spacingVerticalXxl,
         Text(
-          'Completa tus datos',
+          'complete_data'.tr,
           style: AppTextStyle.robotoSemibold20.copyWith(
             color: AppColors.secondary,
           ),
         ),
         AppSpacing.spacingVerticalXxl,
-        const AppTextfield(
-          title: 'Correo electrónico',
+        AppTextfield(
+          title: 'email'.tr,
         ),
         AppSpacing.spacingVerticalXxl,
-        const AppTextfield(
-          title: 'Contraseña',
-          isPassword: true,
+        AppTextfield(
+          title: 'password'.tr,
+          suffixIcon: Icons.remove_red_eye_rounded,
+          onSuffixIconPressed: () {},
+          obscureText: true,
         ),
         AppSpacing.spacingVerticalXxl,
         InkWell(
           onTap: () => Get.toNamed(AppRoutes.recoverPassword),
           child: Text(
-            'Olvidaste tu contraseña?',
+            'forgot_password'.tr,
             style: AppTextStyle.robotoMedium14.copyWith(
               color: AppColors.secondary,
             ),
@@ -50,7 +52,7 @@ class LoginForm extends StatelessWidget {
         ),
         AppSpacing.spacingVerticalXxl,
         BaseButtom(
-          text: 'Iniciar sesión',
+          text: 'login'.tr,
           onTap: () => Get.toNamed(AppRoutes.home),
         ),
       ],

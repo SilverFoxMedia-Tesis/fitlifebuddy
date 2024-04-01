@@ -50,13 +50,13 @@ class PersonalInfoForm extends StatelessWidget {
                 children: [
                   AppTextfield(
                     title: 'Peso',
-                    suflixText: 'kg',
+                    suffixText: 'kg',
                     width: 162,
                   ),
                   AppSpacing.spacingHorizontalXxl,
                   AppTextfield(
                     title: 'Altura',
-                    suflixText: 'cm',
+                    suffixText: 'cm',
                     width: 162,
                   ),
                 ],

@@ -1,8 +1,8 @@
 {
     "complete_data": "Completa tus datos",
     "email": "Correo electrónico",
-    "passwprd": "Contraseña",
-    "forgot_password": "Olvidaste tu contraseña?",
+    "password": "Contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
     "login": "Iniciar sesión",
     "welcome_to": "Bienvenido a FitLifeBuddy",
     "phrase0": "Combate el sobrepeso y mejora tus hábitos alimenticios y de ejercicio. ¡Únete ahora!",

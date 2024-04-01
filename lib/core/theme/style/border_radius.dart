@@ -3,6 +3,7 @@ class AppBorderRadius {
   static const borderRadiusXs = 2.0;
   static const borderRadiusSm = 4.0;
   static const borderRadiusMd = 8.0;
+  static const borderRadius14 = 14.0;
   static const borderRadiusLg = 16.0;
   static const borderRadiusXl = 20.0;  
   static const borderRadiusXxl = 24.0;  

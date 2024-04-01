@@ -19,6 +19,7 @@ class Cover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: 7,
       child: Container(
         color: AppColors.white,
         child: Column(
@@ -29,13 +30,14 @@ class Cover extends StatelessWidget {
               style: AppTextStyle.robotoSemibold36.copyWith(
                 color: AppColors.secondary
               ),
+              textAlign: TextAlign.center,
             ),
             AppSpacing.spacingVerticalXxl,
             SizedBox(
-              width: 590,
+              width: 500,
               child: Text(
                 description,
-                style: AppTextStyle.robotoMedium24.copyWith(
+                style: AppTextStyle.robotoMedium20.copyWith(
                   color: AppColors.secondary
                 ),
                 textAlign: TextAlign.center,

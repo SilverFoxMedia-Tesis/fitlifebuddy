@@ -8,6 +8,8 @@ class BorderRadiusWrapper {
       BorderRadius.all(Radius.circular(AppBorderRadius.borderRadiusSm));
   static const borderRadiusMd =
       BorderRadius.all(Radius.circular(AppBorderRadius.borderRadiusMd));
+  static const borderRadius14 =
+      BorderRadius.all(Radius.circular(AppBorderRadius.borderRadius14));
   static const borderRadiusLg =
       BorderRadius.all(Radius.circular(AppBorderRadius.borderRadiusLg));
   static const borderRadiusXl =
