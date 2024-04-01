@@ -24,7 +24,7 @@ class PatientProfilePage extends StatelessWidget {
             AppSpacing.spacingVerticalXxxl,
             Text(
               'Mi perfil',
-              style: AppTextStyle.robotoSemibold32.copyWith(
+              style: AppTextStyle.robotoSemibold34.copyWith(
                 color: AppColors.secondary,
               ),
             ),

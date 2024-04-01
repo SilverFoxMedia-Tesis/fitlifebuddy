@@ -28,7 +28,7 @@ class NotificationPage extends StatelessWidget {
         children: [
           const Text(
             'Mis notificaciones',
-            style: AppTextStyle.robotoSemibold32,
+            style: AppTextStyle.robotoSemibold34,
           ),
           AppSpacing.spacingVerticalXxl,
           ListView(

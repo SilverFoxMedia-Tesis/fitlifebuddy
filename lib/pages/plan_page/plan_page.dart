@@ -24,7 +24,7 @@ class PlanPage extends StatelessWidget {
               AppSpacing.spacingVerticalXxl,
               Text(
                 'Mi plan actual',
-                style: AppTextStyle.robotoSemibold32.copyWith(
+                style: AppTextStyle.robotoSemibold34.copyWith(
                   color: AppColors.secondary,
                 ),
               ),

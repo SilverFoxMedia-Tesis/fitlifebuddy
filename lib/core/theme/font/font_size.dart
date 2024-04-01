@@ -1,9 +1,12 @@
 class AppFontSize {
-  static const fontSizeXs = 4.0;
-  static const fontSizeSm = 8.0;
-  static const fontSizeMd = 14.0;
-  static const fontSizeLg = 16.0;
-  static const fontSizeXl = 20.0;
-  static const fontSizeXxl = 24.0;
-  static const fontSizeXxxl = 32.0;
+  static const fontSize10 = 10.0;
+  static const fontSize12 = 12.0;
+  static const fontSize14 = 14.0;
+  static const fontSize16 = 16.0;
+  static const fontSize20 = 20.0;
+  static const fontSize24 = 24.0;
+  static const fontSize34 = 34.0;
+  static const fontSize48 = 48.0;
+  static const fontSize60 = 60.0;
+  static const fontSize96 = 96.0;
 }

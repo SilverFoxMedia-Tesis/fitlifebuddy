@@ -19,7 +19,7 @@ class SuccesfulRegisterContainer extends StatelessWidget {
         children: [
           Text(
             'Registro exitoso!',
-            style: AppTextStyle.robotoSemibold32.copyWith(
+            style: AppTextStyle.robotoSemibold34.copyWith(
               color: AppColors.secondary,
             ),
           ),

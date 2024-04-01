@@ -17,7 +17,7 @@ class RecoverPasswordForm extends StatelessWidget {
       children: [
         Text(
           'Recuperar contraseña',
-          style: AppTextStyle.robotoSemibold32.copyWith(
+          style: AppTextStyle.robotoSemibold34.copyWith(
             color: AppColors.secondary,
           ),
         ),

@@ -30,14 +30,14 @@ class RoutinePage extends StatelessWidget {
                   children: [
                     Text(
                       'Rutina |',
-                      style: AppTextStyle.robotoSemibold32.copyWith(
+                      style: AppTextStyle.robotoSemibold34.copyWith(
                         color: AppColors.secondary
                       ),
                     ),
                     AppSpacing.spacingHorizontalLg,
                     Text(
                       'Miércoles, 15 de Noviembre',
-                      style: AppTextStyle.robotoRegular32.copyWith(
+                      style: AppTextStyle.robotoRegular34.copyWith(
                         color: AppColors.primary
                       ),
                     ),
