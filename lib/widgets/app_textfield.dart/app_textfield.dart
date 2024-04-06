@@ -13,6 +13,8 @@ class AppTextfield extends StatelessWidget {
   final String? hintText;
   final TextEditingController? controller;
   final TextInputType inputType;
+  final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onChanged;
   final String? suffixText;
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
@@ -26,6 +28,8 @@ class AppTextfield extends StatelessWidget {
     this.hintText,
     this.controller,
     this.inputType = TextInputType.text,
+    this.validator,
+    this.onChanged,
     this.suffixText,
     this.suffixIcon,
     this.onSuffixIconPressed,
@@ -34,52 +38,78 @@ class AppTextfield extends StatelessWidget {
     this.width = ContainerSizes.baseTextfieldWidth,
   });
 
+  void _onChanged(FormFieldState<String> formFieldState, String value) {
+    var onChanged = this.onChanged;
+    if (onChanged != null) {
+      onChanged(value);
+    }
+    formFieldState.didChange(value);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (title != null) ...[
-          Text(
-            title!,
-            style: buildTitleTextStyle(),
-          ),
-          AppSpacing.spacingVerticalSm,
-        ],
-        Container(
-          width: width,
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadiusWrapper.borderRadius14,
-            boxShadow: [AppBoxShadows.primary25Blur8],
-          ),
-          child: TextField(
-            controller: controller,
-            keyboardType: inputType,
-            style: AppTextStyle.robotoRegular14.copyWith(
-              color: AppColors.secondary,
+    return FormField<String>(
+      validator: validator,
+      initialValue: controller?.text,
+      builder: (FormFieldState<String> formFieldState) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (title != null) ...[
+              Text(
+                title!,
+                style: buildTitleTextStyle(),
+              ),
+              AppSpacing.spacingVerticalSm,
+            ],
+            Container(
+              width: width,
+              decoration: const BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadiusWrapper.borderRadius14,
+                boxShadow: [AppBoxShadows.primary25Blur8],
+              ),
+              child: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: buildTextStyle(),
+                  suffixIcon: suffixIcon != null ? buildSuffixIcon(): null,
+                  suffixIconColor: AppColors.primary,
+                  suffixIconConstraints: const BoxConstraints(),
+                  suffixText: suffixText,
+                  suffixStyle: buildTextStyle(),
+                  contentPadding: AppPadding.paddingHorizontalLg,
+                  border: InputBorder.none,
+                  enabledBorder: AppInputBorder.hiddenBorder,
+                  focusedBorder: AppInputBorder.focusedBorder,
+                  errorBorder: AppInputBorder.errorBorder,
+                ),
+                keyboardType: inputType,
+                style: AppTextStyle.robotoRegular14.copyWith(
+                  color: AppColors.secondary,
+                ),
+                readOnly: readOnly,
+                obscureText: obscureText,
+                onChanged: (String value) {
+                  _onChanged(formFieldState, value);
+                },
+                cursorColor: AppColors.secondary,
+              ),
             ),
-            cursorColor: AppColors.secondary,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: hintText != null ? buildTextStyle() : null,
-              suffixIconConstraints: const BoxConstraints(),
-              suffixIcon: buildSuffixIcon(),
-              suffixIconColor: AppColors.primary,
-              suffixText: suffixText,
-              suffixStyle: suffixText != null ? buildTextStyle(): null,
-              contentPadding: AppPadding.paddingHorizontalLg,
-              border: InputBorder.none,
-              enabledBorder: AppInputBorder.hiddenBorder,
-              focusedBorder: AppInputBorder.focusedBorder,
-              errorBorder: AppInputBorder.errorBorder,
-            ),
-            readOnly: readOnly,
-            obscureText: obscureText,
-          ),
-        ),
-      ],
+            if (formFieldState.hasError) ...[
+              AppSpacing.spacingVerticalXs,
+              Text(
+                formFieldState.errorText!,
+                style: AppTextStyle.robotoMedium12.copyWith(
+                  color: AppColors.danger,
+                ),
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 
@@ -113,10 +143,10 @@ class AppTextfield extends StatelessWidget {
     return InkWell(
       onTap: onSuffixIconPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: AppPadding.paddingHorizontalLg,
         child: Icon(
           suffixIcon,
-          size: 18,
+          size: ContainerSizes.iconSize,
         ),
       ),
     );

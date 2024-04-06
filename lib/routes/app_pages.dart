@@ -1,3 +1,4 @@
+import 'package:fitlifebuddy/pages/login_page/login_binding.dart';
 import 'package:fitlifebuddy/pages/login_page/login_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
@@ -14,6 +15,7 @@ import 'package:get/get.dart';
 final appPages = [
   GetPage(
     name: AppRoutes.login,
+    binding: LoginBinding(),
     page: () => const LoginPage(),
     transition: Transition.noTransition,
   ),

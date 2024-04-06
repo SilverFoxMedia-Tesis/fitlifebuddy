@@ -79,5 +79,8 @@
     "dinner_reminder_description": "Es hora de cenar y cuidar tu cuerpo. Echa un vistazo a tu plan de alimentación para descubrir qué opción saludable te hemos seleccionado para esta noche",
     "routine_reminder_description": "¡Es momento de moverte! Recuerda completar tu rutina de ejercicio programada para hoy.",
     "my_personal_info": "Mi información personal",
-    "save": "Guardar"
+    "save": "Guardar",
+    "validator_empty": "El campo no puede estar vacío",
+    "validator_email_invalid": "El correo electrónico no es válido",
+    "validator_password_invalid": "La contraseña debe tener al menos 6 caracteres"
 }

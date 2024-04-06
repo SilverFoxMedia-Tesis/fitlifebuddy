@@ -4,6 +4,12 @@ import 'package:fitlifebuddy/core/theme/font/font_weight.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyle {
+  static const robotoMedium12 = TextStyle(
+    fontFamily: AppFontFamily.fontFamilyDefault,
+    fontSize: AppFontSize.fontSize12,
+    fontWeight: AppFontWeight.medium,
+  );
+
   static const robotoRegular14 = TextStyle(
     fontFamily: AppFontFamily.fontFamilyDefault,
     fontSize: AppFontSize.fontSize14,
