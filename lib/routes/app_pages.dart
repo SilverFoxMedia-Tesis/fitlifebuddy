@@ -5,6 +5,7 @@ import 'package:fitlifebuddy/pages/patient_home_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_page.dart';
 import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
+import 'package:fitlifebuddy/pages/recover_password_page/recover_password_binding.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
@@ -15,13 +16,14 @@ import 'package:get/get.dart';
 final appPages = [
   GetPage(
     name: AppRoutes.login,
-    binding: LoginBinding(),
     page: () => const LoginPage(),
+    binding: LoginBinding(),
     transition: Transition.noTransition,
   ),
   GetPage(
     name: AppRoutes.recoverPassword,
     page: () => const RecoverPasswordPage(),
+    binding: RecoverPasswordBinding(),
     transition: Transition.noTransition,
   ),
   GetPage(
