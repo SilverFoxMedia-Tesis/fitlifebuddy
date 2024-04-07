@@ -1,7 +1,5 @@
 class AppIcons {
   static const edit = '../assets/icons/edit.svg';
-  static const eyeClose = '../assets/icons/eye_close.svg';
-  static const eye = '../assets/icons/eye.svg';
   static const help = '../assets/icons/help.svg';
   static const home = '../assets/icons/home.svg';
   static const logo = '../assets/icons/logo.svg';

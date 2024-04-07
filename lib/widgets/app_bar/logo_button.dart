@@ -33,7 +33,7 @@ class LogoButton extends StatelessWidget {
               SvgPicture.asset(
                 icon,
                 height: ContainerSize.logoButtonSize,
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.contain,
               ),
               if (expanded.value) ...[
                 AppSpacing.spacingHorizontal16,

@@ -1,13 +1,14 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
-import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class LoginForm extends GetView<LoginController> {
@@ -20,10 +21,9 @@ class LoginForm extends GetView<LoginController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const LogoButton(
-            icon: AppIcons.logo,
-            text: '',
-            onTap: null,
+          SvgPicture.asset(
+            AppIcons.logo,
+            width: ContainerSize.logoButtonSize,
           ),
           AppSpacing.spacingVertical24,
           Text(
