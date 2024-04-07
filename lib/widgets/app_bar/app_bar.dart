@@ -1,10 +1,10 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_button.dart';
 import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
@@ -19,17 +19,17 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppPadding.paddingVerticalXxxl,
+      padding: AppPadding.paddingVertical32,
       child: Obx(
         () => Container(
           padding: AppPadding.paddingAppBar,
           width: expanded.value 
-            ? ContainerSizes.appBarWidthExpanded
-            : ContainerSizes.appBarWidth,
+            ? ContainerSize.appBarWidthExpanded
+            : ContainerSize.appBarWidth,
           decoration: const BoxDecoration(
             color: AppColors.primary,
-            borderRadius: BorderRadiusWrapper.borderRadiusRightLg,
-              boxShadow: [AppBoxShadows.secondary25Blur8],
+            borderRadius: AppBorderRadius.borderRadiusRightLg,
+              boxShadow: [AppBoxShadow.secondary25Blur8],
           ),
           child: Expanded(
             child: Column(
@@ -45,19 +45,19 @@ class MyAppBar extends StatelessWidget {
                         expanded.value = !expanded.value;
                       },
                     ),
-                    AppSpacing.spacingVerticalXxxl,
+                    AppSpacing.spacingVertical32,
                     AppButton(
                       icon: AppIcons.home, 
                       text: 'Home'.tr,
                       onTap: () => Get.toNamed(AppRoutes.home),
                     ),
-                    AppSpacing.spacingVerticalXxxl,
+                    AppSpacing.spacingVertical32,
                     AppButton(
                       icon: AppIcons.person, 
                       text: 'My profile'.tr,
                       onTap: () => Get.toNamed(AppRoutes.profile),
                     ),
-                    AppSpacing.spacingVerticalXxxl,
+                    AppSpacing.spacingVertical32,
                     AppButton(icon: AppIcons.notification, text: 'Notifications'.tr),
                   ],
                 ),
@@ -65,7 +65,7 @@ class MyAppBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AppButton(icon: AppIcons.settings, text: 'Settings'.tr, colorNumber: 1),
-                    AppSpacing.spacingVerticalXxxl,
+                    AppSpacing.spacingVertical32,
                     AppButton(icon: AppIcons.help, text: 'Help'.tr, colorNumber: 1),
                   ],
                 ),

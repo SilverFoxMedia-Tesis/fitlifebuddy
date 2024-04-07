@@ -1,8 +1,8 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/pages/routine_page/widgets/change_exercise_card.dart';
@@ -21,7 +21,7 @@ class RoutinePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppSpacing.spacingVerticalXxxl,
+            AppSpacing.spacingVertical32,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -34,7 +34,7 @@ class RoutinePage extends StatelessWidget {
                         color: AppColors.secondary
                       ),
                     ),
-                    AppSpacing.spacingHorizontalLg,
+                    AppSpacing.spacingHorizontal16,
                     Text(
                       'Miércoles, 15 de Noviembre',
                       style: AppTextStyle.robotoRegular34.copyWith(
@@ -51,11 +51,11 @@ class RoutinePage extends StatelessWidget {
                 ),
               ],
             ),
-            AppSpacing.spacingVerticalXxl,
+            AppSpacing.spacingVertical24,
             Row(
               children: [
                 const PlanItemCard(text: 'Ejercicio 1', description: '4 x 60 s', image: AppIcons.exercise1),
-                AppSpacing.spacingHorizontalXl,
+                AppSpacing.spacingHorizontal20,
                 BaseButtom(
                   text: 'Cambiar',
                   onTap: () {
@@ -71,11 +71,11 @@ class RoutinePage extends StatelessWidget {
                 ),
               ],
             ),
-            AppSpacing.spacingVerticalXl,
+            AppSpacing.spacingVertical20,
             Row(
               children: [
                 const PlanItemCard(text: 'Ejercicio 2', description: '5 x 60 s', image: AppIcons.exercise2),
-                AppSpacing.spacingHorizontalXl,
+                AppSpacing.spacingHorizontal20,
                 BaseButtom(
                   text: 'Cambiar',
                   onTap: () {},
@@ -84,11 +84,11 @@ class RoutinePage extends StatelessWidget {
                 ),
               ],
             ),
-            AppSpacing.spacingVerticalXl,
+            AppSpacing.spacingVertical20,
             Row(
               children: [
                 const PlanItemCard(text: 'Ejercicio 3', description: '6 x 60 s', image: AppIcons.exercise3),
-                AppSpacing.spacingHorizontalXl,
+                AppSpacing.spacingHorizontal20,
                 BaseButtom(
                   text: 'Cambiar',
                   onTap: () {},

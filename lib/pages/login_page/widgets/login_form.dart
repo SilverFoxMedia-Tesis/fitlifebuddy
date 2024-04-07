@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
 import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
@@ -25,14 +25,14 @@ class LoginForm extends GetView<LoginController> {
             text: '',
             onTap: null,
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           Text(
             'complete_data'.tr,
             style: AppTextStyle.robotoSemibold20.copyWith(
               color: AppColors.secondary,
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           Obx(
             () => AppTextfield(
               title: 'email'.tr,
@@ -41,7 +41,7 @@ class LoginForm extends GetView<LoginController> {
               inputType: TextInputType.emailAddress,
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           Obx(
             () => AppTextfield(
               title: 'password'.tr,
@@ -54,7 +54,7 @@ class LoginForm extends GetView<LoginController> {
               obscureText: controller.obscurePassword.value,
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           InkWell(
             onTap: controller.forgotPassword,
             child: Text(
@@ -64,7 +64,7 @@ class LoginForm extends GetView<LoginController> {
               ),
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           BaseButtom(
             text: 'login'.tr,
             onTap: controller.login,

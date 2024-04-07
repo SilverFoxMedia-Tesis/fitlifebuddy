@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/style/box_shadows.dart';
@@ -29,8 +29,8 @@ class PlanItemCard extends StatelessWidget {
         height: 160,
         decoration: const BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadiusWrapper.borderRadiusLg,
-          boxShadow: [AppBoxShadows.secondary25Blur8],
+          borderRadius: AppBorderRadius.borderRadiusLg,
+          boxShadow: [AppBoxShadow.secondary25Blur8],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +52,7 @@ class PlanItemCard extends StatelessWidget {
                     ),
                   ),
                   if (description != null) ...[
-                    AppSpacing.spacingVerticalXs,
+                    AppSpacing.spacingVertical4,
                     Text(
                       description!,
                       style: AppTextStyle.robotoSemibold14.copyWith(

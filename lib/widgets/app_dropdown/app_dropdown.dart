@@ -1,8 +1,8 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,12 +31,12 @@ class AppDropdown extends StatelessWidget {
           () => SizedBox(
             width: 160,
             child: Container(
-              padding: AppPadding.paddingHorizontalLg,
+              padding: AppPadding.paddingHorizontal16,
               width: 160,
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: const [AppBoxShadows.primary25Blur8],
+                boxShadow: const [AppBoxShadow.primary25Blur8],
               ),
               child: IgnorePointer(
                 ignoring: readOnly,
@@ -57,7 +57,7 @@ class AppDropdown extends StatelessWidget {
             ),
           ),
         ),
-        AppSpacing.spacingHorizontalXxl,
+        AppSpacing.spacingHorizontal24,
         AppTextfield(
           hintText: (type == 1) ? 'Diabetes' : 'Frutos secos',
           readOnly: readOnly,

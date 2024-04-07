@@ -1,11 +1,21 @@
+import 'package:fitlifebuddy/core/theme/size/space.dart';
+import 'package:flutter/material.dart';
+
 class AppBorderRadius {
-  static const borderRadiusNone = 0.0;
-  static const borderRadiusXs = 2.0;
-  static const borderRadiusSm = 4.0;
-  static const borderRadiusMd = 8.0;
-  static const borderRadius14 = 14.0;
-  static const borderRadiusLg = 16.0;
-  static const borderRadiusXl = 20.0;  
-  static const borderRadiusXxl = 24.0;  
-  static const borderRadiusXxxl = 32.0;  
+  static const borderRadius14 =
+      BorderRadius.all(Radius.circular(Space.space14));
+  static const borderRadiusLg =
+      BorderRadius.all(Radius.circular(Space.space16));
+  static const borderRadiusXl =
+      BorderRadius.all(Radius.circular(Space.space20));
+    static const borderRadiusXxl =
+      BorderRadius.all(Radius.circular(Space.space24));
+  static const borderRadiusXxxl =
+      BorderRadius.all(Radius.circular(Space.space32));
+
+  static const borderRadiusRightLg =
+      BorderRadius.only(
+        topRight: Radius.circular(Space.space16), 
+        bottomRight: Radius.circular(Space.space16)
+      );
 }

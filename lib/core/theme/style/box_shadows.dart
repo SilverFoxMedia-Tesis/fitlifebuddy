@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppBoxShadows {
+class AppBoxShadow {
   static const secondary25Blur8 = BoxShadow(
     color: Color(0x3f3d5a80),
     offset: Offset(0, 0),

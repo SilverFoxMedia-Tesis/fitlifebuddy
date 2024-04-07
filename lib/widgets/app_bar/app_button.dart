@@ -1,10 +1,10 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,23 +30,23 @@ class AppButton extends StatelessWidget {
       () => InkWell(
         onTap: onTap,
         child: Container(
-          padding: AppPadding.paddingLg,
+          padding: AppPadding.padding16,
           width: expanded.value ? 176 : 56,
           decoration: BoxDecoration(
             color: _getColor(colorNumber),
-            borderRadius: expanded.value ? BorderRadiusWrapper.borderRadiusXxxl : null,
-            boxShadow: const [AppBoxShadows.secondary25Blur8],
+            borderRadius: expanded.value ? AppBorderRadius.borderRadiusXxxl : null,
+            boxShadow: const [AppBoxShadow.secondary25Blur8],
             shape: expanded.value ? BoxShape.rectangle : BoxShape.circle,
           ),
           child: Row(
             children: [
               SvgPicture.asset(
                 icon,
-                height: ContainerSizes.appBarButtonSize,
+                height: ContainerSize.appBarButtonSize,
                 fit: BoxFit.fitHeight,
               ),
               if (expanded.value) ...[
-                AppSpacing.spacingHorizontalLg,
+                AppSpacing.spacingHorizontal16,
                 Text(
                   text,
                   style: AppTextStyle.robotoSemibold14.copyWith(

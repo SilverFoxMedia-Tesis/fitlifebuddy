@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
@@ -23,7 +23,7 @@ class SuccesfulRegisterContainer extends StatelessWidget {
               color: AppColors.secondary,
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           SizedBox(
             width: 348,
             child: Text(
@@ -33,19 +33,19 @@ class SuccesfulRegisterContainer extends StatelessWidget {
               ),
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           const AppTextfield(
             readOnly: true,
             title: 'Correo electrónico',
             hintText: 'example@gmail.com',
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           const AppTextfield(
             readOnly: true,
             title: 'Contraseña',
             hintText: '4h6j6kbb24b4',
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           SizedBox(
             width: 348,
             child: Text(
@@ -55,7 +55,7 @@ class SuccesfulRegisterContainer extends StatelessWidget {
               ),
             ),
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           BaseButtom(
           text: 'Ir a Inicio',
           onTap: () => Get.toNamed(AppRoutes.home),

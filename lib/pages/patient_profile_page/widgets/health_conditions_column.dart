@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +24,14 @@ class HealthConditionsColumn extends StatelessWidget {
                 color: AppColors.secondary,
               ),
             ),
-            AppSpacing.spacingHorizontalMd,
+            AppSpacing.spacingHorizontal14,
             Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(100),
-                boxShadow: const [AppBoxShadows.primary25Blur8],
+                boxShadow: const [AppBoxShadow.primary25Blur8],
               ),
               child: const Icon(
                 Icons.edit_rounded,
@@ -41,7 +41,7 @@ class HealthConditionsColumn extends StatelessWidget {
             ),
           ],
         ),
-        AppSpacing.spacingVerticalXxl,
+        AppSpacing.spacingVertical24,
         const AppDropdown(),
       ],
     );

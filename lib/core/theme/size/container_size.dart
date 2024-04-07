@@ -1,4 +1,4 @@
-class ContainerSizes {
+class ContainerSize {
   static const appBarWidth = 105.0;
   static const appBarWidthExpanded = 224.0;
   static const logoButtonSize = 64.0;

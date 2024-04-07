@@ -1,9 +1,9 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/enum/notification_type.dart';
 import 'package:fitlifebuddy/pages/notifications_page/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +16,11 @@ class NotificationPage extends StatelessWidget {
     return Container(
       width: 496,
       height: 960,
-      padding: AppPadding.paddingXxxl,
+      padding: AppPadding.padding32,
       decoration: const BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadiusWrapper.borderRadiusXl,
-        boxShadow: [AppBoxShadows.secondary25Blur8],
+        borderRadius: AppBorderRadius.borderRadiusXl,
+        boxShadow: [AppBoxShadow.secondary25Blur8],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,7 @@ class NotificationPage extends StatelessWidget {
             'Mis notificaciones',
             style: AppTextStyle.robotoSemibold34,
           ),
-          AppSpacing.spacingVerticalXxl,
+          AppSpacing.spacingVertical24,
           ListView(
             children: const [
               NotificationCard(

@@ -1,6 +1,6 @@
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_card/app_card.dart';
@@ -20,7 +20,7 @@ class NutritionistHomePage extends GetView {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const AppBanner(text: 'Bienvenido nutricionista!'),
-            AppSpacing.spacingVerticalXxxl,
+            AppSpacing.spacingVertical32,
             Row(
               children: [
                 AppCard(
@@ -29,7 +29,7 @@ class NutritionistHomePage extends GetView {
                   icon: AppIcons.person,
                   onTap: () => Get.toNamed(AppRoutes.patients)
                 ),
-                AppSpacing.spacingHorizontalLg,
+                AppSpacing.spacingHorizontal16,
                 AppCard(
                   title: 'Registrar paciente', 
                   description: 'Inscribe a tu paciente', 

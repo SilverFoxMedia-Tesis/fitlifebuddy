@@ -1,8 +1,8 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/widgets/change_meal_card.dart';
 import 'package:fitlifebuddy/pages/meal_page/widgets/food_card.dart';
@@ -35,7 +35,7 @@ class MealPage extends StatelessWidget {
                           color: AppColors.secondary
                         ),
                       ),
-                      AppSpacing.spacingHorizontalLg,
+                      AppSpacing.spacingHorizontal16,
                       Text(
                         'Miércoles, 15 de Noviembre',
                         style: AppTextStyle.robotoRegular34.copyWith(
@@ -60,7 +60,7 @@ class MealPage extends StatelessWidget {
                         color: AppColors.warning,
                         width: 160,
                       ),
-                      AppSpacing.spacingHorizontalLg,
+                      AppSpacing.spacingHorizontal16,
                       BaseButtom(
                         text: 'Completado',
                         onTap: () {},
@@ -71,28 +71,28 @@ class MealPage extends StatelessWidget {
                   ),
                 ],
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               Text(
                 'Tostada con palta y huevo',
                 style: AppTextStyle.robotoSemibold24.copyWith(
                   color: AppColors.secondary
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               Text(
                 'Disfruta de una exquisita tostada con huevo frito y palta, una combinación perfecta para comenzar el día con energía. Esta delicia consiste en una tostada crujiente y dorada, cubierta con un huevo frito de yema cremosa y clara  cocida. Acompañando al huevo, encontrarás rodajas de palta fresca y suave, que le aportan un toque de frescura y cremosidad.',
                 style: AppTextStyle.robotoRegular20.copyWith(
                   color: AppColors.secondary
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               Text(
                 'Ingredientes:',
                 style: AppTextStyle.robotoSemibold24.copyWith(
                   color: AppColors.secondary
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               SizedBox(
                 width: 824,
                 child: GridView.count(
@@ -121,14 +121,14 @@ class MealPage extends StatelessWidget {
                   ],
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               Text(
                 'Preparación:',
                 style: AppTextStyle.robotoSemibold24.copyWith(
                   color: AppColors.secondary
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               Text(
                 '''- Tuesta una rebanada de pan hasta que esté crujiente y dorada.\n\n- Mientras tanto, corta una palta madura por la mitad y retira el hueso. Con una cuchara, extrae la pulpa de la palta y colócala en un bol pequeño.\n\n- Con un tenedor, machaca la palta hasta obtener una consistencia suave. Puedes agregar sal y pimienta al gusto para sazonarla.\n\n- En una sartén antiadherente, calienta un poco de aceite o mantequilla a fuego medio. Rompe un huevo en la sartén y cocínalo a tu gusto: puedes hacerlo frito, a punto de nieve o como prefieras.\n\n- Mientras se cocina el huevo, unta generosamente la palta machacada sobre la rebanada de pan tostado.\n\n- Una vez que el huevo esté listo, colócalo cuidadosamente sobre la capa de palta en la tostada.\n\n- Opcionalmente, puedes sazonar el huevo con sal y pimienta adicional, así como añadir otros ingredientes como hojas de rúcula, tomate cortado en rodajas o incluso un poco de salsa picante para darle un toque extra de sabor.''',
                 style: AppTextStyle.robotoRegular20.copyWith(

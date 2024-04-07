@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
@@ -20,27 +20,27 @@ class PatientProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppSpacing.spacingVerticalLg,
-            AppSpacing.spacingVerticalXxxl,
+            AppSpacing.spacingVertical16,
+            AppSpacing.spacingVertical32,
             Text(
               'Mi perfil',
               style: AppTextStyle.robotoSemibold34.copyWith(
                 color: AppColors.secondary,
               ),
             ),
-            AppSpacing.spacingVerticalXxxl,
+            AppSpacing.spacingVertical32,
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PersonalInfo(),
-                AppSpacing.spacingHorizontalLg,
-                AppSpacing.spacingHorizontalXxxl,
+                AppSpacing.spacingHorizontal16,
+                AppSpacing.spacingHorizontal32,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FoodConditionsColumn(),
-                    AppSpacing.spacingVerticalLg,
-                    AppSpacing.spacingVerticalXxxl,
+                    AppSpacing.spacingVertical16,
+                    AppSpacing.spacingVertical32,
                     HealthConditionsColumn(),
                   ],
                 )

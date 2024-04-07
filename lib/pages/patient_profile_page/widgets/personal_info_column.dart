@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +23,14 @@ class PersonalInfo extends StatelessWidget {
                 color: AppColors.secondary,
               ),
             ),
-            AppSpacing.spacingHorizontalMd,
+            AppSpacing.spacingHorizontal14,
             Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(100),
-                boxShadow: const [AppBoxShadows.primary25Blur8],
+                boxShadow: const [AppBoxShadow.primary25Blur8],
               ),
               child: const Icon(
                 Icons.edit_rounded,
@@ -40,31 +40,31 @@ class PersonalInfo extends StatelessWidget {
             ),
           ],
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const AppTextfield(
           title: 'Nombre',
           hintText: 'Mark',
           readOnly: true,
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const AppTextfield(
           title: 'Apellido',
           hintText: 'Smith',
           readOnly: true,
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const AppTextfield(
           title: 'Género',
           hintText: 'Masculino',
           readOnly: true,
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const AppTextfield(
           title: 'Fecha de nacimiento',
           hintText: '01/01/2001',
           readOnly: true,
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -75,7 +75,7 @@ class PersonalInfo extends StatelessWidget {
               suffixText: 'kg',
               readOnly: true,
             ),
-            AppSpacing.spacingHorizontalXxl,
+            AppSpacing.spacingHorizontal24,
             AppTextfield(
               width: 160,
               title: 'Altura',
@@ -85,7 +85,7 @@ class PersonalInfo extends StatelessWidget {
             ),
           ],
         ),
-        AppSpacing.spacingVerticalXxxl,
+        AppSpacing.spacingVertical32,
         const AppTextfield(
           title: 'Correo electrónico',
           hintText: 'marksmith@gmail.com',

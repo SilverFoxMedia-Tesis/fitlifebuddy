@@ -1,10 +1,10 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -20,8 +20,8 @@ class FoodCard extends StatelessWidget {
           padding: AppPadding.paddingDialog,
           decoration: const BoxDecoration(
             color: AppColors.white,
-            borderRadius: BorderRadiusWrapper.borderRadiusXl,
-            boxShadow: [AppBoxShadows.secondary25Blur8],
+            borderRadius: AppBorderRadius.borderRadiusXl,
+            boxShadow: [AppBoxShadow.secondary25Blur8],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,56 +32,56 @@ class FoodCard extends StatelessWidget {
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalSm,
+              AppSpacing.spacingVertical8,
               Text(
                 'Proteína',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 '6 g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 'Carbohidratos',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 '0.6 g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 'Grasa',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 '7 g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 'Calorías',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 '90 g',
                 style: AppTextStyle.robotoSemibold14.copyWith(

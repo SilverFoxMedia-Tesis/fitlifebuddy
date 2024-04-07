@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class Cover extends StatelessWidget {
@@ -32,7 +32,7 @@ class Cover extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            AppSpacing.spacingVerticalXxl,
+            AppSpacing.spacingVertical24,
             SizedBox(
               width: 500,
               child: Text(
@@ -43,10 +43,10 @@ class Cover extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            AppSpacing.spacingVerticalXxl,
+            AppSpacing.spacingVertical24,
             Image.asset(
               image,
-              width: ContainerSizes.coverPhotoWeight,
+              width: ContainerSize.coverPhotoWeight,
               fit: BoxFit.fitWidth,
             )
           ],

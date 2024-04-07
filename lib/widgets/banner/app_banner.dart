@@ -1,8 +1,8 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppBanner extends StatelessWidget {
@@ -13,12 +13,12 @@ class AppBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPadding.paddingAppBanner,
-      width: ContainerSizes.bannerWidth,
-      height: ContainerSizes.bannerHeight,
+      width: ContainerSize.bannerWidth,
+      height: ContainerSize.bannerHeight,
       alignment: Alignment.center,
       decoration: const BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadiusWrapper.borderRadiusLg,
+        borderRadius: AppBorderRadius.borderRadiusLg,
       ),
       child: Text(
         text,

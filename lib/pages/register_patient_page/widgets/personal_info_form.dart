@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
@@ -28,23 +28,23 @@ class PersonalInfoForm extends StatelessWidget {
                   color: AppColors.secondary,
                 ),
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const AppTextfield(
                 title: 'Nombre',
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const AppTextfield(
                 title: 'Apellido',
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const AppTextfield(
                 title: 'Género',
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const AppTextfield(
                 title: 'Fecha de nacimiento',
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -53,7 +53,7 @@ class PersonalInfoForm extends StatelessWidget {
                     suffixText: 'kg',
                     width: 162,
                   ),
-                  AppSpacing.spacingHorizontalXxl,
+                  AppSpacing.spacingHorizontal24,
                   AppTextfield(
                     title: 'Altura',
                     suffixText: 'cm',
@@ -61,7 +61,7 @@ class PersonalInfoForm extends StatelessWidget {
                   ),
                 ],
               ),
-              AppSpacing.spacingVerticalXxl,
+              AppSpacing.spacingVertical24,
               const AppTextfield(
                 title: 'Correo electrónico',
               ),

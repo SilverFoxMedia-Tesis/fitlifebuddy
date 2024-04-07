@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class BaseButtom extends StatelessWidget {
@@ -13,7 +13,7 @@ class BaseButtom extends StatelessWidget {
   const BaseButtom({
     super.key, 
     required this.text,
-    this.width = ContainerSizes.baseButtonWidth,
+    this.width = ContainerSize.baseButtonWidth,
     this.color,
     this.onTap,
   });
@@ -25,10 +25,10 @@ class BaseButtom extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: width,
-        height: ContainerSizes.baseButtonHeight,
+        height: ContainerSize.baseButtonHeight,
         decoration: BoxDecoration(
           color: color ?? AppColors.primary,
-          borderRadius: BorderRadiusWrapper.borderRadiusXxl,
+          borderRadius: AppBorderRadius.borderRadiusXxl,
         ),
         child: Text(
           text,

@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
@@ -17,7 +17,7 @@ class RecoverPasswordForm extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: ContainerSizes.baseContainerdWidth,
+          width: ContainerSize.baseContainerdWidth,
           child: Text(
             'recover_password'.tr,
             style: AppTextStyle.robotoSemibold20.copyWith(
@@ -25,9 +25,9 @@ class RecoverPasswordForm extends StatelessWidget {
             ),
           ),
         ),
-        AppSpacing.spacingVerticalXxl,
+        AppSpacing.spacingVertical24,
         SizedBox(
-          width: ContainerSizes.baseContainerdWidth,
+          width: ContainerSize.baseContainerdWidth,
           child: Text(
             'recover_password_description'.tr,
             style: AppTextStyle.robotoMedium14.copyWith(
@@ -35,11 +35,11 @@ class RecoverPasswordForm extends StatelessWidget {
             ),
           ),
         ),
-        AppSpacing.spacingVerticalXxl,
+        AppSpacing.spacingVertical24,
         AppTextfield(
           title: 'email'.tr,
         ),
-        AppSpacing.spacingVerticalXxl,
+        AppSpacing.spacingVertical24,
         BaseButtom(
           text: 'recover_password'.tr,
           onTap: () => Get.toNamed(AppRoutes.login),

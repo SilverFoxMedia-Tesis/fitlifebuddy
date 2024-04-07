@@ -1,11 +1,11 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/input_border.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/input_border.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppTextfield extends StatelessWidget {
@@ -35,7 +35,7 @@ class AppTextfield extends StatelessWidget {
     this.onSuffixIconPressed,
     this.obscureText = false,
     this.readOnly = false,
-    this.width = ContainerSizes.baseTextfieldWidth,
+    this.width = ContainerSize.baseTextfieldWidth,
   });
 
   void _onChanged(FormFieldState<String> formFieldState, String value) {
@@ -61,14 +61,14 @@ class AppTextfield extends StatelessWidget {
                 title!,
                 style: buildTitleTextStyle(),
               ),
-              AppSpacing.spacingVerticalSm,
+              AppSpacing.spacingVertical8,
             ],
             Container(
               width: width,
               decoration: const BoxDecoration(
                 color: AppColors.white,
-                borderRadius: BorderRadiusWrapper.borderRadius14,
-                boxShadow: [AppBoxShadows.primary25Blur8],
+                borderRadius: AppBorderRadius.borderRadius14,
+                boxShadow: [AppBoxShadow.primary25Blur8],
               ),
               child: TextField(
                 controller: controller,
@@ -80,7 +80,7 @@ class AppTextfield extends StatelessWidget {
                   suffixIconConstraints: const BoxConstraints(),
                   suffixText: suffixText,
                   suffixStyle: buildTextStyle(),
-                  contentPadding: AppPadding.paddingHorizontalLg,
+                  contentPadding: AppPadding.paddingHorizontal16,
                   border: InputBorder.none,
                   enabledBorder: AppInputBorder.hiddenBorder,
                   focusedBorder: AppInputBorder.focusedBorder,
@@ -99,7 +99,7 @@ class AppTextfield extends StatelessWidget {
               ),
             ),
             if (formFieldState.hasError) ...[
-              AppSpacing.spacingVerticalXs,
+              AppSpacing.spacingVertical4,
               Text(
                 formFieldState.errorText!,
                 style: AppTextStyle.robotoMedium12.copyWith(
@@ -143,10 +143,10 @@ class AppTextfield extends StatelessWidget {
     return InkWell(
       onTap: onSuffixIconPressed,
       child: Padding(
-        padding: AppPadding.paddingHorizontalLg,
+        padding: AppPadding.paddingHorizontal16,
         child: Icon(
           suffixIcon,
-          size: ContainerSizes.iconSize,
+          size: ContainerSize.iconSize,
         ),
       ),
     );

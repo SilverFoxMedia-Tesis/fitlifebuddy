@@ -1,10 +1,10 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/border_radius_wrapper.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/padding.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/enum/notification_type.dart';
 import 'package:flutter/material.dart';
 
@@ -28,13 +28,13 @@ class NotificationCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        padding: AppPadding.paddingLg,
-        width: ContainerSizes.notificationCardWidth,
-        height: ContainerSizes.notificationCardHeight,
+        padding: AppPadding.padding16,
+        width: ContainerSize.notificationCardWidth,
+        height: ContainerSize.notificationCardHeight,
         decoration: const BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadiusWrapper.borderRadiusLg,
-          boxShadow: [AppBoxShadows.secondary25Blur8],
+          borderRadius: AppBorderRadius.borderRadiusLg,
+          boxShadow: [AppBoxShadow.secondary25Blur8],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -46,14 +46,14 @@ class NotificationCard extends StatelessWidget {
                 color: AppColors.secondary
               ),
             ),
-            AppSpacing.spacingVerticalMd,
+            AppSpacing.spacingVertical14,
             Text(
               description,
               style: AppTextStyle.robotoMedium14.copyWith(
                 color: AppColors.primary
               ),
             ),
-            AppSpacing.spacingVerticalMd,
+            AppSpacing.spacingVertical14,
             Text(
               description,
               style: AppTextStyle.robotoMedium14.copyWith(

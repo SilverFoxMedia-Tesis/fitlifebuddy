@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/spacing/container_sizes.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/spacing.dart';
-import 'package:fitlifebuddy/core/theme/wrapper/text_style.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,17 +26,17 @@ class LogoButton extends StatelessWidget {
         onTap: onTap,
         child: SizedBox(
           width: expanded.value 
-            ? ContainerSizes.logoButtonExpanded
-            : ContainerSizes.logoButtonSize,
+            ? ContainerSize.logoButtonExpanded
+            : ContainerSize.logoButtonSize,
           child: Row(
             children: [
               SvgPicture.asset(
                 icon,
-                height: ContainerSizes.logoButtonSize,
+                height: ContainerSize.logoButtonSize,
                 fit: BoxFit.fitHeight,
               ),
               if (expanded.value) ...[
-                AppSpacing.spacingHorizontalLg,
+                AppSpacing.spacingHorizontal16,
                 Text(
                   text,
                   style: AppTextStyle.robotoSemibold20.copyWith(
