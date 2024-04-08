@@ -82,5 +82,6 @@
     "save": "Guardar",
     "validator_empty": "El campo no puede estar vacío",
     "validator_email_invalid": "El correo electrónico no es válido",
-    "validator_password_invalid": "La contraseña debe tener al menos 6 caracteres"
+    "validator_password_invalid": "La contraseña debe tener al menos 6 caracteres",
+    "password_recovery_request_sent": "Solicitud de recuperación de contraseña enviada"
 }

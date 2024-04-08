@@ -1,3 +1,4 @@
+import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class LoginController extends GetxController {
       try {
         Get.toNamed(AppRoutes.home);
       } catch (e) {
-        // TODO: display error message
+        displayErrorToast(e);
       }
     }
   }
@@ -28,7 +29,7 @@ class LoginController extends GetxController {
     try {
       Get.toNamed(AppRoutes.recoverPassword);
     } catch (e) {
-      // TODO: display error message
+      displayErrorToast(e);
     }
   }
 

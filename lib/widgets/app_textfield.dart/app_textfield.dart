@@ -59,7 +59,7 @@ class AppTextfield extends StatelessWidget {
             if (title != null) ...[
               Text(
                 title!,
-                style: buildTitleTextStyle(),
+                style: _buildTitleTextStyle(),
               ),
               AppSpacing.spacingVertical8,
             ],
@@ -74,12 +74,12 @@ class AppTextfield extends StatelessWidget {
                 controller: controller,
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: buildTextStyle(),
-                  suffixIcon: suffixIcon != null ? buildSuffixIcon(): null,
+                  hintStyle: _buildTextStyle(),
+                  suffixIcon: suffixIcon != null ? _buildSuffixIcon(): null,
                   suffixIconColor: AppColors.primary,
                   suffixIconConstraints: const BoxConstraints(),
                   suffixText: suffixText,
-                  suffixStyle: buildTextStyle(),
+                  suffixStyle: _buildTextStyle(),
                   contentPadding: AppPadding.paddingHorizontal16,
                   border: InputBorder.none,
                   enabledBorder: AppInputBorder.hiddenBorder,
@@ -113,7 +113,7 @@ class AppTextfield extends StatelessWidget {
     );
   }
 
-  TextStyle buildTextStyle() {
+  TextStyle _buildTextStyle() {
     switch (readOnly) {
       case true:
         return AppTextStyle.robotoRegular14.copyWith(
@@ -126,7 +126,7 @@ class AppTextfield extends StatelessWidget {
     }
   }
 
-  TextStyle buildTitleTextStyle() {
+  TextStyle _buildTitleTextStyle() {
     switch (readOnly) {
       case true:
         return AppTextStyle.robotoMedium14.copyWith(
@@ -139,7 +139,7 @@ class AppTextfield extends StatelessWidget {
     }
   }
 
-  Widget buildSuffixIcon() {
+  Widget _buildSuffixIcon() {
     return InkWell(
       onTap: onSuffixIconPressed,
       child: Padding(
