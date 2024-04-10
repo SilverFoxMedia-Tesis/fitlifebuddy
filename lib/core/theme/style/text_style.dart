@@ -34,13 +34,19 @@ class AppTextStyle {
     fontWeight: AppFontWeight.semiBold,
   );
 
+  static const robotoSemibold16 = TextStyle(
+    fontFamily: AppFontFamily.fontFamilyDefault,
+    fontSize: AppFontSize.fontSize16,
+    fontWeight: AppFontWeight.semiBold,
+  );
+
   static const robotoRegular20 = TextStyle(
     fontFamily: AppFontFamily.fontFamilyDefault,
     fontSize: AppFontSize.fontSize20,
     fontWeight: AppFontWeight.regular,
   );
 
-    static const robotoMedium20 = TextStyle(
+  static const robotoMedium20 = TextStyle(
     fontFamily: AppFontFamily.fontFamilyDefault,
     fontSize: AppFontSize.fontSize20,
     fontWeight: AppFontWeight.medium,

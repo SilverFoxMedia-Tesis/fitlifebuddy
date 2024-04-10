@@ -27,8 +27,8 @@ class PatientHomePage extends GetView {
               description: 'Revisa la información de tu plan alimentario y de ejercicios', 
               icon: 'assets/icons/person.svg',
               onTap: () => Get.toNamed(AppRoutes.plan),
-            )
-          ]
+            ),
+          ],
         ),
       ),
     );

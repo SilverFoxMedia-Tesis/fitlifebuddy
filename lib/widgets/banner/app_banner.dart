@@ -5,28 +5,72 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
-class AppBanner extends StatelessWidget {
+class AppBanner extends StatefulWidget {
   final String text;
-  const AppBanner({super.key, required this.text});
+
+  const AppBanner({
+    required this.text, 
+    super.key,
+  });
+
+  @override
+  State<AppBanner> createState() => _AppBannerState();
+}
+
+class _AppBannerState extends State<AppBanner> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Color?> _colorAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _colorAnimation = ColorTween(
+      begin: AppColors.secondary,
+      end: AppColors.tertiary,
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: AppPadding.paddingAppBanner,
-      width: ContainerSize.bannerWidth,
-      height: ContainerSize.bannerHeight,
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: AppBorderRadius.borderRadiusLg,
-      ),
-      child: Text(
-        text,
-        style: AppTextStyle.robotoSemibold24.copyWith(
-          color: AppColors.white,
-        ),
-        textAlign: TextAlign.center,
-        ),
+    return AnimatedBuilder(
+      animation: _colorAnimation,
+      builder: (context, child) {
+        return Container(
+          width: double.maxFinite,
+          height: ContainerSize.bannerHeight,
+          padding: AppPadding.paddingHorizontal32,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                _colorAnimation.value ?? AppColors.secondary,
+                AppColors.primary,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: AppBorderRadius.borderRadius14,
+          ),
+          child: Text(
+            widget.text,
+            style: AppTextStyle.robotoSemibold16.copyWith(
+              color: AppColors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        );
+      },
     );
   }
 }
