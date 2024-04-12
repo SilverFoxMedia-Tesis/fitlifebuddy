@@ -6,6 +6,7 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'widgets/personal_info_column.dart';
 
@@ -20,27 +21,24 @@ class PatientProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppSpacing.spacingVertical16,
-            AppSpacing.spacingVertical32,
+            AppSpacing.spacingVertical24,
             Text(
-              'Mi perfil',
-              style: AppTextStyle.robotoSemibold34.copyWith(
+              'my_profile'.tr,
+              style: AppTextStyle.robotoSemibold24.copyWith(
                 color: AppColors.secondary,
               ),
             ),
-            AppSpacing.spacingVertical32,
+            AppSpacing.spacingVertical24,
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PersonalInfo(),
-                AppSpacing.spacingHorizontal16,
                 AppSpacing.spacingHorizontal32,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FoodConditionsColumn(),
-                    AppSpacing.spacingVertical16,
-                    AppSpacing.spacingVertical32,
+                    AppSpacing.spacingVertical24,
                     HealthConditionsColumn(),
                   ],
                 )

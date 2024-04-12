@@ -20,7 +20,7 @@ class PatientApi {
   // Get Patient by Id
   Future<Patient> getPatientById(String id) async {
     final response = await _apiBase.get('pacients/$id');
-    return Patient.fromJson(json.decode(response.body));
+    return Patient.fromJson(response.body);
   }
 
   // Create Patient

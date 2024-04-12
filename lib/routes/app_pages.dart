@@ -2,6 +2,7 @@ import 'package:fitlifebuddy/pages/login_page/login_binding.dart';
 import 'package:fitlifebuddy/pages/login_page/login_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
+import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_binding.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_page.dart';
 import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
@@ -40,6 +41,7 @@ final appPages = [
     name: AppRoutes.profile,
     page: () => const PatientProfilePage(),
     transition: Transition.noTransition,
+    binding: PatientProfileBinding(),
   ),
   GetPage(
     name: AppRoutes.plan,
