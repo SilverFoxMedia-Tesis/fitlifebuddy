@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
@@ -8,8 +7,8 @@ import 'package:fitlifebuddy/domain/model/plan.dart';
 
 class Patient {
   String? id;
-  Float? height;
-  Float? weight;
+  double? height;
+  double? weight;
   String? gender;
   String? birthDate;
   List<PatientHistory>? patientHistories;
@@ -49,8 +48,8 @@ class Patient {
   factory Patient.fromMap(Map<String, dynamic> map) {
     return Patient(
       id: map['idPatient'] != null ? map['idPatient'] as String : null,
-      height: map['height'] != null ? map['height'] as Float : null,
-      weight: map['weight'] != null ? map['weight'] as Float : null,
+      height: map['height'] != null ? map['height'] as double : null,
+      weight: map['weight'] != null ? map['weight'] as double : null,
       gender: map['gender'] != null ? map['gender'] as String : null,
       birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
       patientHistories: map['patientHistories'] != null ? List<PatientHistory>.from(map['patientHistories']) : null,

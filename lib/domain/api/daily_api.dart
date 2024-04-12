@@ -3,9 +3,10 @@ import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/routine.dart';
+import 'package:get/get.dart';
 
 class DailyApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Dailies
   Future<List<Daily>> getDailies() async {

@@ -6,9 +6,10 @@ import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
+import 'package:get/get.dart';
 
 class PatientApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Patients
   Future<List<Patient>> getPatients() async {

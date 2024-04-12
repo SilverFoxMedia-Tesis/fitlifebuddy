@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/nutritionist.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
+import 'package:get/get.dart';
 
 class NutritionistApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Nutritionists
   Future<List<Nutritionist>> getNutritionists() async {

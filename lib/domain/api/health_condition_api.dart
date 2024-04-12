@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
+import 'package:get/get.dart';
 
 class HealthConditionApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get HealthConditions
   Future<List<HealthCondition>> getHealthConditions() async {

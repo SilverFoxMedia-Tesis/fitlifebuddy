@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/feedback.dart';
 import 'package:fitlifebuddy/domain/model/question.dart';
+import 'package:get/get.dart';
 
 class FeedbackApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Feedbacks
   Future<List<Feedback>> getFeedbacks() async {

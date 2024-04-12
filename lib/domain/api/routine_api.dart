@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/routine.dart';
 import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
+import 'package:get/get.dart';
 
 class RoutineApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Routines
   Future<List<Routine>> getRoutines() async {

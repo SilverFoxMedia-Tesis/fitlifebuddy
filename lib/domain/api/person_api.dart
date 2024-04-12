@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/person.dart';
+import 'package:get/get.dart';
 
 class PersonApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Persons
   Future<List<Person>> getPersons() async {

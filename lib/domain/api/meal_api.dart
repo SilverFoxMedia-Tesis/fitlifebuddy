@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
+import 'package:get/get.dart';
 
 class MealApi {
-  final _apiBase = BaseApi();
+  final _apiBase = Get.find<BaseApi>();
 
   // Get Meals
   Future<List<Meal>> getMeals() async {
