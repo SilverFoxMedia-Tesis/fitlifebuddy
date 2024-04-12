@@ -1,0 +1,44 @@
+import 'dart:convert';
+
+import 'package:fitlifebuddy/domain/api/base_api.dart';
+import 'package:fitlifebuddy/domain/model/routine.dart';
+import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
+
+class RoutineApi {
+  final _apiBase = BaseApi();
+
+  // Get Routines
+  Future<List<Routine>> getRoutines() async {
+    final response = await _apiBase.get('routines');
+    return (json.decode(response.body) as List).map((i) => Routine.fromJson(i)).toList();
+  }
+
+  // Get Routine by Id
+  Future<Routine> getRoutineById(String id) async {
+    final response = await _apiBase.get('routines/$id');
+    return Routine.fromJson(json.decode(response.body));
+  }
+
+  // Create Routine
+  Future<Routine> createRoutine(Routine routine) async {
+    final response = await _apiBase.post('routines', body: routine.toJson());
+    return Routine.fromJson(json.decode(response.body));
+  }
+
+  // Update Routine
+  Future<Routine> updateRoutine(String id, Routine routine) async {
+    final response = await _apiBase.put('routines/$id', body: routine.toJson());
+    return Routine.fromJson(json.decode(response.body));
+  }
+
+  // Delete Routine
+  Future<void> deleteRoutine(String id) async {
+    await _apiBase.delete('routines/$id');
+  }
+
+  // Get RoutineExercises by RoutineId
+  Future<List<RoutineExercise>> getRoutineExerciseByRoutineId(String routineId) async {
+    final response = await _apiBase.get('routines/searchRoutineExerciseByIdRoutine/$routineId');
+    return (json.decode(response.body) as List).map((i) => RoutineExercise.fromJson(i)).toList();
+  }
+}

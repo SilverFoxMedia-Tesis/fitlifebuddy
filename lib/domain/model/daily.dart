@@ -47,3 +47,4 @@ class Daily {
   factory Daily.fromJson(String source) =>
       Daily.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
