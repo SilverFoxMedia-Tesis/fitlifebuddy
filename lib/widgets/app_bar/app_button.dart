@@ -34,7 +34,7 @@ class AppButton extends StatelessWidget {
           width: expanded.value ? 176 : 56,
           decoration: BoxDecoration(
             color: _getColor(colorNumber),
-            borderRadius: expanded.value ? AppBorderRadius.borderRadiusXxxl : null,
+            borderRadius: expanded.value ? AppBorderRadius.borderRadiusXxl : null,
             boxShadow: const [AppBoxShadow.secondary25Blur8],
             shape: expanded.value ? BoxShape.rectangle : BoxShape.circle,
           ),
@@ -42,14 +42,14 @@ class AppButton extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 icon,
-                height: ContainerSize.appBarButtonSize,
+                height: ContainerSize.iconSize,
                 fit: BoxFit.fitHeight,
               ),
               if (expanded.value) ...[
                 AppSpacing.spacingHorizontal16,
                 Text(
                   text,
-                  style: AppTextStyle.robotoSemibold14.copyWith(
+                  style: AppTextStyle.robotoMedium14.copyWith(
                     color: AppColors.white,
                   )
                 ),

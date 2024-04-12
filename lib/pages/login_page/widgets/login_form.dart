@@ -23,7 +23,7 @@ class LoginForm extends GetView<LoginController> {
         children: [
           SvgPicture.asset(
             AppIcons.logo,
-            width: ContainerSize.logoButtonSize,
+            width: ContainerSize.logoSize,
           ),
           AppSpacing.spacingVertical24,
           Text(

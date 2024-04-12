@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LogoButton extends StatelessWidget {
+class LogoButton extends StatefulWidget {
   final String icon;
   final String text;
   final void Function()? onTap;
@@ -20,25 +20,30 @@ class LogoButton extends StatelessWidget {
   });
 
   @override
+  State<LogoButton> createState() => _LogoButtonState();
+}
+
+class _LogoButtonState extends State<LogoButton> {
+  @override
   Widget build(BuildContext context) {
     return Obx(
       () => InkWell(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: SizedBox(
           width: expanded.value 
             ? ContainerSize.logoButtonExpanded
-            : ContainerSize.logoButtonSize,
+            : ContainerSize.logoSize,
           child: Row(
             children: [
               SvgPicture.asset(
-                icon,
-                height: ContainerSize.logoButtonSize,
+                widget.icon,
+                height: ContainerSize.logoSize,
                 fit: BoxFit.contain,
               ),
               if (expanded.value) ...[
                 AppSpacing.spacingHorizontal16,
                 Text(
-                  text,
+                  widget.text,
                   style: AppTextStyle.robotoSemibold20.copyWith(
                     color: AppColors.secondary
                   ),

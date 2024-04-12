@@ -22,56 +22,57 @@ class MyAppBar extends StatelessWidget {
       padding: AppPadding.paddingVertical32,
       child: Obx(
         () => Container(
-          padding: AppPadding.paddingAppBar,
+          padding: AppPadding.paddingVertical32,
           width: expanded.value 
             ? ContainerSize.appBarWidthExpanded
             : ContainerSize.appBarWidth,
           decoration: const BoxDecoration(
             color: AppColors.primary,
-            borderRadius: AppBorderRadius.borderRadiusRightLg,
+            borderRadius: AppBorderRadius.borderRadiusRight14,
               boxShadow: [AppBoxShadow.secondary25Blur8],
           ),
-          child: Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    LogoButton(
-                      icon: AppIcons.logo, 
-                      text: 'Fitlifebuddy'.tr,
-                      onTap: () {
-                        expanded.value = !expanded.value;
-                      },
-                    ),
-                    AppSpacing.spacingVertical32,
-                    AppButton(
-                      icon: AppIcons.home, 
-                      text: 'Home'.tr,
-                      onTap: () => Get.toNamed(AppRoutes.home),
-                    ),
-                    AppSpacing.spacingVertical32,
-                    AppButton(
-                      icon: AppIcons.person, 
-                      text: 'My profile'.tr,
-                      onTap: () => Get.toNamed(AppRoutes.profile),
-                    ),
-                    AppSpacing.spacingVertical32,
-                    AppButton(icon: AppIcons.notification, text: 'Notifications'.tr),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppButton(icon: AppIcons.settings, text: 'Settings'.tr, colorNumber: 1),
-                    AppSpacing.spacingVertical32,
-                    AppButton(icon: AppIcons.help, text: 'Help'.tr, colorNumber: 1),
-                  ],
-                ),
-              ]
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LogoButton(
+                    icon: AppIcons.logo, 
+                    text: 'fitlifebuddy'.tr,
+                    onTap: () {
+                      expanded.value = !expanded.value;
+                    },
+                  ),
+                  AppSpacing.spacingVertical32,
+                  AppButton(
+                    icon: AppIcons.home, 
+                    text: 'home'.tr,
+                    onTap: () => Get.toNamed(AppRoutes.home),
+                  ),
+                  AppSpacing.spacingVertical32,
+                  AppButton(
+                    icon: AppIcons.person, 
+                    text: 'my_profile'.tr,
+                    onTap: () => Get.toNamed(AppRoutes.profile),
+                  ),
+                  AppSpacing.spacingVertical32,
+                  AppButton(
+                    icon: AppIcons.notification,
+                    text: 'notifications'.tr,
+                  ),
+                ],
               ),
-          ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppButton(icon: AppIcons.settings, text: 'settings'.tr, colorNumber: 1),
+                  AppSpacing.spacingVertical32,
+                  AppButton(icon: AppIcons.help, text: 'help'.tr, colorNumber: 1),
+                ],
+              ),
+            ]
+            ),
         ),
       ),
     );

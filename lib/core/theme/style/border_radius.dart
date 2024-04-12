@@ -13,9 +13,9 @@ class AppBorderRadius {
   static const borderRadiusXxxl =
       BorderRadius.all(Radius.circular(Space.space32));
 
-  static const borderRadiusRightLg =
+  static const borderRadiusRight14 =
       BorderRadius.only(
-        topRight: Radius.circular(Space.space16), 
-        bottomRight: Radius.circular(Space.space16)
+        topRight: Radius.circular(Space.space14), 
+        bottomRight: Radius.circular(Space.space14)
       );
 }
