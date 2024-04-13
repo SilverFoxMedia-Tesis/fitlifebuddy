@@ -14,7 +14,7 @@ class PersonApi {
   }
 
   // Get Person by Id
-  Future<Person> getPersonById(String id) async {
+  Future<Person> getPersonById(int id) async {
     final response = await _apiBase.get('persons/$id');
     return Person.fromJson(response.body);
   }

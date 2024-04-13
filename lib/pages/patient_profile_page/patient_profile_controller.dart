@@ -2,13 +2,14 @@ import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
+import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PatientProfileController extends GetxController{
-  final _patientApi = Get.find<PatientApi>();
   final _personApi = Get.find<PersonApi>();
+  final _patientApi = Get.find<PatientApi>();
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
@@ -30,9 +31,13 @@ class PatientProfileController extends GetxController{
     try {
       var patient = await _patientApi.getPatientById(patientId);
       getPatientInfo(patient);
-      if(patient.personId != null){
+      if (patient.personId != null){
         var person = await _personApi.getPersonById(patient.personId!);
         getPersonInfo(person);
+      }
+      var histories = await _patientApi.getPatientHistoriesByPatientId(patientId);
+      if (histories.isNotEmpty) {
+        getPatientHistoryInfo(histories.first);
       }
     } catch (e) {
       displayErrorToast(e);
@@ -40,16 +45,19 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientInfo(Patient patient){
-    genderController.value.text = patient.gender ?? '';
     birthdateController.value.text = patient.birthDate ?? '';
-    heightController.value.text = patient.height?.toStringAsFixed(2) ?? '';
-    weightController.value.text = patient.weight?.toStringAsFixed(2) ?? '';
   }
 
   void getPersonInfo(Person person) {
     firstnameController.value.text = person.fullname ?? '';
     lastnameController.value.text = person.lastname ?? '';
     emailController.value.text = person.emailAddress ?? '';
+  }
+
+  void getPatientHistoryInfo(PatientHistory patientHistory){
+    genderController.value.text = patientHistory.gender.toString();
+    heightController.value.text = patientHistory.height.toString();
+    weightController.value.text = patientHistory.weight.toString();
   }
 
   void editProfile(){

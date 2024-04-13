@@ -61,7 +61,7 @@ class PatientApi {
   // Get PatientHistories by PatientId
   Future<List<PatientHistory>> getPatientHistoriesByPatientId(String patientId) async {
     final response = await _apiBase.get('pacients/searchPatientHistoryByIdPacient/$patientId');
-    return (json.decode(response.body) as List).map((i) => PatientHistory.fromJson(i)).toList();
+    return (response.body as List).map((i) => PatientHistory.fromJson(i)).toList();
   }
 
   // Get Plans by PatientId

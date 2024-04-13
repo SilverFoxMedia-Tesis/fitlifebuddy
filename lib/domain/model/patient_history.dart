@@ -1,65 +1,62 @@
 import 'dart:convert';
 
+import 'package:fitlifebuddy/domain/enum/diet_type.dart';
+import 'package:fitlifebuddy/domain/enum/frecuently.dart';
+import 'package:fitlifebuddy/domain/enum/gender.dart';
+import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
+
 class PatientHistory {
-  String? id;
-  String? scc;
-  int? faf;
-  int? tue;
-  String? mtrans;
-  String? favc;
-  int? fcvc;
-  int? ncp;
-  String? caec;
-  int? ch2o;
-  String? calc;
-  String? patientId;
+  int? id;
+  double? height;
+  double? weight;
+  Gender? gender;
+  int? age;
+  double? abdominalCircumference;
+  PhysicalActivity? physicalActivity;
+  Frecuently? frecuently;
+  DietType? dietType;
+  int? patientId;
 
   PatientHistory({
     this.id,
-    this.scc,
-    this.faf,
-    this.tue,
-    this.mtrans,
-    this.favc,
-    this.fcvc,
-    this.ncp,
-    this.caec,
-    this.ch2o,
-    this.calc,
+    this.height,
+    this.weight,
+    this.gender,
+    this.age,
+    this.abdominalCircumference,
+    this.physicalActivity,
+    this.frecuently,
+    this.dietType,
     this.patientId,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'scc': scc,
-      'faf': faf,
-      'tue': tue,
-      'mtrans': mtrans,
-      'favc': favc,
-      'fcvc': fcvc,
-      'ncp': ncp,
-      'caec': caec,
-      'ch2o': ch2o,
-      'calc': calc,
+      'height': height,
+      'weight': weight,
+      'gender': gender,
+      'age': age,
+      'abdominalCircumference': abdominalCircumference,
+      'physicalActivity': physicalActivity,
+      'frecuently': frecuently,
+      'dietType': dietType,
       'patientId': patientId,
     };
   }
 
   factory PatientHistory.fromMap(Map<String, dynamic> map) {
     return PatientHistory(
-      id: map['idPatientHistory'] != null ? map['idPatientHistory'] as String : null,
-      scc: map['scc'] != null ? map['scc'] as String : null,
-      faf: map['faf'] != null ? map['faf'] as int : null,
-      tue: map['tue'] != null ? map['tue'] as int : null,
-      mtrans: map['mtrans'] != null ? map['mtrans'] as String : null,
-      favc: map['favc'] != null ? map['favc'] as String : null,
-      fcvc: map['fcvc'] != null ? map['fcvc'] as int : null,
-      ncp: map['ncp'] != null ? map['ncp'] as int : null,
-      caec: map['caec'] != null ? map['caec'] as String : null,
-      ch2o: map['ch2o'] != null ? map['ch2o'] as int : null,
-      calc: map['calc'] != null ? map['calc'] as String : null,
-      patientId: map['idPatient'] != null ? map['idPatient'] as String : null,
+      id: map['idPacientHistory'] as int?,
+      height: map['height'] as double?,
+      weight: map['weight'] as double?,
+      gender: map['gender'] as Gender?,
+      age: map['age'] as int?,
+      abdominalCircumference: map['abdominalCircumference'] as double?,
+      physicalActivity: map['physicalActivity'],
+      frecuently: map['frecuently'],
+      dietType: map['dietType'],
+      patientId: map['pacient'] != null ? map['pacient']['idPacient'] as int? : null,
     );
   }
 
