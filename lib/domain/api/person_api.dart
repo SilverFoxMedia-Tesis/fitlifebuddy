@@ -26,13 +26,13 @@ class PersonApi {
   }
 
   // Update Person
-  Future<Person> updatePerson(String id, Person person) async {
+  Future<Person> updatePerson(int id, Person person) async {
     final response = await _apiBase.put('persons/$id', body: person.toJson());
     return Person.fromJson(json.decode(response.body));
   }
 
   // Delete Person
-  Future<void> deletePerson(String id) async {
+  Future<void> deletePerson(int id) async {
     await _apiBase.delete('persons/$id');
   }
 

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/question.dart';
 
 class Feedback {
-  String? id;
+  int? id;
   String? planId;
   String? dailyId;
   int? punctuation;
@@ -29,7 +29,7 @@ class Feedback {
 
   factory Feedback.fromMap(Map<String, dynamic> map) {
     return Feedback(
-      id: map['idFeedback'] != null ? map['idFeedback'] as String : null,
+      id: map['idFeedback'] as int?,
       planId: map['idPlan'] != null ? map['idPlan'] as String : null,
       dailyId: map['idDaily'] != null ? map['idDaily'] as String : null,
       punctuation: map['punctuation'] != null ? map['punctuation'] as int : null,

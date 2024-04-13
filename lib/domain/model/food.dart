@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/enum/category_name.dart';
 
 class Food {
-  String? id;
+  int? id;
   String? name;
   String? measure;
   double? grams;
@@ -44,7 +44,7 @@ class Food {
 
   factory Food.fromMap(Map<String, dynamic> map) {
     return Food(
-      id: map['idFood'] != null ? map['idFood'] as String : null,
+      id: map['idFood'] as int?,
       name: map['nameFood'] != null ? map['nameFood'] as String : null,
       measure: map['measure'] != null ? map['measure'] as String : null,
       grams: map['grams'] != null ? map['grams'] as double : null,

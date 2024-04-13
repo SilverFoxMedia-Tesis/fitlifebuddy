@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class Nutritionist {
-  String? id;
+  int? id;
   List<Patient>? patients;
   String? personId;
 
@@ -23,7 +23,7 @@ class Nutritionist {
 
   factory Nutritionist.fromMap(Map<String, dynamic> map) {
     return Nutritionist(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['id'] as int?,
       patients: map['patients'] != null ? List<Patient>.from(map['healthConditions']) : null,
       personId: map['idPerson'] != null ? map['idPerson'] as String : null,
     );

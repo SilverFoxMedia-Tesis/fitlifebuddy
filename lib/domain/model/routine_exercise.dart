@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/routine.dart';
 
 class RoutineExercise {
-  String? id;
+  int? id;
   Routine? routine;
   Exercise? exercise;
 
@@ -24,7 +24,7 @@ class RoutineExercise {
 
   factory RoutineExercise.fromMap(Map<String, dynamic> map) {
     return RoutineExercise(
-      id: map['idRoutineExercise'] != null ? map['idRoutine'] as String : null,
+      id: map['idRoutineExercise'] as int?,
       routine: map['routine'] != null ? map['nameRoutine'] as Routine : null,
       exercise: map['exercise'] != null ? map['descriptionRoutine'] as Exercise : null,
     );

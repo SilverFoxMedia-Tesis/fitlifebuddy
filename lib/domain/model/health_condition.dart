@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
 
 class HealthCondition {
-  String? id;
+  int? id;
   String? name;
   String? description;
   TypeHealthCondition? type;
@@ -29,7 +29,7 @@ class HealthCondition {
 
   factory HealthCondition.fromMap(Map<String, dynamic> map) {
     return HealthCondition(
-      id: map['idHealthCondition'] != null ? map['idHealthCondition'] as String : null,
+      id: map['idHealthCondition'] as int?,
       name: map['nameHealthCondition'] != null ? map['nameHealthCondition'] as String : null,
       description: map['descriptionHealthCondition'] != null ? map['descriptionHealthCondition'] as String : null,
       type: map['typeHealthCondition'] != null ? map['typeHealthCondition'] as TypeHealthCondition : null,

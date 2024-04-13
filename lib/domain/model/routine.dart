@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 
 class Routine {
-  String? id;
+  int? id;
   String? name;
   String? description;
   String? dailyId;
@@ -29,7 +29,7 @@ class Routine {
 
   factory Routine.fromMap(Map<String, dynamic> map) {
     return Routine(
-      id: map['idRoutine'] != null ? map['idRoutine'] as String : null,
+      id: map['idRoutine'] as int?,
       name: map['nameRoutine'] != null ? map['nameRoutine'] as String : null,
       description: map['descriptionRoutine'] != null ? map['descriptionRoutine'] as String : null,
       dailyId: map['idDaily'] != null ? map['idDaily'] as String : null,

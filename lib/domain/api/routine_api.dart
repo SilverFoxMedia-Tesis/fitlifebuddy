@@ -15,7 +15,7 @@ class RoutineApi {
   }
 
   // Get Routine by Id
-  Future<Routine> getRoutineById(String id) async {
+  Future<Routine> getRoutineById(int id) async {
     final response = await _apiBase.get('routines/$id');
     return Routine.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class RoutineApi {
   }
 
   // Update Routine
-  Future<Routine> updateRoutine(String id, Routine routine) async {
+  Future<Routine> updateRoutine(int id, Routine routine) async {
     final response = await _apiBase.put('routines/$id', body: routine.toJson());
     return Routine.fromJson(json.decode(response.body));
   }
 
   // Delete Routine
-  Future<void> deleteRoutine(String id) async {
+  Future<void> deleteRoutine(int id) async {
     await _apiBase.delete('routines/$id');
   }
 

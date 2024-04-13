@@ -50,12 +50,12 @@ class PatientHistory {
       id: map['idPacientHistory'] as int?,
       height: map['height'] as double?,
       weight: map['weight'] as double?,
-      gender: map['gender'] as Gender?,
+      gender: Gender.fromString(map['gender']),
       age: map['age'] as int?,
       abdominalCircumference: map['abdominalCircumference'] as double?,
-      physicalActivity: map['physicalActivity'],
-      frecuently: map['frecuently'],
-      dietType: map['dietType'],
+      physicalActivity: PhysicalActivity.fromString(map['physicalActivity']),
+      frecuently: Frecuently.fromString(map['frecuently']),
+      dietType: DietType.fromString(map['dietType']),
       patientId: map['pacient'] != null ? map['pacient']['idPacient'] as int? : null,
     );
   }

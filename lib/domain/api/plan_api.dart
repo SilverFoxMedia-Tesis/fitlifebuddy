@@ -15,7 +15,7 @@ class PlanApi {
   }
 
   // Get Plan by Id
-  Future<Plan> getPlanById(String id) async {
+  Future<Plan> getPlanById(int id) async {
     final response = await _apiBase.get('plans/$id');
     return Plan.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class PlanApi {
   }
 
   // Update Plan
-  Future<Plan> updatePlan(String id, Plan plan) async {
+  Future<Plan> updatePlan(int id, Plan plan) async {
     final response = await _apiBase.put('plans/$id', body: plan.toJson());
     return Plan.fromJson(json.decode(response.body));
   }
 
   // Delete Plan
-  Future<void> deletePlan(String id) async {
+  Future<void> deletePlan(int id) async {
     await _apiBase.delete('plans/$id');
   }
 

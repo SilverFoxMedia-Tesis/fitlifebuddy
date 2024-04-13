@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Option {
-  String? id;
+  int? id;
   String? name;
   int? questionId;
 
@@ -21,7 +21,7 @@ class Option {
 
   factory Option.fromMap(Map<String, dynamic> map) {
     return Option(
-      id: map['idOption'] != null ? map['idOption'] as String : null,
+      id: map['idOption'] as int?,
       name: map['nameOption'] != null ? map['nameOption'] as String : null,
       questionId: map['idQuestion'] != null ? map['idQuestion'] as int : null,
     );

@@ -6,10 +6,13 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final _formValidationService = Get.find<FormValidationService>();
+
+  final loginFormKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
+  
   final obscurePassword = true.obs;
-  final loginFormKey = GlobalKey<FormState>();
 
   void setObscurePassword() {
     obscurePassword.value = !obscurePassword.value;

@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 
 class Plan {
-  String? id;
+  int? id;
   String? frecuently;
   DietType? dietType;
   Status? status;
@@ -34,7 +34,7 @@ class Plan {
 
   factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan(
-      id: map['idPlan'] != null ? map['idPlan'] as String : null,
+      id: map['idPlan'] as int?,
       frecuently: map['frecuently'] != null ? map['frecuently'] as String : null,
       dietType: map['dietType'] != null ? map['dietType'] as DietType : null,
       status: map['status'] != null ? map['status'] as Status : null,

@@ -47,25 +47,25 @@ class PersonalInfo extends GetView<PatientProfileController> {
           AppTextfield(
             title: 'firstname'.tr,
             controller: controller.firstnameController.value,
-            readOnly: controller.isEditable.value,
+            readOnly: controller.isPersonalInfoEditable.value,
           ),
           AppSpacing.spacingVertical32,
           AppTextfield(
             title: 'lastname'.tr,
             controller: controller.lastnameController.value,
-            readOnly: controller.isEditable.value,
+            readOnly: controller.isPersonalInfoEditable.value,
           ),
           AppSpacing.spacingVertical32,
           AppTextfield(
             title: 'gender'.tr,
             controller: controller.genderController.value,
-            readOnly: controller.isEditable.value,
+            readOnly: controller.isPersonalInfoEditable.value,
           ),
           AppSpacing.spacingVertical32,
           AppTextfield(
             title: 'birthdate'.tr,
             controller: controller.birthdateController.value,
-            readOnly: controller.isEditable.value,
+            readOnly: controller.isPersonalInfoEditable.value,
           ),
           AppSpacing.spacingVertical32,
           Row(
@@ -76,7 +76,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
                 title: 'weight'.tr,
                 controller: controller.weightController.value,
                 suffixText: 'weight_symbol'.tr,
-                readOnly: controller.isEditable.value,
+                readOnly: controller.isPersonalInfoEditable.value,
               ),
               AppSpacing.spacingHorizontal24,
               AppTextfield(
@@ -84,7 +84,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
                 title: 'height'.tr,
                 controller: controller.heightController.value,
                 suffixText: 'height_symbol'.tr,
-                readOnly: controller.isEditable.value,
+                readOnly: controller.isPersonalInfoEditable.value,
               ),
             ],
           ),
@@ -92,7 +92,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
           AppTextfield(
             title: 'email'.tr,
             controller: controller.emailController.value,
-            readOnly: controller.isEditable.value,
+            readOnly: controller.isPersonalInfoEditable.value,
           ),
         ],
       ),

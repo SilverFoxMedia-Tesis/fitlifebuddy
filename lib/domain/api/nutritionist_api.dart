@@ -15,7 +15,7 @@ class NutritionistApi {
   }
 
   // Get Nutritionist by Id
-  Future<Nutritionist> getNutritionistById(String id) async {
+  Future<Nutritionist> getNutritionistById(int id) async {
     final response = await _apiBase.get('nutritionists/$id');
     return Nutritionist.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class NutritionistApi {
   }
 
   // Update Nutritionist
-  Future<Nutritionist> updateNutritionist(String id, Nutritionist nutritionist) async {
+  Future<Nutritionist> updateNutritionist(int id, Nutritionist nutritionist) async {
     final response = await _apiBase.put('nutritionists/$id', body: nutritionist.toJson());
     return Nutritionist.fromJson(json.decode(response.body));
   }
 
   // Delete Nutritionist
-  Future<void> deleteNutritionist(String id) async {
+  Future<void> deleteNutritionist(int id) async {
     await _apiBase.delete('nutritionists/$id');
   }
 

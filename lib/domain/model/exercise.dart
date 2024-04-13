@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/domain/enum/body_part.dart';
 import 'package:fitlifebuddy/domain/enum/type_exercise.dart';
 
 class Exercise {
-  String? id;
+  int? id;
   String? workout;
   String? sets;
   String? repPerSet;
@@ -33,7 +33,7 @@ class Exercise {
 
   factory Exercise.fromMap(Map<String, dynamic> map) {
     return Exercise(
-      id: map['idExercise'] != null ? map['idExercise'] as String : null,
+      id: map['idExercise'] as int?,
       workout: map['workout'] != null ? map['workout'] as String : null,
       sets: map['sets'] != null ? map['sets'] as String : null,
       repPerSet: map['repPerSet'] != null ? map['repPerSet'] as String : null,
