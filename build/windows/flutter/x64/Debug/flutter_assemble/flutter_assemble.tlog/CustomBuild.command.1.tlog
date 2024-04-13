@@ -1,0 +1,28 @@
+^E:\UPC\CICLOS\TESIS\FITLIFEBUDDY\BUILD\WINDOWS\CMAKEFILES\000E31ADC3FA83354380FD59C7C5E3BC\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\Julissa\fvm\versions\3.13.9 PROJECT_DIR=E:\UPC\Ciclos\Tesis\fitlifebuddy FLUTTER_ROOT=C:\Users\Julissa\fvm\versions\3.13.9 FLUTTER_EPHEMERAL_DIR=E:\UPC\Ciclos\Tesis\fitlifebuddy\windows\flutter\ephemeral PROJECT_DIR=E:\UPC\Ciclos\Tesis\fitlifebuddy FLUTTER_TARGET=E:\UPC\Ciclos\Tesis\fitlifebuddy\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC8wNTQ1Zjg3MDVkZjMwMTg3N2Q3ODcxMDdiYWMxYTZlOWZjOWVlMWFkLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=E:\UPC\Ciclos\Tesis\fitlifebuddy\.dart_tool\package_config.json C:/Users/Julissa/fvm/versions/3.13.9/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\UPC\CICLOS\TESIS\FITLIFEBUDDY\BUILD\WINDOWS\CMAKEFILES\DCBE691D120BD061414B2294848CEAA7\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\UPC\CICLOS\TESIS\FITLIFEBUDDY\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/UPC/Ciclos/Tesis/fitlifebuddy/windows -BE:/UPC/Ciclos/Tesis/fitlifebuddy/build/windows --check-stamp-file E:/UPC/Ciclos/Tesis/fitlifebuddy/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
