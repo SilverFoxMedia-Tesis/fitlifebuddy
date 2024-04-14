@@ -36,10 +36,11 @@ class PersonApi {
     await _apiBase.delete('persons/$id');
   }
 
-  // Get Persons by EmailAddress
-  Future<List<Person>> getPersonsByEmailAddress(String emailAddress) async {
+  // Get Person by EmailAddress
+  Future<Person?> getPersonByEmailAddress(String emailAddress) async {
     final response = await _apiBase.get('persons/searchByEmailAddress/$emailAddress');
-    return (json.decode(response.body) as List).map((i) => Person.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return Person.fromMap(jsonData.first as Map<String, dynamic>);
   }
 
   // Get Persons by FullName
