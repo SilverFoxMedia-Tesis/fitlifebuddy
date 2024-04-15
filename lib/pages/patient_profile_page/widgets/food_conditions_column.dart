@@ -36,7 +36,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
             ),
           ],
         ),
-        AppSpacing.spacingVertical20,
+        AppSpacing.spacingVertical24,
         const AppDropdown(type: 2,),
       ],
     );

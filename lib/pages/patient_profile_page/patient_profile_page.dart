@@ -57,7 +57,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FoodConditionsColumn(),
-                    AppSpacing.spacingVertical20,
+                    AppSpacing.spacingVertical24,
                     HealthConditionsColumn(),
                   ],
                 )

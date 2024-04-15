@@ -1,4 +1,5 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
@@ -36,35 +37,35 @@ class PersonalInfo extends GetView<PatientProfileController> {
                 ),
               ],
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'firstname'.tr,
               controller: controller.firstnameController.value,
               enabled: controller.isPersonalInfoEditing.value,
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'lastname'.tr,
               controller: controller.lastnameController.value,
               enabled: controller.isPersonalInfoEditing.value,
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'gender'.tr,
               controller: controller.genderController.value,
               enabled: controller.isPersonalInfoEditing.value,
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'birthdate'.tr,
               controller: controller.birthdateController.value,
               enabled: controller.isPersonalInfoEditing.value,
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             Row(
               children: [
                 AppTextfield(
-                  width: 160,
+                  width: ContainerSize.baseButtonSmallWidth,
                   title: 'weight'.tr,
                   controller: controller.weightController.value,
                   suffixText: 'weight_symbol'.tr,
@@ -72,7 +73,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
                 ),
                 AppSpacing.spacingHorizontal24,
                 AppTextfield(
-                  width: 160,
+                  width:  ContainerSize.baseButtonSmallWidth,
                   title: 'height'.tr,
                   controller: controller.heightController.value,
                   suffixText: 'height_symbol'.tr,
@@ -80,7 +81,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
                 ),
               ],
             ),
-            AppSpacing.spacingVertical20,
+            AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'email'.tr,
               controller: controller.emailController.value,
