@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/widgets/cover/cover.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override

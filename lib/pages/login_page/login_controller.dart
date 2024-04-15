@@ -51,11 +51,7 @@ class LoginController extends GetxController {
   }
 
   void forgotPassword() {
-    try {
-      Get.toNamed(AppRoutes.recoverPassword);
-    } catch (e) {
-      displayErrorToast(e);
-    }
+    Get.toNamed(AppRoutes.recoverPassword);
   }
 
   void reset() {

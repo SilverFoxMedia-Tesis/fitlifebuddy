@@ -84,5 +84,7 @@
     "password_recovery_request_sent": "Solicitud de recuperación de contraseña enviada",
     "invalid_credentials": "Credenciales inválidas",
     "successful_login": "Inicio de sesión exitoso",
-    "profile_has_been_updated": "Se ha actualizado el perfil"
+    "personal_info_updated": "Información personal actualizada",
+    "health_conditions_updated": "Condiciones de salud actualizadas",
+    "food_conditions_updated": "Condiciones alimentarias actualizadas"
 }

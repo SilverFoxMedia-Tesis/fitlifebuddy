@@ -41,7 +41,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                       text: 'save'.tr,
                       width: ContainerSize.baseButtonSmallWidth,
                       backgroundColor: AppColors.secondary,
-                      onTap: controller.updatePersonalInfo,
+                      onTap: controller.handleProfileUpdate,
                     ),
                   ),
                 ),

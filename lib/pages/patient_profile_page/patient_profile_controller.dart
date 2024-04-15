@@ -21,7 +21,8 @@ class PatientProfileController extends GetxController{
   final _appToast = Get.find<AppToast>();
 
   final personalInfoFormKey = GlobalKey<FormState>();
-  final conditionsFormKey = GlobalKey<FormState>();
+  final healthConditionsFormKey = GlobalKey<FormState>();
+  final foodConditionsFormKey = GlobalKey<FormState>();
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
@@ -93,6 +94,24 @@ class PatientProfileController extends GetxController{
     isFoodConditionsEditing.value = true;
   }
 
+  void resetIsEditing() {
+    isPersonalInfoEditing.value = false;
+    isHealthConditionsEditing.value = false;
+    isPersonalInfoEditing.value = false;
+  }
+
+  Future<void> handleProfileUpdate() async {
+    if (isPersonalInfoEditing.isTrue) {
+      await updatePersonalInfo();
+    } else if (isHealthConditionsEditing.isTrue) {
+      await updateHealthConditions();
+    } else if (isFoodConditionsEditing.isTrue) {
+      await updateFoodConditions();
+    }
+    await getPatientById(1);
+    resetIsEditing();
+  }
+
   Future<void> updatePersonalInfo() async {
     try {
       if (_formValidationService.validateForm(personalInfoFormKey)) {
@@ -107,17 +126,38 @@ class PatientProfileController extends GetxController{
         await _personApi.updatePerson(currentPerson.value.id!, currentPerson.value);
         await _patientHistoryApi.updatePatientHistory(currentPatientHistory.value.id!, currentPatientHistory.value);
         _appToast.showToast(
-          message: 'profile_has_been_updated',
+          message: 'personal_info_updated',
           type: ToastificationType.success,
         );
       }
     } catch (e) {
       displayErrorToast(e);
-    } finally {
-      getPatientById(1);
-      isPersonalInfoEditing.value = false;
-      isHealthConditionsEditing.value = false;
-      isPersonalInfoEditing.value = false;
+    }
+  }
+
+  Future<void> updateHealthConditions() async {
+    try {
+      if (_formValidationService.validateForm(healthConditionsFormKey)) {
+        _appToast.showToast(
+          message: 'health_conditions_updated',
+          type: ToastificationType.success,
+        );
+      }
+    } catch (e) {
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> updateFoodConditions() async {
+    try {
+      if (_formValidationService.validateForm(foodConditionsFormKey)) {
+        _appToast.showToast(
+          message: 'food_conditions_updated',
+          type: ToastificationType.success,
+        );
+      }
+    } catch (e) {
+      displayErrorToast(e);
     }
   }
 }
