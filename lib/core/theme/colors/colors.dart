@@ -9,4 +9,5 @@ class AppColors {
   static const success = Color(0xff99e2b4);
   static const white = Color(0xffffffff);
   static const background = Color(0xffF0F4FA);
+  static const disabled = Color(0xffd1d6dc);
 }

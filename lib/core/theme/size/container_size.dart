@@ -6,6 +6,7 @@ class ContainerSize {
   static const appBarButtonExpanded = 204.0;
   static const bannerHeight = 200.0;
   static const baseButtonWidth = 348.0;
+  static const baseButtonSmallWidth = 160.0;
   static const baseButtonHeight = 52.0;
   static const appCardIconSize = 32.0;
   static const appCardWidth = 592.0;

@@ -1,19 +1,24 @@
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
+import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
+import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:toastification/toastification.dart';
 
 class PatientProfileController extends GetxController{
   final _personApi = Get.find<PersonApi>();
   final _patientApi = Get.find<PatientApi>();
+  final _patientHistoryApi = Get.find<PatientHistoryApi>();
 
   final _formValidationService = Get.find<FormValidationService>();
+  final _appToast = Get.find<AppToast>();
 
   final personalInfoFormKey = GlobalKey<FormState>();
   final conditionsFormKey = GlobalKey<FormState>();
@@ -26,11 +31,15 @@ class PatientProfileController extends GetxController{
   final weightController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
 
-  final isPersonalInfoEditable = false.obs;
+  final isPersonalInfoEditing = false.obs;
+  final isHealthConditionsEditing = false.obs;
+  final isFoodConditionsEditing = false.obs;
 
   final currentPatient = Patient().obs;
   final currentPerson = Person().obs;
   final currentPatientHistory = PatientHistory().obs;
+
+  bool get isEditing => isPersonalInfoEditing.isTrue || isHealthConditionsEditing.isTrue || isFoodConditionsEditing.isTrue;
 
   @override
   Future<void> onInit() async {
@@ -67,30 +76,48 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientHistoryInfo(){
-    genderController.value.text = currentPatientHistory.value.gender?.value ?? '';
+    genderController.value.text = currentPatientHistory.value.gender?.label ?? '';
     heightController.value.text = currentPatientHistory.value.height.toString();
     weightController.value.text = currentPatientHistory.value.weight.toString();
   }
 
-  void onEditPressed() {
-    isPersonalInfoEditable.value = true;
+  void onEditPersonalInfoPressed() {
+    isPersonalInfoEditing.value = true;
   }
 
-  Future<void> updatePatient() async {
-    if (_formValidationService.validateForm(personalInfoFormKey)) {
-      currentPatient.value.birthDate = birthdateController.value.text;
-      currentPerson.value.fullname = firstnameController.value.text;
-      currentPerson.value.lastname = lastnameController.value.text;
-      currentPerson.value.emailAddress = emailController.value.text;
-      currentPatientHistory.value.gender = Gender.fromString(genderController.value.text);
-      currentPatientHistory.value.height = double.parse(heightController.value.text);
-      currentPatientHistory.value.weight = double.parse(weightController.value.text);
-      await _patientApi.updatePatient(currentPatient.value.id!, currentPatient.value);
-      await _personApi.updatePerson(currentPerson.value.id!, currentPerson.value);
-      try {
-      } catch (e) {
-        displayErrorToast(e);
+  void onEditHealthConditionsPressed() {
+    isHealthConditionsEditing.value = true;
+  }
+
+  void onEditFoodConditionsPressed() {
+    isFoodConditionsEditing.value = true;
+  }
+
+  Future<void> updatePersonalInfo() async {
+    try {
+      if (_formValidationService.validateForm(personalInfoFormKey)) {
+        currentPatient.value.birthDate = birthdateController.value.text;
+        currentPerson.value.fullname = firstnameController.value.text;
+        currentPerson.value.lastname = lastnameController.value.text;
+        currentPerson.value.emailAddress = emailController.value.text;
+        currentPatientHistory.value.gender = Gender.fromLabel(genderController.value.text);
+        currentPatientHistory.value.height = double.parse(heightController.value.text);
+        currentPatientHistory.value.weight = double.parse(weightController.value.text);
+        await _patientApi.updatePatient(currentPatient.value.id!, currentPatient.value);
+        await _personApi.updatePerson(currentPerson.value.id!, currentPerson.value);
+        await _patientHistoryApi.updatePatientHistory(currentPatientHistory.value.id!, currentPatientHistory.value);
+        _appToast.showToast(
+          message: 'profile_has_been_updated',
+          type: ToastificationType.success,
+        );
       }
+    } catch (e) {
+      displayErrorToast(e);
+    } finally {
+      getPatientById(1);
+      isPersonalInfoEditing.value = false;
+      isHealthConditionsEditing.value = false;
+      isPersonalInfoEditing.value = false;
     }
   }
 }

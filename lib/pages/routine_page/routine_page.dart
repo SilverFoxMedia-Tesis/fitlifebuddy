@@ -46,7 +46,7 @@ class RoutinePage extends StatelessWidget {
                 BaseButtom(
                   text: 'Completado',
                   onTap: () {},
-                  color: AppColors.secondary,
+                  backgroundColor: AppColors.secondary,
                   width: 160,
                 ),
               ],
@@ -66,7 +66,7 @@ class RoutinePage extends StatelessWidget {
                       ),
                     );
                   },
-                  color: AppColors.warning,
+                  backgroundColor: AppColors.warning,
                   width: 160,
                 ),
               ],
@@ -79,7 +79,7 @@ class RoutinePage extends StatelessWidget {
                 BaseButtom(
                   text: 'Cambiar',
                   onTap: () {},
-                  color: AppColors.warning,
+                  backgroundColor: AppColors.warning,
                   width: 160,
                 ),
               ],
@@ -92,7 +92,7 @@ class RoutinePage extends StatelessWidget {
                 BaseButtom(
                   text: 'Cambiar',
                   onTap: () {},
-                  color: AppColors.warning,
+                  backgroundColor: AppColors.warning,
                   width: 160,
                 ),
               ],

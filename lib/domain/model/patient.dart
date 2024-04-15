@@ -16,10 +16,10 @@ class Patient {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'idPacient': id,
       'birthDate': birthDate,
-      'nutritionistId': nutritionistId,
-      'personId': personId,
+      'idNutritionist': nutritionistId,
+      'idPerson': personId,
     };
   }
 

@@ -60,7 +60,7 @@ class AppDropdown extends StatelessWidget {
         AppSpacing.spacingHorizontal24,
         AppTextfield(
           hintText: (type == 1) ? 'Diabetes' : 'Frutos secos',
-          readOnly: readOnly,
+          enabled: readOnly,
         )
       ],
     );

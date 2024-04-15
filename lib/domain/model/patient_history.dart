@@ -54,7 +54,7 @@ class PatientHistory {
       age: map['age'] as int?,
       abdominalCircumference: map['abdominalCircumference'] as double?,
       physicalActivity: PhysicalActivity.fromString(map['physicalActivity']),
-      frecuently: Frecuently.fromString(map['frecuently']),
+      // frecuently: Frecuently.fromString(map['frecuently']), // Esto causa error
       dietType: DietType.fromString(map['dietType']),
       patientId: map['pacient'] != null ? map['pacient']['idPacient'] as int? : null,
     );

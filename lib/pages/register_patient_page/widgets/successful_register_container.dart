@@ -35,13 +35,13 @@ class SuccesfulRegisterContainer extends StatelessWidget {
           ),
           AppSpacing.spacingVertical24,
           const AppTextfield(
-            readOnly: true,
+            enabled: true,
             title: 'Correo electrónico',
             hintText: 'example@gmail.com',
           ),
           AppSpacing.spacingVertical24,
           const AppTextfield(
-            readOnly: true,
+            enabled: true,
             title: 'Contraseña',
             hintText: '4h6j6kbb24b4',
           ),

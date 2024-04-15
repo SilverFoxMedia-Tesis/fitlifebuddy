@@ -19,7 +19,7 @@ class AppTextfield extends StatelessWidget {
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
   final bool obscureText;
-  final bool readOnly;
+  final bool enabled;
   final double width;
 
   const AppTextfield({
@@ -34,7 +34,7 @@ class AppTextfield extends StatelessWidget {
     this.suffixIcon,
     this.onSuffixIconPressed,
     this.obscureText = false,
-    this.readOnly = false,
+    this.enabled = true,
     this.width = ContainerSize.baseTextfieldWidth,
   });
 
@@ -85,12 +85,11 @@ class AppTextfield extends StatelessWidget {
                   enabledBorder: AppInputBorder.hiddenBorder,
                   focusedBorder: AppInputBorder.focusedBorder,
                   errorBorder: AppInputBorder.errorBorder,
+                  enabled: enabled,
                 ),
                 keyboardType: inputType,
-                style: AppTextStyle.robotoRegular14.copyWith(
-                  color: AppColors.secondary,
-                ),
-                readOnly: readOnly,
+                style: _buildTextStyle(),
+                readOnly: !enabled,
                 obscureText: obscureText,
                 onChanged: (String value) {
                   _onChanged(formFieldState, value);
@@ -114,27 +113,27 @@ class AppTextfield extends StatelessWidget {
   }
 
   TextStyle _buildTextStyle() {
-    switch (readOnly) {
+    switch (enabled) {
       case true:
         return AppTextStyle.robotoRegular14.copyWith(
-          color: AppColors.secondary,
+          color: AppColors.primary,
         );
       default:
       return AppTextStyle.robotoRegular14.copyWith(
-          color: AppColors.primary,
+          color: AppColors.secondary,
         );
     }
   }
 
   TextStyle _buildTitleTextStyle() {
-    switch (readOnly) {
+    switch (enabled) {
       case true:
         return AppTextStyle.robotoMedium14.copyWith(
-          color: AppColors.secondary,
+          color: AppColors.primary,
         );
       default:
       return AppTextStyle.robotoMedium14.copyWith(
-          color: AppColors.primary,
+          color: AppColors.secondary,
         );
     }
   }

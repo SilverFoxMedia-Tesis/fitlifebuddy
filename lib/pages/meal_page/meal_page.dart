@@ -57,14 +57,14 @@ class MealPage extends StatelessWidget {
                           ),
                         );
                       },
-                        color: AppColors.warning,
+                        backgroundColor: AppColors.warning,
                         width: 160,
                       ),
                       AppSpacing.spacingHorizontal16,
                       BaseButtom(
                         text: 'Completado',
                         onTap: () {},
-                        color: AppColors.secondary,
+                        backgroundColor: AppColors.secondary,
                         width: 160,
                       ),
                     ],

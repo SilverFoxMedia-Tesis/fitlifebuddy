@@ -1,11 +1,13 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
+import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
+import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class FoodConditionsColumn extends StatelessWidget {
+class FoodConditionsColumn extends GetView<PatientProfileController> {
   const FoodConditionsColumn({
     super.key,
   });
@@ -19,29 +21,22 @@ class FoodConditionsColumn extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Condiciones alimentarias',
-              style: AppTextStyle.robotoSemibold20.copyWith(
+              'food_conditions'.tr,
+              style: AppTextStyle.robotoSemibold16.copyWith(
                 color: AppColors.secondary,
               ),
             ),
             AppSpacing.spacingHorizontal14,
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(100),
-                boxShadow: const [AppBoxShadow.primary25Blur8],
+            Obx(
+              () => AppIconButton(
+                iconData: Icons.edit_rounded,
+                onTap: controller.onEditFoodConditionsPressed,
+                enabled: !controller.isEditing,
               ),
-              child: const Icon(
-                Icons.edit_rounded,
-                color: AppColors.white,
-                size: 14,
-              )
             ),
           ],
         ),
-        AppSpacing.spacingVertical24,
+        AppSpacing.spacingVertical20,
         const AppDropdown(type: 2,),
       ],
     );

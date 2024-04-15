@@ -28,7 +28,7 @@ class PatientHistoryApi {
   // Update PatientHistory
   Future<PatientHistory> updatePatientHistory(int id, PatientHistory patientHistory) async {
     final response = await _apiBase.put('pacientHistories/$id', body: patientHistory.toJson());
-    return PatientHistory.fromJson(json.decode(response.body));
+    return PatientHistory.fromJson(response.body);
   }
 
   // Delete PatientHistory

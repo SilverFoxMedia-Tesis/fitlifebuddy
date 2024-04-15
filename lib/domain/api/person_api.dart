@@ -28,7 +28,7 @@ class PersonApi {
   // Update Person
   Future<Person> updatePerson(int id, Person person) async {
     final response = await _apiBase.put('persons/$id', body: person.toJson());
-    return Person.fromJson(json.decode(response.body));
+    return Person.fromJson(response.body);
   }
 
   // Delete Person

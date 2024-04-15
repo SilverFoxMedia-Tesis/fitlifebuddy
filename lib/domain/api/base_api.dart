@@ -52,8 +52,8 @@ class BaseApi {
   };
 
   http.Response _handleResponse(http.Response response) {
-  print('Response Status: ${response.statusCode}');
-  print('Response Body: ${response.body}');
+  // print('Response Status: ${response.statusCode}');
+  // print('Response Body: ${response.body}');
   if (response.statusCode >= 200 && response.statusCode < 300) {
     return response;
   } else {

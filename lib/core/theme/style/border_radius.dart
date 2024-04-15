@@ -8,7 +8,7 @@ class AppBorderRadius {
       BorderRadius.all(Radius.circular(Space.space16));
   static const borderRadiusXl =
       BorderRadius.all(Radius.circular(Space.space20));
-    static const borderRadiusXxl =
+    static const borderRadius24 =
       BorderRadius.all(Radius.circular(Space.space24));
   static const borderRadiusXxxl =
       BorderRadius.all(Radius.circular(Space.space32));

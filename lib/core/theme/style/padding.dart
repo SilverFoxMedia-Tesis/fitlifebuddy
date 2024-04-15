@@ -2,6 +2,7 @@ import 'package:fitlifebuddy/core/theme/size/space.dart';
 import 'package:flutter/material.dart';
 
 class AppPadding {
+  static const padding8 = EdgeInsets.all(Space.space8);
   static const padding16 = EdgeInsets.all(Space.space16);
   static const padding32 = EdgeInsets.all(Space.space32);
 

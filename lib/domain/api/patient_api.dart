@@ -32,7 +32,7 @@ class PatientApi {
   // Update Patient
   Future<Patient> updatePatient(int id, Patient patient) async {
     final response = await _apiBase.put('pacients/$id', body: patient.toJson());
-    return Patient.fromJson(json.decode(response.body));
+    return Patient.fromJson(response.body);
   }
 
   // Delete Patient
@@ -61,9 +61,8 @@ class PatientApi {
   // Get PatientHistories by PatientId
   Future<List<PatientHistory>> getPatientHistoriesByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchPacientHistoryByIdPacient/$patientId');
-    final List<dynamic> jsonData = json.decode(response.body);
-    final List<PatientHistory> patientHistories = jsonData.map((data) => 
-        PatientHistory.fromMap(data as Map<String, dynamic>)).toList();
+    final jsonData = json.decode(response.body);
+    final patientHistories = jsonData.map<PatientHistory>((i) => PatientHistory.fromMap(i)).toList();
     return patientHistories;
   }
 
