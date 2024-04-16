@@ -1,17 +1,11 @@
 enum PhysicalActivity {
-  no('No'),
-  slight('Slight'),
-  moderate('Moderate'),
-  strong('Strong'),
-  veryStrong('Very_Strong');
+  no('No', 'Ninguna'),
+  slight('Slight', 'Ligera'),
+  moderate('Moderate', 'Moderada'),
+  strong('Strong', 'Fuerte'),
+  veryStrong('Very_Strong', 'Muy Fuerte');
 
-  const PhysicalActivity(this.value);
+  const PhysicalActivity(this.value, this.label);
   final String value;
-
-  static PhysicalActivity? fromString(String? str) {
-    if (str == null) return null;
-    return PhysicalActivity.values.firstWhere(
-      (pa) => pa.value == str,
-    );
-  }
+  final String label;
 }

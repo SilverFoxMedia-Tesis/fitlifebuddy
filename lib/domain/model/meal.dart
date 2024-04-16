@@ -1,20 +1,17 @@
 import 'dart:convert';
 
-import 'package:fitlifebuddy/domain/model/food.dart';
 
 class Meal {
   int? id;
   String? name;
   String? description;
   String? dailyId;
-  List<Food>? foods;
 
   Meal({
     this.id,
     this.name,
     this.description,
     this.dailyId,
-    this.foods,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,7 +20,6 @@ class Meal {
       'name': name,
       'description': description,
       'dailyId': dailyId,
-      'foods': foods,
     };
   }
 
@@ -33,7 +29,6 @@ class Meal {
       name: map['nameMeal'] != null ? map['nameMeal'] as String : null,
       description: map['descriptionMeal'] != null ? map['descriptionMeal'] as String : null,
       dailyId: map['idDaily'] != null ? map['idDaily'] as String : null,
-      foods: map['mealFoods'] != null ? List<Food>.from(map['mealFoods']) : null,
     );
   }
 

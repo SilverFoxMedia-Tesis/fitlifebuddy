@@ -2,10 +2,10 @@ import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
-import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/cupertino.dart';
@@ -152,7 +152,7 @@ class PatientProfileController extends GetxController{
   Future<void> updatePatientHistory() async {
     try {
       var patientHistory = currentPatientHistory.value;
-      patientHistory.gender = Gender.fromLabel(genderController.value.text);
+      patientHistory.gender = EnumExtension.getLabel(Gender.values, genderController.value.text);
       patientHistory.height = double.parse(heightController.value.text);
       patientHistory.weight = double.parse(weightController.value.text);
       final result = await _patientHistoryApi.updatePatientHistory(patientHistory.id!, patientHistory);

@@ -1,15 +1,9 @@
 enum Frecuently {
-  monthly('MONTLY'), 
-  bimonthly('BIMONTLY'), 
-  quarterly('QUARTERLY');
+  monthly('MONTLY', 'Mensual'), 
+  bimonthly('BIMONTLY', 'Bimensual'), 
+  quarterly('QUARTERLY', 'Trimestral');
 
-  const Frecuently(this.value);
+  const Frecuently(this.value, this.label);
   final String value;
-
-  static Frecuently? fromString(String? str) {
-    if (str == null) return null;
-    return Frecuently.values.firstWhere(
-      (f) => f.value == str,
-    );
-  }
+  final String label;
 }

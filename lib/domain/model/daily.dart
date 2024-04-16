@@ -1,44 +1,41 @@
 import 'dart:convert';
 
-import 'package:fitlifebuddy/domain/model/meal.dart';
-import 'package:fitlifebuddy/domain/model/routine.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
+import 'package:fitlifebuddy/domain/enum/status.dart';
+import 'package:fitlifebuddy/domain/model/plan.dart';
 
 class Daily {
   int? id;
   String? date;
   int? dateNumber;
-  String? planId;
-  List<Meal>? meals;
-  List<Routine>? routines;
+  Plan? plan;
+  Status? status;
 
   Daily({
     this.id,
     this.date,
     this.dateNumber,
-    this.planId,
-    this.meals,
-    this.routines,
+    this.plan,
+    this.status,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'idDaily': id,
       'date': date,
       'dateNumber': dateNumber,
-      'planId': planId,
-      'meals': meals,
-      'routines': routines,
+      'plan': plan,
+      'status': status,
     };
   }
 
   factory Daily.fromMap(Map<String, dynamic> map) {
     return Daily(
-      id: map['idDaily'] as int?,
+      id: map['idDaily'] != null ? map['idDaily'] as int : null,
       date: map['date'] != null ? map['date'] as String : null,
       dateNumber: map['dateNumber'] != null ? map['dateNumber'] as int : null,
-      planId: map['idPlan'] != null ? map['idPlan'] as String : null,
-      meals: map['meals'] != null ? List<Meal>.from(map['meals']) : null,
-      routines: map['routines'] != null ? List<Routine>.from(map['routines']) : null,
+      plan: map['plan'] != null ? Plan.fromMap(map['plan'] as Map<String, dynamic>) : null,
+      status: map['status'] != null ? EnumExtension.getValue(Status.values, map['status']) : null,
     );
   }
 

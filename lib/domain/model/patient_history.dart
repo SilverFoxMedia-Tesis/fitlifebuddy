@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
@@ -50,12 +51,12 @@ class PatientHistory {
       id: map['idPacientHistory'] as int?,
       height: map['height'] as double?,
       weight: map['weight'] as double?,
-      gender: Gender.fromString(map['gender']),
+      gender: EnumExtension.getValue(Gender.values ,map['gender']),
       age: map['age'] as int?,
       abdominalCircumference: map['abdominalCircumference'] as double?,
-      physicalActivity: PhysicalActivity.fromString(map['physicalActivity']),
-      frecuently: Frecuently.fromString(map['frecuently']),
-      dietType: DietType.fromString(map['dietType']),
+      physicalActivity: EnumExtension.getValue(PhysicalActivity.values, map['physicalActivity']),
+      frecuently: EnumExtension.getValue(Frecuently.values, map['frecuently']),
+      dietType: EnumExtension.getValue(DietType.values, map['dietType']),
       patientId: map['pacient'] != null ? map['pacient']['idPacient'] as int? : null,
     );
   }

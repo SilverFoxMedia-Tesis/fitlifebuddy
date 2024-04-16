@@ -1,15 +1,9 @@
-enum DietType { 
-  vegan('VEGAN'),
-  vegetarian('VEGETARIAN'),
-  omnivore('OMNIVORE');
+enum DietType {
+  vegan('VEGAN', 'Vegana'),
+  vegetarian('VEGETARIAN', 'Vegetariana'),
+  omnivore('OMNIVORE', 'Omnívora');
 
-  const DietType(this.value);
+  const DietType(this.value, this.label);
   final String value;
-
-  static DietType? fromString(String? str) {
-    if (str == null) return null;
-    return DietType.values.firstWhere(
-      (dt) => dt.value == str,
-    );
-  }
+  final String label;
 }
