@@ -1,31 +1,27 @@
 import 'dart:convert';
 
-import 'package:fitlifebuddy/domain/model/patient.dart';
+import 'package:fitlifebuddy/domain/model/person.dart';
 
 class Nutritionist {
   int? id;
-  List<Patient>? patients;
-  String? personId;
+  Person? person;
 
   Nutritionist({
     this.id,
-    this.patients,
-    this.personId,
+    this.person,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'patients': patients,
-      'personId': personId,
+      'idNutritionist': id,
+      'personId': person?.toMap(),
     };
   }
 
   factory Nutritionist.fromMap(Map<String, dynamic> map) {
     return Nutritionist(
-      id: map['id'] as int?,
-      patients: map['patients'] != null ? List<Patient>.from(map['healthConditions']) : null,
-      personId: map['idPerson'] != null ? map['idPerson'] as String : null,
+      id: map['idNutritionist'] != null ? map['idNutritionist'] as int : null,
+      person: map['person'] != null ? Person.fromMap(map['person'] as Map<String, dynamic>) : null,
     );
   }
 

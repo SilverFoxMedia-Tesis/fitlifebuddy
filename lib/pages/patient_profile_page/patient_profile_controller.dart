@@ -114,7 +114,7 @@ class PatientProfileController extends GetxController{
       if (_formValidationService.validateForm(personalInfoFormKey)) {
         updatePerson();
         updatePatient();
-        updatePatientHistory();
+        //updatePatientHistory();
         _appToast.showToast(
           message: 'personal_info_updated',
           type: ToastificationType.success,
@@ -132,7 +132,6 @@ class PatientProfileController extends GetxController{
       final result = await _patientApi.updatePatient(patient.id!, patient);
       currentPatient.value = result;
     } catch (e) {
-      print('updatePatient falied: $e');
       displayErrorToast(e);
     }
   }
@@ -146,7 +145,6 @@ class PatientProfileController extends GetxController{
       final result = await _personApi.updatePerson(person!.id!, person);
       currentPatient.value.person = result;
     } catch (e) {
-      print('updatePerson falied: $e');
       displayErrorToast(e);
     }
   }
@@ -160,7 +158,6 @@ class PatientProfileController extends GetxController{
       final result = await _patientHistoryApi.updatePatientHistory(patientHistory.id!, patientHistory);
       currentPatientHistory.value = result;
     } catch (e) {
-      print('updatePatientHistory falied: $e');
       displayErrorToast(e);
     }
   }

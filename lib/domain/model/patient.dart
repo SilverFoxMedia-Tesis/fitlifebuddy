@@ -21,17 +21,17 @@ class Patient {
     return <String, dynamic>{
       'idPacient': id,
       'birthDate': birthDate,
-      'nutritionist': nutritionist,
-      'person': person,
+      'nutritionist': nutritionist?.toMap(),
+      'person': person?.toMap(),
     };
   }
 
   factory Patient.fromMap(Map<String, dynamic> map) {
     return Patient(
-      id: map['idPacient'] as int?,
+      id: map['idPacient'] != null ? map['idPacient'] as int : null,
       birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
-      nutritionist: map['nutritionist'] != null ? Nutritionist.fromMap(map['nutritionist']) : null,
-      person: map['person'] != null ? Person.fromMap(map['person']) : null,
+      nutritionist: map['nutritionist'] != null ? Nutritionist.fromMap(map['nutritionist'] as Map<String, dynamic>) : null,
+      person: map['person'] != null ? Person.fromMap(map['person'] as Map<String, dynamic>) : null,
     );
   }
 

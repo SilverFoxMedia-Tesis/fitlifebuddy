@@ -37,13 +37,13 @@ class MyAppBar extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  LogoButton(
-                    icon: AppIcons.logo, 
-                    text: 'fitlifebuddy'.tr,
-                    onTap: () {
-                      expanded.value = !expanded.value;
-                    },
-                  ),
+                  // LogoButton(
+                  //   icon: AppIcons.logo, 
+                  //   text: 'fitlifebuddy'.tr,
+                  //   onTap: () {
+                  //     expanded.value = !expanded.value;
+                  //   },
+                  // ),
                   AppSpacing.spacingVertical32,
                   AppButton(
                     icon: AppIcons.home, 
