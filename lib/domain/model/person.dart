@@ -28,10 +28,10 @@ class Person {
   factory Person.fromMap(Map<String, dynamic> map) {
     return Person(
       id: map['idPerson'] as int?,
-      fullname: map['fullname'] as String?,
-      lastname: map['lastname'] as String?,
-      emailAddress: map['emailAddress'] as String?,
-      password: map['password'] as String?,
+      fullname: map['fullname'] != null ? map['fullname'] as String : null,
+      lastname: map['lastname'] != null ? map['lastname'] as String : null,
+      emailAddress: map['emailAddress'] != null ? map['emailAddress'] as String : null,
+      password: map['password'] != null ? map['password'] as String : null,
     );
   }
 

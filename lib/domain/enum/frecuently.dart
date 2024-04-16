@@ -1,7 +1,7 @@
 enum Frecuently {
-  monthly('MONTHLY'), 
-  bimonthly('BIMONTHLY'), 
-  quarterly('QUARTERLY'),;
+  monthly('MONTLY'), 
+  bimonthly('BIMONTLY'), 
+  quarterly('QUARTERLY');
 
   const Frecuently(this.value);
   final String value;

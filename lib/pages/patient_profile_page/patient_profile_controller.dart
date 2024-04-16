@@ -37,7 +37,6 @@ class PatientProfileController extends GetxController{
   final isFoodConditionsEditing = false.obs;
 
   final currentPatient = Patient().obs;
-  final currentPerson = Person().obs;
   final currentPatientHistory = PatientHistory().obs;
 
   bool get isEditing => isPersonalInfoEditing.isTrue || isHealthConditionsEditing.isTrue || isFoodConditionsEditing.isTrue;
@@ -52,8 +51,7 @@ class PatientProfileController extends GetxController{
     try {
       currentPatient.value = await _patientApi.getPatientById(patientId);
       getPatientInfo();
-      if (currentPatient.value.personId != null){
-        currentPerson.value = await _personApi.getPersonById(currentPatient.value.personId!);
+      if (currentPatient.value.person != null) {
         getPersonInfo();
       }
       var histories = await _patientApi.getPatientHistoriesByPatientId(patientId);
@@ -67,13 +65,13 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientInfo(){
-    birthdateController.value.text = currentPatient.value.birthDate ?? '';
+    birthdateController.value.text = currentPatient.value.birthDate.toString();
   }
 
   void getPersonInfo() {
-    firstnameController.value.text = currentPerson.value.fullname ?? '';
-    lastnameController.value.text = currentPerson.value.lastname ?? '';
-    emailController.value.text = currentPerson.value.emailAddress ?? '';
+    firstnameController.value.text = currentPatient.value.person?.fullname ?? '';
+    lastnameController.value.text = currentPatient.value.person?.lastname ?? '';
+    emailController.value.text = currentPatient.value.person?.emailAddress ?? '';
   }
 
   void getPatientHistoryInfo(){
@@ -108,29 +106,61 @@ class PatientProfileController extends GetxController{
     } else if (isFoodConditionsEditing.isTrue) {
       await updateFoodConditions();
     }
-    await getPatientById(1);
     resetIsEditing();
   }
 
   Future<void> updatePersonalInfo() async {
     try {
       if (_formValidationService.validateForm(personalInfoFormKey)) {
-        currentPatient.value.birthDate = birthdateController.value.text;
-        currentPerson.value.fullname = firstnameController.value.text;
-        currentPerson.value.lastname = lastnameController.value.text;
-        currentPerson.value.emailAddress = emailController.value.text;
-        currentPatientHistory.value.gender = Gender.fromLabel(genderController.value.text);
-        currentPatientHistory.value.height = double.parse(heightController.value.text);
-        currentPatientHistory.value.weight = double.parse(weightController.value.text);
-        await _patientApi.updatePatient(currentPatient.value.id!, currentPatient.value);
-        await _personApi.updatePerson(currentPerson.value.id!, currentPerson.value);
-        await _patientHistoryApi.updatePatientHistory(currentPatientHistory.value.id!, currentPatientHistory.value);
+        updatePerson();
+        updatePatient();
+        updatePatientHistory();
         _appToast.showToast(
           message: 'personal_info_updated',
           type: ToastificationType.success,
         );
       }
     } catch (e) {
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> updatePatient() async {
+    try {
+      var patient = currentPatient.value;
+      patient.birthDate = birthdateController.value.text;
+      final result = await _patientApi.updatePatient(patient.id!, patient);
+      currentPatient.value = result;
+    } catch (e) {
+      print('updatePatient falied: $e');
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> updatePerson() async {
+    try {
+      var person = currentPatient.value.person;
+      person?.fullname = firstnameController.value.text;
+      person?.lastname = lastnameController.value.text;
+      person?.emailAddress = emailController.value.text;
+      final result = await _personApi.updatePerson(person!.id!, person);
+      currentPatient.value.person = result;
+    } catch (e) {
+      print('updatePerson falied: $e');
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> updatePatientHistory() async {
+    try {
+      var patientHistory = currentPatientHistory.value;
+      patientHistory.gender = Gender.fromLabel(genderController.value.text);
+      patientHistory.height = double.parse(heightController.value.text);
+      patientHistory.weight = double.parse(weightController.value.text);
+      final result = await _patientHistoryApi.updatePatientHistory(patientHistory.id!, patientHistory);
+      currentPatientHistory.value = result;
+    } catch (e) {
+      print('updatePatientHistory falied: $e');
       displayErrorToast(e);
     }
   }

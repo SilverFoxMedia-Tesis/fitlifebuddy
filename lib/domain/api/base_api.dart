@@ -33,7 +33,7 @@ class BaseApi {
     final response = await client.put(
       getUri(endpoint),
       headers: _headers(),
-      body: json.encode(body)
+      body: body,
     );
     return _handleResponse(response);
   }
@@ -52,13 +52,12 @@ class BaseApi {
   };
 
   http.Response _handleResponse(http.Response response) {
-  // print('Response Status: ${response.statusCode}');
-  // print('Response Body: ${response.body}');
-  if (response.statusCode >= 200 && response.statusCode < 300) {
-    return response;
-  } else {
-    throw Exception('Failed to fetch data: Status Code: ${response.statusCode}, Body: ${response.body}');
+    print('Response Status: ${response.statusCode}');
+    print('Response Body: ${response.body}');
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return response;
+    } else {
+      throw Exception('Failed to fetch data: Status Code: ${response.statusCode}, Body: ${response.body}');
+    }
   }
-}
-
 }
