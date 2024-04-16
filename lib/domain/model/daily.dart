@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 
 class Daily {
-  String? id;
+  int? id;
   String? date;
   int? dateNumber;
   Plan? plan;
@@ -31,7 +31,7 @@ class Daily {
 
   factory Daily.fromMap(Map<String, dynamic> map) {
     return Daily(
-      id: map['idDaily'] != null ? map['idDaily'] as String : null,
+      id: map['idDaily'] != null ? map['idDaily'] as int : null,
       date: map['date'] != null ? map['date'] as String : null,
       dateNumber: map['dateNumber'] != null ? map['dateNumber'] as int : null,
       plan: map['plan'] != null ? Plan.fromMap(map['plan'] as Map<String, dynamic>) : null,

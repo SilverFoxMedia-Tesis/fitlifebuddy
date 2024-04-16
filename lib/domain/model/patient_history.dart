@@ -8,7 +8,7 @@ import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class PatientHistory {
-  String? id;
+  int? id;
   num? abdominalCircumference;
   int? age;
   num? height;
@@ -49,7 +49,7 @@ class PatientHistory {
 
   factory PatientHistory.fromMap(Map<String, dynamic> map) {
     return PatientHistory(
-      id: map['idPacientHistory'] != null ? map['idPacientHistory'] as String : null,
+      id: map['idPacientHistory'] != null ? map['idPacientHistory'] as int : null,
       abdominalCircumference: map['abdominalCircumference'] != null ? map['abdominalCircumference'] as num : null,
       age: map['age'] !=null ? map['age'] as int : null,
       height: map['height'] != null ? map['height'] as num : null,

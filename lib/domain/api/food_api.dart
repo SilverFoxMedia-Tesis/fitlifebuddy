@@ -14,7 +14,7 @@ class FoodApi {
   }
 
   // Get Food by Id
-  Future<Food> getFoodById(String id) async {
+  Future<Food> getFoodById(int id) async {
     final response = await _apiBase.get('foods/$id');
     return Food.fromJson(json.decode(response.body));
   }
@@ -26,13 +26,13 @@ class FoodApi {
   }
 
   // Update Food
-  Future<Food> updateFood(String id, Food food) async {
+  Future<Food> updateFood(int id, Food food) async {
     final response = await _apiBase.put('foods/$id', body: food.toJson());
     return Food.fromJson(json.decode(response.body));
   }
 
   // Delete Food
-  Future<void> deleteFood(String id) async {
+  Future<void> deleteFood(int id) async {
     await _apiBase.delete('foods/$id');
   }
 
@@ -49,7 +49,7 @@ class FoodApi {
   }
 
   // Get MealFoods by FoodId
-  Future<List<Food>> getMealFoodsByFoodId(String foodId) async {
+  Future<List<Food>> getMealFoodsByFoodId(int foodId) async {
     final response = await _apiBase.get('foods/searchMealFoodByIdFood/$foodId');
     return (json.decode(response.body) as List).map((i) => Food.fromJson(i)).toList();
   }

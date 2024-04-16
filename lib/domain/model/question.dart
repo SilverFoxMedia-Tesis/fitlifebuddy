@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/feedback.dart';
 
 class Question {
-  String? id;
+  int? id;
   String? name;
   Feedback? feedback;
 
@@ -23,7 +23,7 @@ class Question {
 
   factory Question.fromMap(Map<String, dynamic> map) {
     return Question(
-      id: map['idQuestion'] != null ? map['idQuestion'] as String : null,
+      id: map['idQuestion'] != null ? map['idQuestion'] as int : null,
       name: map['nameQuestion'] != null ? map['nameQuestion'] as String: null,
       feedback: map['feedback'] != null ? Feedback.fromMap(map['feedback'] as Map<String, dynamic>): null,
     );

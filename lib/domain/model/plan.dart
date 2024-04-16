@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class Plan {
-  String? id;
+  int? id;
   num? calorieDeficit;
   num? carbohydrates;
   num? fats; 
@@ -51,7 +51,7 @@ class Plan {
 
   factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan(
-      id: map['idPlan'] != null ? map['idPlan'] as String : null,
+      id: map['idPlan'] != null ? map['idPlan'] as int : null,
       calorieDeficit: map['calorieDeficit'] != null ? map['calorieDeficit'] as num : null,
       carbohydrates: map['carbohydrates_g'] != null ? map['carbohydrates_g'] as num : null,
       fats: map['fats_g'] != null ? map['fats_g'] as num : null,

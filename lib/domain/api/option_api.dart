@@ -14,25 +14,25 @@ class OptionApi {
   }
 
   // Get Option by Id
-  Future<Option> getOptionById(String id) async {
+  Future<Option> getOptionById(int id) async {
     final response = await _apiBase.get('options/$id');
     return Option.fromJson(json.decode(response.body));
   }
 
   // Create Option
-  Future<Option> createOption(Option option, String questionId) async {
+  Future<Option> createOption(Option option, int questionId) async {
     final response = await _apiBase.post('options/$questionId', body: option.toJson());
     return Option.fromJson(json.decode(response.body));
   }
 
   // Update Option
-  Future<Option> updateOption(String id, Option option) async {
+  Future<Option> updateOption(int id, Option option) async {
     final response = await _apiBase.put('options/$id', body: option.toJson());
     return Option.fromJson(json.decode(response.body));
   }
 
   // Delete Option
-  Future<void> deleteOption(String id) async {
+  Future<void> deleteOption(int id) async {
     await _apiBase.delete('options/$id');
   }
 

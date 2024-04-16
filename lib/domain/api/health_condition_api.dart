@@ -14,25 +14,25 @@ class HealthConditionApi {
   }
 
   // Get HealthCondition by Id
-  Future<HealthCondition> getHealthConditionById(String id) async {
+  Future<HealthCondition> getHealthConditionById(int id) async {
     final response = await _apiBase.get('healthConditions/$id');
     return HealthCondition.fromJson(json.decode(response.body));
   }
 
   // Create HealthCondition
-  Future<HealthCondition> createHealthCondition(HealthCondition healthCondition, String patientId) async {
+  Future<HealthCondition> createHealthCondition(HealthCondition healthCondition, int patientId) async {
     final response = await _apiBase.post('healthConditions/$patientId', body: healthCondition.toJson());
     return HealthCondition.fromJson(json.decode(response.body));
   }
 
   // Update HealthCondition
-  Future<HealthCondition> updateHealthCondition(String id, HealthCondition healthCondition) async {
+  Future<HealthCondition> updateHealthCondition(int id, HealthCondition healthCondition) async {
     final response = await _apiBase.put('healthConditions/$id', body: healthCondition.toJson());
     return HealthCondition.fromJson(json.decode(response.body));
   }
 
   // Delete HealthCondition
-  Future<void> deleteHealthCondition(String id) async {
+  Future<void> deleteHealthCondition(int id) async {
     await _apiBase.delete('healthConditions/$id');
   }
 

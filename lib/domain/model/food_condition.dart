@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class FoodCondition {
-  String? id;
+  int? id;
   String? name;
   String? description;
   TypeFoodCondition? type;
@@ -31,7 +31,7 @@ class FoodCondition {
 
   factory FoodCondition.fromMap(Map<String, dynamic> map) {
     return FoodCondition(
-      id: map['idFoodCondition'] != null ? map['idFoodCondition'] as String : null,
+      id: map['idFoodCondition'] != null ? map['idFoodCondition'] as int : null,
       name: map['nameFoodCondition'] != null ? map['nameFoodCondition'] as String : null,
       description: map['descriptionFoodCondition'] != null ? map['descriptionFoodCondition'] as String : null,
       type: map['typeFoodCondition'] != null ? EnumExtension.getValue(TypeFoodCondition.values, map['typeFoodCondition']) : null,

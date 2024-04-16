@@ -15,30 +15,30 @@ class NutritionistApi {
   }
 
   // Get Nutritionist by Id
-  Future<Nutritionist> getNutritionistById(String id) async {
+  Future<Nutritionist> getNutritionistById(int id) async {
     final response = await _apiBase.get('nutritionists/$id');
     return Nutritionist.fromJson(json.decode(response.body));
   }
 
   // Create Nutritionist
-  Future<Nutritionist> createNutritionist(Nutritionist nutritionist, String personId) async {
+  Future<Nutritionist> createNutritionist(Nutritionist nutritionist, int personId) async {
     final response = await _apiBase.post('nutritionists/$personId', body: nutritionist.toJson());
     return Nutritionist.fromJson(json.decode(response.body));
   }
 
   // Update Nutritionist
-  Future<Nutritionist> updateNutritionist(String id, Nutritionist nutritionist) async {
+  Future<Nutritionist> updateNutritionist(int id, Nutritionist nutritionist) async {
     final response = await _apiBase.put('nutritionists/$id', body: nutritionist.toJson());
     return Nutritionist.fromJson(json.decode(response.body));
   }
 
   // Delete Nutritionist
-  Future<void> deleteNutritionist(String id) async {
+  Future<void> deleteNutritionist(int id) async {
     await _apiBase.delete('nutritionists/$id');
   }
 
   // Get Patients by NutritionistId
-  Future<List<Patient>> getPatientsByNutritionistId(String nutritionistId) async {
+  Future<List<Patient>> getPatientsByNutritionistId(int nutritionistId) async {
     final response = await _apiBase.get('nutritionists/searchPacientsByIdNutritionist/$nutritionistId');
     return (json.decode(response.body) as List).map((i) => Patient.fromJson(i)).toList();
   }

@@ -14,25 +14,25 @@ class PatientHistoryApi {
   }
 
   // Get PatientHistory by Id
-  Future<PatientHistory> getPatientHistoryById(String id) async {
+  Future<PatientHistory> getPatientHistoryById(int id) async {
     final response = await _apiBase.get('pacientHistories/$id');
     return PatientHistory.fromJson(json.decode(response.body));
   }
 
   // Create PatientHistory
-  Future<PatientHistory> createPatientHistory(PatientHistory patientHistory, String patientId) async {
+  Future<PatientHistory> createPatientHistory(PatientHistory patientHistory, int patientId) async {
     final response = await _apiBase.post('pacientHistories/$patientId', body: patientHistory.toJson());
     return PatientHistory.fromJson(json.decode(response.body));
   }
 
   // Update PatientHistory
-  Future<PatientHistory> updatePatientHistory(String id, PatientHistory patientHistory) async {
+  Future<PatientHistory> updatePatientHistory(int id, PatientHistory patientHistory) async {
     final response = await _apiBase.put('pacientHistories/$id', body: patientHistory.toJson());
     return PatientHistory.fromJson(response.body);
   }
 
   // Delete PatientHistory
-  Future<void> deletePatientHistory(String id) async {
+  Future<void> deletePatientHistory(int id) async {
     await _apiBase.delete('pacientHistories/$id');
   }
 }

@@ -18,25 +18,25 @@ class PatientApi {
   }
 
   // Get Patient by Id
-  Future<Patient> getPatientById(String id) async {
+  Future<Patient> getPatientById(int id) async {
     final response = await _apiBase.get('pacients/$id');
     return Patient.fromJson(response.body);
   }
 
   // Create Patient
-  Future<Patient> createPatient(Patient patient, String personId, String nutritionistId) async {
+  Future<Patient> createPatient(Patient patient, int personId, int nutritionistId) async {
     final response = await _apiBase.post('pacients/$personId/$nutritionistId', body: patient.toJson());
     return Patient.fromJson(json.decode(response.body));
   }
 
   // Update Patient
-  Future<Patient> updatePatient(String id, Patient patient) async {
+  Future<Patient> updatePatient(int id, Patient patient) async {
     final response = await _apiBase.put('pacients/$id', body: patient.toJson());
     return Patient.fromJson(response.body);
   }
 
   // Delete Patient
-  Future<void> deletePatient(String id) async {
+  Future<void> deletePatient(int id) async {
     await _apiBase.delete('pacients/$id');
   }
 
@@ -47,19 +47,19 @@ class PatientApi {
   }
 
   // Get FoodConditions by PatientId
-  Future<List<FoodCondition>> getFoodConditionsByPatientId(String patientId) async {
+  Future<List<FoodCondition>> getFoodConditionsByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchFoodConditionByIdPacient/$patientId');
     return (json.decode(response.body) as List).map((i) => FoodCondition.fromJson(i)).toList();
   }
 
   // Get HealthConditions by PatientId
-  Future<List<HealthCondition>> getHealthConditionsByPatientId(String patientId) async {
+  Future<List<HealthCondition>> getHealthConditionsByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchHealthConditionByIdPacient/$patientId');
     return (json.decode(response.body) as List).map((i) => HealthCondition.fromJson(i)).toList();
   }
 
   // Get PatientHistories by PatientId
-  Future<List<PatientHistory>> getPatientHistoriesByPatientId(String patientId) async {
+  Future<List<PatientHistory>> getPatientHistoriesByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchPacientHistoryByIdPacient/$patientId');
     final jsonData = json.decode(response.body);
     final patientHistories = jsonData.map<PatientHistory>((i) => PatientHistory.fromMap(i)).toList();
@@ -67,7 +67,7 @@ class PatientApi {
   }
 
   // Get Plans by PatientId
-  Future<List<Plan>> getRoutinesByDailyId(String patientId) async {
+  Future<List<Plan>> getRoutinesByDailyId(int patientId) async {
     final response = await _apiBase.get('pacients/searchPlanByIdPacient/$patientId');
     return (json.decode(response.body) as List).map((i) => Plan.fromJson(i)).toList();
   }

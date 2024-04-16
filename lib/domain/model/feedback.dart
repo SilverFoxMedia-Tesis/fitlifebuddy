@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 
 class Feedback {
-  String? id;
+  int? id;
   Daily? daily;
 
   Feedback({
@@ -20,7 +20,7 @@ class Feedback {
 
   factory Feedback.fromMap(Map<String, dynamic> map) {
     return Feedback(
-      id: map['idFeedback'] != null ? map['idFeedback'] as String : null,
+      id: map['idFeedback'] != null ? map['idFeedback'] as int : null,
       daily: map['daily'] != null ? Daily.fromMap(map['daily'] as Map<String, dynamic>) : null,
     );
   }
