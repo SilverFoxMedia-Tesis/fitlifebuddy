@@ -15,7 +15,7 @@ class FeedbackApi {
   }
 
   // Get Feedback by Id
-  Future<Feedback> getFeedbackById(int id) async {
+  Future<Feedback> getFeedbackById(String id) async {
     final response = await _apiBase.get('feedbacks/$id');
     return Feedback.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class FeedbackApi {
   }
 
   // Update Feedback
-  Future<Feedback> updateFeedback(int id, Feedback feedback) async {
+  Future<Feedback> updateFeedback(String id, Feedback feedback) async {
     final response = await _apiBase.put('feedbacks/$id', body: feedback.toJson());
     return Feedback.fromJson(json.decode(response.body));
   }
 
   // Delete Feedback
-  Future<void> deleteFeedback(int id) async {
+  Future<void> deleteFeedback(String id) async {
     await _apiBase.delete('feedbacks/$id');
   }
 

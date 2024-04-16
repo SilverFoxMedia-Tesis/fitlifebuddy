@@ -5,59 +5,60 @@ import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
+import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class PatientHistory {
-  int? id;
-  double? height;
-  double? weight;
-  Gender? gender;
+  String? id;
+  num? abdominalCircumference;
   int? age;
-  double? abdominalCircumference;
-  PhysicalActivity? physicalActivity;
-  Frecuently? frecuently;
+  num? height;
+  num? weight;
+  Gender? gender;
   DietType? dietType;
-  int? patientId;
+  Frecuently? frecuently;
+  Patient? patient;
+  PhysicalActivity? physicalActivity;
 
   PatientHistory({
     this.id,
+    this.abdominalCircumference,
+    this.age,
     this.height,
     this.weight,
     this.gender,
-    this.age,
-    this.abdominalCircumference,
-    this.physicalActivity,
-    this.frecuently,
     this.dietType,
-    this.patientId,
+    this.frecuently,
+    this.patient,
+    this.physicalActivity,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'idPacientHistory': id,
+      'abdominalCircumference': abdominalCircumference,
+      'age': age,
       'height': height,
       'weight': weight,
       'gender': gender,
-      'age': age,
-      'abdominalCircumference': abdominalCircumference,
-      'physicalActivity': physicalActivity,
-      'frecuently': frecuently,
       'dietType': dietType,
-      'patientId': patientId,
+      'frecuently': frecuently,
+      'pacient': patient?.toJson(),
+      'physicalActivity': physicalActivity,
     };
   }
 
   factory PatientHistory.fromMap(Map<String, dynamic> map) {
     return PatientHistory(
-      id: map['idPacientHistory'] as int?,
-      height: map['height'] as double?,
-      weight: map['weight'] as double?,
+      id: map['idPacientHistory'] != null ? map['idPacientHistory'] as String : null,
+      abdominalCircumference: map['abdominalCircumference'] != null ? map['abdominalCircumference'] as num : null,
+      age: map['age'] !=null ? map['age'] as int : null,
+      height: map['height'] != null ? map['height'] as num : null,
+      weight: map['weight'] != null ? map['weight'] as num : null,
       gender: EnumExtension.getValue(Gender.values ,map['gender']),
-      age: map['age'] as int?,
-      abdominalCircumference: map['abdominalCircumference'] as double?,
-      physicalActivity: EnumExtension.getValue(PhysicalActivity.values, map['physicalActivity']),
-      frecuently: EnumExtension.getValue(Frecuently.values, map['frecuently']),
       dietType: EnumExtension.getValue(DietType.values, map['dietType']),
-      patientId: map['pacient'] != null ? map['pacient']['idPacient'] as int? : null,
+      frecuently: EnumExtension.getValue(Frecuently.values, map['frecuently']),
+      patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
+      physicalActivity: EnumExtension.getValue(PhysicalActivity.values, map['physicalActivity']),
     );
   }
 

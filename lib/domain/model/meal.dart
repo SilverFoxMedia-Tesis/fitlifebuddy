@@ -1,34 +1,36 @@
 import 'dart:convert';
 
+import 'package:fitlifebuddy/domain/model/daily.dart';
+
 
 class Meal {
-  int? id;
+  String? id;
   String? name;
   String? description;
-  String? dailyId;
+  Daily? daily;
 
   Meal({
     this.id,
     this.name,
     this.description,
-    this.dailyId,
+    this.daily,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'description': description,
-      'dailyId': dailyId,
+      'idMeal': id,
+      'nameMeal': name,
+      'descriptionMeal': description,
+      'daily': daily?.toJson(),
     };
   }
 
   factory Meal.fromMap(Map<String, dynamic> map) {
     return Meal(
-      id: map['idMeal'] as int?,
+      id: map['idMeal'] != null ? map['idMeal'] as String : null,
       name: map['nameMeal'] != null ? map['nameMeal'] as String : null,
       description: map['descriptionMeal'] != null ? map['descriptionMeal'] as String : null,
-      dailyId: map['idDaily'] != null ? map['idDaily'] as String : null,
+      daily: map['daily'] != null ? Daily.fromMap(map['daily'] as Map<String, dynamic>) : null,
     );
   }
 

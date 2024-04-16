@@ -1,39 +1,27 @@
 import 'dart:convert';
 
-import 'package:fitlifebuddy/domain/model/question.dart';
+import 'package:fitlifebuddy/domain/model/daily.dart';
 
 class Feedback {
-  int? id;
-  String? planId;
-  String? dailyId;
-  int? punctuation;
-  List<Question>? questions;
+  String? id;
+  Daily? daily;
 
   Feedback({
     this.id,
-    this.planId,
-    this.dailyId,
-    this.punctuation,
-    this.questions,
+    this.daily,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'planId': planId,
-      'dailyId': dailyId,
-      'punctuation': punctuation,
-      'questions': questions,
+      'idFeedback': id,
+      'daily': daily?.toJson(),
     };
   }
 
   factory Feedback.fromMap(Map<String, dynamic> map) {
     return Feedback(
-      id: map['idFeedback'] as int?,
-      planId: map['idPlan'] != null ? map['idPlan'] as String : null,
-      dailyId: map['idDaily'] != null ? map['idDaily'] as String : null,
-      punctuation: map['punctuation'] != null ? map['punctuation'] as int : null,
-      questions: map['questions'] != null ? List<Question>.from(map['questions']): null,
+      id: map['idFeedback'] != null ? map['idFeedback'] as String : null,
+      daily: map['daily'] != null ? Daily.fromMap(map['daily'] as Map<String, dynamic>) : null,
     );
   }
 

@@ -14,7 +14,7 @@ class PersonApi {
   }
 
   // Get Person by Id
-  Future<Person> getPersonById(int id) async {
+  Future<Person> getPersonById(String id) async {
     final response = await _apiBase.get('persons/$id');
     return Person.fromJson(response.body);
   }
@@ -26,13 +26,13 @@ class PersonApi {
   }
 
   // Update Person
-  Future<Person> updatePerson(int id, Person person) async {
+  Future<Person> updatePerson(String id, Person person) async {
     final response = await _apiBase.put('persons/$id', body: person.toJson());
     return Person.fromJson(response.body);
   }
 
   // Delete Person
-  Future<void> deletePerson(int id) async {
+  Future<void> deletePerson(String id) async {
     await _apiBase.delete('persons/$id');
   }
 

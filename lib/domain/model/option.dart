@@ -1,29 +1,31 @@
 import 'dart:convert';
 
+import 'package:fitlifebuddy/domain/model/question.dart';
+
 class Option {
-  int? id;
+  String? id;
   String? name;
-  int? questionId;
+  Question? question;
 
   Option({
     this.id,
     this.name,
-    this.questionId,
+    this.question,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'questionId': questionId,
+      'idOption': id,
+      'nameOption': name,
+      'question': question,
     };
   }
 
   factory Option.fromMap(Map<String, dynamic> map) {
     return Option(
-      id: map['idOption'] as int?,
+      id: map['idOption'] != null ? map['idOption'] as String : null,
       name: map['nameOption'] != null ? map['nameOption'] as String : null,
-      questionId: map['idQuestion'] != null ? map['idQuestion'] as int : null,
+      question: map['question'] != null ? Question.fromMap(map['question'] as Map<String, dynamic>) : null,
     );
   }
 

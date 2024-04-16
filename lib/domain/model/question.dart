@@ -1,36 +1,31 @@
 import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/model/feedback.dart';
-import 'package:fitlifebuddy/domain/model/option.dart';
 
 class Question {
-  int? id;
+  String? id;
   String? name;
   Feedback? feedback;
-  List<Option>? options;
 
   Question({
     this.id,
     this.name,
     this.feedback,
-    this.options,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'title': name,
-      'feedback': feedback,
-      'options': options,
+      'idQuestion': id,
+      'nameQuestion': name,
+      'feedback': feedback?.toJson(),
     };
   }
 
   factory Question.fromMap(Map<String, dynamic> map) {
     return Question(
-      id: map['idQuestion'] as int?,
-      name: map['nameQuestion'] != null ? map['nameQuestion'] as String : null,
-      feedback: map['feedback'] != null ? map['feedback'] as Feedback : null,
-      options: map['options'] != null ? List<Option>.from(map['options']) : null,
+      id: map['idQuestion'] != null ? map['idQuestion'] as String : null,
+      name: map['nameQuestion'] != null ? map['nameQuestion'] as String: null,
+      feedback: map['feedback'] != null ? Feedback.fromMap(map['feedback'] as Map<String, dynamic>): null,
     );
   }
 

@@ -1,39 +1,41 @@
 import 'dart:convert';
 
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
+import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class FoodCondition {
-  int? id;
+  String? id;
   String? name;
   String? description;
   TypeFoodCondition? type;
-  String? pacientId;
+  Patient? patient;
 
   FoodCondition({
     this.id,
     this.name,
     this.description,
     this.type,
-    this.pacientId,
+    this.patient,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'description': description,
-      'type': type,
-      'pacientId': pacientId,
+      'idFoodCondition': id,
+      'nameFoodCondition': name,
+      'descriptionFoodCondition': description,
+      'typeFoodCondition': type,
+      'pacient': patient?.toJson(),
     };
   }
 
   factory FoodCondition.fromMap(Map<String, dynamic> map) {
     return FoodCondition(
-      id: map['idFoodCondition'] as int?,
+      id: map['idFoodCondition'] != null ? map['idFoodCondition'] as String : null,
       name: map['nameFoodCondition'] != null ? map['nameFoodCondition'] as String : null,
       description: map['descriptionFoodCondition'] != null ? map['descriptionFoodCondition'] as String : null,
-      type: map['typeFoodCondition'] != null ? map['typeFoodCondition'] as TypeFoodCondition : null,
-      pacientId: map['idPacient'] != null ? map['idPacient'] as String : null,
+      type: map['typeFoodCondition'] != null ? EnumExtension.getValue(TypeFoodCondition.values, map['typeFoodCondition']) : null,
+      patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
     );
   }
 

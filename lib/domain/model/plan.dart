@@ -1,45 +1,67 @@
 import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
+import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
-import 'package:fitlifebuddy/domain/model/daily.dart';
+import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class Plan {
-  int? id;
-  String? frecuently;
+  String? id;
+  num? calorieDeficit;
+  num? carbohydrates;
+  num? fats; 
+  num? proteins;
+  num? tmb;
+  num? weightLose;
   DietType? dietType;
+  Frecuently? frecuently;
+  Patient? patient;
   Status? status;
-  List<Daily>? dailies;
-  String? patientId;
 
   Plan({
     this.id,
-    this.frecuently,
+    this.calorieDeficit,
+    this.carbohydrates,
+    this.fats,
+    this.proteins,
+    this.tmb,
+    this.weightLose,
     this.dietType,
+    this.frecuently,
+    this.patient,
     this.status,
-    this.dailies,
-    this.patientId,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'frecuently': frecuently,
+      'idPlan': id,
+      'calorieDeficit': calorieDeficit,
+      'carbohydrates_g': carbohydrates,
+      'fats_g': fats,
+      'proteins_g': proteins,
+      'tmb': tmb,
+      'weightLose': weightLose,
       'dietType': dietType,
+      'frecuently': frecuently,
+      'pacient': patient?.toJson(),
       'status': status,
-      'dailies': dailies,
-      'patientId': patientId,
     };
   }
 
   factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan(
-      id: map['idPlan'] as int?,
-      frecuently: map['frecuently'] != null ? map['frecuently'] as String : null,
-      dietType: map['dietType'] != null ? map['dietType'] as DietType : null,
-      status: map['status'] != null ? map['status'] as Status : null,
-      dailies: map['dailies'] != null ? List<Daily>.from(map['dailies']) : null,
-      patientId: map['idPatient'] != null ? map['idPatient'] as String : null,
+      id: map['idPlan'] != null ? map['idPlan'] as String : null,
+      calorieDeficit: map['calorieDeficit'] != null ? map['calorieDeficit'] as num : null,
+      carbohydrates: map['carbohydrates_g'] != null ? map['carbohydrates_g'] as num : null,
+      fats: map['fats_g'] != null ? map['fats_g'] as num : null,
+      proteins: map['proteins_g'] != null ? map['proteins_g'] as num : null,
+      tmb: map['tmb'] != null ? map['tmb'] as num : null,
+      weightLose: map['weightLose'] != null ? map['weightLose'] as num : null,
+      dietType: map['dietType'] != null ? EnumExtension.getValue(DietType.values, map['dietType']): null,
+      frecuently: map['frecuently'] != null ? EnumExtension.getValue(Frecuently.values, map['frecuently']) : null,
+      patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
+      status: map['status'] != null ? EnumExtension.getValue(Status.values, map['status']) : null,
     );
   }
 

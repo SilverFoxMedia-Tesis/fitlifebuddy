@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/domain/model/person.dart';
 
 
 class Patient {
-  int? id;
+  String? id;
   String? birthDate;
   Nutritionist? nutritionist;
   Person? person;
@@ -28,7 +28,7 @@ class Patient {
 
   factory Patient.fromMap(Map<String, dynamic> map) {
     return Patient(
-      id: map['idPacient'] != null ? map['idPacient'] as int : null,
+      id: map['idPacient'] != null ? map['idPacient'] as String : null,
       birthDate: map['birthDate'] != null ? map['birthDate'] as String : null,
       nutritionist: map['nutritionist'] != null ? Nutritionist.fromMap(map['nutritionist'] as Map<String, dynamic>) : null,
       person: map['person'] != null ? Person.fromMap(map['person'] as Map<String, dynamic>) : null,

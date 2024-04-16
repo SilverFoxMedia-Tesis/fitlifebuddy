@@ -44,10 +44,10 @@ class PatientProfileController extends GetxController{
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getPatientById(1);
+    await getPatientById('1');
   }
 
-  Future<void> getPatientById(int patientId) async{
+  Future<void> getPatientById(String patientId) async{
     try {
       currentPatient.value = await _patientApi.getPatientById(patientId);
       getPatientInfo();

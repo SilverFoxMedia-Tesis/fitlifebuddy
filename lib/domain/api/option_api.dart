@@ -14,7 +14,7 @@ class OptionApi {
   }
 
   // Get Option by Id
-  Future<Option> getOptionById(int id) async {
+  Future<Option> getOptionById(String id) async {
     final response = await _apiBase.get('options/$id');
     return Option.fromJson(json.decode(response.body));
   }
@@ -26,13 +26,13 @@ class OptionApi {
   }
 
   // Update Option
-  Future<Option> updateOption(int id, Option option) async {
+  Future<Option> updateOption(String id, Option option) async {
     final response = await _apiBase.put('options/$id', body: option.toJson());
     return Option.fromJson(json.decode(response.body));
   }
 
   // Delete Option
-  Future<void> deleteOption(int id) async {
+  Future<void> deleteOption(String id) async {
     await _apiBase.delete('options/$id');
   }
 

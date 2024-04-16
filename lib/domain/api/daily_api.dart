@@ -15,7 +15,7 @@ class DailyApi {
   }
 
   // Get Daily by Id
-  Future<Daily> getDailyById(int id) async {
+  Future<Daily> getDailyById(String id) async {
     final response = await _apiBase.get('dailies/$id');
     return Daily.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class DailyApi {
   }
 
   // Update Daily
-  Future<Daily> updateDaily(int id, Daily daily) async {
+  Future<Daily> updateDaily(String id, Daily daily) async {
     final response = await _apiBase.put('dailies/$id', body: daily.toJson());
     return Daily.fromJson(json.decode(response.body));
   }
 
   // Delete Daily
-  Future<void> deleteDaily(int id) async {
+  Future<void> deleteDaily(String id) async {
     await _apiBase.delete('dailies/$id');
   }
 

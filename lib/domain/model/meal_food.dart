@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 
 class MealFood {
-  int? id;
+  String? id;
   Meal? meal;
   Food? food;
 
@@ -16,17 +16,17 @@ class MealFood {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': meal,
-      'description': food,
+      'idMealFood': id,
+      'meal': meal?.toJson(),
+      'food': food?.toJson(),
     };
   }
 
   factory MealFood.fromMap(Map<String, dynamic> map) {
     return MealFood(
-      id: map['idMealFood'] as int?,
-      meal: map['meal'] != null ? map['meal'] as Meal : null,
-      food: map['food'] != null ? map['food'] as Food : null,
+      id: map['idMealFood'] != null ? map['idMealFood'] as String : null,
+      meal: map['meal'] != null ? Meal.fromMap(map['meal'] as Map<String, dynamic>) : null,
+      food: map['food'] != null ? Food.fromMap(map['food'] as Map<String, dynamic>) : null,
     );
   }
 

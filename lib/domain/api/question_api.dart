@@ -15,7 +15,7 @@ class QuestionApi {
   }
 
   // Get Question by Id
-  Future<Question> getQuestionById(int id) async {
+  Future<Question> getQuestionById(String id) async {
     final response = await _apiBase.get('questions/$id');
     return Question.fromJson(json.decode(response.body));
   }
@@ -27,13 +27,13 @@ class QuestionApi {
   }
 
   // Update Question
-  Future<Question> updateQuestion(int id, Question question) async {
+  Future<Question> updateQuestion(String id, Question question) async {
     final response = await _apiBase.put('questions/$id', body: question.toJson());
     return Question.fromJson(json.decode(response.body));
   }
 
   // Delete Question
-  Future<void> deleteQuestion(int id) async {
+  Future<void> deleteQuestion(String id) async {
     await _apiBase.delete('questions/$id');
   }
 

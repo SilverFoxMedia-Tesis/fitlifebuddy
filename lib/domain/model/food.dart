@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/category_name.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 
 class Food {
-  int? id;
+  String? id;
   String? name;
   String? measure;
-  double? grams;
-  double? calories;
-  double? fat;
-  double? satFat;
-  double? fiber;
-  double? carbs;
+  num? grams;
+  num? calories;
+  num? fat;
+  num? satFat;
+  num? fiber;
+  num? carbs;
   CategoryName? categoryName;
 
   Food({
@@ -29,8 +30,8 @@ class Food {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
+      'idFood': id,
+      'nameFood': name,
       'measure': measure,
       'grams': grams,
       'calories': calories,
@@ -44,16 +45,16 @@ class Food {
 
   factory Food.fromMap(Map<String, dynamic> map) {
     return Food(
-      id: map['idFood'] as int?,
+      id: map['idFood'] != null ? map['idFood'] as String : null,
       name: map['nameFood'] != null ? map['nameFood'] as String : null,
       measure: map['measure'] != null ? map['measure'] as String : null,
-      grams: map['grams'] != null ? map['grams'] as double : null,
-      calories: map['calories'] != null ? map['calories'] as double : null,
-      fat: map['fat'] != null ? map['fat'] as double : null,
-      satFat: map['satFat'] != null ? map['satFat'] as double : null,
-      fiber: map['fiber'] != null ? map['fiber'] as double : null,
-      carbs: map['carbs'] != null ? map['carbs'] as double : null,
-      categoryName: map['categoryName'] != null ? map['categoryName'] as CategoryName : null,
+      grams: map['grams'] != null ? map['grams'] as num : null,
+      calories: map['calories'] != null ? map['calories'] as num : null,
+      fat: map['fat'] != null ? map['fat'] as num : null,
+      satFat: map['satFat'] != null ? map['satFat'] as num : null,
+      fiber: map['fiber'] != null ? map['fiber'] as num : null,
+      carbs: map['carbs'] != null ? map['carbs'] as num : null,
+      categoryName: map['categoryName'] != null ? EnumExtension.getValue(CategoryName.values, map['categoryName']) : null,
     );
   }
 

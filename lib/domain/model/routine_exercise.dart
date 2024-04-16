@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/routine.dart';
 
 class RoutineExercise {
-  int? id;
+  String? id;
   Routine? routine;
   Exercise? exercise;
 
@@ -16,17 +16,17 @@ class RoutineExercise {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': routine,
-      'description': exercise,
+      'idRoutineExercise': id,
+      'routine': routine?.toJson(),
+      'exercise': exercise?.toJson(),
     };
   }
 
   factory RoutineExercise.fromMap(Map<String, dynamic> map) {
     return RoutineExercise(
-      id: map['idRoutineExercise'] as int?,
-      routine: map['routine'] != null ? map['nameRoutine'] as Routine : null,
-      exercise: map['exercise'] != null ? map['descriptionRoutine'] as Exercise : null,
+      id: map['idRoutineExercise'] != null ? map['idRoutineExercise'] as String : null,
+      routine: map['routine'] != null ? Routine.fromMap(map['nameRoutine'] as Map<String, dynamic>) : null,
+      exercise: map['exercise'] != null ? Exercise.fromMap(map['descriptionRoutine'] as Map<String, dynamic>) : null,
     );
   }
 

@@ -14,7 +14,7 @@ class FoodConditionApi {
   }
 
   // Get FoodCondition by Id
-  Future<FoodCondition> getFoodConditionById(int id) async {
+  Future<FoodCondition> getFoodConditionById(String id) async {
     final response = await _apiBase.get('foodConditions/$id');
     return FoodCondition.fromJson(json.decode(response.body));
   }
@@ -26,13 +26,13 @@ class FoodConditionApi {
   }
 
   // Update FoodCondition
-  Future<FoodCondition> updateFoodCondition(int id, FoodCondition foodCondition) async {
+  Future<FoodCondition> updateFoodCondition(String id, FoodCondition foodCondition) async {
     final response = await _apiBase.put('foodConditions/$id', body: foodCondition.toJson());
     return FoodCondition.fromJson(json.decode(response.body));
   }
 
   // Delete FoodCondition
-  Future<void> deleteFoodCondition(int id) async {
+  Future<void> deleteFoodCondition(String id) async {
     await _apiBase.delete('foodConditions/$id');
   }
 

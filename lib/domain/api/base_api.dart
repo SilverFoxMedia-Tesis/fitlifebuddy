@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class BaseApi {
   final String baseUrl = 'http://18.229.162.139:8080/api';
@@ -23,7 +22,7 @@ class BaseApi {
     final response = await client.post(
       getUri(endpoint),
       headers: _headers(),
-      body: json.encode(body)
+      body: body
     );
     return _handleResponse(response);
   }
@@ -52,8 +51,8 @@ class BaseApi {
   };
 
   http.Response _handleResponse(http.Response response) {
-    print('Response Status: ${response.statusCode}');
-    print('Response Body: ${response.body}');
+    // print('Response Status: ${response.statusCode}');
+    // print('Response Body: ${response.body}');
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return response;
     } else {

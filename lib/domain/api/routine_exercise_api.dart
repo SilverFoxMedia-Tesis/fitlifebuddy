@@ -14,7 +14,7 @@ class RoutineExerciseApi {
   }
 
   // Get RoutineExercise by Id
-  Future<RoutineExercise> getRoutineExerciseById(int id) async {
+  Future<RoutineExercise> getRoutineExerciseById(String id) async {
     final response = await _apiBase.get('routineExercises/$id');
     return RoutineExercise.fromJson(json.decode(response.body));
   }
@@ -26,13 +26,13 @@ class RoutineExerciseApi {
   }
 
   // Update RoutineExercise
-  Future<RoutineExercise> updateRoutineExercise(int id, RoutineExercise patientHistory) async {
+  Future<RoutineExercise> updateRoutineExercise(String id, RoutineExercise patientHistory) async {
     final response = await _apiBase.put('routineExercises/$id', body: patientHistory.toJson());
     return RoutineExercise.fromJson(json.decode(response.body));
   }
 
   // Delete RoutineExercise
-  Future<void> deleteRoutineExercise(int id) async {
+  Future<void> deleteRoutineExercise(String id) async {
     await _apiBase.delete('routineExercises/$id');
   }
 }
