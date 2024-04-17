@@ -35,7 +35,7 @@ final appPages = [
   ),
   GetPage(
     name: AppRoutes.registerPatient,
-    page: () => const RegisterPatientPage(),
+    page: () => RegisterPatientPage(),
     transition: Transition.noTransition,
     binding: RegisterPatientBinding(),
   ),
@@ -67,7 +67,7 @@ final appPages = [
   ),
   GetPage(
     name: AppRoutes.registerPatient,
-    page: () => const RegisterPatientPage(),
+    page: () => RegisterPatientPage(),
     transition: Transition.noTransition,
   ),
   GetPage(

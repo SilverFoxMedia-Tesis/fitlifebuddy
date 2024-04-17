@@ -16,7 +16,6 @@ import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
-import 'package:fitlifebuddy/pages/register_patient_page/widgets/personal_info_form.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,9 +32,6 @@ class RegisterPatientController extends GetxController{
   final _appToast = Get.find<AppToast>();
 
   final PageController pageController = PageController();
-  final List<Widget> pages = [
-    const PersonalInfoForm(),
-  ];
 
   final personalInfoFormKey = GlobalKey<FormState>();
   final healthConditionsFormKey = GlobalKey<FormState>();
@@ -71,7 +67,7 @@ class RegisterPatientController extends GetxController{
     super.onInit();
   }
 
-  void setPage(int pageIndex) {
+  void onChangedPage(int pageIndex) {
     pageController.animateToPage(
       pageIndex, 
       duration: const Duration(milliseconds: 300),
