@@ -89,5 +89,8 @@
     "personal_info_updated": "Información personal actualizada",
     "health_conditions_updated": "Condiciones de salud actualizadas",
     "food_conditions_updated": "Condiciones alimentarias actualizadas",
-    "select_a_gender" : "Selecciona un género"
+    "select_a_gender" : "Selecciona un género",
+    "select_a_condition": "Selecciona una condición",
+    "no_food_conditions": "No hay condiciones alimentarias actualmente",
+    "no_health_conditions": "No hay condiciones de salud actualmente"
 }

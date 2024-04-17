@@ -24,7 +24,7 @@ class AppDropdown extends StatelessWidget {
     this.selectedValue,
     this.onChanged,
     this.height = 50,
-    this.width = ContainerSize.baseTextfieldWidth,
+    this.width = ContainerSize.baseDropdownWidth,
     this.enabled = true,
     this.title,
     this.hintText,

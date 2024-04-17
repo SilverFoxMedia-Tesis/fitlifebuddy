@@ -1,10 +1,16 @@
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
+import 'package:fitlifebuddy/domain/api/food_condition_api.dart';
+import 'package:fitlifebuddy/domain/api/health_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
+import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
+import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
+import 'package:fitlifebuddy/domain/model/food_condition.dart';
+import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
@@ -17,6 +23,8 @@ class PatientProfileController extends GetxController{
   final _personApi = Get.find<PersonApi>();
   final _patientApi = Get.find<PatientApi>();
   final _patientHistoryApi = Get.find<PatientHistoryApi>();
+  final _foodConditionApi = Get.find<FoodConditionApi>();
+  final _healthConditionApi = Get.find<HealthConditionApi>();
 
   final _formValidationService = Get.find<FormValidationService>();
   final _appToast = Get.find<AppToast>();
@@ -32,8 +40,15 @@ class PatientProfileController extends GetxController{
   final weightController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
 
-  var genderSelectedValue  = Gender.values.first.label.obs;
   List<String> genders = Gender.values.map((e) => e.label).toList();
+  List<String> foodConditionTypes = TypeFoodCondition.values.map((e) => e.label).toList();
+  List<String> healthConditionTypes = TypeHealthCondition.values.map((e) => e.label).toList();
+
+  final genderSelectedValue  = Gender.values.first.label.obs;
+  final foodConditionTypeSelectedValues = <int, String>{}.obs;
+  final healthConditionTypeSelectedValues = <int, String>{}.obs;
+  final foodConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
+  final healthConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
 
   final isPersonalInfoEditing = false.obs;
   final isHealthConditionsEditing = false.obs;
@@ -41,16 +56,25 @@ class PatientProfileController extends GetxController{
 
   final currentPatient = Patient().obs;
   final currentPatientHistory = PatientHistory().obs;
+  final currentFoodConditions = <FoodCondition>[].obs;
+  final currentHealthConditions = <HealthCondition>[].obs;
 
   bool get isEditing => isPersonalInfoEditing.isTrue || isHealthConditionsEditing.isTrue || isFoodConditionsEditing.isTrue;
 
+  bool get hasFoodConditions => currentFoodConditions.isNotEmpty;
+  bool get hasHealthConditions => currentHealthConditions.isNotEmpty;
+
   var currentPatientSaved = Patient();
   var currentPatientHistorySaved = PatientHistory();
+  var currentFoodConditionsSaved = <FoodCondition>[];
+  var currentHealthConditionsSaved = <HealthCondition>[];
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await getPatientById(1);
+    await getFoodConditions(1);
+    await getHealthConditions(1);
   }
 
   Future<void> getPatientById(int patientId) async{
@@ -65,6 +89,52 @@ class PatientProfileController extends GetxController{
         currentPatientHistory.value = histories.first;
         getPatientHistoryInfo();
       }
+    } catch (e) {
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> getFoodConditions(int patientId) async{
+    try {
+      //currentFoodConditions.value = await _patientApi.getFoodConditionsByPatientId(patientId);
+      currentFoodConditions.value = [
+        FoodCondition(
+          id: 1,
+          name: 'Ejemplo 1',
+          type: TypeFoodCondition.allergy,
+          patient: currentPatient.value
+        ),
+        FoodCondition(
+          id: 2,
+          name: 'Ejemplo 2',
+          type: TypeFoodCondition.preference,
+          patient: currentPatient.value
+        ),
+      ];
+      getFoodConditionsValues();
+    } catch (e) {
+      displayErrorToast(e);
+    }
+  }
+
+  Future<void> getHealthConditions(int patientId) async{
+    try {
+      //currentHealthConditions.value = await _patientApi.getHealthConditionsByPatientId(patientId);
+      currentHealthConditions.value = [
+        HealthCondition(
+          id: 1,
+          name: 'Ejemplo 3',
+          type: TypeHealthCondition.surgery,
+          patient: currentPatient.value
+        ),
+        HealthCondition(
+          id: 2,
+          name: 'Ejemplo 4',
+          type: TypeHealthCondition.illness,
+          patient: currentPatient.value
+        ),
+      ];
+      getHealthConditionValues();
     } catch (e) {
       displayErrorToast(e);
     }
@@ -86,6 +156,30 @@ class PatientProfileController extends GetxController{
     weightController.value.text = currentPatientHistory.value.weight.toString();
   }
 
+  void getFoodConditionsValues() {
+    if (currentFoodConditions.isNotEmpty) {
+      for (var i = 0; i < currentFoodConditions.length; i++) {
+        var foodCondition = currentFoodConditions[i];
+        if (foodCondition.type?.label != null) {
+          foodConditionTypeSelectedValues[i] = foodCondition.type!.label;
+          foodConditionTypeSelectedControllers[i] = TextEditingController(text: foodCondition.name);
+        }
+      }
+    }
+  }
+
+  void getHealthConditionValues() {
+    if (currentHealthConditions.isNotEmpty) {
+      for (var i = 0; i < currentHealthConditions.length; i++) {
+        var healthCondition = currentHealthConditions[i];
+        if (healthCondition.type?.label != null) {
+          healthConditionTypeSelectedValues[i] = healthCondition.type!.label;
+          healthConditionTypeSelectedControllers[i] = TextEditingController(text: healthCondition.name);
+        }
+      }
+    }
+  }
+
   void onEditPersonalInfoPressed() {
     isPersonalInfoEditing.value = true;
     currentPatientSaved = currentPatient.value;
@@ -94,15 +188,29 @@ class PatientProfileController extends GetxController{
 
   void onEditHealthConditionsPressed() {
     isHealthConditionsEditing.value = true;
+    currentHealthConditionsSaved = currentHealthConditions.value;
   }
 
   void onEditFoodConditionsPressed() {
     isFoodConditionsEditing.value = true;
+    currentFoodConditionsSaved = currentFoodConditions.value;
   }
 
   void onChangedGender(String? value) {
     if (value != null && value != '') {
       genderSelectedValue.value = value;
+    }
+  }
+
+  void onChangedFoodCondition(int index, String? value) {
+    if (value != null && value != '') {
+      foodConditionTypeSelectedValues[index] = value;
+    }
+  }
+
+  void onChangedHealthCondition(int index, String? value) {
+    if (value != null && value != '') {
+      healthConditionTypeSelectedValues[index] = value;
     }
   }
 
@@ -192,6 +300,14 @@ class PatientProfileController extends GetxController{
   Future<void> updateHealthConditions() async {
     try {
       if (_formValidationService.validateForm(healthConditionsFormKey)) {
+        for (var i = 0; i < currentHealthConditions.length; i++) {
+          var hCondition = currentHealthConditions[i];
+          hCondition.type = EnumExtension.getLabel(TypeHealthCondition.values, healthConditionTypeSelectedValues[i]);
+          hCondition.name = healthConditionTypeSelectedControllers[i]?.text;
+          //final result = await _healthConditionApi.updateHealthCondition(hCondition.id!, hCondition);
+          //currentHealthConditions[i] = result;
+          currentHealthConditions[i] = hCondition;
+        }
         _appToast.showToast(
           message: 'health_conditions_updated',
           type: ToastificationType.success,
@@ -206,12 +322,20 @@ class PatientProfileController extends GetxController{
   Future<void> updateFoodConditions() async {
     try {
       if (_formValidationService.validateForm(foodConditionsFormKey)) {
+        for (var i = 0; i < currentFoodConditions.length; i++) {
+          var foodConditions = currentFoodConditions[i];
+          foodConditions.type = EnumExtension.getLabel(TypeFoodCondition.values, foodConditionTypeSelectedValues[i]);
+          foodConditions.name = foodConditionTypeSelectedControllers[i]?.text;
+          //final result = await _foodConditionApi.updateFoodCondition(foodConditions.id!, foodConditions);
+          // currentFoodConditions[i] = result;
+          currentFoodConditions[i] = foodConditions;
+        }
         _appToast.showToast(
           message: 'food_conditions_updated',
           type: ToastificationType.success,
         );
+        isFoodConditionsEditing.value = false;
       }
-      isFoodConditionsEditing.value = false;
     } catch (e) {
       displayErrorToast(e);
     }
@@ -227,8 +351,12 @@ class PatientProfileController extends GetxController{
       getPatientHistoryInfo();
     } else if (isHealthConditionsEditing.isTrue) {
       isHealthConditionsEditing.value = false;
+      currentHealthConditions.value = currentHealthConditionsSaved;
+      getHealthConditionValues();
     } else if (isFoodConditionsEditing.isTrue) {
       isFoodConditionsEditing.value = false;
+      currentFoodConditions.value = currentFoodConditionsSaved;
+      getFoodConditionsValues();
     }
   }
 }
