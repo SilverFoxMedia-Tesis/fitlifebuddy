@@ -17,5 +17,6 @@ class ContainerSize {
   static const baseTextfieldWidth = 348.0;
   static const baseContainerdWidth = 348.0;
   static const iconSize = 18.0;
+  static const iconSizeLarge = 22.0;
   static const snackBarMaxWidth = 378.0;
 }

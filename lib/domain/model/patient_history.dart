@@ -39,11 +39,11 @@ class PatientHistory {
       'age': age,
       'height': height,
       'weight': weight,
-      'gender': gender,
-      'dietType': dietType,
-      'frecuently': frecuently,
-      'pacient': patient?.toJson(),
-      'physicalActivity': physicalActivity,
+      'gender': gender?.value,
+      'dietType': dietType?.value,
+      'frecuently': frecuently?.value,
+      'pacient': patient?.toMap(),
+      'physicalActivity': physicalActivity?.value,
     };
   }
 

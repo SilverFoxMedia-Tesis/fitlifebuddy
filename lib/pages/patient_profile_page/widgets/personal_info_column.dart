@@ -5,6 +5,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_formatters.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
+import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';
@@ -57,9 +58,12 @@ class PersonalInfo extends GetView<PatientProfileController> {
               inputFormatters: InputFormatters.lettersOnly,
             ),
             AppSpacing.spacingVertical24,
-            AppTextfield(
+            AppDropdown(
               title: 'gender'.tr,
-              controller: controller.genderController.value,
+              hintText: 'select_a_gender'.tr,
+              items: controller.genders,
+              selectedValue: controller.genderSelectedValue.value,
+              onChanged: (value) => controller.onChangedGender(value),
               enabled: controller.isPersonalInfoEditing.value,
             ),
             AppSpacing.spacingVertical24,

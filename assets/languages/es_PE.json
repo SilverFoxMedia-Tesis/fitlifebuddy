@@ -88,5 +88,6 @@
     "successful_login": "Inicio de sesión exitoso",
     "personal_info_updated": "Información personal actualizada",
     "health_conditions_updated": "Condiciones de salud actualizadas",
-    "food_conditions_updated": "Condiciones alimentarias actualizadas"
+    "food_conditions_updated": "Condiciones alimentarias actualizadas",
+    "select_a_gender" : "Selecciona un género"
 }

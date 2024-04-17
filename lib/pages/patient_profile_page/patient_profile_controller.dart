@@ -27,11 +27,13 @@ class PatientProfileController extends GetxController{
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
-  final genderController = TextEditingController().obs;
   final birthdateController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
+
+  var genderSelectedValue  = Gender.values.first.label.obs;
+  List<String> genders = Gender.values.map((e) => e.label).toList();
 
   final isPersonalInfoEditing = false.obs;
   final isHealthConditionsEditing = false.obs;
@@ -79,7 +81,7 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientHistoryInfo(){
-    genderController.value.text = currentPatientHistory.value.gender?.label ?? '';
+    onChangedGender(currentPatientHistory.value.gender?.label);
     heightController.value.text = currentPatientHistory.value.height.toString();
     weightController.value.text = currentPatientHistory.value.weight.toString();
   }
@@ -96,6 +98,12 @@ class PatientProfileController extends GetxController{
 
   void onEditFoodConditionsPressed() {
     isFoodConditionsEditing.value = true;
+  }
+
+  void onChangedGender(String? value) {
+    if (value != null && value != '') {
+      genderSelectedValue.value = value;
+    }
   }
 
   void onTapDateTime() async {
@@ -130,7 +138,7 @@ class PatientProfileController extends GetxController{
       if (_formValidationService.validateForm(personalInfoFormKey)) {
         updatePerson();
         updatePatient();
-        //updatePatientHistory();
+        updatePatientHistory();
         _appToast.showToast(
           message: 'personal_info_updated'.tr,
           type: ToastificationType.success,
@@ -171,9 +179,9 @@ class PatientProfileController extends GetxController{
   Future<void> updatePatientHistory() async {
     try {
       var patientHistory = currentPatientHistory.value;
-      patientHistory.gender = EnumExtension.getLabel(Gender.values, genderController.value.text);
-      patientHistory.height = double.parse(heightController.value.text);
-      patientHistory.weight = double.parse(weightController.value.text);
+      patientHistory.gender = EnumExtension.getLabel(Gender.values, genderSelectedValue.value);
+      patientHistory.height = num.parse(heightController.value.text);
+      patientHistory.weight = num.parse(weightController.value.text);
       final result = await _patientHistoryApi.updatePatientHistory(patientHistory.id!, patientHistory);
       currentPatientHistory.value = result;
     } catch (e) {

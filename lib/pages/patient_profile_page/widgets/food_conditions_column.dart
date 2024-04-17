@@ -2,7 +2,6 @@ import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +36,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
           ],
         ),
         AppSpacing.spacingVertical24,
-        const AppDropdown(type: 2,),
+        //const AppDropdown(),
       ],
     );
   }

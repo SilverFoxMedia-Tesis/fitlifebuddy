@@ -1,113 +1,125 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppDropdown extends StatelessWidget {
-  final int selectedOption;
-  final int type;
-  final bool readOnly;
-  final double width;
+  final List<String>? items;
+  final String? selectedValue;
+  final void Function(String?)? onChanged;
+  final double? height;
+  final double? width;
+  final bool? enabled;
+  final String? title;
+  final String? hintText;
 
   const AppDropdown({
     super.key,
-    this. selectedOption = 1,
-    this.type = 1,
-    this.readOnly = true,
-    this.width = 160,
+    this.items,
+    this.selectedValue,
+    this.onChanged,
+    this.height = 50,
+    this.width = ContainerSize.baseTextfieldWidth,
+    this.enabled = true,
+    this.title,
+    this.hintText,
   });
 
   @override
   Widget build(BuildContext context) {
-    final x = buidSelectOption();
-    var selectedOption = x.obs;
-    return Row(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(
-          () => SizedBox(
-            width: 160,
-            child: Container(
-              padding: AppPadding.paddingHorizontal16,
-              width: 160,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: const [AppBoxShadow.primary25Blur8],
-              ),
-              child: IgnorePointer(
-                ignoring: readOnly,
-                child: DropdownButtonFormField<String>(
-                  value: selectedOption.value,
-                  items: buidDropdownItems(),
-                  onChanged: (value) {
-                    selectedOption.value = value!;
-                  },
-                  style: buildTextStyle(),
-                  focusColor: AppColors.white,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
+        if (title != null) ...[
+          Text(
+            title!,
+            style: buildTextStyle(),
+          ),
+          AppSpacing.spacingVertical8,
+        ],
+        IgnorePointer(
+          ignoring: !enabled!,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton2<String>(
+              isExpanded: true,
+              hint: hintText != null 
+                ? Text(
+                  hintText!,
+                  style: AppTextStyle.robotoMedium14.copyWith(
+                    color: AppColors.disabled,
                   ),
-                  
+                )
+                : null,
+              items: items?.map(
+                (item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: buildTextStyle(),
+                      ),
+                    ))
+                .toList(),
+              value: selectedValue,
+              onChanged: onChanged,
+              buttonStyleData: ButtonStyleData(
+                height: height,
+                width: width,
+                padding: AppPadding.padding16,
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: AppBorderRadius.borderRadius14,
+                  boxShadow: [AppBoxShadow.primary25Blur8],
                 ),
+              ),
+              iconStyleData: const IconStyleData(
+                icon: Icon(
+                  Icons.arrow_drop_down_rounded,
+                  size: ContainerSize.iconSizeLarge,
+                  color: AppColors.secondary,
+                ),
+              ),
+              dropdownStyleData: DropdownStyleData(
+                maxHeight: 200,
+                width: width,
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: AppBorderRadius.borderRadius14,
+                  boxShadow: [AppBoxShadow.primary25Blur8],
+                ),
+                offset: const Offset(0, 0),
+                scrollbarTheme: ScrollbarThemeData( //revisar otra vez
+                  radius: const Radius.circular(40),
+                  thickness: MaterialStateProperty.all<double>(6),
+                  thumbVisibility: MaterialStateProperty.all<bool>(true),
+                ),
+              ),
+              menuItemStyleData: MenuItemStyleData(
+                padding: AppPadding.padding16,
+                overlayColor: MaterialStateProperty.all<Color>(AppColors.background),
               ),
             ),
           ),
         ),
-        AppSpacing.spacingHorizontal24,
-        AppTextfield(
-          hintText: (type == 1) ? 'Diabetes' : 'Frutos secos',
-          enabled: readOnly,
-        )
       ],
     );
   }
 
   TextStyle buildTextStyle() {
-    switch (readOnly) {
+    switch (enabled) {
       case true:
-        return AppTextStyle.robotoSemibold14.copyWith(
+        return AppTextStyle.robotoMedium14.copyWith(
+          color: AppColors.primary,
+        );
+      default:
+      return AppTextStyle.robotoMedium14.copyWith(
           color: AppColors.secondary,
         );
-      default:
-      return AppTextStyle.robotoSemibold14.copyWith(
-          color: AppColors.white,
-        );
-    }
-  }
-
-  List<DropdownMenuItem<String>> buidDropdownItems() {
-    switch (type) {
-      case 1:
-        return [
-          const DropdownMenuItem(
-            value: 'Enfermedad',
-            child: Text('Enfermedad'),
-          ),
-          const DropdownMenuItem(
-            value: 'Cirugía',
-            child: Text('Cirugía'),
-          ),
-        ];
-      default:
-      return [
-          const DropdownMenuItem(
-            value: 'Alergia',
-            child: Text('Alergia'),
-          ),
-        ];
-    }
-  }
-
-  String buidSelectOption() {
-    switch (type) {
-      case 1:
-        return 'Enfermedad';
-      default:
-      return 'Alergia';
     }
   }
 }
