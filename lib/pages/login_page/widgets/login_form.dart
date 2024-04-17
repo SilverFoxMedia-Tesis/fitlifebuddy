@@ -7,6 +7,7 @@ import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -68,6 +69,27 @@ class LoginForm extends GetView<LoginController> {
           BaseButtom(
             text: 'login'.tr,
             onTap: controller.login,
+          ),
+          AppSpacing.spacingVertical24,
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '${'no_have_an_account_yet'.tr} ',
+                  style: AppTextStyle.robotoMedium14.copyWith(
+                    color: AppColors.secondary,
+                  ),
+                ),
+                TextSpan(
+                  text: 'register'.tr,
+                  style: AppTextStyle.robotoMedium14.copyWith(
+                    color: Colors.blueAccent,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = controller.register,
+                ),
+              ],
+            ),
           ),
         ],
       ),

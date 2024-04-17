@@ -92,5 +92,10 @@
     "select_a_gender" : "Selecciona un género",
     "select_a_condition": "Selecciona una condición",
     "no_food_conditions": "No hay condiciones alimentarias actualmente",
-    "no_health_conditions": "No hay condiciones de salud actualmente"
+    "no_health_conditions": "No hay condiciones de salud actualmente",
+    "no_have_an_account_yet": "¿Aún no tienes una cuenta?",
+    "register": "Registrarse",
+    "personal_info_saved": "Información personal guardada",
+    "health_conditions_saved": "Condiciones de salud guardadas",
+    "food_conditions_saved": "Condiciones alimentarias guardadas"
 }

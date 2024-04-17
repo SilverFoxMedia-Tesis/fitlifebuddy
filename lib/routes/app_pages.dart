@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_binding.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_page.dart';
+import 'package:fitlifebuddy/pages/register_patient_page/register_patient_binding.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_page.dart';
@@ -36,6 +37,7 @@ final appPages = [
     name: AppRoutes.registerPatient,
     page: () => const RegisterPatientPage(),
     transition: Transition.noTransition,
+    binding: RegisterPatientBinding(),
   ),
   GetPage(
     name: AppRoutes.profile,

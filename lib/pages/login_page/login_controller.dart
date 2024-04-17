@@ -54,6 +54,10 @@ class LoginController extends GetxController {
     Get.toNamed(AppRoutes.recoverPassword);
   }
 
+  void register() {
+    Get.toNamed(AppRoutes.registerPatient);
+  }
+
   void reset() {
     obscurePassword(true);
     emailController.value.clear();

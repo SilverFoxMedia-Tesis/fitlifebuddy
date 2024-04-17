@@ -74,10 +74,13 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
               ),
             ),
           if (!controller.hasFoodConditions)
-            Text(
-              'no_food_conditions'.tr,
-              style: AppTextStyle.robotoMedium14.copyWith(
-                color: AppColors.secondary,
+            Padding(
+              padding: AppPadding.paddingOnlyTop24,
+              child: Text(
+                'no_food_conditions'.tr,
+                style: AppTextStyle.robotoMedium14.copyWith(
+                  color: AppColors.secondary,
+                ),
               ),
             ),
         ],

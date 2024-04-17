@@ -24,8 +24,8 @@ class FoodCondition {
       'idFoodCondition': id,
       'nameFoodCondition': name,
       'descriptionFoodCondition': description,
-      'typeFoodCondition': type,
-      'pacient': patient?.toJson(),
+      'typeFoodCondition': type?.value,
+      'pacient': patient?.toMap(),
     };
   }
 

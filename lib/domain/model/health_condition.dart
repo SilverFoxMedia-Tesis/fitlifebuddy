@@ -24,8 +24,8 @@ class HealthCondition {
       'idHealthCondition': id,
       'nameHealthCondition': name,
       'descriptionHealthCondition': description,
-      'typeHealthCondition': type,
-      'pacient': patient?.toJson(),
+      'typeHealthCondition': type?.value,
+      'pacient': patient?.toMap(),
     };
   }
 
