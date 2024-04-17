@@ -1,3 +1,4 @@
+import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
@@ -8,7 +9,7 @@ import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 
@@ -41,6 +42,9 @@ class PatientProfileController extends GetxController{
 
   bool get isEditing => isPersonalInfoEditing.isTrue || isHealthConditionsEditing.isTrue || isFoodConditionsEditing.isTrue;
 
+  var currentPatientSaved = Patient();
+  var currentPatientHistorySaved = PatientHistory();
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -65,7 +69,7 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientInfo(){
-    birthdateController.value.text = currentPatient.value.birthDate.toString();
+    birthdateController.value.text = currentPatient.value.birthDate ?? '';
   }
 
   void getPersonInfo() {
@@ -82,6 +86,8 @@ class PatientProfileController extends GetxController{
 
   void onEditPersonalInfoPressed() {
     isPersonalInfoEditing.value = true;
+    currentPatientSaved = currentPatient.value;
+    currentPatientHistorySaved = currentPatientHistory.value;
   }
 
   void onEditHealthConditionsPressed() {
@@ -92,10 +98,21 @@ class PatientProfileController extends GetxController{
     isFoodConditionsEditing.value = true;
   }
 
-  void resetIsEditing() {
-    isPersonalInfoEditing.value = false;
-    isHealthConditionsEditing.value = false;
-    isPersonalInfoEditing.value = false;
+  void onTapDateTime() async {
+    var selectedDate = DateTime.now();
+    if (birthdateController.value.text.isNotEmpty) {
+      selectedDate = DateTime.parse(currentPatient.value.birthDate!);
+    }
+    await showDatePicker(
+      context: Get.context!,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+        selectedDate = pickedDate;
+        birthdateController.value.text = fromDateToInitial(selectedDate);
+    });
   }
 
   Future<void> handleProfileUpdate() async {
@@ -106,7 +123,6 @@ class PatientProfileController extends GetxController{
     } else if (isFoodConditionsEditing.isTrue) {
       await updateFoodConditions();
     }
-    resetIsEditing();
   }
 
   Future<void> updatePersonalInfo() async {
@@ -116,9 +132,10 @@ class PatientProfileController extends GetxController{
         updatePatient();
         //updatePatientHistory();
         _appToast.showToast(
-          message: 'personal_info_updated',
+          message: 'personal_info_updated'.tr,
           type: ToastificationType.success,
         );
+        isPersonalInfoEditing.value = false;
       }
     } catch (e) {
       displayErrorToast(e);
@@ -128,9 +145,11 @@ class PatientProfileController extends GetxController{
   Future<void> updatePatient() async {
     try {
       var patient = currentPatient.value;
-      patient.birthDate = birthdateController.value.text;
-      final result = await _patientApi.updatePatient(patient.id!, patient);
-      currentPatient.value = result;
+      if (birthdateController.value.text.isNotEmpty) {
+        patient.birthDate = birthdateController.value.text;
+        final result = await _patientApi.updatePatient(patient.id!, patient);
+        currentPatient.value = result;
+      }
     } catch (e) {
       displayErrorToast(e);
     }
@@ -169,6 +188,7 @@ class PatientProfileController extends GetxController{
           message: 'health_conditions_updated',
           type: ToastificationType.success,
         );
+        isHealthConditionsEditing.value = false;
       }
     } catch (e) {
       displayErrorToast(e);
@@ -183,8 +203,24 @@ class PatientProfileController extends GetxController{
           type: ToastificationType.success,
         );
       }
+      isFoodConditionsEditing.value = false;
     } catch (e) {
       displayErrorToast(e);
+    }
+  }
+
+  void cancel() {
+    if (isPersonalInfoEditing.isTrue) {
+      isPersonalInfoEditing.value = false;
+      currentPatient.value = currentPatientSaved;
+      currentPatientHistory.value = currentPatientHistorySaved;
+      getPersonInfo();
+      getPatientInfo();
+      getPatientHistoryInfo();
+    } else if (isHealthConditionsEditing.isTrue) {
+      isHealthConditionsEditing.value = false;
+    } else if (isFoodConditionsEditing.isTrue) {
+      isFoodConditionsEditing.value = false;
     }
   }
 }

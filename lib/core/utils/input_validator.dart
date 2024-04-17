@@ -32,3 +32,23 @@ String? validatePassword(String? password) {
   }
   return null;
 }
+
+String? validateLettersOnly(String? input) {
+  input = input ?? "";
+  if (input.trim().isEmpty) {
+    return "validator_empty".tr;
+  } else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(input)) {
+    return "validator_letters_invalid".tr;
+  }
+  return null;
+}
+
+String? validateNumbersOnly(String? input) {
+  input = input ?? "";
+  if (input.trim().isEmpty) {
+    return "validator_empty".tr;
+  } else if (!RegExp(r'^[0-9]+$').hasMatch(input)) {
+    return "validator_numbers_invalid".tr;
+  }
+  return null;
+}

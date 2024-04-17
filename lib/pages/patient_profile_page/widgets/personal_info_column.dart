@@ -2,6 +2,8 @@ import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
+import 'package:fitlifebuddy/core/utils/input_formatters.dart';
+import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
@@ -42,12 +44,17 @@ class PersonalInfo extends GetView<PatientProfileController> {
               title: 'firstname'.tr,
               controller: controller.firstnameController.value,
               enabled: controller.isPersonalInfoEditing.value,
+              inputType: TextInputType.name,
+              validator: validateLettersOnly,
+              inputFormatters: InputFormatters.lettersOnly,
             ),
             AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'lastname'.tr,
               controller: controller.lastnameController.value,
               enabled: controller.isPersonalInfoEditing.value,
+              validator: validateLettersOnly,
+              inputFormatters: InputFormatters.lettersOnly,
             ),
             AppSpacing.spacingVertical24,
             AppTextfield(
@@ -60,6 +67,8 @@ class PersonalInfo extends GetView<PatientProfileController> {
               title: 'birthdate'.tr,
               controller: controller.birthdateController.value,
               enabled: controller.isPersonalInfoEditing.value,
+              inputType: TextInputType.datetime,
+              onTap: controller.onTapDateTime,
             ),
             AppSpacing.spacingVertical24,
             Row(
@@ -70,6 +79,9 @@ class PersonalInfo extends GetView<PatientProfileController> {
                   controller: controller.weightController.value,
                   suffixText: 'weight_symbol'.tr,
                   enabled: controller.isPersonalInfoEditing.value,
+                  inputType: TextInputType.number,
+                  validator: validateNumbersOnly,
+                  inputFormatters: InputFormatters.numbersOnly,
                 ),
                 AppSpacing.spacingHorizontal24,
                 AppTextfield(
@@ -78,6 +90,9 @@ class PersonalInfo extends GetView<PatientProfileController> {
                   controller: controller.heightController.value,
                   suffixText: 'height_symbol'.tr,
                   enabled: controller.isPersonalInfoEditing.value,
+                  inputType: TextInputType.number,
+                  validator: validateNumbersOnly,
+                  inputFormatters: InputFormatters.numbersOnly,
                 ),
               ],
             ),
@@ -86,6 +101,9 @@ class PersonalInfo extends GetView<PatientProfileController> {
               title: 'email'.tr,
               controller: controller.emailController.value,
               enabled: controller.isPersonalInfoEditing.value,
+              inputType: TextInputType.emailAddress,
+              validator: validateEmail,
+              inputFormatters: InputFormatters.emailFormat,
             ),
           ],
         ),

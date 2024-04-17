@@ -7,6 +7,7 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTextfield extends StatelessWidget {
   final String? title;
@@ -21,6 +22,8 @@ class AppTextfield extends StatelessWidget {
   final bool obscureText;
   final bool enabled;
   final double width;
+  final void Function()? onTap;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextfield({
     super.key,
@@ -36,6 +39,8 @@ class AppTextfield extends StatelessWidget {
     this.obscureText = false,
     this.enabled = true,
     this.width = ContainerSize.baseTextfieldWidth,
+    this.onTap,
+    this.inputFormatters,
   });
 
   void _onChanged(FormFieldState<String> formFieldState, String value) {
@@ -95,6 +100,8 @@ class AppTextfield extends StatelessWidget {
                   _onChanged(formFieldState, value);
                 },
                 cursorColor: AppColors.secondary,
+                onTap: onTap,
+                inputFormatters: inputFormatters,
               ),
             ),
             if (formFieldState.hasError) ...[

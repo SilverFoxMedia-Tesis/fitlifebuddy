@@ -34,16 +34,33 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                     color: AppColors.secondary,
                   ),
                 ),
-                Obx(
-                  () => Visibility(
-                    visible: controller.isEditing,
-                    child: BaseButtom(
-                      text: 'save'.tr,
-                      width: ContainerSize.baseButtonSmallWidth,
-                      backgroundColor: AppColors.secondary,
-                      onTap: controller.handleProfileUpdate,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Obx(
+                      () => Visibility(
+                        visible: controller.isEditing,
+                        child: BaseButtom(
+                          text: 'cancel'.tr,
+                          width: ContainerSize.baseButtonSmallWidth,
+                          backgroundColor: AppColors.danger,
+                          onTap: controller.cancel,
+                        ),
+                      ),
                     ),
-                  ),
+                    AppSpacing.spacingHorizontal20,
+                    Obx(
+                      () => Visibility(
+                        visible: controller.isEditing,
+                        child: BaseButtom(
+                          text: 'save'.tr,
+                          width: ContainerSize.baseButtonSmallWidth,
+                          backgroundColor: AppColors.secondary,
+                          onTap: controller.handleProfileUpdate,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
