@@ -52,3 +52,10 @@ String? validateNumbersOnly(String? input) {
   }
   return null;
 }
+
+String? validateNotNullOrEmpty(String? input) {
+  if (input == null || input.trim().isEmpty) {
+    return "validator_empty".tr;
+  }
+  return null;
+}

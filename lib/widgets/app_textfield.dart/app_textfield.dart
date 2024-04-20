@@ -69,7 +69,9 @@ class AppTextfield extends StatelessWidget {
               AppSpacing.spacingVertical8,
             ],
             Container(
-              width: width,
+              constraints: BoxConstraints(
+                maxWidth: width,
+              ),
               decoration: const BoxDecoration(
                 color: AppColors.white,
                 borderRadius: AppBorderRadius.borderRadius14,

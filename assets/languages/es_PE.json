@@ -19,7 +19,7 @@
     "my_patiens_description" : "Revisa la información de cada uno de tus pacientes",
     "register_patient" : "Registrar paciente",
     "register_patient_description" : "Inscribe a tu paciente",
-    "register_pacient_title": "Cuéntanos más sobre el paciente!",
+    "register_pacient_title": "Cuéntanos más sobre ti!",
     "firstname" : "Nombre",
     "lastname" : "Apellido",
     "gender": "Género",
@@ -97,5 +97,5 @@
     "register": "Registrarse",
     "personal_info_saved": "Información personal guardada",
     "health_conditions_saved": "Condiciones de salud guardadas",
-    "food_conditions_saved": "Condiciones alimentarias guardadas"
+    "food_conditions_saved": "Condiciones alimentarias guardadas",
 }

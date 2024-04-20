@@ -31,7 +31,8 @@ class RegisterPatientController extends GetxController{
   final _formValidationService = Get.find<FormValidationService>();
   final _appToast = Get.find<AppToast>();
 
-  final PageController pageController = PageController();
+  final pageController = PageController(initialPage: 0);
+  final currentPage = 0.obs;
 
   final personalInfoFormKey = GlobalKey<FormState>();
   final healthConditionsFormKey = GlobalKey<FormState>();
@@ -49,10 +50,18 @@ class RegisterPatientController extends GetxController{
   List<String> healthConditionTypes = TypeHealthCondition.values.map((e) => e.label).toList();
 
   final genderSelectedValue  = Gender.values.first.label.obs;
+
   final foodConditionTypeSelectedValues = <int, String>{}.obs;
   final healthConditionTypeSelectedValues = <int, String>{}.obs;
+
   final foodConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
   final healthConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
+
+  final newfConditionValue = TypeFoodCondition.values.first.label.obs;
+  final newhConditionValue = TypeHealthCondition.values.first.label.obs;
+
+  final newFoodConditionController = TextEditingController().obs;
+  final newHealthConditionController = TextEditingController().obs;
 
   final currentPatient = Patient().obs;
   final currentPatientHistory = PatientHistory().obs;
@@ -75,15 +84,53 @@ class RegisterPatientController extends GetxController{
     );
   }
 
+  // @override
+  // void dispose() {
+  //   pageController.dispose();
+  //   super.dispose();
+  // }
+
+  // void nextPage() {
+  //   if (currentPage.value < pages.length - 1) {
+  //     pageController.nextPage(
+  //       duration: const Duration(milliseconds: 300),
+  //       curve: Curves.ease,
+  //     );
+  //     currentPage.value++;
+  //   }
+  // }
+
+  // void previousPage() {
+  //   if (currentPage > 0) {
+  //     pageController.previousPage(
+  //       duration: const Duration(milliseconds: 300),
+  //       curve: Curves.ease,
+  //     );
+  //     currentPage.value--;
+  //   }
+  // }
+
   void onChangedGender(String? value) {
     if (value != null && value != '') {
       genderSelectedValue.value = value;
     }
   }
 
+  void onChangedNewFoodCondition(String? value) {
+    if (value != null && value != '') {
+      newfConditionValue.value = value;
+    }
+  }
+
   void onChangedFoodCondition(int index, String? value) {
     if (value != null && value != '') {
       foodConditionTypeSelectedValues[index] = value;
+    }
+  }
+
+  void onChangedNewHealthCondition(String? value) {
+    if (value != null && value != '') {
+      newhConditionValue.value = value;
     }
   }
 
@@ -161,6 +208,20 @@ class RegisterPatientController extends GetxController{
     } catch (e) {
       displayErrorToast(e);
     }
+  }
+
+  void addFCondition() {
+    var index = foodConditionTypeSelectedValues.length;
+    foodConditionTypeSelectedValues[index] = newfConditionValue.value;
+    foodConditionTypeSelectedControllers[index] = TextEditingController(text: newHealthConditionController.value.text);
+    
+    newHealthConditionController.value.clear();
+  }
+
+  void addHCondition() {
+    var index = healthConditionTypeSelectedValues.length;
+    healthConditionTypeSelectedValues[index] = newfConditionValue.value;
+    healthConditionTypeSelectedControllers[index] = TextEditingController(text: newHealthConditionController.value.text);
   }
 
   Future<void> saveHealthConditions() async {

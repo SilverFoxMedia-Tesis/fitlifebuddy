@@ -1,7 +1,7 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
-import 'package:fitlifebuddy/domain/api/food_condition_api.dart';
-import 'package:fitlifebuddy/domain/api/health_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
@@ -23,8 +23,6 @@ class PatientProfileController extends GetxController{
   final _personApi = Get.find<PersonApi>();
   final _patientApi = Get.find<PatientApi>();
   final _patientHistoryApi = Get.find<PatientHistoryApi>();
-  final _foodConditionApi = Get.find<FoodConditionApi>();
-  final _healthConditionApi = Get.find<HealthConditionApi>();
 
   final _formValidationService = Get.find<FormValidationService>();
   final _appToast = Get.find<AppToast>();
