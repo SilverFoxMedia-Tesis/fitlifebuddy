@@ -26,6 +26,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   easy_date_timeline: ^1.0.6
   unsplash_client: ^2.2.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:

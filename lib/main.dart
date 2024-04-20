@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/domain/dependency_injection.dart';
 import 'package:fitlifebuddy/domain/provider/localization/languages.dart';
+import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
 import 'package:fitlifebuddy/routes/app_pages.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main({Widget? page}) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences.initialize();
   await Languages.init();
   await DependencyInjection.init();
   runApp(page ?? const MyApp());

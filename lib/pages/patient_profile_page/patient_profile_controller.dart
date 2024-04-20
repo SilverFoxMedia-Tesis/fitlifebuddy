@@ -14,6 +14,7 @@ import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
+import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,7 +71,8 @@ class PatientProfileController extends GetxController{
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getPatientById(1);
+    var id = UserPreferences.getPatientId();
+    await getPatientById(int.parse(id!));
     await getFoodConditions(1);
     await getHealthConditions(1);
   }
