@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_formatters.dart';
@@ -22,7 +23,7 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
       children: [
         Obx(
           () => Form(
-            key: controller.personalInfoFormKey,
+            key: controller.healthConditionsFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +42,7 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
                 ),
                 AppSpacing.spacingVertical24,
                 _buildNewHealthConditionContainer(),
-                if (controller.healthConditionTypeSelectedValues.isNotEmpty)
+                if (controller.hConditionTypes.isNotEmpty)
                 _buildHealthConditions(),
               ],
             ),
@@ -59,24 +60,28 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
 
   Widget _buildHealthConditions() {
     return Column(
-      children: controller.healthConditionTypeSelectedValues.keys.map((key) {
-        return _buildHealthConditionContainer(key);
+      children: controller.hConditionTypes.keys.map((key) {
+        return Padding(
+          padding: AppPadding.paddingOnlyTop24,
+          child: _buildHealthConditionContainer(key),
+        );
       }).toList(),
     );
   }
 
   Widget _buildHealthConditionContainer(int index) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppDropdown(
-          items: controller.healthConditionTypes,
-          selectedValue: controller.healthConditionTypeSelectedValues[index],
+          items: controller.hCTypes,
+          selectedValue: controller.hConditionTypes[index],
           onChanged: (value) => controller.onChangedHealthCondition(index, value),
         ),
         AppSpacing.spacingHorizontal14,
         Expanded(
           child: AppTextfield(
-            controller: controller.healthConditionTypeSelectedControllers[index],
+            controller: controller.hConditionsControllers[index],
             inputType: TextInputType.text,
             validator: validateNotNullOrEmpty,
             inputFormatters: InputFormatters.alphanumericOnly,
@@ -88,16 +93,17 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
 
   Widget _buildNewHealthConditionContainer() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppDropdown(
-          items: controller.healthConditionTypes,
-          selectedValue: controller.newhConditionValue.value,
+          items: controller.hCTypes,
+          selectedValue: controller.newhConditionType.value,
           onChanged: (value) => controller.onChangedNewHealthCondition(value),
         ),
         AppSpacing.spacingHorizontal14,
         Expanded(
           child: AppTextfield(
-            controller: controller.newHealthConditionController.value,
+            controller: controller.newHConditionController.value,
             inputType: TextInputType.text,
             validator: validateNotNullOrEmpty,
             inputFormatters: InputFormatters.alphanumericOnly,
@@ -106,7 +112,7 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
         AppSpacing.spacingHorizontal14,
         AppIconButton(
           iconData: Icons.add,
-          onTap: controller.addHCondition,
+          onTap: controller.saveHCondition,
         ),
       ],
     );

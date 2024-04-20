@@ -46,30 +46,34 @@ class RegisterPatientController extends GetxController{
   final emailController = TextEditingController().obs;
 
   List<String> genders = Gender.values.map((e) => e.label).toList();
-  List<String> foodConditionTypes = TypeFoodCondition.values.map((e) => e.label).toList();
-  List<String> healthConditionTypes = TypeHealthCondition.values.map((e) => e.label).toList();
+  List<String> hCTypes = TypeHealthCondition.values.map((e) => e.label).toList();
+  List<String> fCTypes = TypeFoodCondition.values.map((e) => e.label).toList();
 
-  final genderSelectedValue  = Gender.values.first.label.obs;
+  final genderSelected  = Gender.values.first.label.obs;
 
-  final foodConditionTypeSelectedValues = <int, String>{}.obs;
-  final healthConditionTypeSelectedValues = <int, String>{}.obs;
+  //new health condition
+  final newhConditionType = TypeHealthCondition.values.first.label.obs;
+  final newHConditionController = TextEditingController().obs;
 
-  final foodConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
-  final healthConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
+  // health conditions
+  final hConditionTypes = <int, String>{}.obs;
+  final hConditionsControllers = <int, TextEditingController>{}.obs;
 
-  final newfConditionValue = TypeFoodCondition.values.first.label.obs;
-  final newhConditionValue = TypeHealthCondition.values.first.label.obs;
+  //new food conditions
+  final newfConditionType = TypeFoodCondition.values.first.label.obs;
+  final newFConditionController = TextEditingController().obs;
 
-  final newFoodConditionController = TextEditingController().obs;
-  final newHealthConditionController = TextEditingController().obs;
+  // food conditions
+  final fConditionTypes = <int, String>{}.obs;
+  final fConditionsControllers = <int, TextEditingController>{}.obs;
 
   final currentPatient = Patient().obs;
   final currentPatientHistory = PatientHistory().obs;
   final currentFoodConditions = <FoodCondition>[].obs;
   final currentHealthConditions = <HealthCondition>[].obs;
 
-  bool get hasFoodConditions => currentFoodConditions.isNotEmpty;
-  bool get hasHealthConditions => currentHealthConditions.isNotEmpty;
+  bool get hasFoodConditions => hConditionTypes.isNotEmpty;
+  bool get hasHealthConditions => fConditionTypes.isNotEmpty;
 
   @override
   Future<void> onInit() async {
@@ -112,31 +116,31 @@ class RegisterPatientController extends GetxController{
 
   void onChangedGender(String? value) {
     if (value != null && value != '') {
-      genderSelectedValue.value = value;
+      genderSelected.value = value;
     }
   }
 
   void onChangedNewFoodCondition(String? value) {
     if (value != null && value != '') {
-      newfConditionValue.value = value;
+      newfConditionType.value = value;
     }
   }
 
   void onChangedFoodCondition(int index, String? value) {
     if (value != null && value != '') {
-      foodConditionTypeSelectedValues[index] = value;
+      fConditionTypes[index] = value;
     }
   }
 
   void onChangedNewHealthCondition(String? value) {
     if (value != null && value != '') {
-      newhConditionValue.value = value;
+      newhConditionType.value = value;
     }
   }
 
   void onChangedHealthCondition(int index, String? value) {
     if (value != null && value != '') {
-      healthConditionTypeSelectedValues[index] = value;
+      hConditionTypes[index] = value;
     }
   }
 
@@ -157,85 +161,86 @@ class RegisterPatientController extends GetxController{
     });
   }
 
-  Future<void> savePersonalInfo() async {
+  void savePersonalInfo() {
+    if (_formValidationService.validateForm(personalInfoFormKey)) {
+      savePerson();
+      savePatient();
+      savePatientHistory();
+      _appToast.showToast(
+        message: 'personal_info_saved'.tr,
+        type: ToastificationType.success,
+      );
+    }
+  }
+
+  void savePatient() {
+    if (birthdateController.value.text.isNotEmpty) {
+      currentPatient.value.birthDate = birthdateController.value.text;
+    }
+  }
+
+  void savePerson() {
+    currentPatient.value.person?.fullname = firstnameController.value.text;
+    currentPatient.value.person?.lastname = lastnameController.value.text;
+    currentPatient.value.person?.emailAddress = emailController.value.text;
+  }
+
+  void savePatientHistory() {
+    currentPatientHistory.value.gender = EnumExtension.getLabel(Gender.values, genderSelected.value);
+    currentPatientHistory.value.height = num.parse(heightController.value.text);
+    currentPatientHistory.value.weight = num.parse(weightController.value.text);
+    currentPatientHistory.value.patient = currentPatient.value;
+  }
+
+  void saveFCondition() {
+    var index = fConditionTypes.length;
+    fConditionTypes[index] = newfConditionType.value;
+    fConditionsControllers[index] = TextEditingController();
+    fConditionsControllers[index]?.text = newFConditionController.value.text;
+    
+    //reset
+    newfConditionType.value = TypeFoodCondition.values.first.label;
+    newFConditionController.value.clear();
+  }
+
+  void saveHCondition() {
+    var index = hConditionTypes.length;
+    hConditionTypes[index] = newhConditionType.value;
+    hConditionsControllers[index] = TextEditingController();
+    hConditionsControllers[index]?.text = newHConditionController.value.text;
+    
+    //reset
+    newhConditionType.value = TypeHealthCondition.values.first.label;
+    newHConditionController.value.clear();
+  }
+
+  Future<void> register() async {
     try {
-      if (_formValidationService.validateForm(personalInfoFormKey)) {
-        savePerson();
-        savePatient();
-        savePatientHistory();
-        _appToast.showToast(
-          message: 'personal_info_saved'.tr,
+      await registerPatient();
+      await registerHConditions();
+      await registerFConditions();
+      _appToast.showToast(
+          message: 'successful_registration'.tr,
           type: ToastificationType.success,
         );
-      }
     } catch (e) {
       displayErrorToast(e);
     }
   }
 
-  Future<void> savePatient() async {
-    try {
-      var patient = currentPatient.value;
-      if (birthdateController.value.text.isNotEmpty) {
-        patient.birthDate = birthdateController.value.text;
-        currentPatient.value = patient;
-      }
-    } catch (e) {
-      displayErrorToast(e);
-    }
-  }
-
-  Future<void> savePerson() async {
-    try {
-      var person = currentPatient.value.person;
-      person?.fullname = firstnameController.value.text;
-      person?.lastname = lastnameController.value.text;
-      person?.emailAddress = emailController.value.text;
-      currentPatient.value.person = person;
-    } catch (e) {
-      displayErrorToast(e);
-    }
-  }
-
-  Future<void> savePatientHistory() async {
-    try {
-      var patientHistory = currentPatientHistory.value;
-      patientHistory.gender = EnumExtension.getLabel(Gender.values, genderSelectedValue.value);
-      patientHistory.height = num.parse(heightController.value.text);
-      patientHistory.weight = num.parse(weightController.value.text);
-      patientHistory.patient = currentPatient.value;
-      currentPatientHistory.value = patientHistory;
-    } catch (e) {
-      displayErrorToast(e);
-    }
-  }
-
-  void addFCondition() {
-    var index = foodConditionTypeSelectedValues.length;
-    foodConditionTypeSelectedValues[index] = newfConditionValue.value;
-    foodConditionTypeSelectedControllers[index] = TextEditingController(text: newHealthConditionController.value.text);
-    
-    newHealthConditionController.value.clear();
-  }
-
-  void addHCondition() {
-    var index = healthConditionTypeSelectedValues.length;
-    healthConditionTypeSelectedValues[index] = newfConditionValue.value;
-    healthConditionTypeSelectedControllers[index] = TextEditingController(text: newHealthConditionController.value.text);
-  }
-
-  Future<void> saveHealthConditions() async {
+  Future<void> registerHConditions() async {
     try {
       if (_formValidationService.validateForm(healthConditionsFormKey)) {
-        for (var i = 0; i < currentHealthConditions.length; i++) {
-          var hCondition = currentHealthConditions[i];
-          hCondition.type = EnumExtension.getLabel(TypeHealthCondition.values, healthConditionTypeSelectedValues[i]);
-          hCondition.name = healthConditionTypeSelectedControllers[i]?.text;
-          hCondition.patient = currentPatient.value;
-          currentHealthConditions[i] = hCondition;
+        for (var i = 0; i < hConditionTypes.length; i++) {
+          var hCondition = HealthCondition(
+            type: EnumExtension.getLabel(TypeHealthCondition.values, hConditionTypes[i]),
+            name: hConditionsControllers[i]?.text,
+            patient: currentPatient.value
+          );
+          await _healthConditionApi.createHealthCondition(hCondition, currentPatient.value.id!);
         }
         _appToast.showToast(
-          message: 'health_conditions_saved',
+          message: 'health_conditions_saved'.tr,
           type: ToastificationType.success,
         );
       }
@@ -244,18 +249,19 @@ class RegisterPatientController extends GetxController{
     }
   }
 
-  Future<void> saveFoodConditions() async {
+  Future<void> registerFConditions() async {
     try {
       if (_formValidationService.validateForm(foodConditionsFormKey)) {
-        for (var i = 0; i < currentFoodConditions.length; i++) {
-          var fCondition = currentFoodConditions[i];
-          fCondition.type = EnumExtension.getLabel(TypeFoodCondition.values, foodConditionTypeSelectedValues[i]);
-          fCondition.name = foodConditionTypeSelectedControllers[i]?.text;
-          fCondition.patient = currentPatient.value;
-          currentFoodConditions[i] = fCondition;
+        for (var i = 0; i < hConditionTypes.length; i++) {
+          var fCondition = FoodCondition(
+            type: EnumExtension.getLabel(TypeFoodCondition.values, fConditionTypes[i]),
+            name: fConditionsControllers[i]?.text,
+            patient: currentPatient.value,
+          );
+          await _foodConditionApi.createFoodCondition(fCondition, currentPatient.value.id!);
         }
         _appToast.showToast(
-          message: 'food_conditions_saved',
+          message: 'food_conditions_saved'.tr,
           type: ToastificationType.success,
         );
       }
@@ -266,22 +272,20 @@ class RegisterPatientController extends GetxController{
 
   Future<void> registerPatient() async {
     try {
-      if (currentPatient.value.person != null) {
-        currentPatient.value.person?.password = generatePassword();
-        final newPerson = await _personApi.createPerson(currentPatient.value.person!);
-        if (newPerson.id != null) {
-          currentPatient.value.person = newPerson;
-          final newPatient = await _patientApi.createPatient(currentPatient.value, newPerson.id!, 1);
-          if (newPatient.id != null) {
-            currentPatient.value = newPatient;
-            await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
-            for (var i = 0; i < currentHealthConditions.length; i++) {
-              currentHealthConditions[i].patient = currentPatient.value;
-              await _healthConditionApi.createHealthCondition(currentHealthConditions[i], newPatient.id!);
-            }
-            for (var i = 0; i < currentFoodConditions.length; i++) {
-              currentFoodConditions[i].patient = currentPatient.value;
-              await _foodConditionApi.createFoodCondition(currentFoodConditions[i], newPatient.id!);
+      if (_formValidationService.validateForm(personalInfoFormKey)) {
+        if (currentPatient.value.person != null) {
+          currentPatient.value.person?.password = generatePassword();
+          final newPerson = await _personApi.createPerson(currentPatient.value.person!);
+          if (newPerson.id != null) {
+            currentPatient.value.person = newPerson;
+            final newPatient = await _patientApi.createPatient(currentPatient.value, newPerson.id!, 1);
+            if (newPatient.id != null) {
+              currentPatient.value = newPatient;
+              await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
+              _appToast.showToast(
+                message: 'personal_info_saved'.tr,
+                type: ToastificationType.success,
+              );
             }
           }
         }
