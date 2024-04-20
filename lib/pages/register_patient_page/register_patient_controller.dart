@@ -7,15 +7,20 @@ import 'package:fitlifebuddy/domain/api/health_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
+import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
+import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
+import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
 import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
 import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
+import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,38 +86,23 @@ class RegisterPatientController extends GetxController{
   }
 
   void onChangedPage(int pageIndex) {
-    pageController.animateToPage(
-      pageIndex, 
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
-  }
+    bool allFormsValid = true;
 
-  // @override
-  // void dispose() {
-  //   pageController.dispose();
-  //   super.dispose();
-  // }
+    if (pageIndex == 1) {
+      savePersonalInfo();
+      allFormsValid = _formValidationService.validateForm(personalInfoFormKey);
+    } else if (pageIndex == 2) {
+      allFormsValid = _formValidationService.validateForm(healthConditionsFormKey);
+    }
 
-  // void nextPage() {
-  //   if (currentPage.value < pages.length - 1) {
-  //     pageController.nextPage(
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.ease,
-  //     );
-  //     currentPage.value++;
-  //   }
-  // }
-
-  // void previousPage() {
-  //   if (currentPage > 0) {
-  //     pageController.previousPage(
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.ease,
-  //     );
-  //     currentPage.value--;
-  //   }
-  // }
+    if (allFormsValid) {
+      pageController.animateToPage(
+        pageIndex, 
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    }
+  } 
 
   void onChangedGender(String? value) {
     if (value != null && value != '') {
@@ -180,49 +170,65 @@ class RegisterPatientController extends GetxController{
   }
 
   void savePerson() {
-    currentPatient.value.person?.fullname = firstnameController.value.text;
-    currentPatient.value.person?.lastname = lastnameController.value.text;
-    currentPatient.value.person?.emailAddress = emailController.value.text;
+    currentPatient.value.person = Person(
+      fullname: firstnameController.value.text,
+      lastname: lastnameController.value.text,
+      emailAddress: emailController.value.text,
+    );
   }
 
   void savePatientHistory() {
     currentPatientHistory.value.gender = EnumExtension.getLabel(Gender.values, genderSelected.value);
     currentPatientHistory.value.height = num.parse(heightController.value.text);
     currentPatientHistory.value.weight = num.parse(weightController.value.text);
-    currentPatientHistory.value.patient = currentPatient.value;
   }
 
   void saveFCondition() {
-    var index = fConditionTypes.length;
-    fConditionTypes[index] = newfConditionType.value;
-    fConditionsControllers[index] = TextEditingController();
-    fConditionsControllers[index]?.text = newFConditionController.value.text;
-    
-    //reset
-    newfConditionType.value = TypeFoodCondition.values.first.label;
-    newFConditionController.value.clear();
+    if (newFConditionController.value.text.isNotEmpty) {
+      var index = fConditionTypes.length;
+      fConditionTypes[index] = newfConditionType.value;
+      fConditionsControllers[index] = TextEditingController();
+      fConditionsControllers[index]?.text = newFConditionController.value.text;
+      
+      //reset
+      newfConditionType.value = TypeFoodCondition.values.first.label;
+      newFConditionController.value.clear();
+    } else {
+      _appToast.showToast(
+        message: "Completa el campo para agregar una condición"
+      );
+    }
   }
 
   void saveHCondition() {
-    var index = hConditionTypes.length;
-    hConditionTypes[index] = newhConditionType.value;
-    hConditionsControllers[index] = TextEditingController();
-    hConditionsControllers[index]?.text = newHConditionController.value.text;
-    
-    //reset
-    newhConditionType.value = TypeHealthCondition.values.first.label;
-    newHConditionController.value.clear();
+    if (newHConditionController.value.text.isNotEmpty) {
+      var index = hConditionTypes.length;
+      hConditionTypes[index] = newhConditionType.value;
+      hConditionsControllers[index] = TextEditingController();
+      hConditionsControllers[index]?.text = newHConditionController.value.text;
+      
+      //reset
+      newhConditionType.value = TypeHealthCondition.values.first.label;
+      newHConditionController.value.clear();
+    } else {
+      _appToast.showToast(
+        message: "Completa el campo para agregar una condición"
+      );
+    }
   }
 
   Future<void> register() async {
     try {
-      await registerPatient();
-      await registerHConditions();
-      await registerFConditions();
-      _appToast.showToast(
+      if (_formValidationService.validateForm(foodConditionsFormKey)) {
+        await registerPatient();
+        await registerHConditions();
+        await registerFConditions();
+        Get.toNamed(AppRoutes.successfulRegister);
+        _appToast.showToast(
           message: 'successful_registration'.tr,
           type: ToastificationType.success,
         );
+      }
     } catch (e) {
       displayErrorToast(e);
     }
@@ -230,20 +236,19 @@ class RegisterPatientController extends GetxController{
 
   Future<void> registerHConditions() async {
     try {
-      if (_formValidationService.validateForm(healthConditionsFormKey)) {
-        for (var i = 0; i < hConditionTypes.length; i++) {
-          var hCondition = HealthCondition(
-            type: EnumExtension.getLabel(TypeHealthCondition.values, hConditionTypes[i]),
-            name: hConditionsControllers[i]?.text,
-            patient: currentPatient.value
-          );
-          await _healthConditionApi.createHealthCondition(hCondition, currentPatient.value.id!);
-        }
-        _appToast.showToast(
-          message: 'health_conditions_saved'.tr,
-          type: ToastificationType.success,
+      for (var i = 0; i < hConditionTypes.length; i++) {
+        var hCondition = HealthCondition(
+          name: hConditionsControllers[i]?.text,
+          description: '',
+          type: EnumExtension.getLabel(TypeHealthCondition.values, hConditionTypes[i]),
+          patient: currentPatient.value
         );
+        await _healthConditionApi.createHealthCondition(hCondition, currentPatient.value.id!);
       }
+      _appToast.showToast(
+        message: 'health_conditions_saved'.tr,
+        type: ToastificationType.success,
+      );
     } catch (e) {
       displayErrorToast(e);
     }
@@ -251,20 +256,19 @@ class RegisterPatientController extends GetxController{
 
   Future<void> registerFConditions() async {
     try {
-      if (_formValidationService.validateForm(foodConditionsFormKey)) {
-        for (var i = 0; i < hConditionTypes.length; i++) {
-          var fCondition = FoodCondition(
-            type: EnumExtension.getLabel(TypeFoodCondition.values, fConditionTypes[i]),
-            name: fConditionsControllers[i]?.text,
-            patient: currentPatient.value,
-          );
-          await _foodConditionApi.createFoodCondition(fCondition, currentPatient.value.id!);
-        }
-        _appToast.showToast(
-          message: 'food_conditions_saved'.tr,
-          type: ToastificationType.success,
+      for (var i = 0; i < hConditionTypes.length; i++) {
+        var fCondition = FoodCondition(
+          name: fConditionsControllers[i]?.text,
+          description: '',
+          type: EnumExtension.getLabel(TypeFoodCondition.values, fConditionTypes[i]),
+          patient: currentPatient.value,
         );
+        await _foodConditionApi.createFoodCondition(fCondition, currentPatient.value.id!);
       }
+      _appToast.showToast(
+        message: 'food_conditions_saved'.tr,
+        type: ToastificationType.success,
+      );
     } catch (e) {
       displayErrorToast(e);
     }
@@ -272,22 +276,25 @@ class RegisterPatientController extends GetxController{
 
   Future<void> registerPatient() async {
     try {
-      if (_formValidationService.validateForm(personalInfoFormKey)) {
-        savePersonalInfo();
-        if (currentPatient.value.person != null) {
-          currentPatient.value.person?.password = generatePassword();
-          final newPerson = await _personApi.createPerson(currentPatient.value.person!);
-          if (newPerson.id != null) {
-            currentPatient.value.person = newPerson;
-            final newPatient = await _patientApi.createPatient(currentPatient.value, newPerson.id!, 1);
-            if (newPatient.id != null) {
-              currentPatient.value = newPatient;
-              await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
-              _appToast.showToast(
-                message: 'personal_info_saved'.tr,
-                type: ToastificationType.success,
-              );
-            }
+      if (currentPatient.value.person != null) {
+        currentPatient.value.person?.password = generatePassword();
+        final newPerson = await _personApi.createPerson(currentPatient.value.person!);
+        if (newPerson.id != null) {
+          currentPatient.value.person = newPerson;
+          final newPatient = await _patientApi.createPatient(currentPatient.value, newPerson.id!, 1);
+          if (newPatient.id != null) {
+            currentPatient.value = newPatient;
+            currentPatientHistory.value.patient = newPatient;
+            currentPatientHistory.value.age = 0;
+            currentPatientHistory.value.abdominalCircumference = 0;
+            currentPatientHistory.value.dietType = DietType.omnivore;
+            currentPatientHistory.value.frecuently = Frecuently.monthly;
+            currentPatientHistory.value.physicalActivity = PhysicalActivity.no;
+            await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
+            _appToast.showToast(
+              message: 'personal_info_saved'.tr,
+              type: ToastificationType.success,
+            );
           }
         }
       }

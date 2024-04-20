@@ -22,7 +22,7 @@ class FoodConditionApi {
   // Create FoodCondition
   Future<FoodCondition> createFoodCondition(FoodCondition foodCondition, int patientId) async {
     final response = await _apiBase.post('foodConditions/$patientId', body: foodCondition.toJson());
-    return FoodCondition.fromJson(json.decode(response.body));
+    return FoodCondition.fromJson(response.body);
   }
 
   // Update FoodCondition

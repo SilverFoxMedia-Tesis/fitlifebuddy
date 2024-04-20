@@ -26,7 +26,7 @@ class PatientApi {
   // Create Patient
   Future<Patient> createPatient(Patient patient, int personId, int nutritionistId) async {
     final response = await _apiBase.post('pacients/$personId/$nutritionistId', body: patient.toJson());
-    return Patient.fromJson(json.decode(response.body));
+    return Patient.fromJson(response.body);
   }
 
   // Update Patient

@@ -22,7 +22,7 @@ class PersonApi {
   // Create Person
   Future<Person> createPerson(Person person) async {
     final response = await _apiBase.post('persons', body: person.toJson());
-    return Person.fromJson(json.decode(response.body));
+    return Person.fromJson(response.body);
   }
 
   // Update Person

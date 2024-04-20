@@ -22,7 +22,7 @@ class PatientHistoryApi {
   // Create PatientHistory
   Future<PatientHistory> createPatientHistory(PatientHistory patientHistory, int patientId) async {
     final response = await _apiBase.post('pacientHistories/$patientId', body: patientHistory.toJson());
-    return PatientHistory.fromJson(json.decode(response.body));
+    return PatientHistory.fromJson(response.body);
   }
 
   // Update PatientHistory

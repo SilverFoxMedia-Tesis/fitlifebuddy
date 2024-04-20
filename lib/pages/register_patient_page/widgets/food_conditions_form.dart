@@ -22,30 +22,30 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Obx(
-          () => Form(
-            key: controller.foodConditionsFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'register_pacient_title'.tr,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary,
-                  ),
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'register_pacient_title'.tr,
+                style: AppTextStyle.robotoSemibold24.copyWith(
+                  color: AppColors.secondary,
                 ),
-                AppSpacing.spacingVertical32,
-                Text(
-                  'register_pacient_3_title'.tr,
-                  style: AppTextStyle.robotoSemibold16.copyWith(
-                    color: AppColors.secondary,
-                  ),
+              ),
+              AppSpacing.spacingVertical32,
+              Text(
+                'register_pacient_3_title'.tr,
+                style: AppTextStyle.robotoSemibold16.copyWith(
+                  color: AppColors.secondary,
                 ),
-                AppSpacing.spacingVertical24,
-                _buildNewFoodConditionContainer(),
-                if (controller.hasFoodConditions)
-                _buildFoodConditions(),
-              ],
-            ),
+              ),
+              AppSpacing.spacingVertical24,
+              _buildNewFoodConditionContainer(),
+              if (controller.hasFoodConditions)
+              Form(
+                key: controller.foodConditionsFormKey,
+                child: _buildFoodConditions(),
+              ),
+            ],
           ),
         ),
         AppSpacing.spacingVertical24,
@@ -105,7 +105,6 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
           child: AppTextfield(
             controller: controller.newFConditionController.value,
             inputType: TextInputType.text,
-            validator: validateNotNullOrEmpty,
             inputFormatters: InputFormatters.alphanumericOnly,
           ),
         ),

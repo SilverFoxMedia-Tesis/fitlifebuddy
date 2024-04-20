@@ -22,7 +22,7 @@ class HealthConditionApi {
   // Create HealthCondition
   Future<HealthCondition> createHealthCondition(HealthCondition healthCondition, int patientId) async {
     final response = await _apiBase.post('healthConditions/$patientId', body: healthCondition.toJson());
-    return HealthCondition.fromJson(json.decode(response.body));
+    return HealthCondition.fromJson(response.body);
   }
 
   // Update HealthCondition

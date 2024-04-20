@@ -22,30 +22,30 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Obx(
-          () => Form(
-            key: controller.healthConditionsFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'register_pacient_title'.tr,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary,
-                  ),
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'register_pacient_title'.tr,
+                style: AppTextStyle.robotoSemibold24.copyWith(
+                  color: AppColors.secondary,
                 ),
-                AppSpacing.spacingVertical32,
-                Text(
-                  'register_pacient_2_title'.tr,
-                  style: AppTextStyle.robotoSemibold16.copyWith(
-                    color: AppColors.secondary,
-                  ),
+              ),
+              AppSpacing.spacingVertical32,
+              Text(
+                'register_pacient_2_title'.tr,
+                style: AppTextStyle.robotoSemibold16.copyWith(
+                  color: AppColors.secondary,
                 ),
-                AppSpacing.spacingVertical24,
-                _buildNewHealthConditionContainer(),
-                if (controller.hConditionTypes.isNotEmpty)
-                _buildHealthConditions(),
-              ],
-            ),
+              ),
+              AppSpacing.spacingVertical24,
+              _buildNewHealthConditionContainer(),
+              if (controller.hConditionTypes.isNotEmpty)
+              Form(
+                key: controller.healthConditionsFormKey,
+                child: _buildHealthConditions(),
+              ),
+            ],
           ),
         ),
         AppSpacing.spacingVertical24,
@@ -105,7 +105,6 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
           child: AppTextfield(
             controller: controller.newHConditionController.value,
             inputType: TextInputType.text,
-            validator: validateNotNullOrEmpty,
             inputFormatters: InputFormatters.alphanumericOnly,
           ),
         ),
