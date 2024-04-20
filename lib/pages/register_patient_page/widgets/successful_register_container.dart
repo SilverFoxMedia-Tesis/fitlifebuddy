@@ -1,14 +1,15 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SuccesfulRegisterContainer extends StatelessWidget {
+class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
   const SuccesfulRegisterContainer({super.key});
 
   @override
@@ -18,38 +19,40 @@ class SuccesfulRegisterContainer extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Registro exitoso!',
+            'successful_registration'.tr,
             style: AppTextStyle.robotoSemibold34.copyWith(
               color: AppColors.secondary,
             ),
           ),
           AppSpacing.spacingVertical24,
           SizedBox(
-            width: 348,
+            width: ContainerSize.baseContainerdWidth,
             child: Text(
-              'El paciente ha sido creada exitosamente. A continuación, encontrarás los detalles de su cuenta:',
+              'successful_registration_descripction'.tr,
               style: AppTextStyle.robotoSemibold14.copyWith(
                 color: AppColors.secondary,
               ),
             ),
           ),
           AppSpacing.spacingVertical24,
-          const AppTextfield(
-            enabled: true,
-            title: 'Correo electrónico',
-            hintText: 'example@gmail.com',
+          AppTextfield(
+            title: 'email'.tr,
+            hintText: controller.currentPatient.value.person?.emailAddress ?? 'btrbrhrhr',
+            suffixIcon: Icons.copy,
+            onSuffixIconPressed: controller.copyEmail,
           ),
           AppSpacing.spacingVertical24,
-          const AppTextfield(
-            enabled: true,
-            title: 'Contraseña',
-            hintText: '4h6j6kbb24b4',
+          AppTextfield(
+            title: 'password'.tr,
+            hintText: controller.currentPatient.value.person?.password ?? 'oigjorigjr',
+            suffixIcon: Icons.copy,
+            onSuffixIconPressed: controller.copyPassword,
           ),
           AppSpacing.spacingVertical24,
           SizedBox(
-            width: 348,
+            width: ContainerSize.baseContainerdWidth,
             child: Text(
-              'IMPORTANTE: Hemos generado una contraseña temporal para la cuenta. Indicar al paciente cambiar esta contraseña.',
+              'successful_registration_warning'.tr,
               style: AppTextStyle.robotoSemibold14.copyWith(
                 color: AppColors.danger,
               ),
@@ -57,10 +60,9 @@ class SuccesfulRegisterContainer extends StatelessWidget {
           ),
           AppSpacing.spacingVertical24,
           BaseButtom(
-          text: 'Ir a Inicio',
-          onTap: () => Get.toNamed(AppRoutes.home),
-            ),
-          
+            text: 'go_to_login'.tr,
+            onTap: controller.goToLogin,
+          ),
         ],
       ),
     );

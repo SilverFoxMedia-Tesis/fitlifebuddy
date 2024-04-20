@@ -23,6 +23,7 @@ import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 
@@ -312,5 +313,29 @@ class RegisterPatientController extends GetxController{
       buffer.write(caracteres[indice]);
     }
     return buffer.toString();
+  }
+
+  void goToLogin() {
+    Get.toNamed(AppRoutes.login);
+  }
+
+  void copyEmail() {
+    Clipboard.setData(ClipboardData(
+      text: currentPatient.value.person?.emailAddress ?? '',
+    ));
+    _appToast.showToast(
+      message: 'email_copied'.tr,
+      type: ToastificationType.success,
+    );
+  }
+
+  void copyPassword() {
+    Clipboard.setData(ClipboardData(
+      text: currentPatient.value.person?.password ?? '',
+    ));
+    _appToast.showToast(
+      message: 'password_copied'.tr,
+      type: ToastificationType.success,
+    );
   }
 }

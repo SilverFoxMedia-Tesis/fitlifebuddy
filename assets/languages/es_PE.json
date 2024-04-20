@@ -34,7 +34,7 @@
     "register_pacient_3_title": "Tiene alguna condición alimentaria?",
     "finish": "Finalizar",
     "successful_registration": "Registro exitoso!",
-    "successful_registration_descripction" : "El paciente ha sido creada exitosamente. A continuación, encontrarás los detalles de su cuenta:",
+    "successful_registration_descripction" : "Tu cuenta ha sido creada exitosamente. A continuación, encontrarás los detalles de tu cuenta:",
     "successful_registration_warning": "IMPORTANTE: Hemos generado una contraseña temporal para la cuenta. Indicar al paciente cambiar esta contraseña.",
     "go_to_home": "Ir a inicio",
     "active_plan" : "Plan activo",
@@ -97,5 +97,8 @@
     "register": "Registrarse",
     "personal_info_saved": "Información personal guardada",
     "health_conditions_saved": "Condiciones de salud guardadas",
-    "food_conditions_saved": "Condiciones alimentarias guardadas"
+    "food_conditions_saved": "Condiciones alimentarias guardadas",
+    "go_to_login": "Ir a inicio",
+    "email_copied": "Correo electrónico copiado",
+    "password_copied": "Contraseña copiada"
 }
