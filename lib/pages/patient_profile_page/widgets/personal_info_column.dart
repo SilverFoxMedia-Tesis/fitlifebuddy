@@ -108,7 +108,6 @@ class PersonalInfo extends GetView<PatientProfileController> {
               enabled: controller.isPersonalInfoEditing.value,
               inputType: TextInputType.emailAddress,
               validator: validateEmail,
-              inputFormatters: InputFormatters.emailFormat,
             ),
           ],
         ),

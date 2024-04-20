@@ -92,7 +92,6 @@ class PersonalInfoForm extends GetView<RegisterPatientController> {
                 controller: controller.emailController.value,
                 inputType: TextInputType.emailAddress,
                 validator: validateRequiredEmail,
-                inputFormatters: InputFormatters.emailFormat,
               ),
             ],
           ),

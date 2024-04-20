@@ -52,7 +52,7 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
         BaseButtom(
           width: ContainerSize.baseButtonSmallWidth,
           text: 'finish'.tr,
-          onTap: () => controller.register,
+          onTap: controller.register,
         ),
       ],
     );
@@ -75,13 +75,13 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
       children: [
         AppDropdown(
           items: controller.fCTypes,
-          selectedValue: controller.hConditionTypes[index],
-          onChanged: (value) => controller.onChangedHealthCondition(index, value),
+          selectedValue: controller.fConditionTypes[index],
+          onChanged: (value) => controller.onChangedFoodCondition(index, value),
         ),
         AppSpacing.spacingHorizontal14,
         Expanded(
           child: AppTextfield(
-            controller: controller.hConditionsControllers[index],
+            controller: controller.fConditionsControllers[index],
             inputType: TextInputType.text,
             validator: validateNotNullOrEmpty,
             inputFormatters: InputFormatters.alphanumericOnly,

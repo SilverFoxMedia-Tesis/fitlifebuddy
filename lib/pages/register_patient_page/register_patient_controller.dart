@@ -273,6 +273,7 @@ class RegisterPatientController extends GetxController{
   Future<void> registerPatient() async {
     try {
       if (_formValidationService.validateForm(personalInfoFormKey)) {
+        savePersonalInfo();
         if (currentPatient.value.person != null) {
           currentPatient.value.person?.password = generatePassword();
           final newPerson = await _personApi.createPerson(currentPatient.value.person!);
