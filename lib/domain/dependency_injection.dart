@@ -24,9 +24,6 @@ import 'package:get/get.dart';
 
 class DependencyInjection {
   static Future<void> init() async {
-    // Shared Preferences
-    //Get.lazyPut(() => UserPreferences(), fenix: true);
-
     ///Persisted controllers
     Get.lazyPut(() => LoginController(), fenix: true);
 

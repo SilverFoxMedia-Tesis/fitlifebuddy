@@ -73,8 +73,8 @@ class PatientProfileController extends GetxController{
     super.onInit();
     var id = UserPreferences.getPatientId();
     await getPatientById(int.parse(id!));
-    await getFoodConditions(1);
-    await getHealthConditions(1);
+    await getFoodConditions(int.parse(id));
+    await getHealthConditions(int.parse(id));
   }
 
   Future<void> getPatientById(int patientId) async{
@@ -96,21 +96,21 @@ class PatientProfileController extends GetxController{
 
   Future<void> getFoodConditions(int patientId) async{
     try {
-      //currentFoodConditions.value = await _patientApi.getFoodConditionsByPatientId(patientId);
-      currentFoodConditions.value = [
-        FoodCondition(
-          id: 1,
-          name: 'Ejemplo 1',
-          type: TypeFoodCondition.allergy,
-          patient: currentPatient.value
-        ),
-        FoodCondition(
-          id: 2,
-          name: 'Ejemplo 2',
-          type: TypeFoodCondition.preference,
-          patient: currentPatient.value
-        ),
-      ];
+      currentFoodConditions.value = await _patientApi.getFoodConditionsByPatientId(patientId);
+      // currentFoodConditions.value = [
+      //   FoodCondition(
+      //     id: 1,
+      //     name: 'Ejemplo 1',
+      //     type: TypeFoodCondition.allergy,
+      //     patient: currentPatient.value
+      //   ),
+      //   FoodCondition(
+      //     id: 2,
+      //     name: 'Ejemplo 2',
+      //     type: TypeFoodCondition.preference,
+      //     patient: currentPatient.value
+      //   ),
+      // ];
       getFoodConditionsValues();
     } catch (e) {
       displayErrorToast(e);
@@ -119,21 +119,21 @@ class PatientProfileController extends GetxController{
 
   Future<void> getHealthConditions(int patientId) async{
     try {
-      //currentHealthConditions.value = await _patientApi.getHealthConditionsByPatientId(patientId);
-      currentHealthConditions.value = [
-        HealthCondition(
-          id: 1,
-          name: 'Ejemplo 3',
-          type: TypeHealthCondition.surgery,
-          patient: currentPatient.value
-        ),
-        HealthCondition(
-          id: 2,
-          name: 'Ejemplo 4',
-          type: TypeHealthCondition.illness,
-          patient: currentPatient.value
-        ),
-      ];
+      currentHealthConditions.value = await _patientApi.getHealthConditionsByPatientId(patientId);
+      // currentHealthConditions.value = [
+      //   HealthCondition(
+      //     id: 1,
+      //     name: 'Ejemplo 3',
+      //     type: TypeHealthCondition.surgery,
+      //     patient: currentPatient.value
+      //   ),
+      //   HealthCondition(
+      //     id: 2,
+      //     name: 'Ejemplo 4',
+      //     type: TypeHealthCondition.illness,
+      //     patient: currentPatient.value
+      //   ),
+      // ];
       getHealthConditionValues();
     } catch (e) {
       displayErrorToast(e);
@@ -309,7 +309,7 @@ class PatientProfileController extends GetxController{
           currentHealthConditions[i] = hCondition;
         }
         _appToast.showToast(
-          message: 'health_conditions_updated',
+          message: 'health_conditions_updated'.tr,
           type: ToastificationType.success,
         );
         isHealthConditionsEditing.value = false;
@@ -331,7 +331,7 @@ class PatientProfileController extends GetxController{
           currentFoodConditions[i] = foodConditions;
         }
         _appToast.showToast(
-          message: 'food_conditions_updated',
+          message: 'food_conditions_updated'.tr,
           type: ToastificationType.success,
         );
         isFoodConditionsEditing.value = false;

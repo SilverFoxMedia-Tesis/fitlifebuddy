@@ -50,13 +50,15 @@ class PatientApi {
   // Get FoodConditions by PatientId
   Future<List<FoodCondition>> getFoodConditionsByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchFoodConditionByIdPacient/$patientId');
-    return (json.decode(response.body) as List).map((i) => FoodCondition.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => FoodCondition.fromMap(i)).toList();
   }
 
   // Get HealthConditions by PatientId
   Future<List<HealthCondition>> getHealthConditionsByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchHealthConditionByIdPacient/$patientId');
-    return (json.decode(response.body) as List).map((i) => HealthCondition.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => HealthCondition.fromMap(i)).toList();
   }
 
   // Get PatientHistories by PatientId
