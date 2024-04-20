@@ -1,4 +1,6 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -25,11 +27,13 @@ class PlanItemCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 400,
-        height: 160,
+        constraints: const BoxConstraints(
+          maxWidth: ContainerSize.basePlanItemCardWidth,
+          maxHeight: ContainerSize.basePlanItemCardHeight,
+        ),
         decoration: const BoxDecoration(
           color: AppColors.white,
-          borderRadius: AppBorderRadius.borderRadiusLg,
+          borderRadius: AppBorderRadius.borderRadius14,
           boxShadow: [AppBoxShadow.secondary25Blur8],
         ),
         child: Row(
@@ -38,15 +42,15 @@ class PlanItemCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: 200,
                     child: Text(
                       text,
-                      style: AppTextStyle.robotoSemibold24.copyWith(
+                      style: AppTextStyle.robotoSemibold16.copyWith(
                         color: AppColors.secondary,
                       ),
                     ),
@@ -55,7 +59,7 @@ class PlanItemCard extends StatelessWidget {
                     AppSpacing.spacingVertical4,
                     Text(
                       description!,
-                      style: AppTextStyle.robotoSemibold14.copyWith(
+                      style: AppTextStyle.robotoRegular16.copyWith(
                         color: AppColors.primary,
                       ),
                     ),
@@ -63,12 +67,19 @@ class PlanItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            Image.asset(
-              image,
-              width:152,
-              fit: BoxFit.contain,
-              height: double.infinity,
-            ),
+            image != '' 
+              ? Image.network(
+                  image,
+                  width: 152,
+                  fit: BoxFit.contain,
+                  height: double.infinity,
+                )
+              : Image.asset(
+                  AppIcons.notFound,
+                  width: 152,
+                  fit: BoxFit.contain,
+                  height: double.infinity,
+                )
           ],
         ),
       ),

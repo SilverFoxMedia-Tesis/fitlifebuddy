@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_bar/app_button.dart';
-import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
+//import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

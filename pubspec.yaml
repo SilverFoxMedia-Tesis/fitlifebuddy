@@ -24,6 +24,8 @@ dependencies:
   http: ^1.1.0
   intl: ^0.19.0
   dropdown_button2: ^2.3.9
+  easy_date_timeline: ^1.0.6
+  unsplash_client: ^2.2.0
 
 dev_dependencies:
   flutter_test:

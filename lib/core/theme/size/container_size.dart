@@ -20,4 +20,7 @@ class ContainerSize {
   static const iconSizeLarge = 22.0;
   static const snackBarMaxWidth = 378.0;
   static const baseDropdownWidth = 160.0;
+  static const pointSize = 8.0;
+  static const basePlanItemCardWidth = 400.0;
+  static const basePlanItemCardHeight = 160.0;
 }

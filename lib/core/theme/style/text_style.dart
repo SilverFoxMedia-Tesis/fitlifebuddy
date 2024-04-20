@@ -34,6 +34,12 @@ class AppTextStyle {
     fontWeight: AppFontWeight.semiBold,
   );
 
+  static const robotoRegular16 = TextStyle(
+    fontFamily: AppFontFamily.fontFamilyDefault,
+    fontSize: AppFontSize.fontSize16,
+    fontWeight: AppFontWeight.regular,
+  );
+
   static const robotoSemibold16 = TextStyle(
     fontFamily: AppFontFamily.fontFamilyDefault,
     fontSize: AppFontSize.fontSize16,

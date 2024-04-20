@@ -17,6 +17,7 @@ import 'package:fitlifebuddy/domain/api/question_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_exercise_api.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
+import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:get/get.dart';
@@ -48,6 +49,7 @@ class DependencyInjection {
 
     //Services
     Get.lazyPut(() => FormValidationService(), fenix: true);
+    Get.lazyPut(() => UnsplashService(), fenix: true);
 
     Get.lazyPut(() => AppToast(), fenix: true);
   }

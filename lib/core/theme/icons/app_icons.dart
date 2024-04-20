@@ -24,4 +24,5 @@ class AppIcons {
   static const food2 = '../assets/images/food2.png';
   static const food3 = '../assets/images/food3.png';
   static const days = '../assets/images/days.png';
+  static const notFound = '../assets/images/not_found.png';
 }

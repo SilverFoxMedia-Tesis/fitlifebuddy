@@ -100,5 +100,6 @@
     "food_conditions_saved": "Condiciones alimentarias guardadas",
     "go_to_login": "Ir a inicio",
     "email_copied": "Correo electrónico copiado",
-    "password_copied": "Contraseña copiada"
+    "password_copied": "Contraseña copiada",
+    "no_routine": "No hay una rutina disponible"
 }

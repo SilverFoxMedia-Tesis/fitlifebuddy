@@ -1,16 +1,19 @@
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/empty_container.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PlanPage extends StatelessWidget {
+class PlanPage extends GetView<PlanController> {
   const PlanPage({super.key});
 
   @override
@@ -19,121 +22,114 @@ class PlanPage extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: AppPadding.paddingPage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppSpacing.spacingVertical24,
-              AppSpacing.spacingVertical24,
-              Text(
-                'Mi plan actual',
-                style: AppTextStyle.robotoSemibold34.copyWith(
-                  color: AppColors.secondary,
-                ),
-              ),
-              AppSpacing.spacingVertical24,
-              if (false)
-              Center(
-                child: EmptyContainer(
-                  text: 'no_plan'.tr, 
-                  buttonTitle: 'generate_plan'.tr,
-                  onTap: () => Get.toNamed(AppRoutes.routine),
-                ),
-              ),
-              if (true)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    AppIcons.days,
-                    width: 1200,
+          child: Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSpacing.spacingVertical24,
+                Text(
+                  'my_current_plan'.tr,
+                  style: AppTextStyle.robotoSemibold24.copyWith(
+                    color: AppColors.secondary,
                   ),
-                  AppSpacing.spacingVertical32,
-                  Text(
-                    'Miércoles, 15 de Noviembre',
-                    style: AppTextStyle.robotoSemibold24.copyWith(
-                      color: AppColors.secondary,
-                    ),
-                  ),
-                  AppSpacing.spacingVertical32,
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 498,
-                        child: SingleChildScrollView(
-                          physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Desayuno',
-                                style: AppTextStyle.robotoSemibold24.copyWith(
-                                  color: AppColors.secondary,
-                                ),
-                              ),
-                              AppSpacing.spacingVertical24,
-                              PlanItemCard(
-                                text: 'Tostada con palta y huevo', 
-                                image: AppIcons.meal1,
-                                onTap: () => Get.toNamed(AppRoutes.meal),
-                              ),
-                              AppSpacing.spacingVertical24,
-                              Text(
-                                'Almuerzo',
-                                style: AppTextStyle.robotoSemibold24.copyWith(
-                                  color: AppColors.secondary,
-                                ),
-                              ),
-                              AppSpacing.spacingVertical24,
-                              const PlanItemCard(text: 'Verduras y pollo al vapor', image: AppIcons.meal2),
-                              AppSpacing.spacingVertical24,
-                              Text(
-                                'Cena',
-                                style: AppTextStyle.robotoSemibold24.copyWith(
-                                  color: AppColors.secondary,
-                                ),
-                              ),
-                              AppSpacing.spacingVertical24,
-                              const PlanItemCard(text: 'Chuleta asada con verduras', image: AppIcons.meal4),
-                          ],
-                          ),
-                        ),
+                ),
+                AppSpacing.spacingVertical24,
+                // if (false)
+                // Center(
+                //   child: EmptyContainer(
+                //     text: 'no_plan'.tr, 
+                //     buttonTitle: 'generate_plan'.tr,
+                //     onTap: () => Get.toNamed(AppRoutes.routine),
+                //   ),
+                // ),
+                // if (true)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildDateTimeLine(),
+                    AppSpacing.spacingVertical24,
+                    Text(
+                      controller.getCurrentDateTime,
+                      style: AppTextStyle.robotoRegular20.copyWith(
+                        color: AppColors.secondary,
                       ),
-                      AppSpacing.spacingHorizontal32,
-                      SizedBox(
-                        height: 498,
-                        child: SingleChildScrollView(
-                          physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              InkWell(
-                                onTap: () => Get.toNamed(AppRoutes.routine),
-                                child: Text(
-                                  'Rutina de ejercicios',
-                                  style: AppTextStyle.robotoSemibold24.copyWith(
-                                    color: AppColors.secondary,
-                                  ),
-                                ),
-                              ),
-                              AppSpacing.spacingVertical24,
-                              const PlanItemCard(text: 'Ejercicio 1', description: '4 x 60 s', image: AppIcons.exercise1),
-                              AppSpacing.spacingVertical24,
-                              AppSpacing.spacingVertical24,
-                              const PlanItemCard(text: 'Ejercicio 2', description: '5 x 60 s', image: AppIcons.exercise2),
-                              AppSpacing.spacingVertical24,
-                              AppSpacing.spacingVertical24,
-                              const PlanItemCard(text: 'Ejercicio 3', description: '6 x 60 s', image: AppIcons.exercise3),
-                          ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              )
-            ]
+                    ),
+                    AppSpacing.spacingVertical24,
+                    const SizedBox(
+                      height: 360, //TODO: cambiar a valor dinamico
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MealsView(),
+                          AppSpacing.spacingHorizontal32,
+                          RoutineView()
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ]
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+
+  Widget buildDateTimeLine() {
+    return Container(
+      padding: AppPadding.padding24,
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        borderRadius: AppBorderRadius.borderRadius14,
+        boxShadow: [AppBoxShadow.secondary25Blur8],
+      ),
+      child: EasyInfiniteDateTimeLine(
+        itemBuilder: (_, dayNumber, dayName, monthName, fullDate, isSelected) {
+          return Container(
+            padding: AppPadding.paddingDateTimeLineItem,
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.primary : AppColors.white,
+              borderRadius: AppBorderRadius.borderRadiusXxxl,
+              boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  controller.capitalize(dayName),
+                  style: AppTextStyle.robotoRegular16.copyWith(
+                    color: isSelected ? AppColors.white : AppColors.secondary,
+                  ),
+                ),
+                AppSpacing.spacingVertical16,
+                Text(
+                  dayNumber,
+                  style: AppTextStyle.robotoSemibold20.copyWith(
+                    color: isSelected ? AppColors.white : AppColors.primary,
+                  ),
+                ),
+                AppSpacing.spacingVertical4,
+                Container(
+                  width: ContainerSize.pointSize,
+                  height: ContainerSize.pointSize,
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.white : AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        locale: "es_PE",
+        controller: controller.dateTimeLineController,
+        firstDate: DateTime(2024),
+        focusDate: controller.currentDateTime.value,
+        lastDate: DateTime(2024, 12, 31),
+        showTimelineHeader: false,
+        onDateChange: controller.onDateChange,
       ),
     );
   }

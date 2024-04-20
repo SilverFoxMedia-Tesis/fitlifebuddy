@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class DateFormats {
   static const initial = "yyyy-MM-dd";
+  static const long = "EEEE, d '${'de'}' MMMM";
 }
 
 String fromString(String dateTime, String dateFormat) {
@@ -20,4 +21,8 @@ String fromStringToInitial(String dateTime) {
 
 String fromDateToInitial(DateTime dateTime) {
   return DateFormat(DateFormats.initial).format(dateTime);
+}
+
+String fromDateToLong(DateTime dateTime) {
+  return DateFormat(DateFormats.long).format(dateTime);
 }
