@@ -10,6 +10,7 @@ class AppIconButton extends StatelessWidget {
   final void Function()? onTap;
   final Color? backgroundColor;
   final bool enabled;
+  final bool outlined;
   const AppIconButton({
     required this.iconData,
     this.iconColor = AppColors.white,
@@ -17,6 +18,7 @@ class AppIconButton extends StatelessWidget {
     this.onTap,
     this.backgroundColor = AppColors.primary,
     this.enabled = true,
+    this.outlined = false,
     super.key,
   });
 
@@ -27,9 +29,9 @@ class AppIconButton extends StatelessWidget {
       child: Container(
         padding: AppPadding.padding8,
         decoration: BoxDecoration(
-          color: enabled ? backgroundColor : AppColors.disabled,
+          color: _buildBackgroundColor(),
           shape: BoxShape.circle,
-          boxShadow: enabled ? const [AppBoxShadow.primary25Blur8] : null,
+          boxShadow: enabled && !outlined ? const [AppBoxShadow.primary25Blur8] : null,
         ),
         child: Icon(
           iconData,
@@ -38,5 +40,15 @@ class AppIconButton extends StatelessWidget {
         )
       ),
     );
+  }
+
+  Color? _buildBackgroundColor() {
+    if (outlined) {
+      return Colors.transparent;
+    } else if (enabled) {
+      return backgroundColor;
+    } else {
+      return AppColors.disabled;
+    }
   }
 }

@@ -71,13 +71,13 @@ class PlanItemCard extends StatelessWidget {
               ? Image.network(
                   image,
                   width: 152,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   height: double.infinity,
                 )
               : Image.asset(
                   AppIcons.notFound,
                   width: 152,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   height: double.infinity,
                 )
           ],

@@ -10,6 +10,8 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,11 +29,24 @@ class PlanPage extends GetView<PlanController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppSpacing.spacingVertical24,
-                Text(
-                  'my_current_plan'.tr,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppIconButton(
+                      iconData: Icons.arrow_back_ios_rounded,
+                      iconColor: AppColors.secondary,
+                      size: ContainerSize.iconSize,
+                      onTap: () => Get.offAllNamed(AppRoutes.home),
+                      outlined: true,
+                    ),
+                    AppSpacing.spacingHorizontal14,
+                    Text(
+                      'my_current_plan'.tr,
+                      style: AppTextStyle.robotoSemibold24.copyWith(
+                        color: AppColors.secondary,
+                      ),
+                    ),
+                  ],
                 ),
                 AppSpacing.spacingVertical24,
                 // if (false)

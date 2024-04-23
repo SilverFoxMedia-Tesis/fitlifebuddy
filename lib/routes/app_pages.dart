@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/pages/login_page/login_binding.dart';
 import 'package:fitlifebuddy/pages/login_page/login_page.dart';
+import 'package:fitlifebuddy/pages/meal_page/meal_binding.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_binding.dart';
@@ -56,6 +57,7 @@ final appPages = [
     name: AppRoutes.meal,
     page: () => const MealPage(),
     transition: Transition.noTransition,
+    binding: MealBinding(),
   ),
   GetPage(
     name: AppRoutes.routine,

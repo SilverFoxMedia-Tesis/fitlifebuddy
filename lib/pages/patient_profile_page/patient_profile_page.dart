@@ -7,6 +7,8 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,14 +30,27 @@ class PatientProfilePage extends GetView<PatientProfileController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'my_profile'.tr,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppIconButton(
+                      iconData: Icons.arrow_back_ios_rounded,
+                      iconColor: AppColors.secondary,
+                      size: ContainerSize.iconSize,
+                      onTap: () => Get.offAllNamed(AppRoutes.home),
+                      outlined: true,
+                    ),
+                    AppSpacing.spacingHorizontal14,
+                    Text(
+                      'my_profile'.tr,
+                      style: AppTextStyle.robotoSemibold24.copyWith(
+                        color: AppColors.secondary,
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Obx(
                       () => Visibility(
