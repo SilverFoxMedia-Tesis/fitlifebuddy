@@ -5,12 +5,13 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
+import 'package:fitlifebuddy/pages/routine_page/routine_controller.dart';
 import 'package:fitlifebuddy/pages/routine_page/widgets/change_exercise_card.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RoutinePage extends StatelessWidget {
+class RoutinePage extends GetView<RoutineController> {
   const RoutinePage({super.key});
 
   @override
@@ -28,23 +29,28 @@ class RoutinePage extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'Rutina |',
-                      style: AppTextStyle.robotoSemibold34.copyWith(
-                        color: AppColors.secondary
-                      ),
-                    ),
-                    AppSpacing.spacingHorizontal16,
-                    Text(
-                      'Miércoles, 15 de Noviembre',
-                      style: AppTextStyle.robotoRegular34.copyWith(
-                        color: AppColors.primary
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${'routine'.tr} | ',
+                            style: AppTextStyle.robotoSemibold24.copyWith(
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                          TextSpan(
+                            text: controller.getRoutineDate(),
+                            style: AppTextStyle.robotoRegular24.copyWith(
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 BaseButtom(
-                  text: 'Completado',
+                  text: 'completed'.tr,
                   onTap: () {},
                   backgroundColor: AppColors.secondary,
                   width: 160,

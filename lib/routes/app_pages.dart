@@ -13,6 +13,7 @@ import 'package:fitlifebuddy/pages/recover_password_page/recover_password_page.d
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_binding.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
+import 'package:fitlifebuddy/pages/routine_page/routine_binding.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -38,45 +39,41 @@ final appPages = [
   GetPage(
     name: AppRoutes.registerPatient,
     page: () => RegisterPatientPage(),
-    transition: Transition.noTransition,
     binding: RegisterPatientBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.profile,
-    page: () => const PatientProfilePage(),
-    transition: Transition.noTransition,
-    binding: PatientProfileBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.plan,
-    page: () => const PlanPage(),
-    transition: Transition.noTransition,
-    binding: PlanBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.meal,
-    page: () => const MealPage(),
-    transition: Transition.noTransition,
-    binding: MealBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.routine,
-    page: () => const RoutinePage(),
-    transition: Transition.noTransition,
-  ),
-  GetPage(
-    name: AppRoutes.patients,
-    page: () => const PatientsPage(),
-    transition: Transition.noTransition,
-  ),
-  GetPage(
-    name: AppRoutes.registerPatient,
-    page: () => RegisterPatientPage(),
     transition: Transition.noTransition,
   ),
   GetPage(
     name: AppRoutes.successfulRegister,
     page: () => const SuccesfulRegisterPage(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.profile,
+    page: () => const PatientProfilePage(),
+    binding: PatientProfileBinding(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.plan,
+    page: () => const PlanPage(),
+    binding: PlanBinding(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.meal,
+    page: () => const MealPage(),
+    binding: MealBinding(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.routine,
+    page: () => const RoutinePage(),
+    binding: RoutineBinding(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.patients,
+    page: () => const PatientsPage(),
     transition: Transition.noTransition,
   ),
 ];
