@@ -10,7 +10,8 @@ class PersonApi {
   // Get Persons
   Future<List<Person>> getPersons() async {
     final response = await _apiBase.get('persons');
-    return (json.decode(response.body) as List).map((i) => Person.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Person.fromJson(i)).toList();
   }
 
   // Get Person by Id
@@ -40,18 +41,20 @@ class PersonApi {
   Future<Person?> getPersonByEmailAddress(String emailAddress) async {
     final response = await _apiBase.get('persons/searchByEmailAddress/$emailAddress');
     final List<dynamic> jsonData = json.decode(response.body);
-    return Person.fromMap(jsonData.first as Map<String, dynamic>);
+    return Person.fromMap(jsonData.first as Map<String, dynamic>); //TODO: revertir a retornar una lista
   }
 
   // Get Persons by FullName
   Future<List<Person>> getPersonsByFullName(String fullname) async {
     final response = await _apiBase.get('persons/searchByFullName/$fullname');
-    return (json.decode(response.body) as List).map((i) => Person.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Person.fromJson(i)).toList();
   }
 
   // Get Persons by LastName
   Future<List<Person>> getPersonsByLastName(String lastname) async {
     final response = await _apiBase.get('persons/searchByLastName/$lastname');
-    return (json.decode(response.body) as List).map((i) => Person.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Person.fromJson(i)).toList();
   }
 }

@@ -11,7 +11,8 @@ class ExerciseApi {
   // Get Exercises
   Future<List<Exercise>> getExercises() async {
     final response = await _apiBase.get('exercises');
-    return (json.decode(response.body) as List).map((i) => Exercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Exercise.fromJson(i)).toList();
   }
 
   // Get Exercise by Id
@@ -40,24 +41,28 @@ class ExerciseApi {
   // Get Exercises by BodyPart
   Future<List<Exercise>> getExercisesByBodyPart(String bodyPart) async {
     final response = await _apiBase.get('exercises/searchByBodyPart/$bodyPart');
-    return (json.decode(response.body) as List).map((i) => Exercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Exercise.fromJson(i)).toList();
   }
 
   // Get Exercises by TypeExercise
   Future<List<Exercise>> getExercisesByType(String typeExercise) async {
     final response = await _apiBase.get('exercises/searchByTypeExercise/$typeExercise');
-    return (json.decode(response.body) as List).map((i) => Exercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Exercise.fromJson(i)).toList();
   }
 
   // Get Exercises by Workout
   Future<List<Exercise>> getExercisesByWorkout(String workout) async {
     final response = await _apiBase.get('exercises/searchByWorkout/$workout');
-    return (json.decode(response.body) as List).map((i) => Exercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Exercise.fromJson(i)).toList();
   }
 
   // Get RoutineExercises by ExerciseId
   Future<List<RoutineExercise>> getRoutineExerciseByExerciseId(int exerciseId) async {
     final response = await _apiBase.get('exercises/searchRoutineExerciseByIdExercise/$exerciseId');
-    return (json.decode(response.body) as List).map((i) => RoutineExercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => RoutineExercise.fromJson(i)).toList();
   }
 }

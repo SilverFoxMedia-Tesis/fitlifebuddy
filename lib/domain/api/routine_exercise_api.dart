@@ -10,7 +10,8 @@ class RoutineExerciseApi {
   // Get RoutineExercises
   Future<List<RoutineExercise>> getRoutineExercises() async {
     final response = await _apiBase.get('routineExercises');
-    return (json.decode(response.body) as List).map((i) => RoutineExercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => RoutineExercise.fromJson(i)).toList();
   }
 
   // Get RoutineExercise by Id

@@ -10,7 +10,8 @@ class HealthConditionApi {
   // Get HealthConditions
   Future<List<HealthCondition>> getHealthConditions() async {
     final response = await _apiBase.get('healthConditions');
-    return (json.decode(response.body) as List).map((i) => HealthCondition.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => HealthCondition.fromJson(i)).toList();
   }
 
   // Get HealthCondition by Id
@@ -37,14 +38,16 @@ class HealthConditionApi {
   }
 
   // Get HealthConditions by NameHealthCondition
-  Future<List<HealthCondition>> getHealthConditionByName(String nameHealthCondition) async {
+  Future<List<HealthCondition>> getHealthConditionsByName(String nameHealthCondition) async {
     final response = await _apiBase.get('healthConditions/searchByNameHealthCondition/$nameHealthCondition');
-    return (json.decode(response.body) as List).map((i) => HealthCondition.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => HealthCondition.fromJson(i)).toList();
   }
 
   // Get HealthConditions by TypeHealthCondition
-  Future<List<HealthCondition>> getHealthConditionByType(String typeHealthCondition) async {
+  Future<List<HealthCondition>> getHealthConditionsByType(String typeHealthCondition) async {
     final response = await _apiBase.get('healthConditions/searchByTypeHealthCondition/$typeHealthCondition');
-    return (json.decode(response.body) as List).map((i) => HealthCondition.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => HealthCondition.fromJson(i)).toList();
   }
 }

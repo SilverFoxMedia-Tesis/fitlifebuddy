@@ -11,7 +11,8 @@ class RoutineApi {
   // Get Routines
   Future<List<Routine>> getRoutines() async {
     final response = await _apiBase.get('routines');
-    return (json.decode(response.body) as List).map((i) => Routine.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Routine.fromJson(i)).toList();
   }
 
   // Get Routine by Id
@@ -40,6 +41,7 @@ class RoutineApi {
   // Get RoutineExercises by RoutineId
   Future<List<RoutineExercise>> getRoutineExerciseByRoutineId(int routineId) async {
     final response = await _apiBase.get('routines/searchRoutineExerciseByIdRoutine/$routineId');
-    return (json.decode(response.body) as List).map((i) => RoutineExercise.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => RoutineExercise.fromJson(i)).toList();
   }
 }

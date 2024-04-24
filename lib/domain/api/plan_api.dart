@@ -11,7 +11,8 @@ class PlanApi {
   // Get Plans
   Future<List<Plan>> getPlans() async {
     final response = await _apiBase.get('plans');
-    return (json.decode(response.body) as List).map((i) => Plan.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Plan.fromJson(i)).toList();
   }
 
   // Get Plan by Id
@@ -40,18 +41,21 @@ class PlanApi {
   // Get Plans by DietType
   Future<List<Plan>> getPlansByDietType(String dietType) async {
     final response = await _apiBase.get('plans/searchByDietType/$dietType');
-    return (json.decode(response.body) as List).map((i) => Plan.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Plan.fromJson(i)).toList();
   }
 
   // Get Plans by Frecuently
   Future<List<Plan>> getPlansByFrecuently(String frecuently) async {
     final response = await _apiBase.get('plans/searchByFrecuently/$frecuently');
-    return (json.decode(response.body) as List).map((i) => Plan.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Plan.fromJson(i)).toList();
   }
 
   // Get Dailies by PlanId
   Future<List<Daily>> getDailiesByPlanId(int planId) async {
     final response = await _apiBase.get('plans/searchDailiesByIdPlan/$planId');
-    return (json.decode(response.body) as List).map((i) => Daily.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Daily.fromJson(i)).toList();
   }
 }

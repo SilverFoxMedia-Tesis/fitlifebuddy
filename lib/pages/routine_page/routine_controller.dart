@@ -8,10 +8,10 @@ class RoutineController extends GetxController {
   final currentRoutine = Routine().obs;
   final exercises = <Exercise>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  // }
 
   String getRoutineDate() {
     return fromDateToLong(dateTime.value);

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
+import 'package:fitlifebuddy/domain/model/meal_food.dart';
 import 'package:get/get.dart';
 
 class MealApi {
@@ -10,7 +11,8 @@ class MealApi {
   // Get Meals
   Future<List<Meal>> getMeals() async {
     final response = await _apiBase.get('meals');
-    return (json.decode(response.body) as List).map((i) => Meal.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Meal.fromJson(i)).toList();
   }
 
   // Get Meal by Id
@@ -39,12 +41,14 @@ class MealApi {
   // Get Meals by NameMeal
   Future<List<Meal>> getMealsByName(String nameMeal) async {
     final response = await _apiBase.get('meals/searchByNameMeal/$nameMeal');
-    return (json.decode(response.body) as List).map((i) => Meal.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Meal.fromJson(i)).toList();
   }
 
   // Get MealsFoods by MealId
-  Future<List<Meal>> getByName(int mealId) async {
+  Future<List<MealFood>> getMealFoodsByMealId(int mealId) async {
     final response = await _apiBase.get('meals/searchMealFoodsByIdMeal/$mealId');
-    return (json.decode(response.body) as List).map((i) => Meal.fromJson(i)).toList(); //TDOO: change to MealFood
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => MealFood.fromJson(i)).toList();
   }
 }

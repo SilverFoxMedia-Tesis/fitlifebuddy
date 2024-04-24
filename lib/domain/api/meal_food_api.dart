@@ -10,7 +10,8 @@ class MealFoodApi {
   // Get MealFoods
   Future<List<MealFood>> getMealFoods() async {
     final response = await _apiBase.get('mealFoods');
-    return (json.decode(response.body) as List).map((i) => MealFood.fromJson(i)).toList();
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => MealFood.fromJson(i)).toList();
   }
 
   // Get MealFood by Id
