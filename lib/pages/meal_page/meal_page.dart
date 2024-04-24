@@ -35,7 +35,7 @@ class MealPage extends GetView<MealController> {
                     iconData: Icons.arrow_back_ios_rounded,
                     iconColor: AppColors.secondary,
                     size: ContainerSize.iconSize,
-                    onTap: () => Get.offAllNamed(AppRoutes.home),
+                    onTap: () => Get.offAllNamed(AppRoutes.plan),
                     outlined: true,
                     ),
                     AppSpacing.spacingHorizontal14,

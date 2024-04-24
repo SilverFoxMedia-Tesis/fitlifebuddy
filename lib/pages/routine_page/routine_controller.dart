@@ -16,4 +16,8 @@ class RoutineController extends GetxController {
   String getRoutineDate() {
     return fromDateToLong(dateTime.value);
   }
+
+  void changeRoutineToCompleted() {
+    
+  }
 }
