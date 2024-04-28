@@ -12,6 +12,7 @@ import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
+import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,70 +22,78 @@ class PlanPage extends GetView<PlanController> {
   @override
   Widget build(BuildContext context) {
     return LauncherPage(
-      child: Scaffold(
-        body: Padding(
-          padding: AppPadding.paddingPage,
-          child: Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppSpacing.spacingVertical24,
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppIconButton(
-                      iconData: Icons.arrow_back_ios_rounded,
-                      iconColor: AppColors.secondary,
-                      size: ContainerSize.iconSize,
-                      onTap: () => Get.offAllNamed(AppRoutes.home),
-                      outlined: true,
-                    ),
-                    AppSpacing.spacingHorizontal14,
-                    Text(
-                      'my_current_plan'.tr,
-                      style: AppTextStyle.robotoSemibold24.copyWith(
-                        color: AppColors.secondary,
+      child: SingleChildScrollView(
+        padding: AppPadding.paddingPage,
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacing.spacingVertical24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppIconButton(
+                        iconData: Icons.arrow_back_ios_rounded,
+                        iconColor: AppColors.secondary,
+                        size: ContainerSize.iconSize,
+                        onTap: () => Get.offAllNamed(AppRoutes.home),
+                        outlined: true,
                       ),
-                    ),
-                  ],
-                ),
-                AppSpacing.spacingVertical24,
-                // if (false)
-                // Center(
-                //   child: EmptyContainer(
-                //     text: 'no_plan'.tr, 
-                //     buttonTitle: 'generate_plan'.tr,
-                //     onTap: () => Get.toNamed(AppRoutes.routine),
-                //   ),
-                // ),
-                // if (true)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildDateTimeLine(),
-                    AppSpacing.spacingVertical24,
-                    Text(
-                      controller.getCurrentDateTime,
-                      style: AppTextStyle.robotoRegular20.copyWith(
-                        color: AppColors.secondary,
+                      AppSpacing.spacingHorizontal14,
+                      Text(
+                        'my_current_plan'.tr,
+                        style: AppTextStyle.robotoSemibold24.copyWith(
+                          color: AppColors.secondary,
+                        ),
                       ),
+                    ],
+                  ),
+                  BaseButton(
+                    text: "edit_plan".tr,
+                    width: ContainerSize.baseButtonSmallWidth,
+                    backgroundColor: AppColors.warning,
+                  ),
+                ],
+              ),
+              AppSpacing.spacingVertical24,
+              // if (false)
+              // Center(
+              //   child: EmptyContainer(
+              //     text: 'no_plan'.tr, 
+              //     buttonTitle: 'generate_plan'.tr,
+              //     onTap: () => Get.toNamed(AppRoutes.routine),
+              //   ),
+              // ),
+              // if (true)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildDateTimeLine(),
+                  AppSpacing.spacingVertical24,
+                  Text(
+                    controller.getCurrentDateTime,
+                    style: AppTextStyle.robotoRegular20.copyWith(
+                      color: AppColors.secondary,
                     ),
-                    AppSpacing.spacingVertical24,
-                    const SizedBox(
-                      height: 360, //TODO: cambiar a valor dinamico
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MealsView(),
-                          AppSpacing.spacingHorizontal32,
-                          RoutineView()
-                        ],
-                      ),
+                  ),
+                  AppSpacing.spacingVertical24,
+                  const SizedBox(
+                    height: 360, //TODO: cambiar a valor dinamico
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MealsView(),
+                        AppSpacing.spacingHorizontal32,
+                        RoutineView()
+                      ],
                     ),
-                  ],
-                )
-              ]
-            ),
+                  ),
+                ],
+              )
+            ]
           ),
         ),
       ),

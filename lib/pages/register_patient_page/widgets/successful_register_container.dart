@@ -59,7 +59,7 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
             ),
           ),
           AppSpacing.spacingVertical24,
-          BaseButtom(
+          BaseButton(
             text: 'go_to_login'.tr,
             onTap: controller.goToLogin,
           ),

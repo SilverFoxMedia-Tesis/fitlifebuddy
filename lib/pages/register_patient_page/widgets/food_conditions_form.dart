@@ -49,7 +49,7 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        BaseButtom(
+        BaseButton(
           width: ContainerSize.baseButtonSmallWidth,
           text: 'finish'.tr,
           onTap: controller.register,

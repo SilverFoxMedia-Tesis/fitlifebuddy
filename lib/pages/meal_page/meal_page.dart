@@ -62,14 +62,14 @@ class MealPage extends GetView<MealController> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    BaseButtom(
+                    BaseButton(
                       text: 'edit_food'.tr,
                       width: ContainerSize.baseButtonSmallWidth,
                       backgroundColor: AppColors.warning,
                       onTap: controller.openChangeMeal,
                     ),
                     AppSpacing.spacingHorizontal16,
-                    BaseButtom(
+                    BaseButton(
                       text: 'completed'.tr,
                       width: ContainerSize.baseButtonSmallWidth,
                       backgroundColor: AppColors.secondary,

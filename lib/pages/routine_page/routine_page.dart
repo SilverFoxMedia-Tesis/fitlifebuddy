@@ -58,7 +58,7 @@ class RoutinePage extends GetView<RoutineController> {
                     ),
                   ],
                 ),
-                BaseButtom(
+                BaseButton(
                   text: 'completed'.tr,
                   width: ContainerSize.baseButtonSmallWidth,
                   backgroundColor: AppColors.secondary,
@@ -110,7 +110,7 @@ class RoutinePage extends GetView<RoutineController> {
           image: image,
         ),
         AppSpacing.spacingHorizontal20,
-        BaseButtom(
+        BaseButton(
           text: 'change'.tr,
           width: ContainerSize.baseButtonSmallWidth,
           backgroundColor: AppColors.warning,

@@ -33,7 +33,7 @@ class EmptyContainer extends StatelessWidget {
           ),
         ),
         AppSpacing.spacingVertical24,
-        BaseButtom(
+        BaseButton(
           text: buttonTitle,
           onTap: onTap,
         ),

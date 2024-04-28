@@ -55,7 +55,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                     Obx(
                       () => Visibility(
                         visible: controller.isEditing,
-                        child: BaseButtom(
+                        child: BaseButton(
                           text: 'cancel'.tr,
                           width: ContainerSize.baseButtonSmallWidth,
                           backgroundColor: AppColors.danger,
@@ -67,7 +67,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                     Obx(
                       () => Visibility(
                         visible: controller.isEditing,
-                        child: BaseButtom(
+                        child: BaseButton(
                           text: 'save'.tr,
                           width: ContainerSize.baseButtonSmallWidth,
                           backgroundColor: AppColors.secondary,

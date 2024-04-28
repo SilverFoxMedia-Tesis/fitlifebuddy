@@ -49,7 +49,7 @@ class ChangeMealCard extends StatelessWidget {
                 image: AppIcons.meal6,
               ),
               AppSpacing.spacingVertical20,
-              BaseButtom(
+              BaseButton(
                 text: 'Cambiar comida',
                 onTap: () {},
               ),

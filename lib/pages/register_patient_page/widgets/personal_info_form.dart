@@ -99,7 +99,7 @@ class PersonalInfoForm extends GetView<RegisterPatientController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        BaseButtom(
+        BaseButton(
           width: ContainerSize.baseButtonSmallWidth,
           text: 'continue'.tr,
           onTap: () => controller.onChangedPage(1),

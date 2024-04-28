@@ -49,7 +49,7 @@ class ChangeExerciseCard extends StatelessWidget {
                 image: AppIcons.exercise6,
               ),
               AppSpacing.spacingVertical20,
-              BaseButtom(
+              BaseButton(
                 text: 'Cambiar ejercicio',
                 onTap: () {},
               ),

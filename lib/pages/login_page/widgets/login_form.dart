@@ -66,7 +66,7 @@ class LoginForm extends GetView<LoginController> {
             ),
           ),
           AppSpacing.spacingVertical24,
-          BaseButtom(
+          BaseButton(
             text: 'login'.tr,
             onTap: controller.login,
           ),

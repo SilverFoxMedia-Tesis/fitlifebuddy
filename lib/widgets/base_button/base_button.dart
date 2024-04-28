@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
-class BaseButtom extends StatelessWidget {
+class BaseButton extends StatelessWidget {
   final String text;
   final Color? textColor;
   final double width;
@@ -12,7 +12,7 @@ class BaseButtom extends StatelessWidget {
   final void Function()? onTap;
   final bool enabled;
 
-  const BaseButtom({
+  const BaseButton({
     super.key, 
     required this.text,
     this.textColor = AppColors.white,

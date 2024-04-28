@@ -46,7 +46,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             inputType: TextInputType.emailAddress,
           ),
           AppSpacing.spacingVertical24,
-          BaseButtom(
+          BaseButton(
             text: 'recover_password'.tr,
             onTap: controller.sendRecoverLink,
           ),
