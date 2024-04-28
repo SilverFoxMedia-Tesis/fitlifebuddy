@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_page.dar
 import 'package:fitlifebuddy/pages/patients_page/patients_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_binding.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_page.dart';
+import 'package:fitlifebuddy/pages/questions_page/questions_page.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_binding.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_binding.dart';
@@ -15,6 +16,7 @@ import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.d
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_binding.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_page.dart';
+import 'package:fitlifebuddy/pages/settings_page/setting_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -69,6 +71,16 @@ final appPages = [
     name: AppRoutes.routine,
     page: () => const RoutinePage(),
     binding: RoutineBinding(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.settings,
+    page: () => const SettingsPage(),
+    transition: Transition.noTransition,
+  ),
+  GetPage(
+    name: AppRoutes.questions,
+    page: () => const QuestionsPage(),
     transition: Transition.noTransition,
   ),
   GetPage(

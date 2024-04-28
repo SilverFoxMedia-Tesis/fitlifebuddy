@@ -9,4 +9,6 @@ class AppRoutes {
   static const meal = "/meal";
   static const profile = "/profile";
   static const successfulRegister = "/succesful-register";
+  static const settings = "/settings";
+  static const questions = "/q&a";
 }

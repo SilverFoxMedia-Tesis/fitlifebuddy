@@ -66,9 +66,19 @@ class MyAppBar extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AppButton(icon: AppIcons.settings, text: 'settings'.tr, colorNumber: 1),
+                  AppButton(
+                    icon: AppIcons.settings, 
+                    text: 'settings'.tr, 
+                    colorNumber: 1,
+                    onTap: () => Get.toNamed(AppRoutes.settings),
+                  ),
                   AppSpacing.spacingVertical32,
-                  AppButton(icon: AppIcons.help, text: 'help'.tr, colorNumber: 1),
+                  AppButton(
+                    icon: AppIcons.help, 
+                    text: 'help'.tr, 
+                    colorNumber: 1,
+                    onTap: () => Get.toNamed(AppRoutes.questions),
+                  ),
                 ],
               ),
             ]
