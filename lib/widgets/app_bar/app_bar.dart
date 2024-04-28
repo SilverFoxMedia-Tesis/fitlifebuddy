@@ -11,8 +11,6 @@ import 'package:fitlifebuddy/widgets/app_bar/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-RxBool expanded = false.obs;
-
 class MyAppBar extends StatelessWidget {
   const MyAppBar({super.key});
 
@@ -20,12 +18,9 @@ class MyAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: AppPadding.paddingVertical32,
-      child: Obx(
-        () => Container(
+      child: Container(
           padding: AppPadding.paddingVertical32,
-          width: expanded.value 
-            ? ContainerSize.appBarWidthExpanded
-            : ContainerSize.appBarWidth,
+          width: ContainerSize.appBarWidth,
           decoration: const BoxDecoration(
             color: AppColors.primary,
             borderRadius: AppBorderRadius.borderRadiusRight14,
@@ -40,9 +35,6 @@ class MyAppBar extends StatelessWidget {
                   // LogoButton(
                   //   icon: AppIcons.logo, 
                   //   text: 'fitlifebuddy'.tr,
-                  //   onTap: () {
-                  //     expanded.value = !expanded.value;
-                  //   },
                   // ),
                   AppSpacing.spacingVertical32,
                   AppButton(
@@ -69,14 +61,14 @@ class MyAppBar extends StatelessWidget {
                   AppButton(
                     icon: AppIcons.settings, 
                     text: 'settings'.tr, 
-                    colorNumber: 1,
+                    enableDarkColor: true,
                     onTap: () => Get.toNamed(AppRoutes.settings),
                   ),
                   AppSpacing.spacingVertical32,
                   AppButton(
                     icon: AppIcons.help, 
                     text: 'help'.tr, 
-                    colorNumber: 1,
+                    enableDarkColor: true,
                     onTap: () => Get.toNamed(AppRoutes.questions),
                   ),
                 ],
@@ -84,7 +76,6 @@ class MyAppBar extends StatelessWidget {
             ]
             ),
         ),
-      ),
     );
   }
 }
