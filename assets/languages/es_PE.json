@@ -93,5 +93,8 @@
     "go_to_login": "Ir a inicio",
     "email_copied": "Correo electrónico copiado",
     "password_copied": "Contraseña copiada",
-    "no_routine": "No hay una rutina disponible"
+    "no_routine": "No hay una rutina disponible",
+    "breakfast": "Desayuno",
+    "lunch": "Almuerzo",
+    "dinner": "Cena"
 }

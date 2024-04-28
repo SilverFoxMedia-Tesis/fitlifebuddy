@@ -6,7 +6,6 @@ import 'package:fitlifebuddy/domain/api/food_api.dart';
 import 'package:fitlifebuddy/domain/api/food_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/health_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/meal_api.dart';
-import 'package:fitlifebuddy/domain/api/meal_food_api.dart';
 import 'package:fitlifebuddy/domain/api/nutritionist_api.dart';
 import 'package:fitlifebuddy/domain/api/option_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
@@ -15,7 +14,6 @@ import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
 import 'package:fitlifebuddy/domain/api/question_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_api.dart';
-import 'package:fitlifebuddy/domain/api/routine_exercise_api.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
@@ -36,7 +34,6 @@ class DependencyInjection {
     Get.lazyPut(() => FoodConditionApi(), fenix: true);
     Get.lazyPut(() => HealthConditionApi(), fenix: true);
     Get.lazyPut(() => MealApi(), fenix: true);
-    Get.lazyPut(() => MealFoodApi(), fenix: true);
     Get.lazyPut(() => NutritionistApi(), fenix: true);
     Get.lazyPut(() => OptionApi(), fenix: true);
     Get.lazyPut(() => PatientApi(), fenix: true);
@@ -45,7 +42,6 @@ class DependencyInjection {
     Get.lazyPut(() => PlanApi(), fenix: true);
     Get.lazyPut(() => QuestionApi(), fenix: true);
     Get.lazyPut(() => RoutineApi(), fenix: true);
-    Get.lazyPut(() => RoutineExerciseApi(), fenix: true);
 
     //Services
     Get.lazyPut(() => FormValidationService(), fenix: true);

@@ -81,15 +81,8 @@ class MealPage extends GetView<MealController> {
             ),
             AppSpacing.spacingVertical24,
             Text(
-              controller.currentMeal.value.name ?? '',
+              controller.currentMeal.value.foods?.first.name ?? '',
               style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary
-              ),
-            ),
-            AppSpacing.spacingVertical24,
-            Text(
-              controller.currentMeal.value.description ?? '',
-              style: AppTextStyle.robotoRegular16.copyWith(
                 color: AppColors.secondary
               ),
             ),

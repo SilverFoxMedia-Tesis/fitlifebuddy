@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
-import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
 import 'package:get/get.dart';
 
 class ExerciseApi {
@@ -57,12 +56,5 @@ class ExerciseApi {
     final response = await _apiBase.get('exercises/searchByWorkout/$workout');
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map((i) => Exercise.fromJson(i)).toList();
-  }
-
-  // Get RoutineExercises by ExerciseId
-  Future<List<RoutineExercise>> getRoutineExerciseByExerciseId(int exerciseId) async {
-    final response = await _apiBase.get('exercises/searchRoutineExerciseByIdExercise/$exerciseId');
-    final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => RoutineExercise.fromJson(i)).toList();
   }
 }

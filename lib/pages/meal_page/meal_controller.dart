@@ -13,14 +13,6 @@ class MealController extends GetxController {
   final currentMeal = Meal().obs;
   final foods = <Food>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    mealType.value = 'Desayuno';
-    currentMeal.value.name = "Ejemplo de titulo";
-    currentMeal.value.description = "Ejemplo de descripcion";
-  }
-
   String getMealDate() {
     return fromDateToLong(dateTime.value);
   }

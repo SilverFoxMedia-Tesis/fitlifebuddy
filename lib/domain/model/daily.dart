@@ -2,20 +2,25 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
-import 'package:fitlifebuddy/domain/model/plan.dart';
+import 'package:fitlifebuddy/domain/model/meal.dart';
+import 'package:fitlifebuddy/domain/model/routine.dart';
 
 class Daily {
   int? id;
   String? date;
   int? dateNumber;
-  Plan? plan;
+  List<Meal>? meals;
+  Routine? routine;
+  String? planId;
   Status? status;
 
   Daily({
     this.id,
     this.date,
     this.dateNumber,
-    this.plan,
+    this.meals,
+    this.routine,
+    this.planId,
     this.status,
   });
 
@@ -24,7 +29,7 @@ class Daily {
       'idDaily': id,
       'date': date,
       'dateNumber': dateNumber,
-      'plan': plan?.toJson(),
+      'IdPlan': planId,
       'status': status,
     };
   }
@@ -34,7 +39,7 @@ class Daily {
       id: map['idDaily'] != null ? map['idDaily'] as int : null,
       date: map['date'] != null ? map['date'] as String : null,
       dateNumber: map['dateNumber'] != null ? map['dateNumber'] as int : null,
-      plan: map['plan'] != null ? Plan.fromMap(map['plan'] as Map<String, dynamic>) : null,
+      planId: map['IdPlan'] != null ? map['IdPlan'] as String : null,
       status: map['status'] != null ? EnumExtension.getValue(Status.values, map['status']) : null,
     );
   }
