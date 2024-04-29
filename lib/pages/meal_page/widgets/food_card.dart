@@ -95,7 +95,7 @@ class FoodCard extends StatelessWidget {
           right: 0,
           top: 0,
           child: Image.asset(
-            AppIcons.food1,
+            AppIcons.notFound,
             width: 152,
           height: 160,
           ),

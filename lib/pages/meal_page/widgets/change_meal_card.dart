@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
@@ -35,18 +34,15 @@ class ChangeMealCard extends StatelessWidget {
           Column(
             children: [
               const PlanItemCard(
-                text: 'Comida 4', 
-                image: AppIcons.meal4,
+                text: 'Comida 4',
               ),
               AppSpacing.spacingVertical20,
               const PlanItemCard(
-                text: 'Comida 5', 
-                image: AppIcons.meal5,
+                text: 'Comida 5',
               ),
               AppSpacing.spacingVertical20,
               const PlanItemCard(
-                text: 'Comida 6', 
-                image: AppIcons.meal6,
+                text: 'Comida 6',
               ),
               AppSpacing.spacingVertical20,
               BaseButton(

@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
@@ -35,18 +34,15 @@ class ChangeExerciseCard extends StatelessWidget {
           Column(
             children: [
               const PlanItemCard(
-                text: 'Ejercicio 4', 
-                image: AppIcons.exercise4,
+                text: 'Ejercicio 4',
               ),
               AppSpacing.spacingVertical20,
               const PlanItemCard(
-                text: 'Ejercicio 5', 
-                image: AppIcons.exercise5,
+                text: 'Ejercicio 5',
               ),
               AppSpacing.spacingVertical20,
               const PlanItemCard(
-                text: 'Ejercicio 6', 
-                image: AppIcons.exercise6,
+                text: 'Ejercicio 6',
               ),
               AppSpacing.spacingVertical20,
               BaseButton(

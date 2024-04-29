@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
@@ -45,7 +44,6 @@ class RoutineView extends GetView<PlanController> {
           child: PlanItemCard(
             text: exercise.workout ?? '',
             description: '${exercise.repsPerSet} x ${exercise.sets}',
-            image: AppIcons.exercise1,
           ),
         );
       }).toList(),

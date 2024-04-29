@@ -11,14 +11,14 @@ import '../../../core/theme/style/box_shadows.dart';
 class PlanItemCard extends StatelessWidget {
   final String text;
   final String? description;
-  final String image;
+  final String? image;
   final void Function()? onTap;
 
   const PlanItemCard({
     super.key,
     required this.text, 
     this.description,
-    required this.image,
+    this.image,
     this.onTap,
   });
 
@@ -69,7 +69,7 @@ class PlanItemCard extends StatelessWidget {
             ),
             image != '' 
               ? Image.network(
-                  image,
+                  image!,
                   width: 152,
                   fit: BoxFit.cover,
                   height: double.infinity,
