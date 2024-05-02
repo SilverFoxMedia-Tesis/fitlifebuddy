@@ -11,7 +11,7 @@ class RoutineApi {
   Future<List<Routine>> getRoutines() async {
     final response = await _apiBase.get('routines');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Routine.fromJson(i)).toList();
+    return jsonData.map((i) => Routine.fromMap(i)).toList();
   }
 
   // Get Routine by Id

@@ -11,7 +11,7 @@ class PatientHistoryApi {
   Future<List<PatientHistory>> getPatientHistories() async {
     final response = await _apiBase.get('pacientHistories');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => PatientHistory.fromJson(i)).toList();
+    return jsonData.map((i) => PatientHistory.fromMap(i)).toList();
   }
 
   // Get PatientHistory by Id

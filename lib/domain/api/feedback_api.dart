@@ -12,7 +12,7 @@ class FeedbackApi {
   Future<List<Feedback>> getFeedbacks() async {
     final response = await _apiBase.get('feedbacks');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Feedback.fromJson(i)).toList();
+    return jsonData.map((i) => Feedback.fromMap(i)).toList();
   }
 
   // Get Feedback by Id
@@ -42,6 +42,6 @@ class FeedbackApi {
   Future<List<Question>> getQuestionsByFeedbackId(int feedbackId) async {
     final response = await _apiBase.get('feedbacks/searchQuestionsByFeedback/$feedbackId');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Question.fromJson(i)).toList();
+    return jsonData.map((i) => Question.fromMap(i)).toList();
   }
 }

@@ -12,7 +12,7 @@ class NutritionistApi {
   Future<List<Nutritionist>> getNutritionists() async {
     final response = await _apiBase.get('nutritionists');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Nutritionist.fromJson(i)).toList();
+    return jsonData.map((i) => Nutritionist.fromMap(i)).toList();
   }
 
   // Get Nutritionist by Id
@@ -42,6 +42,6 @@ class NutritionistApi {
   Future<List<Patient>> getPatientsByNutritionistId(int nutritionistId) async {
     final response = await _apiBase.get('nutritionists/searchPacientsByIdNutritionist/$nutritionistId');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Patient.fromJson(i)).toList();
+    return jsonData.map((i) => Patient.fromMap(i)).toList();
   }
 }

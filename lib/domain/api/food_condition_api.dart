@@ -11,7 +11,7 @@ class FoodConditionApi {
   Future<List<FoodCondition>> getFoodConditions() async {
     final response = await _apiBase.get('foodConditions');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => FoodCondition.fromJson(i)).toList();
+    return jsonData.map((i) => FoodCondition.fromMap(i)).toList();
   }
 
   // Get FoodCondition by Id
@@ -41,13 +41,13 @@ class FoodConditionApi {
   Future<List<FoodCondition>> getFoodConditionsByName(String nameFoodCondition) async {
     final response = await _apiBase.get('foodConditions/searchByNameFoodCondition/$nameFoodCondition');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => FoodCondition.fromJson(i)).toList();
+    return jsonData.map((i) => FoodCondition.fromMap(i)).toList();
   }
 
   // Get FoodConditions by TypeFoodCondition
   Future<List<FoodCondition>> getFoodConditionsByType(String typeFoodCondition) async {
     final response = await _apiBase.get('foodConditions/searchByTypeFoodCondition/$typeFoodCondition');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => FoodCondition.fromJson(i)).toList();
+    return jsonData.map((i) => FoodCondition.fromMap(i)).toList();
   }
 }

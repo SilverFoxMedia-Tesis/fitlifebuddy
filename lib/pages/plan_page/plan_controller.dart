@@ -1,11 +1,12 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
+import 'package:fitlifebuddy/domain/api/daily_api.dart';
+import 'package:fitlifebuddy/domain/api/plan_api.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
-import 'package:fitlifebuddy/domain/model/routine.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -13,14 +14,13 @@ import 'package:get/get.dart';
 class PlanController extends GetxController {
   final dateTimeLineController = EasyInfiniteDateTimelineController();
   final unsplashService = Get.find<UnsplashService>();
+  final planApi = Get.find<PlanApi>();
+  final dailyApi = Get.find<DailyApi>();
 
   final currentDateTime = DateTime.now().obs;
   final currentPlan = Plan().obs;
   final currentDaily = Daily().obs;
-  final currentBreakfast = Meal().obs;
-  final currentLunch = Meal().obs;
-  final currentDinner = Meal().obs;
-  final currentRoutine = Routine().obs;
+  final meals = <Meal>[].obs;
   final exercises = <Exercise>[].obs;
   final breakfastImage = "".obs;
   final lunchImage = "".obs;
@@ -29,6 +29,7 @@ class PlanController extends GetxController {
 
 
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
+  bool get hasMeals => meals.isNotEmpty;
   bool get hasExercises => exercises.isNotEmpty;
 
   @override
@@ -54,7 +55,10 @@ class PlanController extends GetxController {
 
   Future<void> getDailiesByDay() async {
     try {
-      
+      final list = await dailyApi.getMealsByDailyId(1);
+      if (list.isNotEmpty) {
+        meals.addAll(list);
+      }
     } catch (e) {
       displayErrorToast(e);
     }

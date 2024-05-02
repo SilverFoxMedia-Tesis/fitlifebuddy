@@ -11,7 +11,7 @@ class PersonApi {
   Future<List<Person>> getPersons() async {
     final response = await _apiBase.get('persons');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Person.fromJson(i)).toList();
+    return jsonData.map((i) => Person.fromMap(i)).toList();
   }
 
   // Get Person by Id
@@ -48,13 +48,13 @@ class PersonApi {
   Future<List<Person>> getPersonsByFullName(String fullname) async {
     final response = await _apiBase.get('persons/searchByFullName/$fullname');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Person.fromJson(i)).toList();
+    return jsonData.map((i) => Person.fromMap(i)).toList();
   }
 
   // Get Persons by LastName
   Future<List<Person>> getPersonsByLastName(String lastname) async {
     final response = await _apiBase.get('persons/searchByLastName/$lastname');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Person.fromJson(i)).toList();
+    return jsonData.map((i) => Person.fromMap(i)).toList();
   }
 }

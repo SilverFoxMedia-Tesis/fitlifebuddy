@@ -12,7 +12,7 @@ class QuestionApi {
   Future<List<Question>> getQuestions() async {
     final response = await _apiBase.get('questions');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Question.fromJson(i)).toList();
+    return jsonData.map((i) => Question.fromMap(i)).toList();
   }
 
   // Get Question by Id
@@ -42,13 +42,13 @@ class QuestionApi {
   Future<List<Question>> getQuestionsByName(String nameQuestion) async {
     final response = await _apiBase.get('questions/searchByNameQuestion/$nameQuestion');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Question.fromJson(i)).toList();
+    return jsonData.map((i) => Question.fromMap(i)).toList();
   }
 
   // Get Options by QuestionId
   Future<List<Option>> getOptionsByQustionId(int questionId) async {
     final response = await _apiBase.get('questions/searchOptionsByIdQuestion/$questionId');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Option.fromJson(i)).toList();
+    return jsonData.map((i) => Option.fromMap(i)).toList();
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
+import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/model/routine.dart';
 
 class Daily {
@@ -11,7 +12,7 @@ class Daily {
   int? dateNumber;
   List<Meal>? meals;
   Routine? routine;
-  String? planId;
+  Plan? plan;
   Status? status;
 
   Daily({
@@ -20,7 +21,7 @@ class Daily {
     this.dateNumber,
     this.meals,
     this.routine,
-    this.planId,
+    this.plan,
     this.status,
   });
 
@@ -29,7 +30,7 @@ class Daily {
       'idDaily': id,
       'date': date,
       'dateNumber': dateNumber,
-      'IdPlan': planId,
+      'plan': plan?.toMap(),
       'status': status,
     };
   }
@@ -39,7 +40,7 @@ class Daily {
       id: map['idDaily'] != null ? map['idDaily'] as int : null,
       date: map['date'] != null ? map['date'] as String : null,
       dateNumber: map['dateNumber'] != null ? map['dateNumber'] as int : null,
-      planId: map['IdPlan'] != null ? map['IdPlan'] as String : null,
+      plan: map['plan'] != null ? Plan.fromMap(map['plan'] as Map<String, dynamic>) : null,
       status: map['status'] != null ? EnumExtension.getValue(Status.values, map['status']) : null,
     );
   }

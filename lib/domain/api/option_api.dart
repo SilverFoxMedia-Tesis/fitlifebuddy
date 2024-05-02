@@ -11,7 +11,7 @@ class OptionApi {
   Future<List<Option>> getOptions() async {
     final response = await _apiBase.get('options');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Option.fromJson(i)).toList();
+    return jsonData.map((i) => Option.fromMap(i)).toList();
   }
 
   // Get Option by Id
@@ -41,6 +41,6 @@ class OptionApi {
   Future<List<Option>> getOptionsByName(String nameOption) async {
     final response = await _apiBase.get('options/searchByNameOption/$nameOption');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Option.fromJson(i)).toList();
+    return jsonData.map((i) => Option.fromMap(i)).toList();
   }
 }

@@ -14,23 +14,25 @@ class RoutineView extends GetView<PlanController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: controller.viewRoutineDetails,
-            child: Text(
-              'workout_routine'.tr,
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary,
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: controller.viewRoutineDetails,
+              child: Text(
+                'workout_routine'.tr,
+                style: AppTextStyle.robotoSemibold20.copyWith(
+                  color: AppColors.secondary,
+                ),
               ),
             ),
-          ),
-          if (controller.hasExercises)
-            _buildExercises(),
-          if (!controller.hasExercises)
-            _buildEmptyList(),
-      ],
+            if (controller.hasExercises)
+              _buildExercises(),
+            if (!controller.hasExercises)
+              _buildEmptyList(),
+        ],
+        ),
       ),
     );
   }
@@ -38,7 +40,7 @@ class RoutineView extends GetView<PlanController> {
   Widget _buildExercises() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: controller.exercises.map((exercise) {
+      children: controller.currentDaily.value.routine!.exercises!.map((exercise) {
         return Padding(
           padding: AppPadding.paddingOnlyTop24,
           child: PlanItemCard(
