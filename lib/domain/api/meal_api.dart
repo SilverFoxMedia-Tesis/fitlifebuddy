@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
+import 'package:fitlifebuddy/domain/model/meal_food.dart';
 import 'package:get/get.dart';
 
 class MealApi {
@@ -37,10 +38,10 @@ class MealApi {
     await _apiBase.delete('meals/$id');
   }
 
-  // Get Meals by NameMeal
-  Future<List<Meal>> getMealsByName(String nameMeal) async {
-    final response = await _apiBase.get('meals/searchByNameMeal/$nameMeal');
+  // Get MealFoods by IdMeal
+  Future<List<MealFood>> getMealFoodsByMealId(String idMeal) async {
+    final response = await _apiBase.get('meals/searchMealFoodsByIdMeal/$idMeal');
     final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Meal.fromMap(i)).toList();
+    return jsonData.map((i) => MealFood.fromMap(i)).toList();
   }
 }

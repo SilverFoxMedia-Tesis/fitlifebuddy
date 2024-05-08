@@ -37,11 +37,7 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
               },
             ),
           ),
-          Cover(
-            title: 'welcome_to'.tr, 
-            description: 'phrase0'.tr,
-            image: '../assets/images/cover_photo.png',
-          ),
+          const Cover(),
         ],
       ),
     );

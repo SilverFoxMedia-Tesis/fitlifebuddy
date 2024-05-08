@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/daily_api.dart';
+import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
@@ -16,6 +17,7 @@ class PlanController extends GetxController {
   final unsplashService = Get.find<UnsplashService>();
   final planApi = Get.find<PlanApi>();
   final dailyApi = Get.find<DailyApi>();
+  final mealApi = Get.find<MealApi>();
 
   final currentDateTime = DateTime.now().obs;
   final currentPlan = Plan().obs;
@@ -59,9 +61,33 @@ class PlanController extends GetxController {
       if (list.isNotEmpty) {
         meals.addAll(list);
       }
+      getFoodsByMealId();
     } catch (e) {
       displayErrorToast(e);
     }
+  }
+
+  Future<void> getFoodsByMealId() async {
+    for (var i = 0; i < meals.length; i++) {
+      if (meals[i].id != null) {
+        final id = meals[i].id. toString();
+        final mealFoods = await mealApi.getMealFoodsByMealId(id);
+        if (mealFoods.isNotEmpty) {
+          for (var mf in mealFoods) {
+            meals[i].foods?.add(mf.food!);
+          }
+        }
+      }
+    }
+  }
+
+  String getMealName(int index) {
+    final meal = meals[index];
+    var result = '';
+    for (var f in meal.foods!) {
+      result += " $f";
+    }
+    return result;
   }
 
   void viewMealDetails() {

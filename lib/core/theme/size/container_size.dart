@@ -23,4 +23,5 @@ class ContainerSize {
   static const pointSize = 8.0;
   static const basePlanItemCardWidth = 400.0;
   static const basePlanItemCardHeight = 160.0;
+  static const confirmationDialogWidth = 480.0;
 }

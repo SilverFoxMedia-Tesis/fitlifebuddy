@@ -11,17 +11,13 @@ class SuccesfulRegisterPage extends GetView {
   Widget build(BuildContext context) {
     return LauncherPage(
       isLogged: false,
-      child: Row(
+      child: const Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 5,
             child: SuccesfulRegisterContainer(),
             ),
-          Cover(
-            title: 'welcome_to'.tr, 
-            description: 'phrase0'.tr,
-            image: '../assets/images/cover_photo.png',
-          )
+          Cover()
         ],
       ),
     );

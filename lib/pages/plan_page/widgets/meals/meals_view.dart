@@ -54,7 +54,7 @@ class MealsView extends GetView<PlanController> {
         ),
         AppSpacing.spacingVertical24,
         PlanItemCard(
-          text: meal.foods?.first.name ?? '', 
+          text: controller.getMealName(0), 
           image: image,
           onTap: onTapMeal,
         ),
