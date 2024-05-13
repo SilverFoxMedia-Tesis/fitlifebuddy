@@ -27,6 +27,7 @@ dependencies:
   easy_date_timeline: ^1.0.6
   unsplash_client: ^2.2.0
   shared_preferences: ^2.2.3
+  responsive_framework: ^1.4.0
 
 dev_dependencies:
   flutter_test:

@@ -28,7 +28,9 @@ class BaseButton extends StatelessWidget {
       onTap: enabled ? onTap : null,
       child: Container(
         alignment: Alignment.center,
-        width: width,
+        constraints: BoxConstraints(
+          maxWidth: width,
+        ),
         height: ContainerSize.baseButtonHeight,
         decoration: BoxDecoration(
           color: enabled ? backgroundColor : AppColors.disabled,
