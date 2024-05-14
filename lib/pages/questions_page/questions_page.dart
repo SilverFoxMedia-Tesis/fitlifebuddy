@@ -4,6 +4,7 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
+import 'package:fitlifebuddy/pages/questions_page/widgets/questions_view.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class QuestionsPage extends StatelessWidget {
                 ),
               ],
             ),
+            const Expanded(child: QuestionsView()),
           ],
         ),
       ),

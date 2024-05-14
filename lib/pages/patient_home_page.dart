@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
@@ -20,12 +21,12 @@ class PatientHomePage extends GetView {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AppBanner(text: '¡Estás en el camino correcto hacia una vida saludable! Sigue adelante y mantén el enfoque en tu plan de alimentación y rutinas de ejercicio.'),
+            AppBanner(text: 'phrase1'.tr),
             AppSpacing.spacingVertical32,
             AppCard(
-              title: 'Mi plan actual', 
-              description: 'Revisa la información de tu plan alimentario y de ejercicios', 
-              icon: 'assets/icons/person.svg',
+              title: 'my_current_plan'.tr, 
+              description: 'my_current_plan_description'.tr, 
+              icon: AppIcons.person,
               onTap: () => Get.toNamed(AppRoutes.plan),
             ),
           ],

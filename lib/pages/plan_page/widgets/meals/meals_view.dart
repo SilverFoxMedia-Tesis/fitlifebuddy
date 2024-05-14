@@ -66,7 +66,7 @@ class MealsView extends GetView<PlanController> {
     return Padding(
       padding: AppPadding.paddingOnlyTop24,
       child: Text(
-        'no_routine'.tr,
+        'no_meals'.tr,
         style: AppTextStyle.robotoRegular16.copyWith(
           color: AppColors.secondary,
         ),
