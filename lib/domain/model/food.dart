@@ -14,6 +14,7 @@ class Food {
   num? fiber;
   num? carbs;
   CategoryName? categoryName;
+  String? imageUrl;
 
   Food({
     this.id,
@@ -26,6 +27,7 @@ class Food {
     this.fiber,
     this.carbs,
     this.categoryName,
+    this.imageUrl,
   });
 
   Map<String, dynamic> toMap() {

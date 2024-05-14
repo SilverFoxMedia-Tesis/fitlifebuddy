@@ -11,6 +11,7 @@ class Exercise {
   String? repsPerSet;
   TypeExercise? type;
   BodyPart? bodyPart;
+  String? imageUrl;
 
   Exercise({
     this.id,
@@ -19,6 +20,7 @@ class Exercise {
     this.repsPerSet,
     this.type,
     this.bodyPart,
+    this.imageUrl,
   });
 
   Map<String, dynamic> toMap() {
