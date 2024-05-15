@@ -1,5 +1,5 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/widgets/app_bar/app_bar.dart';
+import 'package:fitlifebuddy/widgets/side_bar/side_bar.dart';
 // ignore: unused_import
 import 'package:fitlifebuddy/widgets/cover/cover.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class LauncherPage extends GetResponsiveView {
       child: Scaffold(
         body: Row(
           children: [
-            if (isLogged) const MyAppBar(),
+            if (isLogged) const SideBar(),
             Flexible(child: child!),
           ],
         ),

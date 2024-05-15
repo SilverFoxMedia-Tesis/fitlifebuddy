@@ -6,13 +6,13 @@ import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/app_bar/app_button.dart';
+import 'package:fitlifebuddy/widgets/side_bar/app_button.dart';
 //import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({super.key});
+class SideBar extends StatelessWidget {
+  const SideBar({super.key});
 
   @override
   Widget build(BuildContext context) {

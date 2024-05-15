@@ -11,8 +11,8 @@ import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,35 +29,7 @@ class PlanPage extends GetView<PlanController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppSpacing.spacingVertical24,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AppIconButton(
-                        iconData: Icons.arrow_back_ios_rounded,
-                        iconColor: AppColors.secondary,
-                        size: ContainerSize.iconSize,
-                        onTap: () => Get.offAllNamed(AppRoutes.home),
-                        outlined: true,
-                      ),
-                      AppSpacing.spacingHorizontal14,
-                      Text(
-                        'my_current_plan'.tr,
-                        style: AppTextStyle.robotoSemibold24.copyWith(
-                          color: AppColors.secondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  BaseButton(
-                    text: "edit_plan".tr,
-                    width: ContainerSize.baseButtonSmallWidth,
-                    backgroundColor: AppColors.warning,
-                  ),
-                ],
-              ),
+              buildCustomBar(),
               AppSpacing.spacingVertical24,
               // if (false)
               // Center(
@@ -100,6 +72,20 @@ class PlanPage extends GetView<PlanController> {
     );
   }
 
+  Widget buildCustomBar() {
+    return CustomBar(
+      title: 'my_current_plan'.tr,
+      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
+      actions: [
+        BaseButton(
+          text: "edit_plan".tr,
+          width: ContainerSize.baseButtonSmallWidth,
+          backgroundColor: AppColors.warning,
+        ),
+      ],
+    );
+  }
+
 
   Widget buildDateTimeLine() {
     return Container(
@@ -122,7 +108,7 @@ class PlanPage extends GetView<PlanController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  controller.capitalize(dayName),
+                  dayName.capitalizeFirst ?? '',
                   style: AppTextStyle.robotoRegular16.copyWith(
                     color: isSelected ? AppColors.white : AppColors.secondary,
                   ),

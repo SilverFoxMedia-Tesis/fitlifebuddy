@@ -98,6 +98,7 @@
     "breakfast": "Desayuno",
     "lunch": "Almuerzo",
     "dinner": "Cena",
+    "cancel": "Cancelar",
     "patientRegistration": "Registro de paciente",
     "newAccount": "En caso de no contar con una cuenta previa, puede ingresar al apartado de Registro de paciente, colocar su información personal, condiciones médicas y condiciones alimentarias de su preferencia. Al final del registro se emitirá una contraseña con la que podrá ingresar a la aplicación.",
     "patientLogin": "Inicio de sesión de paciente",

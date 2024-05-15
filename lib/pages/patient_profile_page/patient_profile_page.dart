@@ -2,14 +2,14 @@ import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
-import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
+import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,83 +21,73 @@ class PatientProfilePage extends GetView<PatientProfileController> {
   @override
   Widget build(BuildContext context) {
     return LauncherPage(
-      child: SingleChildScrollView(
+      child: Padding(
         padding: AppPadding.paddingPage,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppSpacing.spacingVertical24,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppIconButton(
-                      iconData: Icons.arrow_back_ios_rounded,
-                      iconColor: AppColors.secondary,
-                      size: ContainerSize.iconSize,
-                      onTap: () => Get.offAllNamed(AppRoutes.home),
-                      outlined: true,
-                    ),
-                    AppSpacing.spacingHorizontal14,
-                    Text(
-                      'my_profile'.tr,
-                      style: AppTextStyle.robotoSemibold24.copyWith(
-                        color: AppColors.secondary,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Obx(
-                      () => Visibility(
-                        visible: controller.isEditing,
-                        child: BaseButton(
-                          text: 'cancel'.tr,
-                          width: ContainerSize.baseButtonSmallWidth,
-                          backgroundColor: AppColors.danger,
-                          onTap: controller.cancel,
-                        ),
-                      ),
-                    ),
-                    AppSpacing.spacingHorizontal20,
-                    Obx(
-                      () => Visibility(
-                        visible: controller.isEditing,
-                        child: BaseButton(
-                          text: 'save'.tr,
-                          width: ContainerSize.baseButtonSmallWidth,
-                          backgroundColor: AppColors.secondary,
-                          onTap: controller.handleProfileUpdate,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            buildCustomBar(),
             AppSpacing.spacingVertical24,
-            const Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PersonalInfo(),
-                AppSpacing.spacingHorizontal32,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FoodConditionsColumn(),
-                    AppSpacing.spacingVertical24,
-                    HealthConditionsColumn(),
-                  ],
-                )
-              ],
+            Obx(
+              () => LoadingWidget(
+                isLoading: controller.loading.value,
+                child: const Expanded(
+                  child: SingleChildScrollView(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PersonalInfo(),
+                        AppSpacing.spacingHorizontal32,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FoodConditionsColumn(),
+                            AppSpacing.spacingVertical24,
+                            HealthConditionsColumn(),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildCustomBar() {
+    return CustomBar(
+      title: 'my_profile'.tr,
+      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
+      actions: [
+        Obx(
+          () => Visibility(
+            visible: controller.isEditing,
+            child: BaseButton(
+              text: 'cancel'.tr,
+              width: ContainerSize.baseButtonSmallWidth,
+              backgroundColor: AppColors.danger,
+              onTap: controller.cancel,
+            ),
+          ),
+        ),
+        AppSpacing.spacingHorizontal20,
+        Obx(
+          () => Visibility(
+            visible: controller.isEditing,
+            child: BaseButton(
+              text: 'save'.tr,
+              width: ContainerSize.baseButtonSmallWidth,
+              backgroundColor: AppColors.secondary,
+              onTap: controller.handleProfileUpdate,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

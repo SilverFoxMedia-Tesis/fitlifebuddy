@@ -49,6 +49,7 @@ class PatientProfileController extends GetxController{
   final foodConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
   final healthConditionTypeSelectedControllers = <int, TextEditingController>{}.obs;
 
+  final loading = false.obs;
   final isPersonalInfoEditing = false.obs;
   final isHealthConditionsEditing = false.obs;
   final isFoodConditionsEditing = false.obs;
@@ -71,10 +72,19 @@ class PatientProfileController extends GetxController{
   @override
   Future<void> onInit() async {
     super.onInit();
-    var id = UserPreferences.getPatientId();
-    await getPatientById(int.parse(id!));
-    await getFoodConditions(int.parse(id));
-    await getHealthConditions(int.parse(id));
+    await getProfileInfo();
+  }
+
+  Future<void> getProfileInfo() async {
+    try {
+      loading(true);
+      var id = UserPreferences.getPatientId();
+      await getPatientById(int.parse(id!));
+      await getFoodConditions(int.parse(id));
+      await getHealthConditions(int.parse(id));
+    } finally {
+      loading(false);
+    }
   }
 
   Future<void> getPatientById(int patientId) async{
