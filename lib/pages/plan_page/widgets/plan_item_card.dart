@@ -67,19 +67,12 @@ class PlanItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            image != '' 
-              ? Image.network(
-                  image!,
-                  width: 152,
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                )
-              : Image.asset(
-                  AppIcons.notFound,
-                  width: 152,
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                )
+            Image.network(
+              image ?? AppIcons.notFound,
+              width: 152,
+              fit: BoxFit.cover,
+              height: 152,
+            ),
           ],
         ),
       ),

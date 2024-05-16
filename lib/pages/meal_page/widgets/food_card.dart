@@ -5,10 +5,12 @@ import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
+import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
-  const FoodCard({super.key});
+  final Food food;
+  const FoodCard({super.key, required this.food});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class FoodCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Huevo frito',
+                food.name ?? '',
                 style: AppTextStyle.robotoSemibold20.copyWith(
                   color: AppColors.secondary,
                 ),
@@ -41,7 +43,7 @@ class FoodCard extends StatelessWidget {
               ),
               AppSpacing.spacingVertical4,
               Text(
-                '6 g',
+                '${food.fiber} g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
@@ -55,7 +57,7 @@ class FoodCard extends StatelessWidget {
               ),
               AppSpacing.spacingVertical4,
               Text(
-                '0.6 g',
+                '${food.carbs} g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
@@ -69,7 +71,7 @@ class FoodCard extends StatelessWidget {
               ),
               AppSpacing.spacingVertical4,
               Text(
-                '7 g',
+                '${food.fat} g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
@@ -83,7 +85,7 @@ class FoodCard extends StatelessWidget {
               ),
               AppSpacing.spacingVertical4,
               Text(
-                '90 g',
+                '${food.calories} g',
                 style: AppTextStyle.robotoSemibold14.copyWith(
                   color: AppColors.primary,
                 ),
@@ -94,8 +96,8 @@ class FoodCard extends StatelessWidget {
         Positioned(
           right: 0,
           top: 0,
-          child: Image.asset(
-            AppIcons.notFound,
+          child: Image.network(
+            food.imageUrl ?? AppIcons.notFound,
             width: 152,
           height: 160,
           ),

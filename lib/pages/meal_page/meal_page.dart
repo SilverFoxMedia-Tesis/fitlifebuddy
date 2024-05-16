@@ -6,8 +6,8 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,63 +25,10 @@ class MealPage extends GetView<MealController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppSpacing.spacingVertical24,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppIconButton(
-                    iconData: Icons.arrow_back_ios_rounded,
-                    iconColor: AppColors.secondary,
-                    size: ContainerSize.iconSize,
-                    onTap: () => Get.offAllNamed(AppRoutes.plan),
-                    outlined: true,
-                    ),
-                    AppSpacing.spacingHorizontal14,
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '${controller.mealType.value} | ',
-                            style: AppTextStyle.robotoSemibold24.copyWith(
-                              color: AppColors.secondary,
-                            ),
-                          ),
-                          TextSpan(
-                            text: controller.getMealDate(),
-                            style: AppTextStyle.robotoRegular24.copyWith(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    BaseButton(
-                      text: 'edit_food'.tr,
-                      width: ContainerSize.baseButtonSmallWidth,
-                      backgroundColor: AppColors.warning,
-                      onTap: controller.openChangeMeal,
-                    ),
-                    AppSpacing.spacingHorizontal16,
-                    BaseButton(
-                      text: 'completed'.tr,
-                      width: ContainerSize.baseButtonSmallWidth,
-                      backgroundColor: AppColors.secondary,
-                      onTap: controller.changeMealToCompleted,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            buildCustomBar(),
             AppSpacing.spacingVertical24,
             Text(
-              controller.currentMeal.value.foods?.first.name ?? '',
+              controller.currentMeal.value.getName(),
               style: AppTextStyle.robotoSemibold20.copyWith(
                 color: AppColors.secondary
               ),
@@ -95,22 +42,46 @@ class MealPage extends GetView<MealController> {
             ),
             AppSpacing.spacingVertical24,
             GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount: 3,
               crossAxisSpacing: 24,
               mainAxisSpacing: 24,
               shrinkWrap: true,
               childAspectRatio: 3,
-              children: controller.foods.map((food) {
+              children: controller.currentMeal.value.foods!.asMap().entries.map((entry) {
+                final food = entry.value;
                 return PlanItemCard(
                   text: food.name ?? '',
-                  image: '',
-                  onTap: controller.viewFoodInformation,
+                  image: food.imageUrl,
+                  onTap: () => controller.viewFoodInformation(food),
                 );
               }).toList(),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildCustomBar() {
+    return CustomBar(
+      title: '${controller.currentMeal.value.timeMeal?.label} | ',
+      extraTitle: controller.getMealDate(),
+      onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
+      actions: [
+        BaseButton(
+          text: 'edit_food'.tr,
+          width: ContainerSize.baseButtonSmallWidth,
+          backgroundColor: AppColors.warning,
+          onTap: () => controller.openChangeMeal(controller.currentMeal.value.timeMeal),
+        ),
+        AppSpacing.spacingHorizontal16,
+        BaseButton(
+          text: 'completed'.tr,
+          width: ContainerSize.baseButtonSmallWidth,
+          backgroundColor: AppColors.secondary,
+          onTap: controller.changeMealToCompleted,
+        ),
+      ],
     );
   }
 }

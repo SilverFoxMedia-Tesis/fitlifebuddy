@@ -33,17 +33,19 @@ class MealsView extends GetView<PlanController> {
   Widget _buildMeals() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: controller.meals.map((meal) {
-        return Padding(
-          padding: AppPadding.paddingOnlyTop24,
-          child: _buildMeal(meal, null, null),
-        );
-      }).toList(),
+      children: <Widget>[
+        for (var entry in controller.meals.entries)
+          Padding(
+            padding: AppPadding.paddingOnlyTop24,
+            child: _buildMeal(entry.key, entry.value),
+          ),
+      ],
     );
   }
 
-  Widget _buildMeal(Meal meal, String? image, void Function()? onTapMeal) {
+  Widget _buildMeal(int index, Meal meal) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -54,9 +56,9 @@ class MealsView extends GetView<PlanController> {
         ),
         AppSpacing.spacingVertical24,
         PlanItemCard(
-          text: controller.getMealName(0), 
-          image: image,
-          onTap: onTapMeal,
+          text: meal.getName(), 
+          image: meal.foods?.first.imageUrl,
+          onTap: () => controller.viewMealDetails(index),
         ),
       ],
     );

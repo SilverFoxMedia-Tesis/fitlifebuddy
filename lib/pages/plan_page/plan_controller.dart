@@ -9,6 +9,8 @@ import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
+import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
+import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -22,12 +24,8 @@ class PlanController extends GetxController {
   final currentDateTime = DateTime.now().obs;
   final currentPlan = Plan().obs;
   final currentDaily = Daily().obs;
-  final meals = <Meal>[].obs;
-  final exercises = <Exercise>[].obs;
-  final breakfastImage = "".obs;
-  final lunchImage = "".obs;
-  final dinnerImage = "".obs;
-  final routineImage = "".obs;
+  final meals = <int, Meal>{}.obs;
+  final exercises = <int, Exercise>{}.obs;
 
 
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
@@ -38,10 +36,6 @@ class PlanController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await getDailiesByDay();
-    breakfastImage.value = await unsplashService.getReferencePhoto('tostada') ?? '';
-    lunchImage.value = await unsplashService.getReferencePhoto('verduras y pollo') ?? '';
-    routineImage.value = await unsplashService.getReferencePhoto('chuleta') ?? '';
-
   }
 
   Future<void> onDateChange(DateTime dateTime) async {
@@ -49,18 +43,14 @@ class PlanController extends GetxController {
     await getDailiesByDay();
   }
 
-  String capitalize(String text) {
-    if (text.isEmpty) return text;
-    text = text.toLowerCase();
-    return text[0].toUpperCase() + text.substring(1);
-  }
-
   Future<void> getDailiesByDay() async {
     try {
-      final list = await dailyApi.getMealsByDailyId(1);
-      if (list.isNotEmpty) {
-        meals.addAll(list);
-      }
+      // final list = await dailyApi.getMealsByDailyId(1);
+      // if (list.isNotEmpty) {
+      //   for (var i = 0; i < meals.length; i++) {
+      //     meals[i] = list[i];
+      //   }
+      // }
       getFoodsByMealId();
     } catch (e) {
       displayErrorToast(e);
@@ -68,33 +58,37 @@ class PlanController extends GetxController {
   }
 
   Future<void> getFoodsByMealId() async {
-    for (var i = 0; i < meals.length; i++) {
-      if (meals[i].id != null) {
-        final id = meals[i].id. toString();
-        final mealFoods = await mealApi.getMealFoodsByMealId(id);
-        if (mealFoods.isNotEmpty) {
-          for (var mf in mealFoods) {
-            meals[i].foods?.add(mf.food!);
-          }
-        }
-      }
-    }
+    completeDaily();
+    // for (var i = 0; i < meals.length; i++) {
+    //   if (meals[i]?.id != null) {
+    //     final id = meals[i]!.id. toString();
+    //     final mealFoods = await mealApi.getMealFoodsByMealId(id);
+    //     if (mealFoods.isNotEmpty) {
+    //       for (var mf in mealFoods) {
+    //         meals[i]?.foods?.add(mf.food!);
+    //       }
+    //     }
+    //   }
+    // }
   }
 
-  String getMealName(int index) {
-    final meal = meals[index];
-    var result = '';
-    for (var f in meal.foods!) {
-      result += " $f";
-    }
-    return result;
-  }
-
-  void viewMealDetails() {
+  void viewMealDetails(int index) {
+    mealIndex = index;
     Get.toNamed(AppRoutes.meal);
   }
 
   void viewRoutineDetails() {
     Get.toNamed(AppRoutes.routine);
+  }
+
+  void completeDaily() {
+    var list = dMeals;
+    for (var i = 0; i < list.length; i++) {
+      meals[i] = list[i];
+    }
+    var list2 = dExercises;
+    for (var i = 0; i < list2.length; i++) {
+      exercises[i] = list2[i];
+    }
   }
 }

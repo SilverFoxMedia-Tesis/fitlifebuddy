@@ -4,9 +4,11 @@ import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
+import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChangeExerciseCard extends StatelessWidget {
   const ChangeExerciseCard({super.key});
@@ -25,31 +27,34 @@ class ChangeExerciseCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Selecciona un ejercicio',
+            'select_an_exercise'.tr,
             style: AppTextStyle.robotoSemibold24.copyWith(
               color: AppColors.secondary,
             ),
           ),
           AppSpacing.spacingVertical20,
-          Column(
-            children: [
-              const PlanItemCard(
-                text: 'Ejercicio 4',
-              ),
-              AppSpacing.spacingVertical20,
-              const PlanItemCard(
-                text: 'Ejercicio 5',
-              ),
-              AppSpacing.spacingVertical20,
-              const PlanItemCard(
-                text: 'Ejercicio 6',
-              ),
-              AppSpacing.spacingVertical20,
-              BaseButton(
-                text: 'Cambiar ejercicio',
-                onTap: () {},
-              ),
-            ],
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: dExtraExercises.length,
+              itemBuilder: (context, index) {
+                final exercise = dExtraExercises[index];
+                return Column(
+                  children: [
+                    PlanItemCard(
+                      text: exercise.workout ?? '',
+                      description: '${exercise.repsPerSet} x ${exercise.sets}',
+                      image: exercise.imageUrl,
+                    ),
+                    AppSpacing.spacingVertical20,
+                  ],
+                );
+              },
+            ),
+          ),
+          BaseButton(
+            text: 'edit_exercise'.tr,
+            onTap: () {},
           )
         ],
       ),
