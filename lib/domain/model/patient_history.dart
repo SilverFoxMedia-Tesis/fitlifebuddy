@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
-import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
+import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class PatientHistory {
@@ -15,9 +15,9 @@ class PatientHistory {
   num? weight;
   Gender? gender;
   DietType? dietType;
-  Frecuently? frecuently;
   Patient? patient;
   PhysicalActivity? physicalActivity;
+  TypeHealthCondition? typeHealthCondition;
 
   PatientHistory({
     this.id,
@@ -27,9 +27,9 @@ class PatientHistory {
     this.weight,
     this.gender,
     this.dietType,
-    this.frecuently,
     this.patient,
     this.physicalActivity,
+    this.typeHealthCondition,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,9 +41,9 @@ class PatientHistory {
       'weight': weight,
       'gender': gender?.value,
       'dietType': dietType?.value,
-      'frecuently': frecuently?.value,
       'pacient': patient?.toMap(),
       'physicalActivity': physicalActivity?.value,
+      'typeHealthCondition': typeHealthCondition?.value,
     };
   }
 
@@ -56,9 +56,9 @@ class PatientHistory {
       weight: map['weight'] != null ? map['weight'] as num : null,
       gender: EnumExtension.getValue(Gender.values ,map['gender']),
       dietType: EnumExtension.getValue(DietType.values, map['dietType']),
-      frecuently: EnumExtension.getValue(Frecuently.values, map['frecuently']),
       patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
       physicalActivity: EnumExtension.getValue(PhysicalActivity.values, map['physicalActivity']),
+      typeHealthCondition: EnumExtension.getValue(TypeHealthCondition.values ,map['typeHealthCondition']),
     );
   }
 

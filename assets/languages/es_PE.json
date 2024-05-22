@@ -130,5 +130,7 @@
     "dietaryConditionsUpdate": "Actualización de condiciones alimentarias del paciente",
     "dietaryConditionsUpdateInstructions": "Para actualizar las condiciones alimentarias de un paciente, debe dirigirse al apartado Perfil y darle clic al botón en forma de lápiz al costado del título Condiciones alimentarias. Puede cambiar uno o más campos si desea. Una vez realizado los cambios, dar clic a Guardar.",
     "healthConditionsUpdate": "Actualización de condiciones de salud del paciente",
-    "healthConditionsUpdateInstructions": "Para actualizar las condiciones de salud de un paciente, debe dirigirse al apartado Perfil y darle clic al botón en forma de lápiz al costado del título Condiciones de salud. Puede cambiar uno o más campos si desea. Una vez realizado los cambios, dar clic a Guardar."
+    "healthConditionsUpdateInstructions": "Para actualizar las condiciones de salud de un paciente, debe dirigirse al apartado Perfil y darle clic al botón en forma de lápiz al costado del título Condiciones de salud. Puede cambiar uno o más campos si desea. Una vez realizado los cambios, dar clic a Guardar.",
+    "validator_max_length": "El número no puede tener más de 3 dígitos",
+    "validator_max_input": "El número no puede mayor de 250"
 }

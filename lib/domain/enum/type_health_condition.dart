@@ -1,6 +1,8 @@
 enum TypeHealthCondition { 
+  no('NO', 'No'),
   surgery('SURGERY', 'Cirugía'),
-  illness('ILLNESS', 'Enfermedad');
+  illness('ILLNESS', 'Enfermedad'),
+  diabetes('DIABETES', 'Diabetes');
 
   const TypeHealthCondition(this.value, this.label);
   final String value;

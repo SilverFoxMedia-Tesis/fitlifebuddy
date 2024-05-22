@@ -59,3 +59,17 @@ String? validateNotNullOrEmpty(String? input) {
   }
   return null;
 }
+
+String? validateWeightAndHeight(String? input) {
+  input = input ?? "";
+  if (input.trim().isEmpty) {
+    return "validator_empty".tr;
+  } else if (input.length > 3) {
+    return "validator_max_length".tr;
+  } else if (int.parse(input) > 250) {
+    return "validator_max_input".tr;
+  } else if (!RegExp(r'^[0-9]+$').hasMatch(input)) {
+    return "validator_numbers_invalid".tr;
+  }
+  return null;
+}
