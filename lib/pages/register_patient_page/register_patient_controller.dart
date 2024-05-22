@@ -9,7 +9,6 @@ import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
-import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
 import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
@@ -289,8 +288,8 @@ class RegisterPatientController extends GetxController{
             currentPatientHistory.value.age = 0;
             currentPatientHistory.value.abdominalCircumference = 0;
             currentPatientHistory.value.dietType = DietType.omnivore;
-            currentPatientHistory.value.frecuently = Frecuently.monthly;
             currentPatientHistory.value.physicalActivity = PhysicalActivity.no;
+            currentPatientHistory.value.typeHealthCondition = TypeHealthCondition.no;
             await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
             _appToast.showToast(
               message: 'personal_info_saved'.tr,
