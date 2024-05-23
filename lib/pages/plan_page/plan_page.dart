@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
+//import 'package:fitlifebuddy/pages/plan_page/widgets/empty_container.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
@@ -31,7 +32,7 @@ class PlanPage extends GetView<PlanController> {
               AppSpacing.spacingVertical24,
               buildCustomBar(),
               AppSpacing.spacingVertical24,
-              // if (false)
+              // if (!controller.hasPLan)
               // Center(
               //   child: EmptyContainer(
               //     text: 'no_plan'.tr, 
@@ -39,7 +40,7 @@ class PlanPage extends GetView<PlanController> {
               //     onTap: () => Get.toNamed(AppRoutes.routine),
               //   ),
               // ),
-              // if (true)
+              // if (controller.hasPLan)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

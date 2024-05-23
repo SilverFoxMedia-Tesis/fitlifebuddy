@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 class BaseApi {
-  final String baseUrl = 'http://18.229.162.139:8080/api';
+  final String baseUrl = 'http://15.228.8.131:8080/api';
   http.Client client = http.Client();
 
   Uri getUri(String endpoint) {

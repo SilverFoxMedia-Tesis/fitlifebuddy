@@ -29,6 +29,7 @@ class PlanController extends GetxController {
 
 
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
+  bool get hasPLan => currentPlan.value.id != null;
   bool get hasMeals => meals.isNotEmpty;
   bool get hasExercises => exercises.isNotEmpty;
 
