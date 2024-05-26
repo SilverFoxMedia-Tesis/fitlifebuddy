@@ -60,12 +60,14 @@ class AppDialog extends StatelessWidget {
             ],
             AppSpacing.spacingVertical24,
             Row(
-              mainAxisSize: MainAxisSize.max,
+              //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BaseButton(
                   text: cancelButtonTitle ?? "cancel".tr,
                   onTap: onClose ?? Get.back,
+                  textColor: AppColors.danger,
+                  backgroundColor: Colors.transparent,
                 ),
                 const Spacer(),
                 ...actions,

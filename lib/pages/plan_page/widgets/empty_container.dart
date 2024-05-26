@@ -26,7 +26,7 @@ class EmptyContainer extends StatelessWidget {
           width: ContainerSize.baseButtonWidth,
           child: Text(
             text,
-            style: AppTextStyle.robotoSemibold24.copyWith(
+            style: AppTextStyle.robotoSemibold16.copyWith(
               color: AppColors.secondary,
             ),
             textAlign: TextAlign.center,

@@ -4,19 +4,26 @@ import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/daily_api.dart';
 import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
+import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
+import 'package:fitlifebuddy/domain/service/person_service.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_dialog.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:get/get.dart';
+
 
 class PlanController extends GetxController {
   final dateTimeLineController = EasyInfiniteDateTimelineController();
   final unsplashService = Get.find<UnsplashService>();
+  final patientService = Get.find<PatientService>();
+  final getXDialog = Get.find<GetXDialog>();
   final planApi = Get.find<PlanApi>();
   final dailyApi = Get.find<DailyApi>();
   final mealApi = Get.find<MealApi>();
@@ -27,7 +34,10 @@ class PlanController extends GetxController {
   final meals = <int, Meal>{}.obs;
   final exercises = <int, Exercise>{}.obs;
 
+  final frequency = Frecuently.monthly.label.obs;
+  final frequencies = Frecuently.values.map((e) => e.label).toList();
 
+  int get patientId => patientService.patientId;
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
   bool get hasPLan => currentPlan.value.id != null;
   bool get hasMeals => meals.isNotEmpty;
@@ -91,5 +101,20 @@ class PlanController extends GetxController {
     for (var i = 0; i < list2.length; i++) {
       exercises[i] = list2[i];
     }
+  }
+
+  void openGeneratePlanDialog() async {
+    await getXDialog.showDialog(const PlanDialog());
+  }
+
+  onChangeFrecuency(String? value) {
+    if (value != null && value != '') {
+      frequency.value = value;
+    }
+  }
+
+  void generatePlan() async {
+    final finalFrequency = Frecuently.values.firstWhere((e) => e.label == frequency.value);
+    await planApi.createPlan(patientId, finalFrequency.value);
   }
 }
