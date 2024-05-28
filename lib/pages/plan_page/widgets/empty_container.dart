@@ -2,7 +2,7 @@ import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class EmptyContainer extends StatelessWidget {
@@ -33,7 +33,7 @@ class EmptyContainer extends StatelessWidget {
           ),
         ),
         AppSpacing.spacingVertical24,
-        BaseButton(
+        PrimaryButton(
           text: buttonTitle,
           onTap: onTap,
         ),

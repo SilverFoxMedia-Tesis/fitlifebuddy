@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/enum/time_meal.dart';
 import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,7 +63,7 @@ class ChangeMealCard extends StatelessWidget {
               },
             ),
           ),
-          BaseButton(
+          PrimaryButton(
             text: 'edit_food'.tr,
             onTap: () {},
           )

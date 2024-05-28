@@ -1,5 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
@@ -7,7 +5,8 @@ import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controll
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -67,10 +66,9 @@ class PatientProfilePage extends GetView<PatientProfileController> {
         Obx(
           () => Visibility(
             visible: controller.isEditing,
-            child: BaseButton(
+            child: PrimaryButton(
               text: 'cancel'.tr,
-              width: ContainerSize.baseButtonSmallWidth,
-              backgroundColor: AppColors.danger,
+              actionSeverity: ActionSeverity.danger,
               onTap: controller.cancel,
             ),
           ),
@@ -79,10 +77,8 @@ class PatientProfilePage extends GetView<PatientProfileController> {
         Obx(
           () => Visibility(
             visible: controller.isEditing,
-            child: BaseButton(
+            child: PrimaryButton(
               text: 'save'.tr,
-              width: ContainerSize.baseButtonSmallWidth,
-              backgroundColor: AppColors.secondary,
               onTap: controller.handleProfileUpdate,
             ),
           ),

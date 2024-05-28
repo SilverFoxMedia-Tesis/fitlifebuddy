@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -9,7 +8,7 @@ import 'package:fitlifebuddy/pages/register_patient_page/register_patient_contro
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -49,8 +48,7 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        BaseButton(
-          width: ContainerSize.baseButtonSmallWidth,
+        PrimaryButton(
           text: 'finish'.tr,
           onTap: controller.register,
         ),

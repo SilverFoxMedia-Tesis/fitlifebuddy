@@ -2,7 +2,7 @@ import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/app_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +23,7 @@ class PlanDialog extends GetView<PlanController> {
         ),
       ),
       actions: [
-        BaseButton(
+        PrimaryButton(
           text: 'generate_plan'.tr,
           onTap: controller.generatePlan,
         )

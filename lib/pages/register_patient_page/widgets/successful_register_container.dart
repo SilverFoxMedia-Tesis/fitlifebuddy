@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,7 +59,7 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
             ),
           ),
           AppSpacing.spacingVertical24,
-          BaseButton(
+          PrimaryButton(
             text: 'go_to_login'.tr,
             onTap: controller.goToLogin,
           ),

@@ -3,7 +3,8 @@ import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,11 +64,10 @@ class AppDialog extends StatelessWidget {
               //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BaseButton(
+                PrimaryButton(
                   text: cancelButtonTitle ?? "cancel".tr,
                   onTap: onClose ?? Get.back,
-                  textColor: AppColors.danger,
-                  backgroundColor: Colors.transparent,
+                  actionSeverity: ActionSeverity.danger,
                 ),
                 const Spacer(),
                 ...actions,

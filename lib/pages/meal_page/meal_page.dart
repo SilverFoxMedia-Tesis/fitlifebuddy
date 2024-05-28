@@ -6,12 +6,11 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/base_button/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
+import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../core/theme/size/container_size.dart';
 
 class MealPage extends GetView<MealController> {
   const MealPage({super.key});
@@ -68,17 +67,14 @@ class MealPage extends GetView<MealController> {
       extraTitle: controller.getMealDate(),
       onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
       actions: [
-        BaseButton(
+        PrimaryButton(
           text: 'edit_food'.tr,
-          width: ContainerSize.baseButtonSmallWidth,
-          backgroundColor: AppColors.warning,
+          actionSeverity: ActionSeverity.warning,
           onTap: () => controller.openChangeMeal(controller.currentMeal.value.timeMeal),
         ),
         AppSpacing.spacingHorizontal16,
-        BaseButton(
+        PrimaryButton(
           text: 'completed'.tr,
-          width: ContainerSize.baseButtonSmallWidth,
-          backgroundColor: AppColors.secondary,
           onTap: controller.changeMealToCompleted,
         ),
       ],
