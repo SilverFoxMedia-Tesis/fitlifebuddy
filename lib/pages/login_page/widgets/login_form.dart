@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/button_size.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,6 +73,7 @@ class LoginForm extends GetView<LoginController> {
             AppSpacing.spacingVertical24,
             BaseButton(
               text: 'login'.tr,
+              size: ButtonSize.large,
               onTap: controller.login,
             ),
             AppSpacing.spacingVertical24,
