@@ -65,7 +65,7 @@ class _AppBannerState extends State<AppBanner> with SingleTickerProviderStateMix
           child: Text(
             widget.text,
             style: AppTextStyle.robotoSemibold16.copyWith(
-              color: AppColors.white,
+              color: AppColors.light,
             ),
             textAlign: TextAlign.center,
           ),

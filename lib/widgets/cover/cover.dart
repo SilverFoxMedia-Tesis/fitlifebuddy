@@ -23,7 +23,7 @@ class Cover extends StatelessWidget {
     return Expanded(
       flex: 7,
       child: Container(
-        color: AppColors.white,
+        color: AppColors.light,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

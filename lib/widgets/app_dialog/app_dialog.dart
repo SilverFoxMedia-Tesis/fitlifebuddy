@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
-import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,7 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding: const EdgeInsets.all(48),
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.light,
       shape: const RoundedRectangleBorder(
         borderRadius: AppBorderRadius.borderRadius14,
       ),
@@ -64,7 +64,7 @@ class AppDialog extends StatelessWidget {
               //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PrimaryButton(
+                BaseButton(
                   text: cancelButtonTitle ?? "cancel".tr,
                   onTap: onClose ?? Get.back,
                   actionSeverity: ActionSeverity.danger,

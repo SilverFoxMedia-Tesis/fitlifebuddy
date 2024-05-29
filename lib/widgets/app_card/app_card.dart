@@ -32,7 +32,7 @@ class AppCard extends StatelessWidget {
         width: ContainerSize.appCardWidth,
         height: ContainerSize.appCardHeight,
         decoration: const BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.light,
           borderRadius: AppBorderRadius.borderRadiusLg,
           boxShadow: [AppBoxShadow.secondary25Blur8],
         ),

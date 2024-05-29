@@ -5,7 +5,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_controller.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +46,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             inputType: TextInputType.emailAddress,
           ),
           AppSpacing.spacingVertical24,
-          PrimaryButton(
+          BaseButton(
             text: 'recover_password'.tr,
             onTap: controller.sendRecoverLink,
           ),

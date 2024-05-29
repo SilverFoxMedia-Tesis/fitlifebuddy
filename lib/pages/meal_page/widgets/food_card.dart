@@ -21,7 +21,7 @@ class FoodCard extends StatelessWidget {
           height: 263,
           padding: AppPadding.paddingDialog,
           decoration: const BoxDecoration(
-            color: AppColors.white,
+            color: AppColors.light,
             borderRadius: AppBorderRadius.borderRadiusXl,
             boxShadow: [AppBoxShadow.secondary25Blur8],
           ),

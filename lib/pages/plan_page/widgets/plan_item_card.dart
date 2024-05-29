@@ -32,7 +32,7 @@ class PlanItemCard extends StatelessWidget {
           maxHeight: ContainerSize.basePlanItemCardHeight,
         ),
         decoration: const BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.light,
           borderRadius: AppBorderRadius.borderRadius14,
           boxShadow: [AppBoxShadow.secondary25Blur8],
         ),

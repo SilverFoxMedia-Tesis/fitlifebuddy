@@ -48,7 +48,7 @@ class PlanView extends GetView<PlanController> {
     return Container(
       padding: AppPadding.padding24,
       decoration: const BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.light,
         borderRadius: AppBorderRadius.borderRadius14,
         boxShadow: [AppBoxShadow.secondary25Blur8],
       ),
@@ -57,7 +57,7 @@ class PlanView extends GetView<PlanController> {
           return Container(
             padding: AppPadding.paddingDateTimeLineItem,
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.primary : AppColors.white,
+              color: isSelected ? AppColors.primary : AppColors.light,
               borderRadius: AppBorderRadius.borderRadiusXxxl,
               boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
             ),
@@ -67,14 +67,14 @@ class PlanView extends GetView<PlanController> {
                 Text(
                   dayName.capitalizeFirst ?? '',
                   style: AppTextStyle.robotoRegular16.copyWith(
-                    color: isSelected ? AppColors.white : AppColors.secondary,
+                    color: isSelected ? AppColors.light : AppColors.secondary,
                   ),
                 ),
                 AppSpacing.spacingVertical16,
                 Text(
                   dayNumber,
                   style: AppTextStyle.robotoSemibold20.copyWith(
-                    color: isSelected ? AppColors.white : AppColors.primary,
+                    color: isSelected ? AppColors.light : AppColors.primary,
                   ),
                 ),
                 AppSpacing.spacingVertical4,
@@ -82,7 +82,7 @@ class PlanView extends GetView<PlanController> {
                   width: ContainerSize.pointSize,
                   height: ContainerSize.pointSize,
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.white : AppColors.primary,
+                    color: isSelected ? AppColors.light : AppColors.primary,
                     shape: BoxShape.circle,
                   ),
                 ),

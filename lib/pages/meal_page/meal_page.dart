@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
-import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,13 +67,13 @@ class MealPage extends GetView<MealController> {
       extraTitle: controller.getMealDate(),
       onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
       actions: [
-        PrimaryButton(
+        BaseButton(
           text: 'edit_food'.tr,
           actionSeverity: ActionSeverity.warning,
           onTap: () => controller.openChangeMeal(controller.currentMeal.value.timeMeal),
         ),
         AppSpacing.spacingHorizontal16,
-        PrimaryButton(
+        BaseButton(
           text: 'completed'.tr,
           onTap: controller.changeMealToCompleted,
         ),

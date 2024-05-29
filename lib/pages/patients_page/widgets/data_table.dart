@@ -14,7 +14,7 @@ class PatientsDataTable extends StatelessWidget {
       headingRowColor: MaterialStatePropertyAll(AppColors.primary.withOpacity(0.5)),
       headingRowHeight: 64,
       headingTextStyle: AppTextStyle.robotoSemibold14.copyWith(color: AppColors.secondary),
-      dataRowColor: const MaterialStatePropertyAll(AppColors.white),
+      dataRowColor: const MaterialStatePropertyAll(AppColors.light),
       dataRowHeight: 64,
       dataTextStyle: AppTextStyle.robotoRegular14.copyWith(color: AppColors.secondary),
       columns: const [

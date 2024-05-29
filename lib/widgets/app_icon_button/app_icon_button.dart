@@ -13,7 +13,7 @@ class AppIconButton extends StatelessWidget {
   final bool outlined;
   const AppIconButton({
     required this.iconData,
-    this.iconColor = AppColors.white,
+    this.iconColor = AppColors.light,
     this.size = 14,
     this.onTap,
     this.backgroundColor = AppColors.primary,

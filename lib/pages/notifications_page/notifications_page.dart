@@ -18,7 +18,7 @@ class NotificationPage extends StatelessWidget {
       height: 960,
       padding: AppPadding.padding32,
       decoration: const BoxDecoration(
-        color: AppColors.white,
+        color: AppColors.light,
         borderRadius: AppBorderRadius.borderRadiusXl,
         boxShadow: [AppBoxShadow.secondary25Blur8],
       ),

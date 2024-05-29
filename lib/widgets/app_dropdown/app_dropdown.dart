@@ -72,7 +72,7 @@ class AppDropdown extends StatelessWidget {
                 width: width,
                 padding: AppPadding.padding16,
                 decoration: const BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.light,
                   borderRadius: AppBorderRadius.borderRadius14,
                   boxShadow: [AppBoxShadow.primary25Blur8],
                 ),
@@ -88,7 +88,7 @@ class AppDropdown extends StatelessWidget {
                 maxHeight: 200,
                 width: width,
                 decoration: const BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.light,
                   borderRadius: AppBorderRadius.borderRadius14,
                   boxShadow: [AppBoxShadow.primary25Blur8],
                 ),

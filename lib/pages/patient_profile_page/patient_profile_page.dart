@@ -6,7 +6,7 @@ import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
-import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +66,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
         Obx(
           () => Visibility(
             visible: controller.isEditing,
-            child: PrimaryButton(
+            child: BaseButton(
               text: 'cancel'.tr,
               actionSeverity: ActionSeverity.danger,
               onTap: controller.cancel,
@@ -77,7 +77,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
         Obx(
           () => Visibility(
             visible: controller.isEditing,
-            child: PrimaryButton(
+            child: BaseButton(
               text: 'save'.tr,
               onTap: controller.handleProfileUpdate,
             ),

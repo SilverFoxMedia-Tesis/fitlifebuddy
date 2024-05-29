@@ -1,1 +1,1 @@
-enum ButtonSize { small, medium, large } 
+enum ButtonSize { standard, large, fluid } 

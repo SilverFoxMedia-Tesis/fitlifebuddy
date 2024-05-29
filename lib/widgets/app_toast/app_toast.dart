@@ -58,7 +58,7 @@ class AppToast {
             maxWidth: ContainerSize.snackBarMaxWidth,
           ),
           decoration: const BoxDecoration(
-            color: AppColors.white,
+            color: AppColors.light,
             borderRadius: AppBorderRadius.borderRadius14,
             boxShadow: [AppBoxShadow.primary25Blur8],
           ),

@@ -73,7 +73,7 @@ class AppTextfield extends StatelessWidget {
                 maxWidth: width,
               ),
               decoration: const BoxDecoration(
-                color: AppColors.white,
+                color: AppColors.light,
                 borderRadius: AppBorderRadius.borderRadius14,
                 boxShadow: [AppBoxShadow.primary25Blur8],
               ),

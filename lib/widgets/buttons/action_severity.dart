@@ -1,1 +1,1 @@
-enum ActionSeverity { primary, secondary, info, danger, warning, success }
+enum ActionSeverity { primary, secondary, success, danger, warning }

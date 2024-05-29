@@ -32,7 +32,7 @@ class NotificationCard extends StatelessWidget {
         width: ContainerSize.notificationCardWidth,
         height: ContainerSize.notificationCardHeight,
         decoration: const BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.light,
           borderRadius: AppBorderRadius.borderRadiusLg,
           boxShadow: [AppBoxShadow.secondary25Blur8],
         ),

@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/buttons/primary_button.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -99,7 +99,7 @@ class PersonalInfoForm extends GetView<RegisterPatientController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        PrimaryButton(
+        BaseButton(
           text: 'continue'.tr,
           onTap: () => controller.onChangedPage(1),
         ),
