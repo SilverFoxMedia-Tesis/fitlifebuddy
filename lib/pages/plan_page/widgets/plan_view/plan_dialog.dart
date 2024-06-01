@@ -14,6 +14,7 @@ class PlanDialog extends GetView<PlanController> {
     return AppDialog(
       title: 'close_to_generate_plan'.tr,
       description: 'select_a_frecuency'.tr,
+      onClose: controller.onDialogClose,
       extraContent: Obx(
         () => AppDropdown(
           items: controller.frequencies,
@@ -23,9 +24,12 @@ class PlanDialog extends GetView<PlanController> {
         ),
       ),
       actions: [
-        BaseButton(
-          text: 'generate_plan'.tr,
-          onTap: controller.generatePlan,
+        Obx(
+          () => BaseButton(
+            text: 'generate_plan'.tr,
+            onTap: () => controller.generatePlan(),
+            loading: controller.newPlanLoading.value,
+          ),
         )
       ],
     );

@@ -39,8 +39,8 @@ class MealApi {
   }
 
   // Get MealFoods by IdMeal
-  Future<List<MealFood>> getMealFoodsByMealId(String idMeal) async {
-    final response = await _apiBase.get('meals/searchMealFoodsByIdMeal/$idMeal');
+  Future<List<MealFood>> getMealFoodsByMealId(int mealId) async {
+    final response = await _apiBase.get('meals/searchMealFoodsByIdMeal/$mealId');
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map((i) => MealFood.fromMap(i)).toList();
   }

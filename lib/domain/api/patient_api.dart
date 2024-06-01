@@ -70,7 +70,7 @@ class PatientApi {
   }
 
   // Get Plans by PatientId
-  Future<List<Plan>> getRoutinesByDailyId(int patientId) async {
+  Future<List<Plan>> getPlanByPatientId(int patientId) async {
     final response = await _apiBase.get('pacients/searchPlanByIdPacient/$patientId');
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map<Plan>((i) => Plan.fromMap(i)).toList();

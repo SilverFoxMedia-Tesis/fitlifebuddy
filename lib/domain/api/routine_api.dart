@@ -36,4 +36,11 @@ class RoutineApi {
   Future<void> deleteRoutine(int id) async {
     await _apiBase.delete('routines/$id');
   }
+
+  // Get RoutineExercises by routineId
+  Future<List<Routine>> getRoutineExercisesByRoutineId(int routineId) async {
+    final response = await _apiBase.get('routines/searchRoutineExercisesByIdRoutine/$routineId');
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Routine.fromMap(i)).toList();
+  }
 }

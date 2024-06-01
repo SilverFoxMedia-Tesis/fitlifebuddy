@@ -5,7 +5,6 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
-import 'package:fitlifebuddy/widgets/buttons/button_size.dart';
 import 'package:fitlifebuddy/widgets/buttons/button_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
