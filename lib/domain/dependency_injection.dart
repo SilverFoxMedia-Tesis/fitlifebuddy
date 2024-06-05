@@ -17,8 +17,10 @@ import 'package:fitlifebuddy/domain/api/routine_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_exercises_api.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/domain/service/person_service.dart';
+import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/pages/login_page/login_controller.dart';
+import 'package:fitlifebuddy/pages/notifications_page/notifications_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,7 @@ class DependencyInjection {
   static Future<void> init() async {
     ///Persisted controllers
     Get.lazyPut(() => LoginController(), fenix: true);
+    Get.lazyPut(() => NotificationsController(), fenix: true);
 
     //Dialog
     Get.lazyPut(() => GetXDialog(), fenix: true);
@@ -48,12 +51,13 @@ class DependencyInjection {
     Get.lazyPut(() => PlanApi(), fenix: true);
     Get.lazyPut(() => QuestionApi(), fenix: true);
     Get.lazyPut(() => RoutineApi(), fenix: true);
+    Get.lazyPut(() => RoutineExerciseApi(), fenix: true);
 
     //Services
     Get.lazyPut(() => FormValidationService(), fenix: true);
     Get.lazyPut(() => UnsplashService(), fenix: true);
     Get.lazyPut(() => PatientService(), fenix: true);
-    Get.lazyPut(() => RoutineExerciseApi(), fenix: true);
+    Get.lazyPut(() => PlanService(), fenix: true);
 
     Get.lazyPut(() => AppToast(), fenix: true);
   }

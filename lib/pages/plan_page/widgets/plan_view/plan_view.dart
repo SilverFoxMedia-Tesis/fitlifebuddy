@@ -22,15 +22,17 @@ class PlanView extends GetView<PlanController> {
       children: [
         buildDateTimeLine(),
         AppSpacing.spacingVertical24,
-        Text(
-          controller.getCurrentDateTime,
-          style: AppTextStyle.robotoRegular20.copyWith(
-            color: AppColors.secondary,
+        Obx(
+          () => Text(
+            controller.getCurrentDateTime,
+            style: AppTextStyle.robotoRegular20.copyWith(
+              color: AppColors.secondary,
+            ),
           ),
         ),
         AppSpacing.spacingVertical24,
         const SizedBox(
-          height: 360, //TODO: cambiar a valor dinamico
+          height: 330, //TODO: cambiar a valor dinamico
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -97,7 +99,7 @@ class PlanView extends GetView<PlanController> {
           focusDate: controller.currentDateTime.value,
           lastDate: DateTime(2024, 12, 31),
           showTimelineHeader: false,
-          onDateChange: controller.onDateChange,
+          onDateChange: (value) async => controller.onDateChange(value),
         ),
       ),
     );

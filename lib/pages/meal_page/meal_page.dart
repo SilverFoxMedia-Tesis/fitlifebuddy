@@ -9,6 +9,7 @@ import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
+import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,10 +27,12 @@ class MealPage extends GetView<MealController> {
             AppSpacing.spacingVertical24,
             buildCustomBar(),
             AppSpacing.spacingVertical24,
-            Text(
-              controller.currentMeal.value.fullname ?? '',
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary
+            Obx(
+              () => Text(
+                controller.fullname,
+                style: AppTextStyle.robotoSemibold20.copyWith(
+                  color: AppColors.secondary
+                ),
               ),
             ),
             AppSpacing.spacingVertical24,
@@ -40,21 +43,10 @@ class MealPage extends GetView<MealController> {
               ),
             ),
             AppSpacing.spacingVertical24,
-            GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              shrinkWrap: true,
-              childAspectRatio: 3,
-              children: controller.currentMeal.value.foods!.asMap().entries.map((entry) {
-                final food = entry.value;
-                return PlanItemCard(
-                  text: food.name ?? '',
-                  image: food.imageUrl,
-                  onTap: () => controller.viewFoodInformation(food),
-                );
-              }).toList(),
-            ),
+            if (controller.hasFoods)
+              buildFoods(),
+            if (!controller.hasFoods)
+              const EmptyResult(message: 'No hay alimentos'),
           ],
         ),
       ),
@@ -63,14 +55,14 @@ class MealPage extends GetView<MealController> {
 
   Widget buildCustomBar() {
     return CustomBar(
-      title: '${controller.currentMeal.value.timeMeal?.label} | ',
+      title: '${controller.timeMeal} | ',
       extraTitle: controller.getMealDate(),
       onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
       actions: [
         BaseButton(
           text: 'edit_food'.tr,
           actionSeverity: ActionSeverity.warning,
-          onTap: () => controller.openChangeMeal(controller.currentMeal.value.timeMeal),
+          onTap: () => controller.openChangeMealDialog(),
         ),
         AppSpacing.spacingHorizontal16,
         BaseButton(
@@ -78,6 +70,25 @@ class MealPage extends GetView<MealController> {
           onTap: controller.changeMealToCompleted,
         ),
       ],
+    );
+  }
+
+  Widget buildFoods() {
+    return Obx(
+      () => GridView.count(
+        crossAxisCount: 3,
+        crossAxisSpacing: 24,
+        mainAxisSpacing: 24,
+        shrinkWrap: true,
+        childAspectRatio: 3,
+        children: controller.currentMeal.value.foods?.map((food) {
+          return PlanItemCard(
+            text: controller.translatedWord(food.id!),
+            image: food.imageUrl,
+            onTap: () => controller.viewFoodInformation(food),
+          );
+        }).toList() ?? [],
+      ),
     );
   }
 }

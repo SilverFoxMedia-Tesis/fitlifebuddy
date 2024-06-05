@@ -2,7 +2,7 @@ import 'package:fitlifebuddy/pages/login_page/login_binding.dart';
 import 'package:fitlifebuddy/pages/login_page/login_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_binding.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_page.dart';
-import 'package:fitlifebuddy/pages/notifications_page/notifications_page.dart';
+//import 'package:fitlifebuddy/pages/notifications_page/notifications_page.dart';
 import 'package:fitlifebuddy/pages/patient_home_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_binding.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_page.dart';
@@ -89,9 +89,9 @@ final appPages = [
     page: () => const PatientsPage(),
     transition: Transition.noTransition,
   ),
-  GetPage(
-    name: AppRoutes.notifications,
-    page: () => const NotificationsPage(),
-    transition: Transition.noTransition,
-  ),
+  // GetPage(
+  //   name: AppRoutes.notifications,
+  //   page: () => const NotificationsPage(),
+  //   transition: Transition.noTransition,
+  // ),
 ];

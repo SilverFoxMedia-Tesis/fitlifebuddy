@@ -5,7 +5,9 @@ import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/pages/notifications_page/notifications_view.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:fitlifebuddy/widgets/side_bar/app_button.dart';
 //import 'package:fitlifebuddy/widgets/app_bar/logo_button.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +54,20 @@ class SideBar extends StatelessWidget {
                   AppButton(
                     icon: AppIcons.notification,
                     text: 'notifications'.tr,
-                    onTap: () => Get.toNamed(AppRoutes.notifications),
+                    onTap: () {
+                      final getXDialog = Get.find<GetXDialog>();
+                      getXDialog.showDialog(
+                      const Stack(
+                        children: [
+                          Positioned(
+                            left: 140,
+                            top: 32,
+                            child: NotificationsView(),
+                          ),
+                        ],
+                      ),
+                    );
+                    },
                   ),
                 ],
               ),

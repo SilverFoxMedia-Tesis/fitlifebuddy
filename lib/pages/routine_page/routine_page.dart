@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
+import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,20 +26,10 @@ class RoutinePage extends GetView<RoutineController> {
             AppSpacing.spacingVertical24,
             buildCustomBar(),
             AppSpacing.spacingVertical24,
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: controller.exercises.map((exercise) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: buildExercise(
-                        exercise, null
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
+            if (controller.hasExercises)
+              buildExercises(),
+            if (!controller.hasExercises)
+              EmptyResult(message: 'no_routine'.tr),
           ],
         ),
       ),
@@ -59,12 +50,29 @@ class RoutinePage extends GetView<RoutineController> {
     );
   }
 
+  Widget buildExercises() {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: controller.currentExercises.entries.map((entry) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: buildExercise(
+                entry.value, null
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
   Widget buildExercise(Exercise exercise, String? image) {
     return Row(
       children: [
         PlanItemCard(
           text: exercise.workout ?? '', 
-          description: '${exercise.repsPerSet} x ${exercise.sets}',
+          description: '${exercise.repsPerSet} repeticiones (${exercise.sets})',
           image: exercise.imageUrl,
         ),
         AppSpacing.spacingHorizontal20,

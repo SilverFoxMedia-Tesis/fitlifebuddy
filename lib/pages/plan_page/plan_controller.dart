@@ -14,9 +14,9 @@ import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/service/person_service.dart';
+import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
 import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
-import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_dialog.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
@@ -27,6 +27,7 @@ class PlanController extends GetxController {
   final dateTimeLineController = EasyInfiniteDateTimelineController();
   final unsplashService = Get.find<UnsplashService>();
   final patientService = Get.find<PatientService>();
+  final planService = Get.find<PlanService>();
   final getXDialog = Get.find<GetXDialog>();
   final patientApi = Get.find<PatientApi>();
   final planApi = Get.find<PlanApi>();
@@ -70,6 +71,7 @@ class PlanController extends GetxController {
       final list = await patientApi.getPlanByPatientId(int.parse(patientId!));
       if (list.isNotEmpty) {
         currentPlan.value = list.first;
+        planService.setPlan(currentPlan.value);
         dailies.value = await planApi.getDailiesByPlanId(currentPlan.value.id!);
         await getDailyInfo();
       }
@@ -91,6 +93,7 @@ class PlanController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     }
+    planService.setDailyDatetime(currentDateTime.value);
   }
 
   Future<void> getMeals(int dailyId) async {
@@ -109,6 +112,10 @@ class PlanController extends GetxController {
         meals[i]?.foods = foodList;
         meals[i]?.fullname = getName(foodList);
       }
+      // meals.forEach((index, meals) async {
+      // meals.imageUrl = await unsplashService.getReferencePhoto(meals.foods!.last.name!, type: 2, lang: 'es');
+      // });
+      planService.setMeals(meals);
     }
   }
 
@@ -138,10 +145,14 @@ class PlanController extends GetxController {
         exercises[i] = filter[i].exercise!;
       }
     }
+    // exercises.forEach((index, exercise) async {
+    //   exercise.imageUrl = await unsplashService.getReferencePhoto(exercise.workout!);
+    // });
+    planService.setExercises(exercises);
   }
 
   void viewMealDetails(int index) {
-    mealIndex = index;
+    planService.mealSelectedIndex.value = index;
     Get.toNamed(AppRoutes.meal);
   }
 

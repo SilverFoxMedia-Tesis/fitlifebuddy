@@ -14,12 +14,14 @@ class UnsplashService {
         ),
       );
 
-  Future<String?> getReferencePhoto(String query) async {
+  Future<String?> getReferencePhoto(String query, {int type = 1, String lang = 'es'}) async {
     try {
+      String context = type == 1 ?  'comida' : 'ejercicio';
       final page = await unsplash.search.photos(
-        query,
+        '{$query $context}',
         page: 1,
         perPage: 10,
+        lang: lang,
       ).goAndGet();
 
       if (page.results.isNotEmpty) {

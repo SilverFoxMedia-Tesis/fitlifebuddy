@@ -5,6 +5,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
+import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +21,16 @@ class MealsView extends GetView<PlanController> {
         () => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Comidas del día',
+              style: AppTextStyle.robotoSemibold20.copyWith(
+                color: AppColors.secondary,
+              ),
+            ),
             if (controller.hasMeals)
               _buildMeals(),
             if (!controller.hasMeals)
-              _buildEmptyList(),
+              EmptyResult(message: 'no_meals'.tr),
         ],
         ),
       ),
@@ -50,7 +57,7 @@ class MealsView extends GetView<PlanController> {
       children: [
         Text(
           meal.timeMeal?.label ?? '',
-          style: AppTextStyle.robotoSemibold20.copyWith(
+          style: AppTextStyle.robotoMedium20.copyWith(
             color: AppColors.secondary,
           ),
         ),
@@ -63,17 +70,4 @@ class MealsView extends GetView<PlanController> {
       ],
     );
   }
-
-  Widget _buildEmptyList() {
-    return Padding(
-      padding: AppPadding.paddingOnlyTop24,
-      child: Text(
-        'no_meals'.tr,
-        style: AppTextStyle.robotoRegular16.copyWith(
-          color: AppColors.secondary,
-        ),
-      ),
-    );
-  }
 }
-
