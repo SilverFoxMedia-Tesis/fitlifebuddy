@@ -45,7 +45,8 @@ class RegisterPatientController extends GetxController{
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
-  final birthdateController = TextEditingController().obs;
+  final birthday = ''.obs;
+  final birthdayController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
@@ -136,7 +137,7 @@ class RegisterPatientController extends GetxController{
 
   void onTapDateTime() async {
     var selectedDate = DateTime.now();
-    if (birthdateController.value.text.isNotEmpty) {
+    if (birthdayController.value.text.isNotEmpty) {
       selectedDate = DateTime.parse(currentPatient.value.birthDate!);
     }
     await showDatePicker(
@@ -147,7 +148,8 @@ class RegisterPatientController extends GetxController{
     ).then((pickedDate) {
       if (pickedDate == null) return;
         selectedDate = pickedDate;
-        birthdateController.value.text = fromDateToInitial(selectedDate);
+        birthday.value = fromDateToInitial(selectedDate);
+        birthdayController.value.text = fromStringToBirthday(birthday.value);
     });
   }
 
@@ -164,8 +166,8 @@ class RegisterPatientController extends GetxController{
   }
 
   void savePatient() {
-    if (birthdateController.value.text.isNotEmpty) {
-      currentPatient.value.birthDate = birthdateController.value.text;
+    if (birthdayController.value.text.isNotEmpty) {
+      currentPatient.value.birthDate = birthday.value;
     }
   }
 

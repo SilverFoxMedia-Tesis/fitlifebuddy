@@ -8,8 +8,8 @@ import 'package:fitlifebuddy/domain/enum/notification_type.dart';
 import 'package:fitlifebuddy/pages/notifications_page/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
 
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({super.key});
+class NotificationsPage extends StatelessWidget {
+  const NotificationsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

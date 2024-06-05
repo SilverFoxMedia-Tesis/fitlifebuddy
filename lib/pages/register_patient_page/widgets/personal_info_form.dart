@@ -58,7 +58,7 @@ class PersonalInfoForm extends GetView<RegisterPatientController> {
                 AppSpacing.spacingVertical24,
                 AppTextfield(
                   title: 'birthdate'.tr,
-                  controller: controller.birthdateController.value,
+                  controller: controller.birthdayController.value,
                   inputType: TextInputType.datetime,
                   onTap: controller.onTapDateTime,
                 ),

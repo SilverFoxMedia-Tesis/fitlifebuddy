@@ -1,6 +1,7 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
+import 'package:fitlifebuddy/core/utils/maps.dart';
 import 'package:fitlifebuddy/domain/api/daily_api.dart';
 import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
@@ -9,6 +10,7 @@ import 'package:fitlifebuddy/domain/api/routine_exercises_api.dart';
 import 'package:fitlifebuddy/domain/enum/frecuently.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
+import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/service/person_service.dart';
@@ -100,9 +102,28 @@ class PlanController extends GetxController {
     for (var i = 0; i < meals.length; i++) {
       if (meals[i]?.id != null) {
         var mealFoods = await mealApi.getMealFoodsByMealId(meals[i]!.id!);
-        meals[i]?.foods = mealFoods.map((mf) => mf.food!).toList();
+        var foodList = <Food>[];
+        for (var mealFood in mealFoods) {
+          foodList.add(mealFood.food!);
+        }
+        meals[i]?.foods = foodList;
+        meals[i]?.fullname = getName(foodList);
       }
     }
+  }
+
+  String getName(List<Food> foods) {
+    if (foods.isEmpty) return '';
+    
+    var names = foods.map((food) => translateFood(food.id!)).toList();
+    
+    if (names.isEmpty) return '';
+    
+    if (names.length == 1) {
+      return names.first.capitalizeFirst ?? '';
+    }
+
+    return '${names.sublist(0, names.length - 1).join(', ')} y ${names.last}'.capitalizeFirst ?? '';
   }
 
   Future<void> getExercises(int dailyId) async {

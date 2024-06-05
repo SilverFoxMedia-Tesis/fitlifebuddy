@@ -4,40 +4,23 @@ import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/time_meal.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';
-import 'package:get/get.dart';
 
 class Meal {
   int? id;
   TimeMeal? timeMeal;
   List<Food>? foods;
   Daily? daily;
+  String? fullname;
+  String? imageUrl;
 
   Meal({
     this.id,
     this.timeMeal,
     this.foods,
     this.daily,
+    this.fullname,
+    this.imageUrl,
   });
-
-  String getName() {
-    if (foods == null || foods!.isEmpty) return '';
-    
-    final names = foods!
-      .map((food) => food.name?.toLowerCase() ?? '')
-      .where((name) => name.isNotEmpty)
-      .toList();
-    
-    if (names.isEmpty) return '';
-
-    if (names.length == 1) {
-      return names.first.capitalizeFirst ?? '';
-    }
-
-    var result = names.sublist(0, names.length - 1).join(', ');
-    result += ' y ${names.last}';
-
-    return result.capitalizeFirst ?? '';
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

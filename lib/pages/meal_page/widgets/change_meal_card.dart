@@ -54,8 +54,8 @@ class ChangeMealCard extends StatelessWidget {
                 return Column(
                   children: [
                     PlanItemCard(
-                      text: meal?.getName() ?? '',
-                      image: meal?.foods?.first.imageUrl,
+                      text: meal?.fullname ?? '',
+                      image: meal?.imageUrl,
                     ),
                     AppSpacing.spacingVertical20,
                   ],

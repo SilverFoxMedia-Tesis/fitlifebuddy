@@ -27,7 +27,7 @@ class MealPage extends GetView<MealController> {
             buildCustomBar(),
             AppSpacing.spacingVertical24,
             Text(
-              controller.currentMeal.value.getName(),
+              controller.currentMeal.value.fullname ?? '',
               style: AppTextStyle.robotoSemibold20.copyWith(
                 color: AppColors.secondary
               ),
