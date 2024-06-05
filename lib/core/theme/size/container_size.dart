@@ -25,4 +25,5 @@ class ContainerSize {
   static const basePlanItemCardHeight = 160.0;
   static const confirmationDialogWidth = 380.0;
   static const loadingIndicator = 24.0;
+  static const smallLoadingIndicator = 10.0;
 }

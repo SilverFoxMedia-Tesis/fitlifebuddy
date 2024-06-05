@@ -49,6 +49,7 @@ class RegisterPatientController extends GetxController{
   final birthdayController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
+  final absPerimeterController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
 
   List<String> genders = Gender.values.map((e) => e.label).toList();
@@ -183,6 +184,7 @@ class RegisterPatientController extends GetxController{
     currentPatientHistory.value.gender = EnumExtension.getLabel(Gender.values, genderSelected.value);
     currentPatientHistory.value.height = num.parse(heightController.value.text);
     currentPatientHistory.value.weight = num.parse(weightController.value.text);
+    currentPatientHistory.value.abdominalCircumference = num.parse(absPerimeterController.value.text);
   }
 
   void saveFCondition() {
@@ -287,7 +289,7 @@ class RegisterPatientController extends GetxController{
           if (newPatient.id != null) {
             currentPatient.value = newPatient;
             currentPatientHistory.value.patient = newPatient;
-            currentPatientHistory.value.age = 0;
+            currentPatientHistory.value.age = calculateAge(newPatient.birthDate!);
             currentPatientHistory.value.abdominalCircumference = 0;
             currentPatientHistory.value.dietType = DietType.omnivore;
             currentPatientHistory.value.physicalActivity = PhysicalActivity.no;
@@ -303,6 +305,16 @@ class RegisterPatientController extends GetxController{
     } catch (e) {
       displayErrorToast(e);
     }
+  }
+
+  int calculateAge(String birthDate) {
+    final date = DateTime.parse(birthDate);
+    final now = DateTime.now();
+    var age = now.year - date.year;
+    if (now.month < date.month || (now.month == date.month && now.day < date.day)) {
+      age--;
+    }
+    return age;
   }
 
   String generatePassword() {

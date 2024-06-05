@@ -27,7 +27,7 @@
     "weight": "Peso",
     "weight_symbol": "Kg",
     "height": "Altura",
-    "height_symbol": "cm",
+    "centimeter_symbol": "cm",
     "continue": "Continuar",
     "register_pacient_2_title": "¿Tiene alguna condición de salud?",
     "condition": "Condición",
@@ -135,5 +135,6 @@
     "validator_max_input": "El número no puede mayor de 250",
     "close_to_generate_plan": "Estas a punto de generar un plan!",
     "select_a_frecuency": "Selecciona una frecuencia",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "abdominal_perimeter": "Perímetro abdominal"
 }

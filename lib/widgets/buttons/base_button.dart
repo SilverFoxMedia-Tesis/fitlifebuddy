@@ -5,6 +5,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/button_size.dart';
 import 'package:fitlifebuddy/widgets/buttons/button_type.dart';
+import 'package:fitlifebuddy/widgets/loading/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget {
@@ -44,13 +45,18 @@ class BaseButton extends StatelessWidget {
           borderRadius: AppBorderRadius.borderRadius24,
           border: getBorder(),
         ),
-        child: Text(
-          text,
-          style: AppTextStyle.robotoSemibold14.copyWith(
-            color: getTextColor(),
-          ),
-          textAlign: TextAlign.center,
-        ),
+        child: loading 
+          ? const LoadingIndicator(
+            color: AppColors.light,
+            size: ContainerSize.smallLoadingIndicator,
+          )
+          : Text(
+              text,
+              style: AppTextStyle.robotoSemibold14.copyWith(
+                color: getTextColor(),
+              ),
+              textAlign: TextAlign.center,
+            ),
       ),
     );
   }

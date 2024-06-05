@@ -38,6 +38,7 @@ class PatientProfileController extends GetxController{
   final birthdayController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
+  final absPerimeterController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
 
   List<String> genders = Gender.values.map((e) => e.label).toList();
@@ -108,20 +109,6 @@ class PatientProfileController extends GetxController{
   Future<void> getFoodConditions(int patientId) async{
     try {
       currentFoodConditions.value = await _patientApi.getFoodConditionsByPatientId(patientId);
-      // currentFoodConditions.value = [
-      //   FoodCondition(
-      //     id: 1,
-      //     name: 'Ejemplo 1',
-      //     type: TypeFoodCondition.allergy,
-      //     patient: currentPatient.value
-      //   ),
-      //   FoodCondition(
-      //     id: 2,
-      //     name: 'Ejemplo 2',
-      //     type: TypeFoodCondition.preference,
-      //     patient: currentPatient.value
-      //   ),
-      // ];
       getFoodConditionsValues();
     } catch (e) {
       displayErrorToast(e);
@@ -131,20 +118,6 @@ class PatientProfileController extends GetxController{
   Future<void> getHealthConditions(int patientId) async{
     try {
       currentHealthConditions.value = await _patientApi.getHealthConditionsByPatientId(patientId);
-      // currentHealthConditions.value = [
-      //   HealthCondition(
-      //     id: 1,
-      //     name: 'Ejemplo 3',
-      //     type: TypeHealthCondition.surgery,
-      //     patient: currentPatient.value
-      //   ),
-      //   HealthCondition(
-      //     id: 2,
-      //     name: 'Ejemplo 4',
-      //     type: TypeHealthCondition.illness,
-      //     patient: currentPatient.value
-      //   ),
-      // ];
       getHealthConditionValues();
     } catch (e) {
       displayErrorToast(e);
@@ -166,6 +139,7 @@ class PatientProfileController extends GetxController{
     onChangedGender(currentPatientHistory.value.gender?.label);
     heightController.value.text = currentPatientHistory.value.height.toString();
     weightController.value.text = currentPatientHistory.value.weight.toString();
+    absPerimeterController.value.text = currentPatientHistory.value.abdominalCircumference.toString();
   }
 
   void getFoodConditionsValues() {
@@ -303,6 +277,7 @@ class PatientProfileController extends GetxController{
       patientHistory.gender = EnumExtension.getLabel(Gender.values, genderSelectedValue.value);
       patientHistory.height = num.parse(heightController.value.text);
       patientHistory.weight = num.parse(weightController.value.text);
+      patientHistory.abdominalCircumference = num.parse(absPerimeterController.value.text);
       final result = await _patientHistoryApi.updatePatientHistory(patientHistory.id!, patientHistory);
       currentPatientHistory.value = result;
     } catch (e) {
