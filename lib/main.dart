@@ -6,6 +6,7 @@ import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 Future<void> main({Widget? page}) async {
@@ -13,6 +14,7 @@ Future<void> main({Widget? page}) async {
   await UserPreferences.initialize();
   await Languages.init();
   await DependencyInjection.init();
+  await initializeDateFormatting('es', null);
   runApp(page ?? const MyApp());
 }
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       translations: Languages(),
       debugShowCheckedModeBanner: false,
       locale: Get.deviceLocale,
-      fallbackLocale: const Locale('es', 'PE'),
+      fallbackLocale: const Locale('es', 'ES'),
       theme: ThemeData(
         textTheme: GoogleFonts.robotoTextTheme(),
         shadowColor: Colors.transparent,

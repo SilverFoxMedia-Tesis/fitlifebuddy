@@ -71,6 +71,13 @@ class SideBar extends StatelessWidget {
                     enableDarkColor: true,
                     onTap: () => Get.toNamed(AppRoutes.questions),
                   ),
+                  AppSpacing.spacingVertical32,
+                  AppButton(
+                    icon: AppIcons.logout, 
+                    text: 'logout'.tr, 
+                    enableDarkColor: true,
+                    onTap: () => Get.toNamed(AppRoutes.login),
+                  ),
                 ],
               ),
             ]

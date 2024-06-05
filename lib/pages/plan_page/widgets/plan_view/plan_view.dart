@@ -52,51 +52,53 @@ class PlanView extends GetView<PlanController> {
         borderRadius: AppBorderRadius.borderRadius14,
         boxShadow: [AppBoxShadow.secondary25Blur8],
       ),
-      child: EasyInfiniteDateTimeLine(
-        itemBuilder: (_, dayNumber, dayName, monthName, fullDate, isSelected) {
-          return Container(
-            padding: AppPadding.paddingDateTimeLineItem,
-            decoration: BoxDecoration(
-              color: isSelected ? AppColors.primary : AppColors.light,
-              borderRadius: AppBorderRadius.borderRadiusXxxl,
-              boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  dayName.capitalizeFirst ?? '',
-                  style: AppTextStyle.robotoRegular16.copyWith(
-                    color: isSelected ? AppColors.light : AppColors.secondary,
+      child: Obx(
+        () => EasyInfiniteDateTimeLine(
+          itemBuilder: (_, dayNumber, dayName, monthName, fullDate, isSelected) {
+            return Container(
+              padding: AppPadding.paddingDateTimeLineItem,
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.primary : AppColors.light,
+                borderRadius: AppBorderRadius.borderRadiusXxxl,
+                boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    dayName.capitalizeFirst ?? '',
+                    style: AppTextStyle.robotoRegular16.copyWith(
+                      color: isSelected ? AppColors.light : AppColors.secondary,
+                    ),
                   ),
-                ),
-                AppSpacing.spacingVertical16,
-                Text(
-                  dayNumber,
-                  style: AppTextStyle.robotoSemibold20.copyWith(
-                    color: isSelected ? AppColors.light : AppColors.primary,
+                  AppSpacing.spacingVertical16,
+                  Text(
+                    dayNumber,
+                    style: AppTextStyle.robotoSemibold20.copyWith(
+                      color: isSelected ? AppColors.light : AppColors.primary,
+                    ),
                   ),
-                ),
-                AppSpacing.spacingVertical4,
-                Container(
-                  width: ContainerSize.pointSize,
-                  height: ContainerSize.pointSize,
-                  decoration: BoxDecoration(
-                    color: isSelected ? AppColors.light : AppColors.primary,
-                    shape: BoxShape.circle,
+                  AppSpacing.spacingVertical4,
+                  Container(
+                    width: ContainerSize.pointSize,
+                    height: ContainerSize.pointSize,
+                    decoration: BoxDecoration(
+                      color: isSelected ? AppColors.light : AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-        locale: "es_PE",
-        controller: controller.dateTimeLineController,
-        firstDate: DateTime(2024),
-        focusDate: controller.currentDateTime.value,
-        lastDate: DateTime(2024, 12, 31),
-        showTimelineHeader: false,
-        onDateChange: controller.onDateChange,
+                ],
+              ),
+            );
+          },
+          locale: "es_PE",
+          controller: controller.dateTimeLineController,
+          firstDate: DateTime(2024),
+          focusDate: controller.currentDateTime.value,
+          lastDate: DateTime(2024, 12, 31),
+          showTimelineHeader: false,
+          onDateChange: controller.onDateChange,
+        ),
       ),
     );
   }

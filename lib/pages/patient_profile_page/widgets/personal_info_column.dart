@@ -70,7 +70,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
             AppSpacing.spacingVertical24,
             AppTextfield(
               title: 'birthdate'.tr,
-              controller: controller.birthdateController.value,
+              controller: controller.birthdayController.value,
               enabled: controller.isPersonalInfoEditing.value,
               inputType: TextInputType.datetime,
               onTap: controller.onTapDateTime,

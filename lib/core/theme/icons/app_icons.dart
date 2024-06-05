@@ -8,6 +8,7 @@ class AppIcons {
   static const plus = 'assets/icons/plus.svg';
   static const settings = 'assets/icons/settings.svg';
   static const trash = 'assets/icons/trash.svg';
+  static const logout = 'assets/icons/logout.svg';
   static const notFound = 'assets/images/not_found.png';
   static const coverPhoto = 'assets/images/cover_photo.png';
 }

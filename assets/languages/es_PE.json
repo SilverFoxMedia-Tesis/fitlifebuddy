@@ -134,5 +134,6 @@
     "validator_max_length": "El número no puede tener más de 3 dígitos",
     "validator_max_input": "El número no puede mayor de 250",
     "close_to_generate_plan": "Estas a punto de generar un plan!",
-    "select_a_frecuency" : "Selecciona una frecuecia"
+    "select_a_frecuency": "Selecciona una frecuencia",
+    "logout": "Cerrar sesión"
 }

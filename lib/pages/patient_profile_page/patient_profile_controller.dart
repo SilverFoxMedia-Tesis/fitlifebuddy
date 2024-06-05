@@ -34,7 +34,8 @@ class PatientProfileController extends GetxController{
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
-  final birthdateController = TextEditingController().obs;
+  final birthday = ''.obs;
+  final birthdayController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
@@ -151,7 +152,8 @@ class PatientProfileController extends GetxController{
   }
 
   void getPatientInfo(){
-    birthdateController.value.text = currentPatient.value.birthDate ?? '';
+    birthday.value = currentPatient.value.birthDate ?? '';
+    birthdayController.value.text = fromStringToBirthday(birthday.value);
   }
 
   void getPersonInfo() {
@@ -226,7 +228,7 @@ class PatientProfileController extends GetxController{
 
   void onTapDateTime() async {
     var selectedDate = DateTime.now();
-    if (birthdateController.value.text.isNotEmpty) {
+    if (birthdayController.value.text.isNotEmpty) {
       selectedDate = DateTime.parse(currentPatient.value.birthDate!);
     }
     await showDatePicker(
@@ -237,7 +239,8 @@ class PatientProfileController extends GetxController{
     ).then((pickedDate) {
       if (pickedDate == null) return;
         selectedDate = pickedDate;
-        birthdateController.value.text = fromDateToInitial(selectedDate);
+        birthday.value = fromDateToInitial(selectedDate);
+        birthdayController.value.text = fromStringToBirthday(birthday.value);
     });
   }
 
@@ -271,8 +274,8 @@ class PatientProfileController extends GetxController{
   Future<void> updatePatient() async {
     try {
       var patient = currentPatient.value;
-      if (birthdateController.value.text.isNotEmpty) {
-        patient.birthDate = birthdateController.value.text;
+      if (birthdayController.value.text.isNotEmpty) {
+        patient.birthDate = birthday.value;
         final result = await _patientApi.updatePatient(patient.id!, patient);
         currentPatient.value = result;
       }
