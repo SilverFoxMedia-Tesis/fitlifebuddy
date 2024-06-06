@@ -1,18 +1,21 @@
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/maps.dart';
+import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
-import 'package:fitlifebuddy/pages/meal_page/widgets/change_meal_card.dart';
+import 'package:fitlifebuddy/pages/meal_page/widgets/change_meal_dialog.dart';
 import 'package:fitlifebuddy/pages/meal_page/widgets/food_card.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:get/get.dart';
 
 class MealController extends GetxController {
   final getXDialog = Get.find<GetXDialog>();
+  final mealApi = Get.find<MealApi>();
   final planService = Get.find<PlanService>();
   final dateTime = DateTime.now().obs;
   final currentMeal = Meal().obs;
+  final mealsAvaliables = <Meal>[].obs;
 
   bool get hasFoods => currentMeal.value.foods?.isNotEmpty ?? false;
   String get fullname => currentMeal.value.fullname ?? '';
@@ -35,7 +38,8 @@ class MealController extends GetxController {
 
   Future<void> openChangeMealDialog() async {
     var timeMeal = currentMeal.value.timeMeal;
-    await getXDialog.showDialog(ChangeMealCard(timeMeal: timeMeal), onClose: onDialogClose);
+    //TODO: cargar opciones
+    await getXDialog.showDialog(ChangeMealDialog(timeMeal: timeMeal), onClose: onDialogClose);
   }
 
   void changeMealToCompleted() {

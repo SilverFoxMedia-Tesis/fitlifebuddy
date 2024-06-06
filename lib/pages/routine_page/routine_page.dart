@@ -79,7 +79,7 @@ class RoutinePage extends GetView<RoutineController> {
         BaseButton(
           text: 'edit_exercise'.tr,
           actionSeverity: ActionSeverity.warning,
-          onTap: controller.openChangeExerciseDialog,
+          onTap: () => controller.openChangeExerciseDialog(exercise.type),
         ),
       ],
     );

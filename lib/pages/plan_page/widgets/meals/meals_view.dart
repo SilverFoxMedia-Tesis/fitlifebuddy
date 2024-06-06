@@ -20,8 +20,8 @@ class MealsView extends GetView<PlanController> {
         () => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Comidas del día',
+            Text(
+              'meals_of_the_day'.tr,
               style: AppTextStyle.robotoSemibold20,
             ),
             if (controller.hasMeals)

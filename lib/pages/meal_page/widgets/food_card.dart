@@ -7,6 +7,7 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodCard extends StatelessWidget {
   final Food food;
@@ -33,8 +34,8 @@ class FoodCard extends StatelessWidget {
                 style: AppTextStyle.robotoSemibold20,
               ),
               AppSpacing.spacingVertical8,
-              const Text(
-                'Proteína',
+              Text(
+                'protein'.tr,
                 style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
@@ -45,8 +46,8 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              const Text(
-                'Carbohidratos',
+              Text(
+                'carbs'.tr,
                 style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
@@ -57,8 +58,8 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              const Text(
-                'Grasa',
+              Text(
+                'fats'.tr,
                 style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
@@ -69,8 +70,8 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              const Text(
-                'Calorías',
+              Text(
+                'calories'.tr,
                 style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,

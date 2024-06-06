@@ -41,7 +41,9 @@ class MealPage extends GetView<MealController> {
             if (controller.hasFoods)
               buildFoods(),
             if (!controller.hasFoods)
-              const EmptyResult(message: 'No hay alimentos'),
+              EmptyResult(
+                message: 'no_foods'.tr,
+              ),
           ],
         ),
       ),
@@ -55,7 +57,7 @@ class MealPage extends GetView<MealController> {
       onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
       actions: [
         BaseButton(
-          text: 'edit_food'.tr,
+          text: 'edit_meal'.tr,
           actionSeverity: ActionSeverity.warning,
           onTap: () => controller.openChangeMealDialog(),
         ),

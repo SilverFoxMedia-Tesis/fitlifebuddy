@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
-import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/app_dialog.dart';
@@ -18,9 +17,9 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
         extraContent: Expanded(
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: dExtraExercises.length,
+            itemCount: controller.exercisesAvalibles.length,
             itemBuilder: (context, index) {
-              final exercise = dExtraExercises[index];
+              final exercise = controller.exercisesAvalibles[index];
               return Column(
                 children: [
                   PlanItemCard(

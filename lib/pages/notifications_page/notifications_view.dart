@@ -32,15 +32,17 @@ class NotificationsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Notificaciones',
+            Text(
+              'notifications'.tr,
               style: AppTextStyle.robotoSemibold20,
             ),
             AppSpacing.spacingVertical20,
             if (controller.hasNotifications)
               buildNotifications(),
             if (!controller.hasNotifications)
-              const EmptyResult(message: 'No hay notificaciones'),
+              EmptyResult(
+                message: 'no_notifications'.tr,
+              ),
           ],
         ),
       ),

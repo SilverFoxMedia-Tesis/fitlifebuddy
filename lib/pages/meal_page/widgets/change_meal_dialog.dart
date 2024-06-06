@@ -5,28 +5,21 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/enum/time_meal.dart';
-import 'package:fitlifebuddy/pages/plan_page/dummy_data.dart';
+import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-final lists = {
-    TimeMeal.breakfast: dMealsBreakfast,
-    TimeMeal.lunch: dMealsLunch,
-    TimeMeal.dinner: dMealsDinner,
-  };
-
-class ChangeMealCard extends StatelessWidget {
+class ChangeMealDialog extends GetView<MealController> {
   final TimeMeal? timeMeal;
-  const ChangeMealCard({
+  const ChangeMealDialog({
     this.timeMeal = TimeMeal.breakfast,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final list = lists[timeMeal];
     return Container(
       width: 463,
       height: 755,
@@ -46,14 +39,14 @@ class ChangeMealCard extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: list?.length,
+              itemCount: controller.mealsAvaliables.length,
               itemBuilder: (context, index) {
-                final meal = list?[index];
+                final meal = controller.mealsAvaliables[index];
                 return Column(
                   children: [
                     PlanItemCard(
-                      text: meal?.fullname ?? '',
-                      image: meal?.imageUrl,
+                      text: meal.fullname ?? '',
+                      image: meal.imageUrl,
                     ),
                     AppSpacing.spacingVertical20,
                   ],
@@ -62,7 +55,7 @@ class ChangeMealCard extends StatelessWidget {
             ),
           ),
           BaseButton(
-            text: 'edit_food'.tr,
+            text: 'edit_meal'.tr,
             onTap: () {},
           )
         ],

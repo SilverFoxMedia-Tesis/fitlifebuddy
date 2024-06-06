@@ -52,7 +52,7 @@
     "completed" : "Completado",
     "ingredients" : "Ingredientes",
     "select_a_meal" : "Selecciona una comida",
-    "edit_food" : "Cambiar comida",
+    "edit_meal" : "Cambiar comida",
     "protein" : "Proteínas",
     "carbs" : "Carbohidratos",
     "fats" : "Grasas",
@@ -136,5 +136,8 @@
     "close_to_generate_plan": "Estas a punto de generar un plan!",
     "select_a_frecuency": "Selecciona una frecuencia",
     "logout": "Cerrar sesión",
-    "abdominal_perimeter": "Perímetro abdominal"
+    "abdominal_perimeter": "Perímetro abdominal",
+    "no_foods": "No hay alimentos",
+    "no_notifications": "No hay notificaciones",
+    "meals_of_the_day": "Comidas del día"
 }

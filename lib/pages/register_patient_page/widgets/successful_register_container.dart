@@ -33,14 +33,14 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
           AppSpacing.spacingVertical24,
           AppTextfield(
             title: 'email'.tr,
-            hintText: controller.currentPatient.value.person?.emailAddress ?? 'btrbrhrhr',
+            hintText: controller.currentPatient.value.person?.emailAddress,
             suffixIcon: Icons.copy,
             onSuffixIconPressed: controller.copyEmail,
           ),
           AppSpacing.spacingVertical24,
           AppTextfield(
             title: 'password'.tr,
-            hintText: controller.currentPatient.value.person?.password ?? 'oigjorigjr',
+            hintText: controller.currentPatient.value.person?.password,
             suffixIcon: Icons.copy,
             onSuffixIconPressed: controller.copyPassword,
           ),
