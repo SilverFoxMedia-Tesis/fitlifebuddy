@@ -54,7 +54,7 @@ class MealPage extends GetView<MealController> {
     return CustomBar(
       title: '${controller.timeMeal} | ',
       extraTitle: controller.getMealDate(),
-      onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
+      onBackPressed: () => Get.toNamed(AppRoutes.plan),
       actions: [
         BaseButton(
           text: 'edit_meal'.tr,

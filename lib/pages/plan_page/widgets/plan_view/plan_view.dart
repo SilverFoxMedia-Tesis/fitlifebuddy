@@ -29,16 +29,13 @@ class PlanView extends GetView<PlanController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        const SizedBox(
-          height: 330, //TODO: cambiar a valor dinamico
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MealsView(),
-              AppSpacing.spacingHorizontal32,
-              RoutineView()
-            ],
-          ),
+        const Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MealsView(),
+            AppSpacing.spacingHorizontal32,
+            RoutineView(),
+          ],
         ),
       ],
     );

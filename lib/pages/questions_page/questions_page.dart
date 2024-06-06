@@ -2,7 +2,6 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/questions_page/widgets/questions_view.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,10 @@ class QuestionsPage extends StatelessWidget {
           children: [
             AppSpacing.spacingVertical24,
             buildCustomBar(),
-            const Expanded(child: QuestionsView()),
+            AppSpacing.spacingVertical24,
+            const Expanded(
+              child: QuestionsView(),
+            ),
           ],
         ),
       ),
@@ -29,8 +31,7 @@ class QuestionsPage extends StatelessWidget {
 
   Widget buildCustomBar() {
     return CustomBar(
-      title: 'Q&A',
-      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
+      title: 'faq'.tr,
     );
   }
 }

@@ -7,12 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PlanDialog extends GetView<PlanController> {
-  const PlanDialog({super.key});
+  final bool isEdit;
+
+  const PlanDialog({
+    required this.isEdit,
+    super.key, 
+  });
 
   @override
   Widget build(BuildContext context) {
+    final text = isEdit ? 'edit_plan'.tr : 'generate_plan'.tr;
     return AppDialog(
-      title: 'close_to_generate_plan'.tr,
+      title: text,
       description: 'select_a_frecuency'.tr,
       onClose: controller.onDialogClose,
       extraContent: Obx(
@@ -26,11 +32,11 @@ class PlanDialog extends GetView<PlanController> {
       actions: [
         Obx(
           () => BaseButton(
-            text: 'generate_plan'.tr,
-            onTap: () => controller.generatePlan(),
-            loading: controller.newPlanLoading.value,
+            text: text,
+            onTap: controller.createPlan,
+            loading: controller.planLoading.value,
           ),
-        )
+        ),
       ],
     );
   }

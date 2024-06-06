@@ -15,7 +15,7 @@ class QuestionsView extends StatelessWidget {
         children: [
           for (var item in list)
             ListTile(
-              contentPadding: AppPadding.padding16,
+              contentPadding: AppPadding.paddingOnlyBottom16,
               title: item['title'] != null
                 ? Text(
                     item['title']!.tr,

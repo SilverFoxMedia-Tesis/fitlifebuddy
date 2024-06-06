@@ -37,7 +37,7 @@ class AppIconButton extends StatelessWidget {
           iconData,
           color: iconColor,
           size: size,
-        )
+        ),
       ),
     );
   }

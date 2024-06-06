@@ -93,12 +93,12 @@ class SideBar extends StatelessWidget {
                     icon: AppIcons.logout, 
                     text: 'logout'.tr, 
                     enableDarkColor: true,
-                    onTap: () => Get.toNamed(AppRoutes.login),
+                    onTap: () => Get.offAllNamed(AppRoutes.login),
                   ),
                 ],
               ),
-            ]
-            ),
+            ],
+          ),
         ),
     );
   }

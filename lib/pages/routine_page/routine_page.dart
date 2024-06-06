@@ -40,7 +40,7 @@ class RoutinePage extends GetView<RoutineController> {
     return CustomBar(
       title: '${'routine'.tr} | ',
       extraTitle: controller.getRoutineDate(),
-      onBackPressed: () => Get.offAllNamed(AppRoutes.plan),
+      onBackPressed: () => Get.toNamed(AppRoutes.plan),
       actions: [
         BaseButton(
           text: 'completed'.tr,
@@ -57,9 +57,7 @@ class RoutinePage extends GetView<RoutineController> {
           children: controller.currentExercises.entries.map((entry) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: buildExercise(
-                entry.value, null
-              ),
+              child: buildExercise(entry.value, null),
             );
           }).toList(),
         ),

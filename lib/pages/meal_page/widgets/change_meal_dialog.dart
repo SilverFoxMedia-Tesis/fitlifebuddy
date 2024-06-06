@@ -57,7 +57,7 @@ class ChangeMealDialog extends GetView<MealController> {
           BaseButton(
             text: 'edit_meal'.tr,
             onTap: () {},
-          )
+          ),
         ],
       ),
     );

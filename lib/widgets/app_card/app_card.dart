@@ -51,9 +51,9 @@ class AppCard extends StatelessWidget {
                 Text(
                   description,
                   style: AppTextStyle.robotoMedium14.copyWith(
-                    color: AppColors.primary
+                    color: AppColors.primary,
                   ),
-                )
+                ),
               ],
             ),
             Padding(
@@ -64,7 +64,7 @@ class AppCard extends StatelessWidget {
                 fit: BoxFit.fitHeight,
                 colorFilter: const ColorFilter.mode(AppColors.secondary, BlendMode.srcIn),
               ),
-            )
+            ),
           ],
         ),
       ),

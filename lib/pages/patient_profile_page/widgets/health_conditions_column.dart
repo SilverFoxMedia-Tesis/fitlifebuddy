@@ -35,7 +35,7 @@ class HealthConditionsColumn extends GetView<PatientProfileController> {
                   onTap: controller.onEditHealthConditionsPressed,
                   enabled: !controller.isEditing,
                 ),
-              )
+              ),
             ],
           ),
           if (controller.hasHealthConditions)

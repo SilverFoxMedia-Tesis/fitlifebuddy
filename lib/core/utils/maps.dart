@@ -1,4 +1,59 @@
 Map<int, String> exercisesMap = {
+  1: "Incline dumbbell press",
+  2: "Incline cable crossovers",
+  3: "Incline dumbbell flyes",
+  4: "Decline dumbbell press",
+  5: "Decline cable crossovers",
+  6: "Decline dumbbell flyes",
+  7: "Chest flyes",
+  8: "Cable crossovers",
+  9: "Dumbbell flyes",
+  10: "Pull-ups",
+  11: "Barbell rows",
+  12: "Dumbbell rows",
+  13: "Seated cable rows",
+  14: "Incline rows",
+  15: "Hyperextensions",
+  16: "Bird dog",
+  17: "Barbell curls",
+  18: "Dumbbell curls",
+  19: "Preacher curls",
+  20: "Hammer curls",
+  21: "Concentration curls",
+  22: "Close-grip bench press",
+  23: "Overhead triceps extensions",
+  24: "Triceps dips",
+  25: "Skull crushers",
+  26: "Triceps dips",
+  27: "Barbell squats",
+  28: "Leg press",
+  29: "Leg extensions",
+  30: "Romanian deadlifts",
+  31: "Hamstring curls",
+  32: "Barbell hip thrusts",
+  33: "Donkey kicks",
+  34: "Standing calf raises",
+  35: "Seated calf raises",
+  36: "Dumbbell front raises",
+  37: "Military press",
+  38: "Lateral raises",
+  39: "Incline lateral raises",
+  40: "Face pulls",
+  41: "Crunches",
+  42: "Leg raises",
+  43: "Bicycle crunches",
+  44: "Russian twists",
+  45: "Hanging leg raises",
+  46: "Plank",
+  47: "Wrist curls",
+  48: "Wrist extensions",
+  49: "Plate pinch",
+  50: "Towel pull-ups",
+  51: "Fat grip dumbbell curls",
+  52: "Hammer curls",
+};
+
+Map<int, String> exercisesESMap = {
   1: "Press inclinado con mancuernas",
   2: "Cruces de cables inclinados",
   3: "Volantes inclinados con mancuernas",
@@ -50,7 +105,7 @@ Map<int, String> exercisesMap = {
   49: "Pellizco de placa",
   50: "Levantamiento de toalla",
   51: "Curl con mancuernas con agarre gordo",
-  52: "Curl de martillo"
+  52: "Curl de martillo",
 };
 
 Map<int, String> foodsMap = {
@@ -296,7 +351,7 @@ Map<int, String> foodsMap = {
   257: "Noodle",
   258: "Split-pea soup",
   259: "Tomato soup",
-  260: "Vegetable"
+  260: "Vegetable",
 };
 
 Map<int, String> foodsESMap = {
@@ -542,7 +597,7 @@ Map<int, String> foodsESMap = {
   257: "Fideos",
   258: "Sopa de guisantes partidos",
   259: "Sopa de tomate",
-  260: "Vegetal"
+  260: "Vegetal",
 };
 
 String translateFood(int idFood) {

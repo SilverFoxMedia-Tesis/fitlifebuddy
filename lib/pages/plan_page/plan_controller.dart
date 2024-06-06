@@ -51,7 +51,7 @@ class PlanController extends GetxController {
   bool get hasExercises => exercises.isNotEmpty;
 
   final loading = false.obs;
-  final newPlanLoading = false.obs;
+  final planLoading = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -112,9 +112,12 @@ class PlanController extends GetxController {
         meals[i]?.foods = foodList;
         meals[i]?.fullname = getName(foodList);
       }
-      // meals.forEach((index, meals) async {
-      // meals.imageUrl = await unsplashService.getReferencePhoto(meals.foods!.last.name!, type: 2, lang: 'es');
-      // });
+      meals.forEach((index, meals) async {
+        final query = foodsMap[meals.foods?.first.id];
+        if (query != null) {
+          meals.imageUrl = await unsplashService.getReferencePhoto(query);
+        }
+      });
       planService.setMeals(meals);
     }
   }
@@ -145,9 +148,12 @@ class PlanController extends GetxController {
         exercises[i] = filter[i].exercise!;
       }
     }
-    // exercises.forEach((index, exercise) async {
-    //   exercise.imageUrl = await unsplashService.getReferencePhoto(exercise.workout!);
-    // });
+    exercises.forEach((index, exercise) async {
+      final query = exercisesMap[exercise.id];
+      if (query != null) {
+        exercise.imageUrl = await unsplashService.getReferencePhoto(query, type: 2);
+      }
+    });
     planService.setExercises(exercises);
   }
 
@@ -160,8 +166,8 @@ class PlanController extends GetxController {
     Get.toNamed(AppRoutes.routine);
   }
 
-  Future<void> openGeneratePlanDialog() async {
-    await getXDialog.showDialog(const PlanDialog(), onClose: onDialogClose);
+  Future<void> openCreateEditPlanDialog({bool isEdit = false}) async {
+    await getXDialog.showDialog(PlanDialog(isEdit: isEdit), onClose: onDialogClose);
   }
 
   onChangeFrecuency(String? value) {
@@ -170,9 +176,9 @@ class PlanController extends GetxController {
     }
   }
 
-  Future<void> generatePlan() async {
+  Future<void> createPlan() async {
     try {
-      newPlanLoading(true);
+      planLoading(true);
       final finalFrequency = Frecuently.values.firstWhere((e) => e.label == frequency.value);
       final plan = await planApi.createPlan(int.parse(patientId!), finalFrequency.value);
       currentPlan.value = plan;
@@ -181,7 +187,7 @@ class PlanController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      newPlanLoading(true);
+      planLoading(true);
     }
   }
 

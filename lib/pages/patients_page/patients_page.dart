@@ -29,10 +29,10 @@ class PatientsPage extends StatelessWidget {
               const Expanded(
                 child: SizedBox(
                   width: 1200,
-                  child: PatientsDataTable()
+                  child: PatientsDataTable(),
                 ),
               ),
-            ]
+            ],
           ),
         ),
       ),

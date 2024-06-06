@@ -16,6 +16,6 @@ class AppBorderRadius {
   static const borderRadiusRight14 =
       BorderRadius.only(
         topRight: Radius.circular(Space.space14), 
-        bottomRight: Radius.circular(Space.space14)
+        bottomRight: Radius.circular(Space.space14),
       );
 }

@@ -8,6 +8,7 @@ import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
+import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,24 +27,23 @@ class PlanPage extends GetView<PlanController> {
               AppSpacing.spacingVertical24,
               buildCustomBar(),
               AppSpacing.spacingVertical24,
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (!controller.hasPLan)
-                      Center(
-                        child: EmptyContainer(
-                          text: 'no_plan'.tr, 
-                          buttonTitle: 'generate_plan'.tr,
-                          onTap: controller.openGeneratePlanDialog,
+              Obx(
+                () => LoadingWidget(
+                  isLoading: controller.loading.value,
+                  child: controller.hasPLan
+                    ? const PlanView()
+                    : Expanded(
+                        child: Center(
+                          child: EmptyContainer(
+                            text: 'no_plan'.tr,
+                            buttonTitle: 'generate_plan'.tr,
+                            onTap: controller.openCreateEditPlanDialog,
+                          ),
                         ),
                       ),
-                    if (controller.hasPLan)
-                      const PlanView(),
-                  ],
                 ),
               ),
-            ]
+            ],
           ),
         ),
       ),
@@ -53,12 +53,13 @@ class PlanPage extends GetView<PlanController> {
   Widget buildCustomBar() {
     return CustomBar(
       title: 'my_current_plan'.tr,
-      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
+      onBackPressed: () => Get.toNamed(AppRoutes.home),
       actions: [
         if (controller.hasPLan)
           BaseButton(
             text: "edit_plan".tr,
             actionSeverity: ActionSeverity.warning,
+            onTap:() => controller.openCreateEditPlanDialog(isEdit: true),
           ),
       ],
     );

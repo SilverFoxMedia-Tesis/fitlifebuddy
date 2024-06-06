@@ -41,25 +41,25 @@ class PatientsDataTable extends StatelessWidget {
           DataCell(Text('Smith')),
           DataCell(Text('Sí')),
           DataCell(Text('Mensual')),
-        ]),
+        ],),
         DataRow(cells: [
           DataCell(Text('John')),
           DataCell(Text('Doe')),
           DataCell(Text('No')),
           DataCell(Text('Semanal')),
-        ]),
+        ],),
         DataRow(cells: [
           DataCell(Text('Jane')),
           DataCell(Text('Obrien')),
           DataCell(Text('Sí')),
           DataCell(Text('Mensual')),
-        ]),
+        ],),
         DataRow(cells: [
           DataCell(Text('Mike')),
           DataCell(Text('Johnson')),
           DataCell(Text('No')),
           DataCell(Text('Quincenal')),
-        ]),
+        ],),
       ],
     );
   }

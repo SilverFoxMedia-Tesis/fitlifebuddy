@@ -20,7 +20,7 @@ class NutritionistHomePage extends GetView {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppBanner(
-              text: 'welcome_nutritionist'.tr
+              text: 'welcome_nutritionist'.tr,
             ),
             AppSpacing.spacingVertical32,
             Row(
@@ -29,18 +29,18 @@ class NutritionistHomePage extends GetView {
                   title: 'my_patients'.tr, 
                   description: 'my_patiens_description'.tr, 
                   icon: AppIcons.person,
-                  onTap: () => Get.toNamed(AppRoutes.patients)
+                  onTap: () => Get.toNamed(AppRoutes.patients),
                 ),
                 AppSpacing.spacingHorizontal16,
                 AppCard(
                   title: 'register_patient'.tr, 
                   description: 'register_patient_description'.tr, 
                   icon: AppIcons.person,
-                  onTap: () => Get.toNamed(AppRoutes.registerPatient)
+                  onTap: () => Get.toNamed(AppRoutes.registerPatient),
                 ),
               ],
-            )
-          ]
+            ),
+          ],
         ),
       ),
     );

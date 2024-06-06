@@ -63,7 +63,8 @@ class AppDropdown extends StatelessWidget {
                         item,
                         style: buildTextStyle(),
                       ),
-                    ))
+                    ),
+                  )
                 .toList(),
               value: selectedValue,
               onChanged: onChanged,

@@ -12,7 +12,7 @@ class BaseApi {
   Future<http.Response> get(String endpoint) async {
     final response = await client.get(
       getUri(endpoint),
-      headers: _headers()
+      headers: _headers(),
     );
     return _handleResponse(response);
   }
@@ -22,7 +22,7 @@ class BaseApi {
     final response = await client.post(
       getUri(endpoint),
       headers: _headers(),
-      body: body
+      body: body,
     );
     return _handleResponse(response);
   }
@@ -41,7 +41,7 @@ class BaseApi {
   Future<http.Response> delete(String endpoint) async {
     final response = await client.delete(
       getUri(endpoint),
-      headers: _headers()
+      headers: _headers(),
     );
     return _handleResponse(response);
   }

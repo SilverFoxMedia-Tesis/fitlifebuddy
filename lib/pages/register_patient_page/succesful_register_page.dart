@@ -17,7 +17,7 @@ class SuccesfulRegisterPage extends GetView {
             flex: 5,
             child: SuccesfulRegisterContainer(),
             ),
-          Cover()
+          Cover(),
         ],
       ),
     );

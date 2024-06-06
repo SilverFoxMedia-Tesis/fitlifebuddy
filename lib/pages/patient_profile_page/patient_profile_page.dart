@@ -4,7 +4,6 @@ import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/food_conditions_column.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/widgets/health_conditions_column.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
@@ -45,7 +44,7 @@ class PatientProfilePage extends GetView<PatientProfileController> {
                             AppSpacing.spacingVertical24,
                             HealthConditionsColumn(),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -61,7 +60,6 @@ class PatientProfilePage extends GetView<PatientProfileController> {
   Widget buildCustomBar() {
     return CustomBar(
       title: 'my_profile'.tr,
-      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
       actions: [
         Obx(
           () => Visibility(

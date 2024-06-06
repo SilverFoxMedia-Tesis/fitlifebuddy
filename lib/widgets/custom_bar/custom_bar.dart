@@ -27,14 +27,16 @@ class CustomBar extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppIconButton(
-              iconData: Icons.arrow_back_ios_rounded,
-              iconColor: AppColors.secondary,
-              size: ContainerSize.iconSize,
-              onTap: onBackPressed,
-              outlined: true,
-            ),
-            AppSpacing.spacingHorizontal14,
+            if (onBackPressed != null) ...[
+              AppIconButton(
+                iconData: Icons.arrow_back_ios_rounded,
+                iconColor: AppColors.secondary,
+                size: ContainerSize.iconSize,
+                onTap: onBackPressed,
+                outlined: true,
+              ),
+              AppSpacing.spacingHorizontal14,
+            ],
             RichText(
               text: TextSpan(
                 children: [

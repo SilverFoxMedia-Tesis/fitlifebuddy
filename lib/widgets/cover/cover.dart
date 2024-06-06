@@ -46,7 +46,7 @@ class Cover extends StatelessWidget {
               image ?? AppIcons.coverPhoto,
               width: ContainerSize.coverPhotoWeight,
               fit: BoxFit.fitWidth,
-            )
+            ),
           ],
         ),
       ),

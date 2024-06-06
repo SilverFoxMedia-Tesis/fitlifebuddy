@@ -11,7 +11,7 @@ class UserPreferences {
   static SharedPreferences _getInstance() {
     if (_prefs == null) {
       throw Exception(
-        'SharedPreferences no ha sido inicializado. Llama al método initialize primero.'
+        'SharedPreferences no ha sido inicializado. Llama al método initialize primero.',
       );
     }
     return _prefs!;

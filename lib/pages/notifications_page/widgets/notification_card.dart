@@ -48,16 +48,16 @@ class NotificationCard extends StatelessWidget {
             Text(
               description,
               style: AppTextStyle.robotoMedium14.copyWith(
-                color: AppColors.primary
+                color: AppColors.primary,
               ),
             ),
             AppSpacing.spacingVertical14,
             Text(
               description,
               style: AppTextStyle.robotoMedium14.copyWith(
-                color: AppColors.primary
+                color: AppColors.primary,
               ),
-            )
+            ),
           ],
         ),
       ),

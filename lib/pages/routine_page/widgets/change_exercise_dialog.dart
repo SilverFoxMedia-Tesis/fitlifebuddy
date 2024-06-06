@@ -40,7 +40,7 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
               onTap: () => controller.changeExercise,
               loading: controller.loading.value,
             ),
-          )
+          ),
         ],
     );
   }
