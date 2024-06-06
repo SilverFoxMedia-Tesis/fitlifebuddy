@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -23,9 +22,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             width: ContainerSize.baseContainerdWidth,
             child: Text(
               'recover_password'.tr,
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary,
-              ),
+              style: AppTextStyle.robotoSemibold20,
             ),
           ),
           AppSpacing.spacingVertical24,
@@ -33,9 +30,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             width: ContainerSize.baseContainerdWidth,
             child: Text(
               'recover_password_description'.tr,
-              style: AppTextStyle.robotoMedium14.copyWith(
-                color: AppColors.secondary,
-              ),
+              style: AppTextStyle.robotoMedium14,
             ),
           ),
           AppSpacing.spacingVertical24,

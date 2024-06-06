@@ -117,9 +117,7 @@ class AppDropdown extends StatelessWidget {
           color: AppColors.primary,
         );
       default:
-      return AppTextStyle.robotoMedium14.copyWith(
-          color: AppColors.secondary,
-        );
+      return AppTextStyle.robotoMedium14;
     }
   }
 }

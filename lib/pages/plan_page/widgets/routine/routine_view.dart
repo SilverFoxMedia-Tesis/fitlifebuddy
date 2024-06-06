@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/text_utils.dart';
@@ -26,9 +25,7 @@ class RoutineView extends GetView<PlanController> {
               onTap: controller.viewRoutineDetails,
               child: Text(
                 'workout_routine'.tr,
-                style: AppTextStyle.robotoSemibold20.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold20,
               ),
             ),
             if (controller.hasExercises)

@@ -128,9 +128,7 @@ class AppTextfield extends StatelessWidget {
           color: AppColors.primary,
         );
       default:
-      return AppTextStyle.robotoRegular14.copyWith(
-          color: AppColors.secondary,
-        );
+      return AppTextStyle.robotoRegular14;
     }
   }
 
@@ -141,9 +139,7 @@ class AppTextfield extends StatelessWidget {
           color: AppColors.primary,
         );
       default:
-      return AppTextStyle.robotoMedium14.copyWith(
-          color: AppColors.secondary,
-        );
+      return AppTextStyle.robotoMedium14;
     }
   }
 

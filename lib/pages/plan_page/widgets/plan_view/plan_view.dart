@@ -25,9 +25,7 @@ class PlanView extends GetView<PlanController> {
         Obx(
           () => Text(
             controller.getCurrentDateTime,
-            style: AppTextStyle.robotoRegular20.copyWith(
-              color: AppColors.secondary,
-            ),
+            style: AppTextStyle.robotoRegular20,
           ),
         ),
         AppSpacing.spacingVertical24,

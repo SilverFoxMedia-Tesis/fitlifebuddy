@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -26,9 +25,7 @@ class PersonalInfoForm extends GetView<RegisterPatientController> {
               children: [
                 Text(
                   'register_pacient_title'.tr,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary,
-                  ),
+                  style: AppTextStyle.robotoSemibold24,
                 ),
                 AppSpacing.spacingVertical32,
                 //mueve lo de arriba

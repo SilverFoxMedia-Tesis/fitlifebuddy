@@ -30,16 +30,12 @@ class FoodCard extends StatelessWidget {
             children: [
               Text(
                 food.name ?? '',
-                style: AppTextStyle.robotoSemibold20.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold20,
               ),
               AppSpacing.spacingVertical8,
-              Text(
+              const Text(
                 'Proteína',
-                style: AppTextStyle.robotoSemibold14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
               Text(
@@ -49,11 +45,9 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              Text(
+              const Text(
                 'Carbohidratos',
-                style: AppTextStyle.robotoSemibold14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
               Text(
@@ -63,11 +57,9 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              Text(
+              const Text(
                 'Grasa',
-                style: AppTextStyle.robotoSemibold14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
               Text(
@@ -77,11 +69,9 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               AppSpacing.spacingVertical4,
-              Text(
+              const Text(
                 'Calorías',
-                style: AppTextStyle.robotoSemibold14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold14,
               ),
               AppSpacing.spacingVertical4,
               Text(

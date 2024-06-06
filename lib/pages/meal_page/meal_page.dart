@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -30,17 +29,13 @@ class MealPage extends GetView<MealController> {
             Obx(
               () => Text(
                 controller.fullname,
-                style: AppTextStyle.robotoSemibold20.copyWith(
-                  color: AppColors.secondary
-                ),
+                style: AppTextStyle.robotoSemibold20,
               ),
             ),
             AppSpacing.spacingVertical24,
             Text(
               'ingredients'.tr,
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary
-              ),
+              style: AppTextStyle.robotoSemibold20,
             ),
             AppSpacing.spacingVertical24,
             if (controller.hasFoods)

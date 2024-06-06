@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -12,7 +11,7 @@ class PatientsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LauncherPage(
-      child: Scaffold(
+      child: const Scaffold(
         body: Padding(
           padding: AppPadding.paddingPage,
           child: Column(
@@ -22,13 +21,11 @@ class PatientsPage extends StatelessWidget {
               AppSpacing.spacingVertical24,
               Text(
                 'Mis pacientes',
-                style: AppTextStyle.robotoSemibold34.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold34,
               ),
               AppSpacing.spacingVertical20,
               AppSpacing.spacingVertical20,
-              const Expanded(
+              Expanded(
                 child: SizedBox(
                   width: 1200,
                   child: PatientsDataTable()

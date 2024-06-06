@@ -20,18 +20,14 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
         children: [
           Text(
             'successful_registration'.tr,
-            style: AppTextStyle.robotoSemibold34.copyWith(
-              color: AppColors.secondary,
-            ),
+            style: AppTextStyle.robotoSemibold34,
           ),
           AppSpacing.spacingVertical24,
           SizedBox(
             width: ContainerSize.baseContainerdWidth,
             child: Text(
               'successful_registration_descripction'.tr,
-              style: AppTextStyle.robotoSemibold14.copyWith(
-                color: AppColors.secondary,
-              ),
+              style: AppTextStyle.robotoSemibold14,
             ),
           ),
           AppSpacing.spacingVertical24,

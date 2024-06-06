@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -21,11 +20,9 @@ class MealsView extends GetView<PlanController> {
         () => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Comidas del día',
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary,
-              ),
+              style: AppTextStyle.robotoSemibold20,
             ),
             if (controller.hasMeals)
               _buildMeals(),
@@ -57,9 +54,7 @@ class MealsView extends GetView<PlanController> {
       children: [
         Text(
           meal.timeMeal?.label ?? '',
-          style: AppTextStyle.robotoMedium20.copyWith(
-            color: AppColors.secondary,
-          ),
+          style: AppTextStyle.robotoMedium20,
         ),
         AppSpacing.spacingVertical24,
         PlanItemCard(

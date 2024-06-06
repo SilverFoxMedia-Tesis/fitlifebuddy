@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/icons/app_icons.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
@@ -34,9 +33,7 @@ class LoginForm extends GetView<LoginController> {
             AppSpacing.spacingVertical24,
             Text(
               'complete_data'.tr,
-              style: AppTextStyle.robotoSemibold20.copyWith(
-                color: AppColors.secondary,
-              ),
+              style: AppTextStyle.robotoSemibold20,
             ),
             AppSpacing.spacingVertical24,
             Obx(
@@ -65,9 +62,7 @@ class LoginForm extends GetView<LoginController> {
               onTap: controller.forgotPassword,
               child: Text(
                 'forgot_password'.tr,
-                style: AppTextStyle.robotoMedium14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoMedium14,
               ),
             ),
             AppSpacing.spacingVertical24,
@@ -82,9 +77,7 @@ class LoginForm extends GetView<LoginController> {
                 children: [
                   TextSpan(
                     text: '${'no_have_an_account_yet'.tr} ',
-                    style: AppTextStyle.robotoMedium14.copyWith(
-                      color: AppColors.secondary,
-                    ),
+                    style: AppTextStyle.robotoMedium14,
                   ),
                   TextSpan(
                     text: 'register'.tr,

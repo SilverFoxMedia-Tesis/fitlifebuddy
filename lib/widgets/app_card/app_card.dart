@@ -45,9 +45,7 @@ class AppCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppTextStyle.robotoSemibold24.copyWith(
-                    color: AppColors.secondary
-                  ),
+                  style: AppTextStyle.robotoSemibold24,
                 ),
                 AppSpacing.spacingVertical14,
                 Text(

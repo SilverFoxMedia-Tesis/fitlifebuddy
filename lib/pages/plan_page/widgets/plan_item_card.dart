@@ -50,9 +50,7 @@ class PlanItemCard extends StatelessWidget {
                     width: 200,
                     child: Text(
                       text,
-                      style: AppTextStyle.robotoSemibold16.copyWith(
-                        color: AppColors.secondary,
-                      ),
+                      style: AppTextStyle.robotoSemibold16,
                     ),
                   ),
                   if (description != null) ...[

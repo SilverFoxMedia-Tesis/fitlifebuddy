@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -27,9 +26,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
             children: [
               Text(
                 'food_conditions'.tr,
-                style: AppTextStyle.robotoSemibold16.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoSemibold16,
               ),
               AppSpacing.spacingHorizontal14,
               Obx(
@@ -78,9 +75,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
               padding: AppPadding.paddingOnlyTop24,
               child: Text(
                 'no_food_conditions'.tr,
-                style: AppTextStyle.robotoMedium14.copyWith(
-                  color: AppColors.secondary,
-                ),
+                style: AppTextStyle.robotoMedium14,
               ),
             ),
         ],

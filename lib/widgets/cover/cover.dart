@@ -29,9 +29,7 @@ class Cover extends StatelessWidget {
           children: [
             Text(
               title ?? 'welcome_to'.tr,
-              style: AppTextStyle.robotoSemibold36.copyWith(
-                color: AppColors.secondary
-              ),
+              style: AppTextStyle.robotoSemibold36,
               textAlign: TextAlign.center,
             ),
             AppSpacing.spacingVertical24,
@@ -39,9 +37,7 @@ class Cover extends StatelessWidget {
               width: 500,
               child: Text(
                 description ?? 'phrase0'.tr,
-                style: AppTextStyle.robotoMedium20.copyWith(
-                  color: AppColors.secondary
-                ),
+                style: AppTextStyle.robotoMedium20,
                 textAlign: TextAlign.center,
               ),
             ),

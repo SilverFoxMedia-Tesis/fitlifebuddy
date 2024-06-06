@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -28,9 +27,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
               children: [
                 Text(
                   'my_personal_info'.tr,
-                  style: AppTextStyle.robotoSemibold16.copyWith(
-                    color: AppColors.secondary,
-                  ),
+                  style: AppTextStyle.robotoSemibold16,
                 ),
                 AppSpacing.spacingHorizontal14,
                 AppIconButton(

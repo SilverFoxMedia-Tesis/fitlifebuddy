@@ -40,9 +40,7 @@ class ChangeMealCard extends StatelessWidget {
         children: [
           Text(
             'select_a_meal'.tr,
-            style: AppTextStyle.robotoSemibold24.copyWith(
-              color: AppColors.secondary,
-            ),
+            style: AppTextStyle.robotoSemibold24,
           ),
           AppSpacing.spacingVertical20,
           Expanded(

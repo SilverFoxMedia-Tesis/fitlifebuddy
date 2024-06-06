@@ -40,9 +40,7 @@ class CustomBar extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: title,
-                    style: AppTextStyle.robotoSemibold24.copyWith(
-                      color: AppColors.secondary,
-                    ),
+                    style: AppTextStyle.robotoSemibold24,
                   ),
                   TextSpan(
                     text: extraTitle,

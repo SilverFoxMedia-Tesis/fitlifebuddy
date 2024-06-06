@@ -1,4 +1,3 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -27,9 +26,7 @@ class EmptyContainer extends StatelessWidget {
           width: ContainerSize.baseButtonWidth,
           child: Text(
             text,
-            style: AppTextStyle.robotoSemibold16.copyWith(
-              color: AppColors.secondary,
-            ),
+            style: AppTextStyle.robotoSemibold16,
             textAlign: TextAlign.center,
           ),
         ),

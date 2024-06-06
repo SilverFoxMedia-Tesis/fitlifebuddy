@@ -42,9 +42,7 @@ class NotificationCard extends StatelessWidget {
           children: [
             Text(
               type.name,
-              style: AppTextStyle.robotoSemibold24.copyWith(
-                color: AppColors.secondary
-              ),
+              style: AppTextStyle.robotoSemibold24,
             ),
             AppSpacing.spacingVertical14,
             Text(
