@@ -9,6 +9,7 @@ import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
+import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,12 +39,14 @@ class MealPage extends GetView<MealController> {
               style: AppTextStyle.robotoSemibold20,
             ),
             AppSpacing.spacingVertical24,
-            if (controller.hasFoods)
-              buildFoods(),
-            if (!controller.hasFoods)
-              EmptyResult(
-                message: 'no_foods'.tr,
+            Obx(
+              () => LoadingWidget(
+                isLoading: controller.loading.value,
+                child: controller.hasFoods
+                  ? buildFoods()
+                  : EmptyResult(message: 'no_foods'.tr),
               ),
+            ),
           ],
         ),
       ),
@@ -53,38 +56,42 @@ class MealPage extends GetView<MealController> {
   Widget buildCustomBar() {
     return CustomBar(
       title: '${controller.timeMeal} | ',
-      extraTitle: controller.getMealDate(),
+      extraTitle: controller.currentDateTime,
       onBackPressed: () => Get.toNamed(AppRoutes.plan),
       actions: [
         BaseButton(
           text: 'edit_meal'.tr,
           actionSeverity: ActionSeverity.warning,
           onTap: () => controller.openChangeMealDialog(),
+          disabled: controller.completed,
         ),
         AppSpacing.spacingHorizontal16,
         BaseButton(
-          text: 'completed'.tr,
-          onTap: controller.changeMealToCompleted,
+          text: controller.completed ? 'completed'.tr : "No completado",
+          onTap: () async => await controller.changeMealToCompleted(),
+          loading: controller.isChanging.value,
+          disabled: controller.completed,
         ),
       ],
     );
   }
 
   Widget buildFoods() {
-    return Obx(
-      () => GridView.count(
-        crossAxisCount: 3,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 24,
-        shrinkWrap: true,
-        childAspectRatio: 3,
-        children: controller.currentMeal.value.foods?.map((food) {
-          return PlanItemCard(
-            text: controller.translatedWord(food.id!),
-            image: food.imageUrl,
-            onTap: () => controller.viewFoodInformation(food),
-          );
-        }).toList() ?? [],
+    return Expanded(
+      child: Obx(
+        () => Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: List.generate(controller.foodsLength, (index) {
+              final food = controller.currentMeal.value.foods![index];
+              return PlanItemCard(
+                text: controller.translatedWord(food.id!),
+                image: food.imageUrl,
+                onTap: () => controller.viewFoodInformation(food),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

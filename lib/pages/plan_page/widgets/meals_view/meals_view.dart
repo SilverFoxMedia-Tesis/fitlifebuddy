@@ -60,7 +60,7 @@ class MealsView extends GetView<PlanController> {
         PlanItemCard(
           text: meal.fullname ?? '', 
           image: meal.imageUrl,
-          onTap: () => controller.viewMealDetails(meal.id!),
+          onTap: () => controller.viewMealDetails(meal),
         ),
       ],
     );

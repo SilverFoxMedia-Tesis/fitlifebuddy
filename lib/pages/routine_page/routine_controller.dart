@@ -18,7 +18,6 @@ class RoutineController extends GetxController {
   final routineExerciseApi = Get.find<RoutineExerciseApi>();
   final dailyApi = Get.find<DailyApi>();
   final planService = Get.find<PlanService>();
-  final dateTime = DateTime.now().obs;
   final currentExercises = <Exercise>[].obs;
   final exercisesAvalibles = <Exercise>[].obs;
 
@@ -42,7 +41,6 @@ class RoutineController extends GetxController {
   void loadData() {
     try {
       loading(true);
-      dateTime(planService.currentDailyDateTime.value);
       currentExercises(planService.currentExercises);
     } catch (e) {
       displayErrorToast(e);
