@@ -54,25 +54,27 @@ class MealPage extends GetView<MealController> {
   }
 
   Widget buildCustomBar() {
-    return CustomBar(
-      title: '${controller.timeMeal} | ',
-      extraTitle: controller.currentDateTime,
-      onBackPressed: () => Get.toNamed(AppRoutes.plan),
-      actions: [
-        BaseButton(
-          text: 'edit_meal'.tr,
-          actionSeverity: ActionSeverity.warning,
-          onTap: () => controller.openChangeMealDialog(),
-          disabled: controller.completed,
-        ),
-        AppSpacing.spacingHorizontal16,
-        BaseButton(
-          text: controller.completed ? 'completed'.tr : "No completado",
-          onTap: () async => await controller.changeMealToCompleted(),
-          loading: controller.isChanging.value,
-          disabled: controller.completed,
-        ),
-      ],
+    return Obx(
+      () => CustomBar(
+        title: '${controller.timeMeal} | ',
+        extraTitle: controller.currentDateTime,
+        onBackPressed: () => Get.toNamed(AppRoutes.plan),
+        actions: [
+          BaseButton(
+            text: 'edit_meal'.tr,
+            actionSeverity: ActionSeverity.warning,
+            onTap: () => controller.openChangeMealDialog(),
+            disabled: controller.completed,
+          ),
+          AppSpacing.spacingHorizontal16,
+          BaseButton(
+            text: controller.completed ? 'completed'.tr : "No completado",
+            onTap: () async => await controller.changeMealToCompleted(),
+            loading: controller.isChanging.value,
+            disabled: controller.completed,
+          ),
+        ],
+      ),
     );
   }
 
@@ -87,7 +89,7 @@ class MealPage extends GetView<MealController> {
               return PlanItemCard(
                 text: controller.translatedWord(food.id!),
                 image: food.imageUrl,
-                onTap: () => controller.viewFoodInformation(food),
+                onTap: () => controller.openFoodInformationDialog(food),
               );
             },
           ),

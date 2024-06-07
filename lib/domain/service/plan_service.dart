@@ -8,11 +8,12 @@ import 'package:get/get.dart';
 class PlanService {
   final currentPlan = Plan().obs;
   final currentDailyDateTime = DateTime.now().obs;
-  final currentMeal = Meal().obs;
+  final currentDaily = Daily().obs;
+  final currentMeals = <Meal>[].obs;
+  final mealSelectedIndex = 0.obs;
   final routineExerciseIds = <int, int>{}.obs;
   final currentRoutine = Routine().obs;
   final currentExercises = <Exercise>[].obs;
-  final currentDaily = Daily().obs;
 
   void setPlan(Plan plan) {
     currentPlan.value = plan;
@@ -22,9 +23,11 @@ class PlanService {
     currentDailyDateTime.value = dateTime;
   }
 
-  void setMeal(Meal meal) {
-    currentMeal.value = meal;
+  void setMeals(List<Meal> meals) {
+    currentMeals.value = meals;
   }
+
+  Meal get currentMeal => currentMeals[mealSelectedIndex.value];
 
   void setRoutineExerciseIds(Map<int, int> reIds) {
     routineExerciseIds.value = reIds;

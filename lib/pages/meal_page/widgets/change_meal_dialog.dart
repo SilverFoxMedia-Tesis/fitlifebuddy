@@ -1,64 +1,55 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
-import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
-import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/domain/enum/time_meal.dart';
+import 'package:fitlifebuddy/core/utils/maps.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
+import 'package:fitlifebuddy/widgets/app_dialog/app_dialog.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
+import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChangeMealDialog extends GetView<MealController> {
-  final TimeMeal? timeMeal;
-  const ChangeMealDialog({
-    this.timeMeal = TimeMeal.breakfast,
-    super.key,
-  });
+  const ChangeMealDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 463,
-      height: 755,
-      padding: AppPadding.paddingDialog,
-      decoration: const BoxDecoration(
-        color: AppColors.light,
-        borderRadius: AppBorderRadius.borderRadiusXl,
-        boxShadow: [AppBoxShadow.secondary25Blur8],
-      ),
-      child: Column(
-        children: [
-          Text(
-            'select_a_meal'.tr,
-            style: AppTextStyle.robotoSemibold24,
-          ),
-          AppSpacing.spacingVertical20,
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.mealsAvaliables.length,
-              itemBuilder: (context, index) {
-                final meal = controller.mealsAvaliables[index];
-                return Column(
-                  children: [
-                    PlanItemCard(
-                      text: meal.fullname ?? '',
-                      image: meal.imageUrl,
-                    ),
-                    AppSpacing.spacingVertical20,
-                  ],
-                );
-              },
-            ),
-          ),
-          BaseButton(
-            text: 'edit_meal'.tr,
-            onTap: () {},
-          ),
-        ],
+    return AppDialog(
+      title: 'select_a_meal'.tr,
+      extraContent: controller.hasOptions
+        ? buildOptions()
+        : EmptyResult(message: 'no_options'.tr),
+      actions: [
+        BaseButton(
+          text: 'edit_meal'.tr,
+          onTap: () {},
+          disabled: true,
+        ),
+      ],
+    );
+  }
+
+  Widget buildOptions() {
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: controller.availableMeals.length,
+        itemBuilder: (context, index) {
+          final meal = controller.availableMeals[index];
+          return Column(
+            children: [
+              InkWell(
+                onTap: () => controller.onMealSelected(meal),
+                child: PlanItemCard(
+                  text: foodsESMap[meal.foods?.first.id] ?? '',
+                  image: meal.imageUrl,
+                  border: (controller.mealSelected.value == meal)
+                    ? true : null,
+                ),
+              ),
+              AppSpacing.spacingVertical20,
+            ],
+          );
+        },
       ),
     );
   }

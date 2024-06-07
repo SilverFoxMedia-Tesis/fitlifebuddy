@@ -1,6 +1,4 @@
-import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/box_decoration.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -23,11 +21,7 @@ class NotificationsView extends StatelessWidget {
         width: 496,
         height: 560,
         padding: AppPadding.padding32,
-        decoration: const BoxDecoration(
-          color: AppColors.light,
-          borderRadius: AppBorderRadius.borderRadiusXl,
-          boxShadow: [AppBoxShadow.secondary25Blur8],
-        ),
+        decoration: AppBoxDecoration.baseBoxDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

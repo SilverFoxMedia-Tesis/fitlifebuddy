@@ -120,6 +120,7 @@ class PlanController extends GetxController {
         }
       }
       meals.addAll(mealList);
+      planService.currentMeals(meals);
     } catch (e) {
       displayErrorToast(e);
     }
@@ -155,14 +156,14 @@ class PlanController extends GetxController {
         exercise.imageUrl = exercisesURLMap[exercise.id];
       }
       exercises.addAll(filteredExercises);
+      planService.setExercises(exercises);
     } catch (e) {
       displayErrorToast(e);
     }
-    planService.setExercises(exercises);
   }
 
-  void viewMealDetails(Meal meal) {
-    planService.currentMeal.value = meal;
+  void viewMealDetails(index) {
+    planService.mealSelectedIndex(index);
     Get.toNamed(AppRoutes.meal);
   }
 

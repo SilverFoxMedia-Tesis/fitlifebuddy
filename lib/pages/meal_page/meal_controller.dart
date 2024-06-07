@@ -18,7 +18,7 @@ class MealController extends GetxController {
   final dailyApi = Get.find<DailyApi>();
   final planService = Get.find<PlanService>();
   final currentMeal = Meal().obs;
-  final mealsAvaliables = <Meal>[].obs;
+  final availableMeals = <Meal>[].obs;
 
   bool get hasFoods => currentMeal.value.foods?.isNotEmpty ?? false;
   int get foodsLength => currentMeal.value.foods?.length ?? 0;
@@ -32,16 +32,22 @@ class MealController extends GetxController {
 
   final loading = false.obs;
 
+  var selectedId = 0;
+  final mealSelected = Meal().obs;
+  final isSelected = false.obs;
+
+  bool get hasOptions => availableMeals.isNotEmpty;
+
   @override
   void onInit() {
     super.onInit();
     loadData();
   }
 
-  void loadData() async {
+  void loadData() {
     try {
       loading(true);
-      currentMeal(planService.currentMeal.value);
+      currentMeal(planService.currentMeal);
       currentMeal.value.foods?.forEach((food) {
         food.imageUrl = foodsURLMap[food.id];
       });
@@ -52,12 +58,7 @@ class MealController extends GetxController {
     }
   }
 
-  Future<void> openChangeMealDialog() async {
-    var timeMeal = currentMeal.value.timeMeal;
-    //TODO: cargar opciones
-    await getXDialog.showDialog(ChangeMealDialog(timeMeal: timeMeal), onClose: onDialogClose);
-  }
-
+  
   Future<void> changeMealToCompleted() async {
     try {
       isChanging(true);
@@ -74,8 +75,19 @@ class MealController extends GetxController {
     }
   }
 
-  Future<void> viewFoodInformation(Food food) async {
+  Future<void> openFoodInformationDialog(Food food) async {
     await getXDialog.showDialog(FoodInformationDialog(food: food), onClose: onDialogClose);
+  }
+
+  Future<void> openChangeMealDialog() async {
+    //TODO: cargar opciones
+    await getXDialog.showDialog(const ChangeMealDialog(), onClose: onDialogClose);
+  }
+
+
+  void onMealSelected(Meal meal) {
+    isSelected.value = true;
+    mealSelected.value = meal;
   }
 
   String translatedWord(int idFood) {

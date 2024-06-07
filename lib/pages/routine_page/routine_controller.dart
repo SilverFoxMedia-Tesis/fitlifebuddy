@@ -19,7 +19,7 @@ class RoutineController extends GetxController {
   final dailyApi = Get.find<DailyApi>();
   final planService = Get.find<PlanService>();
   final currentExercises = <Exercise>[].obs;
-  final exercisesAvalibles = <Exercise>[].obs;
+  final availableExercises = <Exercise>[].obs;
 
   final loading = false.obs;
   final changeLoading = false.obs;
@@ -68,9 +68,9 @@ class RoutineController extends GetxController {
   Future<void> openChangeExerciseDialog(Exercise exercise) async {
     if (exercise.type != null) {
       selectedId = exercise.id!;
-      exercisesAvalibles.value = await exerciseApi.getExercisesByType(exercise.type!.value);
-      exercisesAvalibles.removeWhere((e) => e.id == exercise.id);
-      for (var exercise in exercisesAvalibles) {
+      availableExercises.value = await exerciseApi.getExercisesByType(exercise.type!.value);
+      availableExercises.removeWhere((e) => e.id == exercise.id);
+      for (var exercise in availableExercises) {
         exercise.imageUrl = exercisesURLMap[exercise.id];
       }
       await getXDialog.showDialog(const ChangeExerciseDialog(), onClose: onDialogClose);

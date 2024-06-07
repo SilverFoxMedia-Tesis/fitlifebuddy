@@ -15,34 +15,7 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
     return AppDialog(
         title: 'select_an_exercise'.tr,
         onClose: controller.onDialogClose,
-        extraContent: Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.exercisesAvalibles.length,
-            itemBuilder: (context, index) {
-              final exercise = controller.exercisesAvalibles[index];
-              return Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      controller.onExerciseSelected(exercise);
-                    },
-                    child: Obx(
-                      () => PlanItemCard(
-                        text: fixEncoding(exercise.workout ?? ''),
-                        description: '${exercise.repsPerSet} x ${exercise.sets}',
-                        image: exercise.imageUrl,
-                        border: (controller.exerciseSelected.value == exercise)
-                          ? true : null,
-                      ),
-                    ),
-                  ),
-                  AppSpacing.spacingVertical20,
-                ],
-              );
-            },
-          ),
-        ),
+        extraContent: buildOptions(),
         actions: [
           Obx(
             () => BaseButton(
@@ -54,5 +27,34 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
           ),
         ],
     );
+  }
+
+  Widget buildOptions() {
+    return Expanded(
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: controller.availableExercises.length,
+          itemBuilder: (context, index) {
+            final exercise = controller.availableExercises[index];
+            return Column(
+              children: [
+                InkWell(
+                  onTap: () => controller.onExerciseSelected(exercise),
+                  child: Obx(
+                    () => PlanItemCard(
+                      text: fixEncoding(exercise.workout ?? ''),
+                      description: '${exercise.repsPerSet} x ${exercise.sets}',
+                      image: exercise.imageUrl,
+                      border: (controller.exerciseSelected.value == exercise)
+                        ? true : null,
+                    ),
+                  ),
+                ),
+                AppSpacing.spacingVertical20,
+              ],
+            );
+          },
+        ),
+      );
   }
 }

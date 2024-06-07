@@ -26,7 +26,7 @@ class SideBar extends StatelessWidget {
           decoration: const BoxDecoration(
             color: AppColors.primary,
             borderRadius: AppBorderRadius.borderRadiusRight14,
-              boxShadow: [AppBoxShadow.secondary25Blur8],
+            boxShadow: [AppBoxShadow.secondary25Blur8],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
