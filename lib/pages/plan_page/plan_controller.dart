@@ -87,6 +87,8 @@ class PlanController extends GetxController {
   Future<void> getDailyInfo() async {
     try {
       dailyLoading(true);
+      meals.clear();
+      exercises.clear();
       final date = fromDateToInitial(currentDateTime.value);
       final daily = dailies.firstWhereOrNull((d) => d.date == date);
       if (daily != null) {
@@ -105,7 +107,6 @@ class PlanController extends GetxController {
 
   Future<void> getMeals(int dailyId) async {
     try {
-      meals.clear();
       final mealList = await dailyApi.getMealsByDailyId(dailyId);
       if (mealList.isEmpty) return;
 
@@ -138,7 +139,6 @@ class PlanController extends GetxController {
 
   Future<void> getExercises(int dailyId) async {
     try {
-      exercises.clear();
       final list = await dailyApi.getRoutinesByDailyId(dailyId);
       if (list.isEmpty) return;
       
