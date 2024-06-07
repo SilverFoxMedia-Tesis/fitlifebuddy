@@ -13,6 +13,7 @@ class PlanItemCard extends StatelessWidget {
   final String? description;
   final String? image;
   final void Function()? onTap;
+  final bool? border;
 
   const PlanItemCard({
     super.key,
@@ -20,6 +21,7 @@ class PlanItemCard extends StatelessWidget {
     this.description,
     this.image,
     this.onTap,
+    this.border,
   });
 
   @override
@@ -31,10 +33,13 @@ class PlanItemCard extends StatelessWidget {
           maxWidth: ContainerSize.basePlanItemCardWidth,
           maxHeight: ContainerSize.basePlanItemCardHeight,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.light,
           borderRadius: AppBorderRadius.borderRadius14,
-          boxShadow: [AppBoxShadow.secondary25Blur8],
+          boxShadow: const [AppBoxShadow.secondary25Blur8],
+          border: border != null
+            ? Border.all(color: Colors.blue, width: 2)
+            : null,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

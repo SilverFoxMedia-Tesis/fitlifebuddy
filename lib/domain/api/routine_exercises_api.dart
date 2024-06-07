@@ -13,4 +13,9 @@ class RoutineExerciseApi {
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map((i) => RoutineExercise.fromMap(i)).toList();
   }
+
+  Future<RoutineExercise> updateRoutineExercise(int id, RoutineExercise routineExercise) async {
+    final response = await _apiBase.put('routineExercises/$id', body: routineExercise.toJson());
+    return RoutineExercise.fromJson(response.body);
+  }
 }

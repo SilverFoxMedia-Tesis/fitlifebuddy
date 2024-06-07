@@ -29,8 +29,8 @@ class Exercise {
       'workout': workout,
       'sets': sets,
       'repsPerSet': repsPerSet,
-      'typeExercise': type,
-      'bodyPart': bodyPart,
+      'typeExercise': type?.value,
+      'bodyPart': bodyPart?.value,
     };
   }
 

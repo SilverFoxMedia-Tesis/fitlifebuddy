@@ -13,6 +13,7 @@ import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
+import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
 import 'package:fitlifebuddy/domain/service/person_service.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
@@ -37,11 +38,12 @@ class PlanController extends GetxController {
   final currentDateTime = DateTime.now().obs;
   final currentPlan = Plan().obs;
   final dailies = <Daily>[].obs;
+  var routineExercises = <RoutineExercise>[];
   final meals = <Meal>[].obs;
   final exercises = <Exercise>[].obs;
 
-  final frequency = Frecuently.monthly.label.obs;
-  final frequencies = Frecuently.values.map((e) => e.label).toList();
+  final frequency = Frecuency.monthly.label.obs;
+  final frequencies = Frecuency.values.map((e) => e.label).toList();
 
   String? get patientId => UserPreferences.getPatientId();
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
@@ -89,6 +91,7 @@ class PlanController extends GetxController {
       final daily = dailies.firstWhereOrNull((d) => d.date == date);
       if (daily != null) {
         await getMeals(daily.id!);
+        routineExercises = await routineExerciseApi.getRoutineExercises();
         await getExercises(daily.id!);
       }
     } catch (e) {
@@ -140,8 +143,14 @@ class PlanController extends GetxController {
       
       final routine = list.first;
       
-      final routineExercises = await routineExerciseApi.getRoutineExercises();
-      final filteredExercises = routineExercises.where((i) => i.routine?.id == routine.id).map((i) => i.exercise).whereType<Exercise>().toList();
+      final filteredList = routineExercises.where((i) => i.routine?.id == routine.id).toList();
+      var ids = <int, int>{};
+      for (var i in filteredList) { 
+        ids[i.exercise!.id!] = i.idRoutineExercise!;
+      }
+      planService.setRoutineExerciseIds(ids);
+      planService.setRoutine(filteredList.first.routine!);
+      final filteredExercises = filteredList.map((i) => i.exercise).whereType<Exercise>().toList();
       for (var exercise in filteredExercises) {
         exercise.imageUrl = exercisesURLMap[exercise.id];
       }
@@ -174,7 +183,7 @@ class PlanController extends GetxController {
   Future<void> createPlan() async {
     try {
       planLoading(true);
-      final finalFrequency = Frecuently.values.firstWhere((e) => e.label == frequency.value);
+      final finalFrequency = Frecuency.values.firstWhere((e) => e.label == frequency.value);
       final plan = await planApi.createPlan(int.parse(patientId!), finalFrequency.value);
       currentPlan.value = plan;
       onDialogClose();

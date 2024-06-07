@@ -1,6 +1,7 @@
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
+import 'package:fitlifebuddy/domain/model/routine.dart';
 import 'package:get/get.dart';
 
 class PlanService {
@@ -8,6 +9,8 @@ class PlanService {
   final currentDailyDateTime = DateTime.now().obs;
   final mealSelectedIndex = 0.obs;
   final currentMeals = <Meal>[].obs;
+  final routineExerciseIds = <int, int>{}.obs;
+  final currentRoutine = Routine().obs;
   final currentExercises = <Exercise>[].obs;
 
   void setPlan(Plan plan) {
@@ -26,6 +29,14 @@ class PlanService {
 
   void setMealSelectedIndex(int index) {
     mealSelectedIndex.value = index;
+  }
+
+  void setRoutineExerciseIds(Map<int, int> reIds) {
+    routineExerciseIds.value = reIds;
+  }
+
+  void setRoutine(Routine routine) {
+    currentRoutine.value = routine;
   }
 
   void setExercises(List<Exercise> exercises) {

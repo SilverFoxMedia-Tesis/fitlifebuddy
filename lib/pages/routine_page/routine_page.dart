@@ -21,17 +21,19 @@ class RoutinePage extends GetView<RoutineController> {
     return LauncherPage(
       child: Padding(
         padding: AppPadding.paddingPage,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppSpacing.spacingVertical24,
-            buildCustomBar(),
-            AppSpacing.spacingVertical24,
-            if (controller.hasExercises)
-              buildExercises(),
-            if (!controller.hasExercises)
-              EmptyResult(message: 'no_routine'.tr),
-          ],
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacing.spacingVertical24,
+              buildCustomBar(),
+              AppSpacing.spacingVertical24,
+              if (controller.hasExercises)
+                buildExercises(),
+              if (!controller.hasExercises)
+                EmptyResult(message: 'no_routine'.tr),
+            ],
+          ),
         ),
       ),
     );

@@ -2,16 +2,12 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
-import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
-import 'package:fitlifebuddy/domain/model/routine.dart';
 
 class Daily {
   int? id;
   String? date;
   int? dateNumber;
-  List<Meal>? meals;
-  Routine? routine;
   Plan? plan;
   Status? status;
 
@@ -19,8 +15,6 @@ class Daily {
     this.id,
     this.date,
     this.dateNumber,
-    this.meals,
-    this.routine,
     this.plan,
     this.status,
   });
@@ -31,7 +25,7 @@ class Daily {
       'date': date,
       'dateNumber': dateNumber,
       'plan': plan?.toMap(),
-      'status': status,
+      'status': status?.value,
     };
   }
 

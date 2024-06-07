@@ -23,14 +23,18 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
               final exercise = controller.exercisesAvalibles[index];
               return Column(
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       controller.onExerciseSelected(exercise);
                     },
-                    child: PlanItemCard(
-                      text: fixEncoding(exercise.workout ?? ''),
-                      description: '${exercise.repsPerSet} x ${exercise.sets}',
-                      image: exercise.imageUrl,
+                    child: Obx(
+                      () => PlanItemCard(
+                        text: fixEncoding(exercise.workout ?? ''),
+                        description: '${exercise.repsPerSet} x ${exercise.sets}',
+                        image: exercise.imageUrl,
+                        border: (controller.exerciseSelected.value == exercise)
+                          ? true : null,
+                      ),
                     ),
                   ),
                   AppSpacing.spacingVertical20,
@@ -43,8 +47,9 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
           Obx(
             () => BaseButton(
               text: 'edit_exercise'.tr,
-              onTap: () => controller.changeExercise,
+              onTap: () async => await controller.changeExercise(),
               loading: controller.loading.value,
+              disabled: !controller.isSelected.value,
             ),
           ),
         ],
