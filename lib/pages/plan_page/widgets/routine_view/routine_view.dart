@@ -42,16 +42,16 @@ class RoutineView extends GetView<PlanController> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        for (var entry in controller.exercises.entries)
+        for (var entry in controller.exercises)
           Padding(
             padding: AppPadding.paddingOnlyTop24,
-            child: _buildMeal(entry.key, entry.value),
+            child: _buildMeal(entry),
           ),
       ],
     );
   }
 
-    Widget _buildMeal(int index, Exercise exercise) {
+    Widget _buildMeal(Exercise exercise) {
     return PlanItemCard(
       text: fixEncoding(exercise.workout ?? ''), 
       description: '${exercise.repsPerSet} repeticiones (${exercise.sets} sets)',

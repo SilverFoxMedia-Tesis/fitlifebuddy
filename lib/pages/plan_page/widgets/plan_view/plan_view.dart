@@ -7,8 +7,8 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/meals/meals_view.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/routine/routine_view.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/meals_view/meals_view.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/routine_view/routine_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,14 +29,17 @@ class PlanView extends GetView<PlanController> {
           ),
         ),
         AppSpacing.spacingVertical24,
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MealsView(),
-            AppSpacing.spacingHorizontal32,
-            RoutineView(),
-          ],
-        ),
+        const SizedBox(
+            height: 300,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MealsView(),
+                AppSpacing.spacingHorizontal32,
+                RoutineView(),
+              ],
+            ),
+          ),
       ],
     );
   }

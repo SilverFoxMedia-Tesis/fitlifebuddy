@@ -22,7 +22,6 @@ import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:get/get.dart';
 
-
 class PlanController extends GetxController {
   final dateTimeLineController = EasyInfiniteDateTimelineController();
   final unsplashService = Get.find<UnsplashService>();
@@ -38,8 +37,8 @@ class PlanController extends GetxController {
   final currentDateTime = DateTime.now().obs;
   final currentPlan = Plan().obs;
   final dailies = <Daily>[].obs;
-  final meals = <int, Meal>{}.obs;
-  final exercises = <int, Exercise>{}.obs;
+  final meals = <Meal>[].obs;
+  final exercises = <Exercise>[].obs;
 
   final frequency = Frecuently.monthly.label.obs;
   final frequencies = Frecuently.values.map((e) => e.label).toList();
@@ -51,6 +50,7 @@ class PlanController extends GetxController {
   bool get hasExercises => exercises.isNotEmpty;
 
   final loading = false.obs;
+  final dailyLoading = false.obs;
   final planLoading = false.obs;
 
   @override
@@ -65,8 +65,8 @@ class PlanController extends GetxController {
   }
 
   Future<void> getPlan() async {
-    loading(true);
     try {
+      loading(true);
       if (patientId == null) return;
       final list = await patientApi.getPlanByPatientId(int.parse(patientId!));
       if (list.isNotEmpty) {
@@ -84,6 +84,7 @@ class PlanController extends GetxController {
 
   Future<void> getDailyInfo() async {
     try {
+      dailyLoading(true);
       final date = fromDateToInitial(currentDateTime.value);
       final daily = dailies.firstWhereOrNull((d) => d.date == date);
       if (daily != null) {
@@ -92,68 +93,62 @@ class PlanController extends GetxController {
       }
     } catch (e) {
       displayErrorToast(e);
+    } finally{
+      dailyLoading(false);
     }
     planService.setDailyDatetime(currentDateTime.value);
   }
 
   Future<void> getMeals(int dailyId) async {
-    final list = await dailyApi.getMealsByDailyId(dailyId);
-    if (list.isEmpty) return;
-    for (var i = 0; i < list.length; i++) {
-      meals[i] = list[i];
-    }
-    for (var i = 0; i < meals.length; i++) {
-      if (meals[i]?.id != null) {
-        var mealFoods = await mealApi.getMealFoodsByMealId(meals[i]!.id!);
-        var foodList = <Food>[];
-        for (var mealFood in mealFoods) {
-          foodList.add(mealFood.food!);
+    try {
+      meals.clear();
+      final mealList = await dailyApi.getMealsByDailyId(dailyId);
+      if (mealList.isEmpty) return;
+
+      for (var meal in mealList) {
+        if (meal.id != null) {
+          final mealFoods = await mealApi.getMealFoodsByMealId(meal.id!);
+          if (mealFoods.isNotEmpty) {
+            meal.foods = mealFoods.map((mf) => mf.food!).toList();
+            meal.fullname = getName(meal.foods!);
+            meal.imageUrl = foodsURLMap[meal.foods?.first.id];
+          }
         }
-        meals[i]?.foods = foodList;
-        meals[i]?.fullname = getName(foodList);
       }
-      meals.forEach((index, meals) async {
-        final query = foodsMap[meals.foods?.first.id];
-        if (query != null) {
-          meals.imageUrl = await unsplashService.getReferencePhoto(query);
-        }
-      });
+      meals.addAll(mealList);
       planService.setMeals(meals);
+    } catch (e) {
+      displayErrorToast(e);
     }
   }
 
   String getName(List<Food> foods) {
     if (foods.isEmpty) return '';
-    
-    var names = foods.map((food) => translateFood(food.id!)).toList();
-    
+    final names = foods.map((food) => translateFood(food.id!)).toList();
     if (names.isEmpty) return '';
-    
     if (names.length == 1) {
       return names.first.capitalizeFirst ?? '';
     }
-
     return '${names.sublist(0, names.length - 1).join(', ')} y ${names.last}'.capitalizeFirst ?? '';
   }
 
   Future<void> getExercises(int dailyId) async {
-    final list = await dailyApi.getRoutinesByDailyId(dailyId);
-    if (list.isEmpty) return;
-    final routine = list.first;
-    final routineExercises = await routineExerciseApi.getRoutineExercises();
-    final filter = routineExercises.where((i) => i.routine?.id == routine.id).toList();
-    exercises.clear();
-    for (var i = 0; i < filter.length; i++) {
-      if (filter[i].exercise != null) {
-        exercises[i] = filter[i].exercise!;
+    try {
+      exercises.clear();
+      final list = await dailyApi.getRoutinesByDailyId(dailyId);
+      if (list.isEmpty) return;
+      
+      final routine = list.first;
+      
+      final routineExercises = await routineExerciseApi.getRoutineExercises();
+      final filteredExercises = routineExercises.where((i) => i.routine?.id == routine.id).map((i) => i.exercise).whereType<Exercise>().toList();
+      for (var exercise in filteredExercises) {
+        exercise.imageUrl = exercisesURLMap[exercise.id];
       }
+      exercises.addAll(filteredExercises);
+    } catch (e) {
+      displayErrorToast(e);
     }
-    exercises.forEach((index, exercise) async {
-      final query = exercisesMap[exercise.id];
-      if (query != null) {
-        exercise.imageUrl = await unsplashService.getReferencePhoto(query, type: 2);
-      }
-    });
     planService.setExercises(exercises);
   }
 

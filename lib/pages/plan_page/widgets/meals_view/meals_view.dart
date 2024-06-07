@@ -38,16 +38,16 @@ class MealsView extends GetView<PlanController> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        for (var entry in controller.meals.entries)
+        for (var meal in controller.meals)
           Padding(
             padding: AppPadding.paddingOnlyTop24,
-            child: _buildMeal(entry.key, entry.value),
+            child: _buildMeal(meal),
           ),
       ],
     );
   }
 
-  Widget _buildMeal(int index, Meal meal) {
+  Widget _buildMeal(Meal meal) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +60,7 @@ class MealsView extends GetView<PlanController> {
         PlanItemCard(
           text: meal.fullname ?? '', 
           image: meal.imageUrl,
-          onTap: () => controller.viewMealDetails(index),
+          onTap: () => controller.viewMealDetails(meal.id!),
         ),
       ],
     );

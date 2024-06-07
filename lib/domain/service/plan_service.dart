@@ -7,8 +7,8 @@ class PlanService {
   final currentPlan = Plan().obs;
   final currentDailyDateTime = DateTime.now().obs;
   final mealSelectedIndex = 0.obs;
-  final currentMeals = <int, Meal>{}.obs;
-  final currentExercises = <int, Exercise>{}.obs;
+  final currentMeals = <Meal>[].obs;
+  final currentExercises = <Exercise>[].obs;
 
   void setPlan(Plan plan) {
     currentPlan.value = plan;
@@ -18,7 +18,7 @@ class PlanService {
     currentDailyDateTime.value = dateTime;
   }
 
-  void setMeals(Map<int, Meal> meals) {
+  void setMeals(List<Meal> meals) {
     currentMeals.value = meals;
   }
 
@@ -28,7 +28,7 @@ class PlanService {
     mealSelectedIndex.value = index;
   }
 
-  void setExercises(Map<int, Exercise> exercises) {
+  void setExercises(List<Exercise> exercises) {
     currentExercises.value = exercises;
   }
 }

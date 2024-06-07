@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
+import 'package:fitlifebuddy/core/utils/text_utils.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
@@ -54,10 +55,10 @@ class RoutinePage extends GetView<RoutineController> {
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
-          children: controller.currentExercises.entries.map((entry) {
+          children: controller.currentExercises.map((entry) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: buildExercise(entry.value, null),
+              child: buildExercise(entry),
             );
           }).toList(),
         ),
@@ -65,11 +66,11 @@ class RoutinePage extends GetView<RoutineController> {
     );
   }
 
-  Widget buildExercise(Exercise exercise, String? image) {
+  Widget buildExercise(Exercise exercise) {
     return Row(
       children: [
         PlanItemCard(
-          text: exercise.workout ?? '', 
+          text: fixEncoding(exercise.workout ?? ''), 
           description: '${exercise.repsPerSet} repeticiones (${exercise.sets})',
           image: exercise.imageUrl,
         ),
@@ -77,7 +78,7 @@ class RoutinePage extends GetView<RoutineController> {
         BaseButton(
           text: 'edit_exercise'.tr,
           actionSeverity: ActionSeverity.warning,
-          onTap: () => controller.openChangeExerciseDialog(exercise.type),
+          onTap: () => controller.openChangeExerciseDialog(exercise),
         ),
       ],
     );

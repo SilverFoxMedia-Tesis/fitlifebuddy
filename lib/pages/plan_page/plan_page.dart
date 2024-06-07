@@ -55,7 +55,7 @@ class PlanPage extends GetView<PlanController> {
       title: 'my_current_plan'.tr,
       onBackPressed: () => Get.toNamed(AppRoutes.home),
       actions: [
-        if (controller.hasPLan)
+        if (controller.hasPLan & !controller.loading.value)
           BaseButton(
             text: "edit_plan".tr,
             actionSeverity: ActionSeverity.warning,
