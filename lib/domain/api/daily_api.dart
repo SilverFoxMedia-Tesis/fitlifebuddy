@@ -30,7 +30,7 @@ class DailyApi {
   // Update Daily
   Future<Daily> updateDaily(int id, Daily daily) async {
     final response = await _apiBase.put('dailies/$id', body: daily.toJson());
-    return Daily.fromJson(json.decode(response.body));
+    return Daily.fromJson(response.body);
   }
 
   // Delete Daily

@@ -48,7 +48,7 @@ class ChangeExerciseDialog extends GetView<RoutineController> {
             () => BaseButton(
               text: 'edit_exercise'.tr,
               onTap: () async => await controller.changeExercise(),
-              loading: controller.loading.value,
+              loading: controller.changeLoading.value,
               disabled: !controller.isSelected.value,
             ),
           ),

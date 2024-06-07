@@ -10,6 +10,7 @@ import 'package:fitlifebuddy/widgets/buttons/action_severity.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
+import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,10 +29,14 @@ class RoutinePage extends GetView<RoutineController> {
               AppSpacing.spacingVertical24,
               buildCustomBar(),
               AppSpacing.spacingVertical24,
-              if (controller.hasExercises)
-                buildExercises(),
-              if (!controller.hasExercises)
-                EmptyResult(message: 'no_routine'.tr),
+              Obx(
+                () => LoadingWidget(
+                  isLoading: controller.loading.value,
+                  child: controller.hasExercises
+                    ? buildExercises()
+                    : EmptyResult(message: 'no_routine'.tr),
+                ),
+              ),
             ],
           ),
         ),
@@ -42,12 +47,16 @@ class RoutinePage extends GetView<RoutineController> {
   Widget buildCustomBar() {
     return CustomBar(
       title: '${'routine'.tr} | ',
-      extraTitle: controller.getRoutineDate(),
+      extraTitle: controller.currentDateTime,
       onBackPressed: () => Get.toNamed(AppRoutes.plan),
       actions: [
-        BaseButton(
-          text: 'completed'.tr,
-          onTap: controller.changeRoutineToCompleted,
+        Obx(
+          () => BaseButton(
+            text: controller.completed ? 'completed'.tr : "No completado",
+            onTap: () async => await controller.changeRoutineToCompleted(),
+            loading: controller.isChanging.value,
+            disabled: controller.completed,
+          ),
         ),
       ],
     );
@@ -77,10 +86,13 @@ class RoutinePage extends GetView<RoutineController> {
           image: exercise.imageUrl,
         ),
         AppSpacing.spacingHorizontal20,
-        BaseButton(
-          text: 'edit_exercise'.tr,
-          actionSeverity: ActionSeverity.warning,
-          onTap: () => controller.openChangeExerciseDialog(exercise),
+        Obx(
+          () => BaseButton(
+            text: 'edit_exercise'.tr,
+            actionSeverity: ActionSeverity.warning,
+            onTap: () => controller.openChangeExerciseDialog(exercise),
+            disabled: controller.completed,
+          ),
         ),
       ],
     );

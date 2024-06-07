@@ -60,10 +60,13 @@ class PlanItemCard extends StatelessWidget {
                   ),
                   if (description != null) ...[
                     AppSpacing.spacingVertical4,
-                    Text(
-                      description!,
-                      style: AppTextStyle.robotoRegular16.copyWith(
-                        color: AppColors.primary,
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        description!,
+                        style: AppTextStyle.robotoRegular16.copyWith(
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   ],

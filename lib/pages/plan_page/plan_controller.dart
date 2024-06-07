@@ -93,13 +93,14 @@ class PlanController extends GetxController {
         await getMeals(daily.id!);
         routineExercises = await routineExerciseApi.getRoutineExercises();
         await getExercises(daily.id!);
+        planService.setDaily(daily);
+        planService.setDailyDatetime(currentDateTime.value);
       }
     } catch (e) {
       displayErrorToast(e);
     } finally{
       dailyLoading(false);
     }
-    planService.setDailyDatetime(currentDateTime.value);
   }
 
   Future<void> getMeals(int dailyId) async {
