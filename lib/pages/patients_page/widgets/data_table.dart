@@ -11,10 +11,10 @@ class PatientsDataTable extends StatelessWidget {
     return DataTable2(
       columnSpacing: 10,
       dividerThickness: 1,
-      headingRowColor: MaterialStatePropertyAll(AppColors.primary.withOpacity(0.5)),
+      headingRowColor: WidgetStatePropertyAll(AppColors.primary.withOpacity(0.5)),
       headingRowHeight: 64,
       headingTextStyle: AppTextStyle.robotoSemibold14,
-      dataRowColor: const MaterialStatePropertyAll(AppColors.light),
+      dataRowColor: const WidgetStatePropertyAll(AppColors.light),
       dataRowHeight: 64,
       dataTextStyle: AppTextStyle.robotoRegular14,
       columns: const [

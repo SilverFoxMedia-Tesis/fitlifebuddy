@@ -96,13 +96,13 @@ class AppDropdown extends StatelessWidget {
                 offset: const Offset(0, 0),
                 scrollbarTheme: ScrollbarThemeData( //revisar otra vez
                   radius: const Radius.circular(40),
-                  thickness: MaterialStateProperty.all<double>(6),
-                  thumbVisibility: MaterialStateProperty.all<bool>(true),
+                  thickness: WidgetStateProperty.all<double>(6),
+                  thumbVisibility: WidgetStateProperty.all<bool>(true),
                 ),
               ),
               menuItemStyleData: MenuItemStyleData(
                 padding: AppPadding.padding16,
-                overlayColor: MaterialStateProperty.all<Color>(AppColors.background),
+                overlayColor: WidgetStateProperty.all<Color>(AppColors.background),
               ),
             ),
           ),

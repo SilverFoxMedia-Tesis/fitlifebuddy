@@ -52,39 +52,43 @@ class PlanView extends GetView<PlanController> {
         boxShadow: [AppBoxShadow.secondary25Blur8],
       ),
       child: Obx(
+        //TODO: mejorar este widget
         () => EasyInfiniteDateTimeLine(
           controller: controller.dateTimeLineController,
           firstDate: DateTime(2024),
           focusDate: controller.currentDateTime.value,
           lastDate: DateTime(2024, 12, 31),
           showTimelineHeader: false,
-          onDateChange: (value) async => await controller.onDateChange(value),
+          onDateChange: (value) => controller.onDateChange(value),
           itemBuilder: (_, date, isSelected, onTap) {
             final textColor = isSelected ? AppColors.light : AppColors.secondary;
-            return Container(
-              padding: AppPadding.paddingDateTimeLine,
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary : AppColors.light,
-                borderRadius: AppBorderRadius.borderRadiusXxxl,
-                boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    EasyDateFormatter.shortDayName(date, "es_PE"),
-                    style: AppTextStyle.robotoRegular16.copyWith(
-                      color: textColor,
+            return InkWell(
+              onTap: onTap,
+              child: Container(
+                padding: AppPadding.paddingDateTimeLine,
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.primary : AppColors.light,
+                  borderRadius: AppBorderRadius.borderRadiusXxxl,
+                  boxShadow: isSelected ? [AppBoxShadow.secondary25Blur8] : null,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      EasyDateFormatter.shortDayName(date, "es_PE").capitalizeFirst ?? '',
+                      style: AppTextStyle.robotoRegular16.copyWith(
+                        color: textColor,
+                      ),
                     ),
-                  ),
-                  AppSpacing.spacingVertical16,
-                  Text(
-                    date.day.toString(),
-                    style: AppTextStyle.robotoSemibold20.copyWith(
-                      color: textColor,
+                    AppSpacing.spacingVertical16,
+                    Text(
+                      date.day.toString(),
+                      style: AppTextStyle.robotoSemibold20.copyWith(
+                        color: textColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
