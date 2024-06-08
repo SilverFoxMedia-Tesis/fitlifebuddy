@@ -52,9 +52,9 @@ class RoutinePage extends GetView<RoutineController> {
       actions: [
         Obx(
           () => BaseButton(
-            text: controller.completed ? 'completed'.tr : "No completado",
+            text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
             onTap: () async => await controller.changeRoutineToCompleted(),
-            loading: controller.isChanging.value,
+            loading: controller.changingStatus.value,
             disabled: controller.completed,
           ),
         ),

@@ -68,9 +68,9 @@ class MealPage extends GetView<MealController> {
           ),
           AppSpacing.spacingHorizontal16,
           BaseButton(
-            text: controller.completed ? 'completed'.tr : "No completado",
+            text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
             onTap: () async => await controller.changeMealToCompleted(),
-            loading: controller.isChanging.value,
+            loading: controller.changingStatus.value,
             disabled: controller.completed,
           ),
         ],

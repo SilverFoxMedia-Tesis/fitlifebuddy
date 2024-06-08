@@ -140,5 +140,8 @@
     "no_notifications": "No hay notificaciones",
     "meals_of_the_day": "Comidas del día",
     "faq": "Preguntas frecuentes",
-    "no_options": "No hay opciones disponibles"
+    "no_options": "No hay opciones disponibles",
+    "plan_updated": "Plan actualizado",
+    "plan_created": "Plan creado",
+    "mark_as_completed": "Marcar como Completado"
 }

@@ -26,7 +26,7 @@ class RoutineController extends GetxController {
   var selectedId = 0;
   final exerciseSelected = Exercise().obs;
   final isSelected = false.obs;
-  final isChanging = false.obs;
+  final changingStatus = false.obs;
 
   bool get hasExercises => currentExercises.isNotEmpty;
   String get currentDateTime => fromDateToLong(planService.currentDailyDateTime.value);
@@ -51,7 +51,7 @@ class RoutineController extends GetxController {
 
   Future<void> changeRoutineToCompleted() async {
     try {
-      isChanging(true);
+      changingStatus(true);
       final daily = planService.currentDaily.value;
       if (daily.id != null) {
         daily.status = Status.completed;
@@ -61,7 +61,7 @@ class RoutineController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      isChanging(false);
+      changingStatus(false);
     }
   }
 

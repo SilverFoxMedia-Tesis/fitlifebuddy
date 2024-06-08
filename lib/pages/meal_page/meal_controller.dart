@@ -25,7 +25,7 @@ class MealController extends GetxController {
   String get fullname => currentMeal.value.fullname ?? '';
   String get timeMeal => currentMeal.value.timeMeal?.label ?? '';
 
-  final isChanging = false.obs;
+  final changingStatus = false.obs;
 
   String get currentDateTime => fromDateToLong(planService.currentDailyDateTime.value);
   bool get completed => planService.currentDaily.value.status?.label == Status.completed.label;
@@ -61,7 +61,7 @@ class MealController extends GetxController {
   
   Future<void> changeMealToCompleted() async {
     try {
-      isChanging(true);
+      changingStatus(true);
       final daily = planService.currentDaily.value;
       if (daily.id != null) {
         daily.status = Status.completed;
@@ -71,7 +71,7 @@ class MealController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      isChanging(false);
+      changingStatus(false);
     }
   }
 

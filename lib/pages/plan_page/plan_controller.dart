@@ -17,18 +17,20 @@ import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
 import 'package:fitlifebuddy/domain/service/person_service.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
-import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_dialog.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
+import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:get/get.dart';
+import 'package:toastification/toastification.dart';
 
 class PlanController extends GetxController {
   final dateTimeLineController = EasyInfiniteDateTimelineController();
-  final unsplashService = Get.find<UnsplashService>();
   final patientService = Get.find<PatientService>();
   final planService = Get.find<PlanService>();
   final getXDialog = Get.find<GetXDialog>();
+  final _appToast = Get.find<AppToast>();
+
   final patientApi = Get.find<PatientApi>();
   final planApi = Get.find<PlanApi>();
   final dailyApi = Get.find<DailyApi>();
@@ -181,18 +183,29 @@ class PlanController extends GetxController {
     }
   }
 
-  Future<void> createPlan() async {
+  Future<void> createEditPlan(bool isEdit) async {
     try {
       planLoading(true);
-      final finalFrequency = Frecuency.values.firstWhere((e) => e.label == frequency.value);
-      final plan = await planApi.createPlan(int.parse(patientId!), finalFrequency.value);
+      var plan = currentPlan.value;
+      plan.frecuency = Frecuency.values.firstWhere((e) => e.label == frequency.value);
+      if (isEdit) {
+        plan = await planApi.updatePlan(plan.id!, plan);
+      } 
+      //plan = await planApi.createPlan(int.parse(patientId!), plan.frecuency!.value);
       currentPlan.value = plan;
+      planService.setPlan(currentPlan.value);
       onDialogClose();
+
+      final message = isEdit ? "plan_updated".tr : "plan_created".tr;
+      _appToast.showToast(
+        message: message,
+        type: ToastificationType.success,
+      );
       await getDailyInfo();
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      planLoading(true);
+      planLoading(false);
     }
   }
 

@@ -30,7 +30,7 @@ class PlanApi {
   // Update Plan
   Future<Plan> updatePlan(int id, Plan plan) async {
     final response = await _apiBase.put('plans/$id', body: plan.toJson());
-    return Plan.fromJson(json.decode(response.body));
+    return Plan.fromJson(response.body);
   }
 
   // Delete Plan

@@ -33,7 +33,7 @@ class PlanDialog extends GetView<PlanController> {
         Obx(
           () => BaseButton(
             text: text,
-            onTap: controller.createPlan,
+            onTap: () async => await controller.createEditPlan(isEdit),
             loading: controller.planLoading.value,
           ),
         ),
