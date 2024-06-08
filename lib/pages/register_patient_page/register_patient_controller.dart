@@ -87,14 +87,14 @@ class RegisterPatientController extends GetxController{
     super.onInit();
   }
 
-  void onChangedPage(int pageIndex) {
+  void onChangedPage(int pageIndex, {bool isback = false}) {
     bool allFormsValid = true;
 
-    if (pageIndex == 1) {
-      savePersonalInfo();
-      allFormsValid = _formValidationService.validateForm(personalInfoFormKey);
-    } else if (pageIndex == 2) {
-      allFormsValid = _formValidationService.validateForm(healthConditionsFormKey);
+    if (!isback) {
+      if (pageIndex == 1) {
+        savePersonalInfo();
+        allFormsValid = _formValidationService.validateForm(personalInfoFormKey);
+      }
     }
 
     if (allFormsValid) {
@@ -103,6 +103,7 @@ class RegisterPatientController extends GetxController{
         duration: const Duration(milliseconds: 300),
         curve: Curves.ease,
       );
+      currentPage(pageIndex);
     }
   } 
 

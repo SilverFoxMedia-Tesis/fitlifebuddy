@@ -7,7 +7,6 @@ import 'package:fitlifebuddy/pages/register_patient_page/register_patient_contro
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,38 +15,28 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'register_pacient_title'.tr,
-                style: AppTextStyle.robotoSemibold24,
-              ),
-              AppSpacing.spacingVertical32,
-              Text(
-                'register_pacient_3_title'.tr,
-                style: AppTextStyle.robotoSemibold16,
-              ),
-              AppSpacing.spacingVertical24,
-              _buildNewFoodConditionContainer(),
-              if (controller.hasFoodConditions)
-              Form(
-                key: controller.foodConditionsFormKey,
-                child: _buildFoodConditions(),
-              ),
-            ],
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'register_pacient_title'.tr,
+            style: AppTextStyle.robotoSemibold24,
           ),
-        ),
-        AppSpacing.spacingVertical24,
-        BaseButton(
-          text: 'finish'.tr,
-          onTap: controller.register,
-        ),
-      ],
+          AppSpacing.spacingVertical32,
+          Text(
+            'register_pacient_3_title'.tr,
+            style: AppTextStyle.robotoSemibold16,
+          ),
+          AppSpacing.spacingVertical24,
+          _buildNewFoodConditionContainer(),
+          if (controller.hasFoodConditions)
+          Form(
+            key: controller.foodConditionsFormKey,
+            child: _buildFoodConditions(),
+          ),
+        ],
+      ),
     );
   }
 

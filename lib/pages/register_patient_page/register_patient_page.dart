@@ -1,4 +1,5 @@
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
+import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/widgets/food_conditions_form.dart';
@@ -13,6 +14,7 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
   RegisterPatientPage({super.key});
 
   final List<Widget> pages = [
+    //const HealthConditionsForm(),
     const PersonalInfoForm(),
     const HealthConditionsForm(),
     const FoodConditionsForm(),
@@ -31,16 +33,18 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: pages.length,
               itemBuilder: (context, index) {
-                return SingleChildScrollView(
+                return Padding(
                   padding: AppPadding.padding32,
                   child: Column(
                     children: [
                       Obx(
                         () => LinearProgressIndicator(
-                          value: controller.currentPage.value / (pages.length - 1),
+                          value: controller.currentPage.value / (pages.length),
                         ),
                       ),
-                      pages[index],
+                      AppSpacing.spacingVertical24,
+                      Expanded(child: SingleChildScrollView(child: pages[index])),
+                      AppSpacing.spacingVertical24,
                       buildNavegationButtons(),
                     ],
                   ),
@@ -62,12 +66,12 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
           if (controller.currentPage.value > 0)
             BaseButton(
               text: 'Anterior',
-              onTap: () {},
+              onTap: () => controller.onChangedPage(controller.currentPage.value, isback: true),
             ),
           if (controller.currentPage.value < pages.length - 1)
             BaseButton(
               text: 'Siguiente',
-              onTap: () {},
+              onTap: () => controller.onChangedPage(controller.currentPage.value + 1),
             ),
         ],
       ),

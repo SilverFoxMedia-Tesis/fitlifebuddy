@@ -5,9 +5,9 @@ import 'package:fitlifebuddy/core/utils/input_formatters.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
+import 'package:fitlifebuddy/widgets/app_dropdown/single_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
-import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,36 +17,30 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'register_pacient_title'.tr,
-                style: AppTextStyle.robotoSemibold24,
-              ),
-              AppSpacing.spacingVertical32,
-              Text(
-                'register_pacient_2_title'.tr,
-                style: AppTextStyle.robotoSemibold16,
-              ),
-              AppSpacing.spacingVertical24,
-              _buildNewHealthConditionContainer(),
-              if (controller.hConditionTypes.isNotEmpty)
-              Form(
-                key: controller.healthConditionsFormKey,
-                child: _buildHealthConditions(),
-              ),
-            ],
-          ),
+        Text(
+          'register_pacient_title'.tr,
+          style: AppTextStyle.robotoSemibold24,
+        ),
+        AppSpacing.spacingVertical32,
+        Text(
+          'register_pacient_2_title'.tr,
+          style: AppTextStyle.robotoSemibold16,
         ),
         AppSpacing.spacingVertical24,
-        BaseButton(
-          text: 'continue'.tr,
-          onTap: () => controller.onChangedPage(2),
+        SingleDropdown(
+          title: 'Cirugias',
+          items: controller.hCTypes,
+          onChanged: (value) {},
         ),
+        AppSpacing.spacingVertical24,
+        // _buildNewHealthConditionContainer(),
+        // if (controller.hConditionTypes.isNotEmpty)
+        // Form(
+        //   key: controller.healthConditionsFormKey,
+        //   child: _buildHealthConditions(),
+        // ),
       ],
     );
   }
