@@ -1,6 +1,5 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
-import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
@@ -54,9 +53,16 @@ class PlanView extends GetView<PlanController> {
       ),
       child: Obx(
         () => EasyInfiniteDateTimeLine(
-          itemBuilder: (_, dayNumber, dayName, monthName, fullDate, isSelected) {
+          controller: controller.dateTimeLineController,
+          firstDate: DateTime(2024),
+          focusDate: controller.currentDateTime.value,
+          lastDate: DateTime(2024, 12, 31),
+          showTimelineHeader: false,
+          onDateChange: (value) async => await controller.onDateChange(value),
+          itemBuilder: (_, date, isSelected, onTap) {
+            final textColor = isSelected ? AppColors.light : AppColors.secondary;
             return Container(
-              padding: AppPadding.paddingDateTimeLineItem,
+              padding: AppPadding.paddingDateTimeLine,
               decoration: BoxDecoration(
                 color: isSelected ? AppColors.primary : AppColors.light,
                 borderRadius: AppBorderRadius.borderRadiusXxxl,
@@ -66,38 +72,22 @@ class PlanView extends GetView<PlanController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    dayName.capitalizeFirst ?? '',
+                    EasyDateFormatter.shortDayName(date, "es_PE"),
                     style: AppTextStyle.robotoRegular16.copyWith(
-                      color: isSelected ? AppColors.light : AppColors.secondary,
+                      color: textColor,
                     ),
                   ),
                   AppSpacing.spacingVertical16,
                   Text(
-                    dayNumber,
+                    date.day.toString(),
                     style: AppTextStyle.robotoSemibold20.copyWith(
-                      color: isSelected ? AppColors.light : AppColors.primary,
-                    ),
-                  ),
-                  AppSpacing.spacingVertical4,
-                  Container(
-                    width: ContainerSize.pointSize,
-                    height: ContainerSize.pointSize,
-                    decoration: BoxDecoration(
-                      color: isSelected ? AppColors.light : AppColors.primary,
-                      shape: BoxShape.circle,
+                      color: textColor,
                     ),
                   ),
                 ],
               ),
             );
           },
-          locale: "es_PE",
-          controller: controller.dateTimeLineController,
-          firstDate: DateTime(2024),
-          focusDate: controller.currentDateTime.value,
-          lastDate: DateTime(2024, 12, 31),
-          showTimelineHeader: false,
-          onDateChange: (value) async => controller.onDateChange(value),
         ),
       ),
     );
