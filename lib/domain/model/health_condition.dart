@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
-import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
+import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class HealthCondition {
   int? id;
   String? name;
   String? description;
-  TypeHealthCondition? type;
+  HealthConditionType? type;
   Patient? patient;
 
   HealthCondition({
@@ -34,7 +34,7 @@ class HealthCondition {
       id: map['idHealthCondition'] != null ? map['idHealthCondition'] as int : null,
       name: map['nameHealthCondition'] != null ? map['nameHealthCondition'] as String : null,
       description: map['descriptionHealthCondition'] != null ? map['descriptionHealthCondition'] as String : null,
-      type: map['typeHealthCondition'] != null ? EnumExtension.getValue(TypeHealthCondition.values, map['typeHealthCondition']) : null,
+      type: map['typeHealthCondition'] != null ? EnumExtension.getValue(HealthConditionType.values, map['typeHealthCondition']) : null,
       patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
     );
   }

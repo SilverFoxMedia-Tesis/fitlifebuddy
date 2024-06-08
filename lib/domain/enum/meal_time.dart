@@ -1,9 +1,9 @@
-enum TimeMeal {
+enum MealTime {
   breakfast('Breakfast', 'Desayuno'),
   lunch('Lunch', 'Almuerzo'),
   dinner('Dinner', 'Cena');
 
-  const TimeMeal(this.value, this.label);
+  const MealTime(this.value, this.label);
   final String value;
   final String label;
 }

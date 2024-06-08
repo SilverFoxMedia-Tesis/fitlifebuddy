@@ -1,7 +1,6 @@
 import 'package:fitlifebuddy/domain/dependency_injection.dart';
 import 'package:fitlifebuddy/domain/provider/localization/languages.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
-import 'package:fitlifebuddy/domain/service/unsplash_service.dart';
 import 'package:fitlifebuddy/routes/app_pages.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +14,6 @@ Future<void> main({Widget? page}) async {
   await UserPreferences.initialize();
   await Languages.init();
   await DependencyInjection.init();
-  final unsplashService = Get.find<UnsplashService>();
-  await unsplashService.init();
   await initializeDateFormatting('es', null);
   runApp(page ?? const MyApp());
 }

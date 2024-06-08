@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/enum/bmi_category.dart';
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
-import 'package:fitlifebuddy/domain/enum/frecuently.dart';
+import 'package:fitlifebuddy/domain/enum/frecuency.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 

@@ -1,4 +1,4 @@
-enum TypeExercise {
+enum ExerciseType {
   upperChest('Upper_Chest', 'Pecho superior'),
   lowerChest('Lower_Chest', 'Pecho inferior'),
   chestIsolation('Chest_Isolation', 'Aislamiento de pecho'),
@@ -18,7 +18,7 @@ enum TypeExercise {
   wristExtensors('Wrist_Extensors', 'Extensores de muñeca'),
   gripStrength('Grip_Strength', 'Fuerza de agarre');
 
-  const TypeExercise(this.value, this.label);
+  const ExerciseType(this.value, this.label);
   final String value;
   final String label;
 }

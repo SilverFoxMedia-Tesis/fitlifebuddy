@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_exercises_api.dart';
-import 'package:fitlifebuddy/domain/enum/frecuently.dart';
+import 'package:fitlifebuddy/domain/enum/frecuency.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';

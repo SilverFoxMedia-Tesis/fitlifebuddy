@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fitlifebuddy/domain/enum/category_name.dart';
+import 'package:fitlifebuddy/domain/enum/food_category.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 
 class Food {
@@ -13,7 +13,7 @@ class Food {
   num? satFat;
   num? fiber;
   num? carbs;
-  CategoryName? categoryName;
+  FoodCategory? categoryName;
   String? imageUrl;
 
   Food({
@@ -56,7 +56,7 @@ class Food {
       satFat: map['satFat'] != null ? map['satFat'] as num : null,
       fiber: map['fiber'] != null ? map['fiber'] as num : null,
       carbs: map['carbs'] != null ? map['carbs'] as num : null,
-      categoryName: map['categoryName'] != null ? EnumExtension.getValue(CategoryName.values, map['categoryName']) : null,
+      categoryName: map['categoryName'] != null ? EnumExtension.getValue(FoodCategory.values, map['categoryName']) : null,
     );
   }
 

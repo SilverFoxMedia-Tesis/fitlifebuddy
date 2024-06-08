@@ -11,8 +11,8 @@ import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
-import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
-import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
+import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
+import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
@@ -53,13 +53,13 @@ class RegisterPatientController extends GetxController{
   final emailController = TextEditingController().obs;
 
   List<String> genders = Gender.values.map((e) => e.label).toList();
-  List<String> hCTypes = TypeHealthCondition.values.map((e) => e.label).toList();
-  List<String> fCTypes = TypeFoodCondition.values.map((e) => e.label).toList();
+  List<String> hCTypes = HealthConditionType.values.map((e) => e.label).toList();
+  List<String> fCTypes = FoodConditionType.values.map((e) => e.label).toList();
 
   final genderSelected  = Gender.values.first.label.obs;
 
   //new health condition
-  final newhConditionType = TypeHealthCondition.values.first.label.obs;
+  final newhConditionType = HealthConditionType.values.first.label.obs;
   final newHConditionController = TextEditingController().obs;
 
   // health conditions
@@ -67,7 +67,7 @@ class RegisterPatientController extends GetxController{
   final hConditionsControllers = <int, TextEditingController>{}.obs;
 
   //new food conditions
-  final newfConditionType = TypeFoodCondition.values.first.label.obs;
+  final newfConditionType = FoodConditionType.values.first.label.obs;
   final newFConditionController = TextEditingController().obs;
 
   // food conditions
@@ -195,7 +195,7 @@ class RegisterPatientController extends GetxController{
       fConditionsControllers[index]?.text = newFConditionController.value.text;
       
       //reset
-      newfConditionType.value = TypeFoodCondition.values.first.label;
+      newfConditionType.value = FoodConditionType.values.first.label;
       newFConditionController.value.clear();
     } else {
       _appToast.showToast(
@@ -212,7 +212,7 @@ class RegisterPatientController extends GetxController{
       hConditionsControllers[index]?.text = newHConditionController.value.text;
       
       //reset
-      newhConditionType.value = TypeHealthCondition.values.first.label;
+      newhConditionType.value = HealthConditionType.values.first.label;
       newHConditionController.value.clear();
     } else {
       _appToast.showToast(
@@ -244,7 +244,7 @@ class RegisterPatientController extends GetxController{
         var hCondition = HealthCondition(
           name: hConditionsControllers[i]?.text,
           description: '',
-          type: EnumExtension.getLabel(TypeHealthCondition.values, hConditionTypes[i]),
+          type: EnumExtension.getLabel(HealthConditionType.values, hConditionTypes[i]),
           patient: currentPatient.value,
         );
         await _healthConditionApi.createHealthCondition(hCondition, currentPatient.value.id!);
@@ -264,7 +264,7 @@ class RegisterPatientController extends GetxController{
         var fCondition = FoodCondition(
           name: fConditionsControllers[i]?.text,
           description: '',
-          type: EnumExtension.getLabel(TypeFoodCondition.values, fConditionTypes[i]),
+          type: EnumExtension.getLabel(FoodConditionType.values, fConditionTypes[i]),
           patient: currentPatient.value,
         );
         await _foodConditionApi.createFoodCondition(fCondition, currentPatient.value.id!);
@@ -293,7 +293,7 @@ class RegisterPatientController extends GetxController{
             currentPatientHistory.value.abdominalCircumference = 0;
             currentPatientHistory.value.dietType = DietType.omnivore;
             currentPatientHistory.value.physicalActivity = PhysicalActivity.no;
-            currentPatientHistory.value.typeHealthCondition = TypeHealthCondition.no;
+            currentPatientHistory.value.typeHealthCondition = HealthConditionType.no;
             await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
             _appToast.showToast(
               message: 'personal_info_saved'.tr,

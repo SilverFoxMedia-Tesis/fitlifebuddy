@@ -1,4 +1,4 @@
-enum CategoryName {
+enum FoodCategory {
   dairyProducts('Dairy_Products', 'Productos Lácteos'),
   fatsOilsShortenings('Fats_Oils_Shortenings', 'Grasas, Aceites, Mantecas'),
   meatPoultry('Meat_Poultry', 'Carne, Aves'),
@@ -12,7 +12,7 @@ enum CategoryName {
   soups('Soups', 'Sopas'),
   seedsAndNuts('Seeds_and_Nuts', 'Semillas y Nueces');
 
-  const CategoryName(this.value, this.label);
+  const FoodCategory(this.value, this.label);
   final String value;
   final String label;
 }

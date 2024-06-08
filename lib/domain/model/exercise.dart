@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:fitlifebuddy/domain/enum/body_part.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
-import 'package:fitlifebuddy/domain/enum/type_exercise.dart';
+import 'package:fitlifebuddy/domain/enum/exercise_type.dart';
 
 class Exercise {
   int? id;
   String? workout;
   String? sets;
   String? repsPerSet;
-  TypeExercise? type;
+  ExerciseType? type;
   BodyPart? bodyPart;
   String? imageUrl;
 
@@ -40,7 +40,7 @@ class Exercise {
       workout: map['workout'] != null ? map['workout'] as String : null,
       sets: map['sets'] != null ? map['sets'] as String : null,
       repsPerSet: map['repsPerSet'] != null ? map['repsPerSet'] as String : null,
-      type: map['typeExercise'] != null ? EnumExtension.getValue(TypeExercise.values, map['typeExercise']) : null,
+      type: map['typeExercise'] != null ? EnumExtension.getValue(ExerciseType.values, map['typeExercise']) : null,
       bodyPart: map['bodyPart'] != null ? EnumExtension.getValue(BodyPart.values, map['bodyPart']): null,
     );
   }

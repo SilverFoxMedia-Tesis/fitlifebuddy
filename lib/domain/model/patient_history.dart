@@ -4,7 +4,7 @@ import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
-import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
+import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
 class PatientHistory {
@@ -17,7 +17,7 @@ class PatientHistory {
   DietType? dietType;
   Patient? patient;
   PhysicalActivity? physicalActivity;
-  TypeHealthCondition? typeHealthCondition;
+  HealthConditionType? typeHealthCondition;
 
   PatientHistory({
     this.id,
@@ -58,7 +58,7 @@ class PatientHistory {
       dietType: EnumExtension.getValue(DietType.values, map['dietType']),
       patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
       physicalActivity: EnumExtension.getValue(PhysicalActivity.values, map['physicalActivity']),
-      typeHealthCondition: EnumExtension.getValue(TypeHealthCondition.values ,map['typeHealthCondition']),
+      typeHealthCondition: EnumExtension.getValue(HealthConditionType.values ,map['typeHealthCondition']),
     );
   }
 

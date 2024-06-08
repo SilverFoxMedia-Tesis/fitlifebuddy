@@ -7,8 +7,8 @@ import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
-import 'package:fitlifebuddy/domain/enum/type_food_condition.dart';
-import 'package:fitlifebuddy/domain/enum/type_health_condition.dart';
+import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
+import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
@@ -42,8 +42,8 @@ class PatientProfileController extends GetxController{
   final emailController = TextEditingController().obs;
 
   List<String> genders = Gender.values.map((e) => e.label).toList();
-  List<String> foodConditionTypes = TypeFoodCondition.values.map((e) => e.label).toList();
-  List<String> healthConditionTypes = TypeHealthCondition.values.map((e) => e.label).toList();
+  List<String> foodConditionTypes = FoodConditionType.values.map((e) => e.label).toList();
+  List<String> healthConditionTypes = HealthConditionType.values.map((e) => e.label).toList();
 
   final genderSelectedValue  = Gender.values.first.label.obs;
   final foodConditionTypeSelectedValues = <int, String>{}.obs;
@@ -290,7 +290,7 @@ class PatientProfileController extends GetxController{
       if (_formValidationService.validateForm(healthConditionsFormKey)) {
         for (var i = 0; i < currentHealthConditions.length; i++) {
           var hCondition = currentHealthConditions[i];
-          hCondition.type = EnumExtension.getLabel(TypeHealthCondition.values, healthConditionTypeSelectedValues[i]);
+          hCondition.type = EnumExtension.getLabel(HealthConditionType.values, healthConditionTypeSelectedValues[i]);
           hCondition.name = healthConditionTypeSelectedControllers[i]?.text;
           //final result = await _healthConditionApi.updateHealthCondition(hCondition.id!, hCondition);
           //currentHealthConditions[i] = result;
@@ -312,7 +312,7 @@ class PatientProfileController extends GetxController{
       if (_formValidationService.validateForm(foodConditionsFormKey)) {
         for (var i = 0; i < currentFoodConditions.length; i++) {
           var foodConditions = currentFoodConditions[i];
-          foodConditions.type = EnumExtension.getLabel(TypeFoodCondition.values, foodConditionTypeSelectedValues[i]);
+          foodConditions.type = EnumExtension.getLabel(FoodConditionType.values, foodConditionTypeSelectedValues[i]);
           foodConditions.name = foodConditionTypeSelectedControllers[i]?.text;
           //final result = await _foodConditionApi.updateFoodCondition(foodConditions.id!, foodConditions);
           // currentFoodConditions[i] = result;
