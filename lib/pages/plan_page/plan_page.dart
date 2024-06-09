@@ -52,15 +52,23 @@ class PlanPage extends GetView<PlanController> {
 
   Widget buildCustomBar() {
     return CustomBar(
-      title: 'my_current_plan'.tr,
+      title: '${'my_current_plan'.tr} | ',
+      extraTitle: '${controller.firstdate} - ${controller.lastdate}',
       onBackPressed: () => Get.toNamed(AppRoutes.home),
       actions: [
-        if (controller.hasPLan & !controller.loading.value)
+        if (controller.hasPLan & !controller.loading.value) ...[
+          BaseButton(
+            text: "view_plan_info".tr,
+            actionSeverity: ActionSeverity.primary,
+            onTap:() => controller.openPlanInformationDialog(),
+          ),
+          AppSpacing.spacingHorizontal14,
           BaseButton(
             text: "edit_plan".tr,
             actionSeverity: ActionSeverity.warning,
             onTap:() => controller.openCreateEditPlanDialog(isEdit: true),
           ),
+        ],
       ],
     );
   }

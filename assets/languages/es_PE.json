@@ -143,5 +143,17 @@
     "no_options": "No hay opciones disponibles",
     "plan_updated": "Plan actualizado",
     "plan_created": "Plan creado",
-    "mark_as_completed": "Marcar como Completado"
+    "mark_as_completed": "Marcar como Completado",
+    "plan_info": "Información de plan",
+    "tmb": "Tasa de Metabolismo Basal (TMB)",
+    "estimated_weight_lose": "Peso estimado a perder",
+    "bmi_category": "Clasificación de Índice de Masa Corporal (IMC)",
+    "calorie_deficit": "Déficit calórico",
+    "view_plan_info": "Ver detalles del plan",
+    "surgeries": "Cirugías",
+    "illnesses": "Enfermedades",
+    "preferences": "Preferencias",
+    "restrictions": "Restriciones",
+    "allergies": "Alergias",
+    "select": "Seleccionar"
 }

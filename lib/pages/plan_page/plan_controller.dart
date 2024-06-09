@@ -18,6 +18,7 @@ import 'package:fitlifebuddy/domain/service/person_service.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_dialog.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_information_dialog.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
@@ -44,14 +45,18 @@ class PlanController extends GetxController {
   final meals = <Meal>[].obs;
   final exercises = <Exercise>[].obs;
 
-  final frequency = Frecuency.monthly.label.obs;
   final frequencies = Frecuency.values.map((e) => e.label).toList();
+
+  final selectedFrequency = Frecuency.monthly.label.obs;
 
   String? get patientId => UserPreferences.getPatientId();
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
   bool get hasPLan => currentPlan.value.id != null;
   bool get hasMeals => meals.isNotEmpty;
   bool get hasExercises => exercises.isNotEmpty;
+  
+  final firstdate = ''.obs;
+  final lastdate =  ''.obs;
 
   final loading = false.obs;
   final dailyLoading = false.obs;
@@ -60,6 +65,7 @@ class PlanController extends GetxController {
   @override
   Future<void> onInit() async {
     await getPlan();
+    getFirstAndLastDate();
     super.onInit();
   }
 
@@ -83,6 +89,31 @@ class PlanController extends GetxController {
       displayErrorToast(e);
     } finally {
       loading(false);
+    }
+  }
+
+  void getFirstAndLastDate() {
+    final first = dailies.firstWhereOrNull((d) => d.dateNumber == 1);
+    if (first?.dateNumber != null) {
+      firstdate.value = fromDateToLong(DateTime.parse(first!.date!));
+    }
+    
+    int dateNumber;
+    switch (currentPlan.value.frecuency) {
+      case Frecuency.bimonthly:
+        dateNumber = 60;
+        break;
+      case Frecuency.quarterly:
+        dateNumber = 90;
+        break;
+      default:
+        dateNumber = 30;
+        break;
+    }
+
+    final last = dailies.firstWhereOrNull((d) => d.dateNumber == dateNumber);
+    if (last?.dateNumber != null) {
+      lastdate.value = fromDateToLong(DateTime.parse(last!.date!));
     }
   }
 
@@ -173,13 +204,17 @@ class PlanController extends GetxController {
     Get.toNamed(AppRoutes.routine);
   }
 
+  Future<void> openPlanInformationDialog() async {
+    await getXDialog.showDialog(PlanInformationDialog(plan: currentPlan.value), onClose: onDialogClose);
+  }
+
   Future<void> openCreateEditPlanDialog({bool isEdit = false}) async {
     await getXDialog.showDialog(PlanDialog(isEdit: isEdit), onClose: onDialogClose);
   }
 
   onChangeFrecuency(String? value) {
     if (value != null && value != '') {
-      frequency.value = value;
+      selectedFrequency.value = value;
     }
   }
 
@@ -187,7 +222,7 @@ class PlanController extends GetxController {
     try {
       planLoading(true);
       var plan = currentPlan.value;
-      plan.frecuency = Frecuency.values.firstWhere((e) => e.label == frequency.value);
+      plan.frecuency = Frecuency.values.firstWhere((e) => e.label == selectedFrequency.value);
       if (isEdit) {
         plan = await planApi.updatePlan(plan.id!, plan);
       } 
