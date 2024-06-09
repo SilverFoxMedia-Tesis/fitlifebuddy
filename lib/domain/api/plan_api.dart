@@ -23,7 +23,7 @@ class PlanApi {
 
   // Create Plan
   Future<Plan> createPlan(int patientId, String frequency) async {
-    final response = await _apiBase.post('plans/$patientId', body: {'frecuently': frequency});
+    final response = await _apiBase.post('plans/$patientId', body: json.encode({'frecuently': frequency}));
     return Plan.fromJson(response.body);
   }
 

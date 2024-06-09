@@ -191,7 +191,7 @@ class PlanController extends GetxController {
       if (isEdit) {
         plan = await planApi.updatePlan(plan.id!, plan);
       } 
-      //plan = await planApi.createPlan(int.parse(patientId!), plan.frecuency!.value);
+      plan = await planApi.createPlan(int.parse(patientId!), plan.frecuency!.value);
       currentPlan.value = plan;
       planService.setPlan(currentPlan.value);
       onDialogClose();
