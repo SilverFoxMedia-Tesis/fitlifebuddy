@@ -36,6 +36,9 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         primarySwatch: Colors.blue,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.blueAccent,
+        ),
       ),
       builder: (context, child) => ResponsiveBreakpoints.builder(
         breakpoints: [

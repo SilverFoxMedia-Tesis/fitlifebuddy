@@ -16,7 +16,7 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppPadding.paddingPage2,
+      padding: AppPadding.padding16,
       child: SingleChildScrollView(
         child: Column(
           children: [

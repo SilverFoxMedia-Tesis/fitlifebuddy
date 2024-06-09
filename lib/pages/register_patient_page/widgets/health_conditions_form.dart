@@ -1,3 +1,4 @@
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
@@ -28,6 +29,7 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
           title: 'Cirugias',
           hintText: 'Seleccionar cirugias',
           items: controller.surgeries,
+          width: ContainerSize.baseButtonWidth,
         ),
         AppSpacing.spacingVertical24,
         MultiDropdown(
@@ -35,6 +37,7 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
           title: 'Enfermedades',
           hintText: 'Seleccionar enfermedades',
           items: controller.illnesses,
+          width: ContainerSize.baseButtonWidth,
         ),
       ],
     );

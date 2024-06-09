@@ -1,3 +1,7 @@
+import 'package:fitlifebuddy/core/theme/colors/colors.dart';
+import 'package:fitlifebuddy/core/theme/size/container_size.dart';
+import 'package:fitlifebuddy/core/theme/size/space.dart';
+import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
@@ -36,11 +40,7 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
                   padding: AppPadding.padding32,
                   child: Column(
                     children: [
-                      Obx(
-                        () => LinearProgressIndicator(
-                          value: controller.currentPage.value / (pages.length),
-                        ),
-                      ),
+                      buildProgressIndicator(),
                       AppSpacing.spacingVertical24,
                       Expanded(child: SingleChildScrollView(child: pages[index])),
                       AppSpacing.spacingVertical24,
@@ -57,10 +57,27 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
     );
   }
 
+  Widget buildProgressIndicator() {
+    return ClipRRect(
+      borderRadius: AppBorderRadius.borderRadius14,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: ContainerSize.baseButtonWidth,
+        ),
+        child: LinearProgressIndicator(
+          value: controller.currentPage.value / (pages.length),
+          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
+          backgroundColor: AppColors.disabled,
+          minHeight: Space.space8,
+        ),
+      ),
+    );
+  }
+
   Widget buildNavegationButtons() {
     return Obx(
-    () => Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      () => Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           if (controller.currentPage.value == 0)
             BaseButton(

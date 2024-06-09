@@ -53,6 +53,13 @@ class MultiDropdown extends StatelessWidget {
               hintStyle: buildTextStyle(),
               headerStyle: buildTextStyle(),
               listItemStyle: buildTextStyle(),
+              listItemDecoration: const ListItemDecoration(
+                selectedIconColor: AppColors.primary,
+                selectedIconBorder: BorderSide(
+                  color: AppColors.secondary,
+                  width: 1,
+                ),
+              ),
             ),
             enabled: enabled,
           ),
