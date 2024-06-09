@@ -14,7 +14,6 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
   RegisterPatientPage({super.key});
 
   final List<Widget> pages = [
-    //const HealthConditionsForm(),
     const PersonalInfoForm(),
     const HealthConditionsForm(),
     const FoodConditionsForm(),
@@ -61,17 +60,23 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
   Widget buildNavegationButtons() {
     return Obx(
     () => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (controller.currentPage.value > 0)
-            BaseButton(
-              text: 'Anterior',
-              onTap: () => controller.onChangedPage(controller.currentPage.value, isback: true),
-            ),
-          if (controller.currentPage.value < pages.length - 1)
+          if (controller.currentPage.value == 0)
             BaseButton(
               text: 'Siguiente',
-              onTap: () => controller.onChangedPage(controller.currentPage.value + 1),
+              onTap: () => controller.savePersonalInfo(),
+            ),
+          if (controller.currentPage.value == 1)
+            BaseButton(
+              text: 'Siguiente',
+              onTap: () => controller.saveHealthConditions(),
+            ),
+          if (controller.currentPage.value == 2)
+            BaseButton(
+              text: 'Registrar',
+              loading: controller.loading.value,
+              onTap: () async => await controller.saveFoodConditions(),
             ),
         ],
       ),

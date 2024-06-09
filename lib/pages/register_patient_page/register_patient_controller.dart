@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:fitlifebuddy/domain/enum/health_conditions_cases.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/food_condition_api.dart';
@@ -9,9 +11,10 @@ import 'package:fitlifebuddy/domain/api/patient_history_api.dart';
 import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
+import 'package:fitlifebuddy/domain/enum/food_category.dart';
+import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
-import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
 import 'package:fitlifebuddy/domain/model/health_condition.dart';
@@ -40,8 +43,6 @@ class RegisterPatientController extends GetxController{
   final currentPage = 0.obs;
 
   final personalInfoFormKey = GlobalKey<FormState>();
-  final healthConditionsFormKey = GlobalKey<FormState>();
-  final foodConditionsFormKey = GlobalKey<FormState>();
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
@@ -52,89 +53,38 @@ class RegisterPatientController extends GetxController{
   final absPerimeterController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
 
-  List<String> genders = Gender.values.map((e) => e.label).toList();
-  List<String> hCTypes = HealthConditionType.values.map((e) => e.label).toList();
-  List<String> fCTypes = FoodConditionType.values.map((e) => e.label).toList();
+  final surgeriesController = MultiSelectController<String>([]).obs;
+  final illnessesController = MultiSelectController<String>([]).obs;
+  final preferencesController = MultiSelectController<String>([]).obs;
+  final restrictionsController = MultiSelectController<String>([]).obs;
+  final allergiesController = MultiSelectController<String>([]).obs;
 
-  final genderSelected  = Gender.values.first.label.obs;
-
-  //new health condition
-  final newhConditionType = HealthConditionType.values.first.label.obs;
-  final newHConditionController = TextEditingController().obs;
-
-  // health conditions
-  final hConditionTypes = <int, String>{}.obs;
-  final hConditionsControllers = <int, TextEditingController>{}.obs;
-
-  //new food conditions
-  final newfConditionType = FoodConditionType.values.first.label.obs;
-  final newFConditionController = TextEditingController().obs;
-
-  // food conditions
-  final fConditionTypes = <int, String>{}.obs;
-  final fConditionsControllers = <int, TextEditingController>{}.obs;
+  final genders = Gender.values.map((e) => e.label).toList();
+  final surgeries = Surgery.values.map((e) => e.label).toList();
+  final illnesses = Illness.values.map((e) => e.label).toList();
+  final preferences = FoodCategory.values.map((e) => e.label).toList();
+  final restrictions = FoodCategory.values.map((e) => e.label).toList();
+  final allergies = FoodCategory.values.map((e) => e.label).toList();
 
   final currentPatient = Patient().obs;
-  final currentPatientHistory = PatientHistory().obs;
-  final currentFoodConditions = <FoodCondition>[].obs;
-  final currentHealthConditions = <HealthCondition>[].obs;
+  var _selectedGender = Gender.values.first.label;
+  var patientHistory = PatientHistory();
+  var healthConditions = <HealthCondition>[];
+  var foodConditions= <FoodCondition>[];
 
-  bool get hasFoodConditions => hConditionTypes.isNotEmpty;
-  bool get hasHealthConditions => fConditionTypes.isNotEmpty;
+  final loading = false.obs;
 
-  @override
-  Future<void> onInit() async {
-    super.onInit();
-  }
-
-  void onChangedPage(int pageIndex, {bool isback = false}) {
-    bool allFormsValid = true;
-
-    if (!isback) {
-      if (pageIndex == 1) {
-        savePersonalInfo();
-        allFormsValid = _formValidationService.validateForm(personalInfoFormKey);
-      }
-    }
-
-    if (allFormsValid) {
-      pageController.animateToPage(
-        pageIndex, 
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-      currentPage(pageIndex);
-    }
+  void onChangedPage(int pageIndex) {
+    pageController.animateToPage(
+      pageIndex, 
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
+    currentPage(pageIndex);
   } 
 
-  void onChangedGender(String? value) {
-    if (value != null && value != '') {
-      genderSelected.value = value;
-    }
-  }
-
-  void onChangedNewFoodCondition(String? value) {
-    if (value != null && value != '') {
-      newfConditionType.value = value;
-    }
-  }
-
-  void onChangedFoodCondition(int index, String? value) {
-    if (value != null && value != '') {
-      fConditionTypes[index] = value;
-    }
-  }
-
-  void onChangedNewHealthCondition(String? value) {
-    if (value != null && value != '') {
-      newhConditionType.value = value;
-    }
-  }
-
-  void onChangedHealthCondition(int index, String? value) {
-    if (value != null && value != '') {
-      hConditionTypes[index] = value;
-    }
+  void onChangedGender(String value) {
+    _selectedGender = value;
   }
 
   void onTapDateTime() async {
@@ -157,23 +107,18 @@ class RegisterPatientController extends GetxController{
 
   void savePersonalInfo() {
     if (_formValidationService.validateForm(personalInfoFormKey)) {
-      savePerson();
-      savePatient();
-      savePatientHistory();
+      _savePerson();
+      _savePatient();
+      _savePatientHistory();
       _appToast.showToast(
         message: 'personal_info_saved'.tr,
         type: ToastificationType.success,
       );
+      onChangedPage(1);
     }
   }
 
-  void savePatient() {
-    if (birthdayController.value.text.isNotEmpty) {
-      currentPatient.value.birthDate = birthday.value;
-    }
-  }
-
-  void savePerson() {
+  void _savePerson() {
     currentPatient.value.person = Person(
       fullname: firstnameController.value.text,
       lastname: lastnameController.value.text,
@@ -181,99 +126,121 @@ class RegisterPatientController extends GetxController{
     );
   }
 
-  void savePatientHistory() {
-    currentPatientHistory.value.gender = EnumExtension.getLabel(Gender.values, genderSelected.value);
-    currentPatientHistory.value.height = num.parse(heightController.value.text);
-    currentPatientHistory.value.weight = num.parse(weightController.value.text);
-    currentPatientHistory.value.abdominalCircumference = num.parse(absPerimeterController.value.text);
-  }
-
-  void saveFCondition() {
-    if (newFConditionController.value.text.isNotEmpty) {
-      var index = fConditionTypes.length;
-      fConditionTypes[index] = newfConditionType.value;
-      fConditionsControllers[index] = TextEditingController();
-      fConditionsControllers[index]?.text = newFConditionController.value.text;
-      
-      //reset
-      newfConditionType.value = FoodConditionType.values.first.label;
-      newFConditionController.value.clear();
-    } else {
-      _appToast.showToast(
-        message: "Completa el campo para agregar una condición",
-      );
+  void _savePatient() {
+    if (birthdayController.value.text.isNotEmpty) {
+      currentPatient.value.birthDate = birthday.value;
+      patientHistory.age = _calculateAge(birthday.value);
     }
   }
 
-  void saveHCondition() {
-    if (newHConditionController.value.text.isNotEmpty) {
-      var index = hConditionTypes.length;
-      hConditionTypes[index] = newhConditionType.value;
-      hConditionsControllers[index] = TextEditingController();
-      hConditionsControllers[index]?.text = newHConditionController.value.text;
-      
-      //reset
-      newhConditionType.value = HealthConditionType.values.first.label;
-      newHConditionController.value.clear();
-    } else {
-      _appToast.showToast(
-        message: "Completa el campo para agregar una condición",
-      );
+  int _calculateAge(String birthDate) {
+    final date = DateTime.parse(birthDate);
+    final now = DateTime.now();
+    var age = now.year - date.year;
+    if (now.month < date.month || (now.month == date.month && now.day < date.day)) {
+      age--;
     }
+    return age;
+  }
+
+  void _savePatientHistory() {
+    patientHistory.gender = EnumExtension.getLabel(Gender.values, _selectedGender);
+    patientHistory.height = num.parse(heightController.value.text);
+    patientHistory.weight = num.parse(weightController.value.text);
+    patientHistory.abdominalCircumference = num.parse(absPerimeterController.value.text);
+  }
+
+  void saveHealthConditions() {
+    saveAsHealthConditionList(surgeriesController.value.value, HealthConditionType.surgery);
+    saveAsHealthConditionList(illnessesController.value.value, HealthConditionType.illness);
+    _appToast.showToast(
+      message: 'health_conditions_saved'.tr,
+      type: ToastificationType.success,
+    );
+    onChangedPage(2);
+  }
+
+  Future<void> saveFoodConditions() async {
+    saveAsFoodConditionList(preferencesController.value.value, FoodConditionType.preference);
+    saveAsFoodConditionList(restrictionsController.value.value, FoodConditionType.restriction);
+    saveAsFoodConditionList(allergiesController.value.value, FoodConditionType.allergy);
+    _appToast.showToast(
+      message: 'food_conditions_saved'.tr,
+      type: ToastificationType.success,
+    );
+    await register();
+  }
+
+  void saveAsHealthConditionList(List<String> items, HealthConditionType type) {
+    final list = (type == HealthConditionType.surgery) ? Surgery.values : Illness.values;
+    healthConditions.addAll(
+      items.map((item) {
+        dynamic e = EnumExtension.getLabel(list, item);
+        var value = e.value;
+        return HealthCondition(
+          id: 0,
+          name: value, 
+          description: '',
+          type: type,
+        );
+      }),
+    );
+  }
+
+  void saveAsFoodConditionList(List<String> items, FoodConditionType type) {
+    foodConditions.addAll(
+      items.map((item) {
+        dynamic e = EnumExtension.getLabel(FoodCategory.values, item);
+        var value = e.value;
+        if (value == "Fats_Oils_Shortenings") value = 'Fats_Oils_Shortening';
+        if (value == "Breads_cereals_fastfood_grains") value = 'Breads_cereals';
+        return FoodCondition(
+          id: 0,
+          name: value, 
+          description: '',
+          type: type,
+        );
+      }),
+    );
   }
 
   Future<void> register() async {
     try {
-      if (_formValidationService.validateForm(foodConditionsFormKey)) {
-        await registerPatient();
-        await registerHConditions();
-        await registerFConditions();
-        Get.toNamed(AppRoutes.successfulRegister);
-        _appToast.showToast(
-          message: 'successful_registration'.tr,
-          type: ToastificationType.success,
-        );
+      loading(true);
+      await registerPatient();
+      await registerHealthConditions();
+      await registerFoodConditions();
+      Get.toNamed(AppRoutes.successfulRegister);
+      _appToast.showToast(
+        message: 'successful_registration'.tr,
+        type: ToastificationType.success,
+      );
+    } catch (e) {
+      displayErrorToast(e);
+    } finally {
+      loading(false);
+    }
+  }
+
+  Future<void> registerHealthConditions() async {
+    try {
+      for (var i = 0; i < healthConditions.length; i++) {
+        var condition = healthConditions[i];
+        condition.patient = currentPatient.value;
+        await _healthConditionApi.createHealthCondition(condition, currentPatient.value.id!);
       }
     } catch (e) {
       displayErrorToast(e);
     }
   }
 
-  Future<void> registerHConditions() async {
+  Future<void> registerFoodConditions() async {
     try {
-      for (var i = 0; i < hConditionTypes.length; i++) {
-        var hCondition = HealthCondition(
-          name: hConditionsControllers[i]?.text,
-          description: '',
-          type: EnumExtension.getLabel(HealthConditionType.values, hConditionTypes[i]),
-          patient: currentPatient.value,
-        );
-        await _healthConditionApi.createHealthCondition(hCondition, currentPatient.value.id!);
+      for (var i = 0; i < foodConditions.length; i++) {
+        var condition = foodConditions[i];
+        condition.patient = currentPatient.value;
+        await _foodConditionApi.createFoodCondition(condition, currentPatient.value.id!);
       }
-      _appToast.showToast(
-        message: 'health_conditions_saved'.tr,
-        type: ToastificationType.success,
-      );
-    } catch (e) {
-      displayErrorToast(e);
-    }
-  }
-
-  Future<void> registerFConditions() async {
-    try {
-      for (var i = 0; i < hConditionTypes.length; i++) {
-        var fCondition = FoodCondition(
-          name: fConditionsControllers[i]?.text,
-          description: '',
-          type: EnumExtension.getLabel(FoodConditionType.values, fConditionTypes[i]),
-          patient: currentPatient.value,
-        );
-        await _foodConditionApi.createFoodCondition(fCondition, currentPatient.value.id!);
-      }
-      _appToast.showToast(
-        message: 'food_conditions_saved'.tr,
-        type: ToastificationType.success,
-      );
     } catch (e) {
       displayErrorToast(e);
     }
@@ -289,33 +256,17 @@ class RegisterPatientController extends GetxController{
           final newPatient = await _patientApi.createPatient(currentPatient.value, newPerson.id!, 1);
           if (newPatient.id != null) {
             currentPatient.value = newPatient;
-            currentPatientHistory.value.patient = newPatient;
-            currentPatientHistory.value.age = calculateAge(newPatient.birthDate!);
-            currentPatientHistory.value.abdominalCircumference = 0;
-            currentPatientHistory.value.dietType = DietType.omnivore;
-            currentPatientHistory.value.physicalActivity = PhysicalActivity.no;
-            currentPatientHistory.value.typeHealthCondition = HealthConditionType.no;
-            await _patientHistoryApi.createPatientHistory(currentPatientHistory.value, newPatient.id!);
-            _appToast.showToast(
-              message: 'personal_info_saved'.tr,
-              type: ToastificationType.success,
-            );
+            patientHistory.patient = currentPatient.value;
+            patientHistory.dietType = DietType.omnivore;
+            patientHistory.physicalActivity = PhysicalActivity.no;
+            patientHistory.typeHealthCondition = HealthConditionType.no;
+            await _patientHistoryApi.createPatientHistory(patientHistory, patientHistory.patient!.id!);
           }
         }
       }
     } catch (e) {
       displayErrorToast(e);
     }
-  }
-
-  int calculateAge(String birthDate) {
-    final date = DateTime.parse(birthDate);
-    final now = DateTime.now();
-    var age = now.year - date.year;
-    if (now.month < date.month || (now.month == date.month && now.day < date.day)) {
-      age--;
-    }
-    return age;
   }
 
   String generatePassword() {
@@ -327,10 +278,6 @@ class RegisterPatientController extends GetxController{
       buffer.write(caracteres[indice]);
     }
     return buffer.toString();
-  }
-
-  void goToLogin() {
-    Get.toNamed(AppRoutes.login);
   }
 
   void copyEmail() {

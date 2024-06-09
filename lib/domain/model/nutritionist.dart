@@ -14,7 +14,7 @@ class Nutritionist {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'idNutritionist': id,
-      'personId': person?.toMap(),
+      'person': person?.toMap(),
     };
   }
 

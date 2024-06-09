@@ -4,7 +4,6 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_formatters.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_dropdown/single_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';

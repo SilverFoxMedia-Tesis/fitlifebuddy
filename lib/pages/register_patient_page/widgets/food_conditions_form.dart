@@ -1,12 +1,7 @@
-import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/core/utils/input_formatters.dart';
-import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
-import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
-import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
+import 'package:fitlifebuddy/widgets/app_dropdown/multi_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,73 +24,28 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
             style: AppTextStyle.robotoSemibold16,
           ),
           AppSpacing.spacingVertical24,
-          _buildNewFoodConditionContainer(),
-          if (controller.hasFoodConditions)
-          Form(
-            key: controller.foodConditionsFormKey,
-            child: _buildFoodConditions(),
+          MultiDropdown(
+            controller: controller.preferencesController.value,
+            title: 'Preferencias',
+            hintText: 'Seleccionar preferencias',
+            items: controller.preferences,
+          ),
+          AppSpacing.spacingVertical24,
+          MultiDropdown(
+            controller: controller.restrictionsController.value,
+            title: 'Restriciones',
+            hintText: 'Seleccionar restriciones',
+            items: controller.restrictions,
+          ),
+          AppSpacing.spacingVertical24,
+          MultiDropdown(
+            controller: controller.allergiesController.value,
+            title: 'Alergias',
+            hintText: 'Seleccionar alergias',
+            items: controller.allergies,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildFoodConditions() {
-    return Column(
-      children: controller.fConditionTypes.keys.map((key) {
-        return Padding(
-          padding: AppPadding.paddingOnlyTop24,
-          child: _buildFoodConditionContainer(key),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildFoodConditionContainer(int index) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppDropdown(
-          items: controller.fCTypes,
-          selectedValue: controller.fConditionTypes[index],
-          onChanged: (value) => controller.onChangedFoodCondition(index, value),
-        ),
-        AppSpacing.spacingHorizontal14,
-        Expanded(
-          child: AppTextfield(
-            controller: controller.fConditionsControllers[index],
-            inputType: TextInputType.text,
-            validator: validateNotNullOrEmpty,
-            inputFormatters: InputFormatters.alphanumericOnly,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildNewFoodConditionContainer() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppDropdown(
-          items: controller.fCTypes,
-          selectedValue: controller.newfConditionType.value,
-          onChanged: (value) => controller.onChangedNewFoodCondition(value),
-        ),
-        AppSpacing.spacingHorizontal14,
-        Expanded(
-          child: AppTextfield(
-            controller: controller.newFConditionController.value,
-            inputType: TextInputType.text,
-            inputFormatters: InputFormatters.alphanumericOnly,
-          ),
-        ),
-        AppSpacing.spacingHorizontal14,
-        AppIconButton(
-          iconData: Icons.add,
-          onTap: controller.saveFCondition,
-        ),
-      ],
     );
   }
 }

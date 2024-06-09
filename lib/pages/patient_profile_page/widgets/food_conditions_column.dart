@@ -4,7 +4,6 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/core/utils/input_formatters.dart';
 import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/app_dropdown.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
 import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
 import 'package:flutter/material.dart';
@@ -49,13 +48,13 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AppDropdown(
-                            hintText: 'select_a_condition'.tr,
-                            items: controller.foodConditionTypes,
-                            selectedValue: controller.foodConditionTypeSelectedValues[index],
-                            onChanged: (value) => controller.onChangedFoodCondition(index, value),
-                            enabled: controller.isFoodConditionsEditing.value,
-                          ),
+                          // AppDropdown(
+                          //   hintText: 'select_a_condition'.tr,
+                          //   items: controller.foodConditionTypes,
+                          //   selectedValue: controller.foodConditionTypeSelectedValues[index],
+                          //   onChanged: (value) => controller.onChangedFoodCondition(index, value),
+                          //   enabled: controller.isFoodConditionsEditing.value,
+                          // ),
                           AppSpacing.spacingHorizontal14,
                           AppTextfield(
                             controller: controller.foodConditionTypeSelectedControllers[index],

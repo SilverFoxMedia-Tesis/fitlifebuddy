@@ -22,10 +22,6 @@ dependencies:
   easy_date_timeline: ^1.1.3
   shared_preferences: ^2.2.3
   responsive_framework: ^1.4.0
-  # Arreglar despues
-  dropdown_button2: ^2.3.9
-  dropdown_textfield: ^1.1.0
-  multi_dropdown: ^2.1.4
   animated_custom_dropdown: ^3.1.0
 
 dev_dependencies:

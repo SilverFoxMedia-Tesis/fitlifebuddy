@@ -61,6 +61,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
               items: controller.genders,
               onChanged: (value) => controller.onChangedGender(value),
               enabled: controller.isPersonalInfoEditing.value,
+              width: ContainerSize.baseButtonWidth,
             ),
             AppSpacing.spacingVertical24,
             AppTextfield(

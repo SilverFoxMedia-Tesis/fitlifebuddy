@@ -5,20 +5,22 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:flutter/material.dart';
 
-class SingleDropdown extends StatelessWidget {
+class MultiDropdown extends StatelessWidget {
+  final MultiSelectController<dynamic>? controller;
   final String? title;
   final String? hintText;
   final List<dynamic> items;
-  final void Function(dynamic)? onChanged;
+  final void Function(dynamic)? onListChanged;
   final bool enabled;
   final double? width;
 
-  const SingleDropdown({
+  const MultiDropdown({
     super.key,
+    this.controller,
     this.title,
     this.hintText,
     required this.items,
-    this.onChanged,
+    this.onListChanged,
     this.enabled = true,
     this.width,
   });
@@ -38,11 +40,11 @@ class SingleDropdown extends StatelessWidget {
         ],
         SizedBox(
           width: width,
-          child: CustomDropdown<dynamic>(
+          child: CustomDropdown<dynamic>.multiSelect(
+            multiSelectController: controller,
             hintText: hintText,
             items: items,
-            initialItem: items.first,
-            onChanged: onChanged,
+            onListChanged: onListChanged,
             decoration: CustomDropdownDecoration(
               closedFillColor: AppColors.light,
               expandedFillColor: AppColors.light,
@@ -53,12 +55,6 @@ class SingleDropdown extends StatelessWidget {
               listItemStyle: buildTextStyle(),
             ),
             enabled: enabled,
-            disabledDecoration: CustomDropdownDisabledDecoration(
-              fillColor: AppColors.light,
-              shadow: [AppBoxShadow.primary25Blur8],
-              hintStyle: buildTextStyle(),
-              headerStyle: buildTextStyle(),
-            ),
           ),
         ),
       ],
@@ -66,13 +62,9 @@ class SingleDropdown extends StatelessWidget {
   }
 
   TextStyle buildTextStyle() {
-    switch (enabled) {
-      case true:
-        return AppTextStyle.robotoRegular14.copyWith(
-          color: AppColors.primary,
-        );
-      default:
-      return AppTextStyle.robotoRegular14;
-    }
+    return AppTextStyle.robotoMedium14.copyWith(
+      color: AppColors.primary,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 }
