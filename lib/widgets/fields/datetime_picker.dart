@@ -46,7 +46,7 @@ class DateTimePicker extends StatelessWidget {
             return null;
           },
           inputType: InputType.date,
-          format: DateFormat(DateFormats.birthday, 'es'),
+          format: DateFormat(DateFormats.birthdate, 'es'),
           lastDate: DateTime.now(),
           decoration: InputDecoration(
             // hint text

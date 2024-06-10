@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class DateFormats {
   static const initial = 'yyyy-MM-dd';
   static const long = 'EEEE, d \'de\' MMMM';
-  static const birthday = 'd \'de\' MMMM \'de\' y';
+  static const birthdate = 'd \'de\' MMMM \'de\' y';
 }
 
 String fromString(String dateTime, String dateFormat) {
@@ -20,10 +20,10 @@ String fromDateToLong(DateTime dateTime) {
   return DateFormat(DateFormats.long, 'es').format(dateTime).capitalizeFirst!;
 }
 
-String fromDateToBirthday(DateTime dateTime) {
-  return DateFormat(DateFormats.birthday, 'es').format(dateTime);
+String fromDateToBirthdate(DateTime dateTime) {
+  return DateFormat(DateFormats.birthdate, 'es').format(dateTime);
 }
 
-String fromStringToBirthday(String dateTime) {
-  return fromString(dateTime, DateFormats.birthday);
+String fromStringToBirthdate(String dateTime) {
+  return fromString(dateTime, DateFormats.birthdate);
 }

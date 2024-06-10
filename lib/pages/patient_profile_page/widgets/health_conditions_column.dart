@@ -1,11 +1,11 @@
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/core/utils/input_formatters.dart';
-import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/patient_profile_page/patient_profile_controller.dart';
 import 'package:fitlifebuddy/widgets/app_icon_button/app_icon_button.dart';
-import 'package:fitlifebuddy/widgets/app_textfield.dart/app_textfield.dart';
+import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
+import 'package:fitlifebuddy/widgets/text_container/text_container.dart';
+import 'package:fitlifebuddy/widgets/text_container/text_container_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,39 +38,35 @@ class HealthConditionsColumn extends GetView<PatientProfileController> {
             ],
           ),
           if (controller.hasHealthConditions)
-            Form(
-              key: controller.healthConditionsFormKey,
-              child: Column(
-                children: List.generate(
-                  controller.currentFoodConditions.length, (index) {
-                    return Padding(
-                      padding: AppPadding.paddingOnlyTop24,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppSpacing.spacingHorizontal14,
-                          AppTextfield(
-                            controller: controller.healthConditionTypeSelectedControllers[index],
-                            enabled: controller.isHealthConditionsEditing.value,
-                            validator: validateLettersOnly,
-                            inputFormatters: InputFormatters.lettersOnly,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            buildConditions(),
           if (!controller.hasHealthConditions)
-            Padding(
-              padding: AppPadding.paddingOnlyTop24,
-              child: Text(
-                'no_health_conditions'.tr,
-                style: AppTextStyle.robotoMedium14,
-              ),
-            ),
+            EmptyResult(message: 'no_health_conditions'.tr),
         ],
+      ),
+    );
+  }
+
+  Widget buildConditions() {
+    return Column(
+      children: List.generate(
+        controller.currentHealthConditions.length, (index) {
+          return Padding(
+            padding: AppPadding.paddingOnlyTop24,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextContainer(
+                  text: controller.currentHealthConditions[index].type?.label ?? '',
+                  style: TextContainerStyle.type2,
+                ),
+                AppSpacing.spacingHorizontal14,
+                TextContainer(
+                  text: controller.currentHealthConditions[index].name ?? '',
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

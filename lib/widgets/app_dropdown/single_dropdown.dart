@@ -10,6 +10,7 @@ class SingleDropdown extends StatelessWidget {
   final String? title;
   final String? hintText;
   final List<String> items;
+  final String? initialItem;
   final void Function(dynamic)? onChanged;
   final bool enabled;
   final double? width;
@@ -19,6 +20,7 @@ class SingleDropdown extends StatelessWidget {
     this.title,
     this.hintText,
     required this.items,
+    this.initialItem,
     this.onChanged,
     this.enabled = true,
     this.width,
@@ -44,6 +46,7 @@ class SingleDropdown extends StatelessWidget {
           child: CustomDropdown<String>(
             hintText: hintText,
             items: items,
+            initialItem: initialItem,
             validator: (value) {
               if (value == null || value.isEmpty) return "select_an_option".tr;
               return null;
