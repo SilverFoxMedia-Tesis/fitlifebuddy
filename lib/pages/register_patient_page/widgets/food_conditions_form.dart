@@ -11,8 +11,11 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: ContainerSize.baseButtonWidth,
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -30,7 +33,6 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
             title: 'preferences'.tr,
             hintText: '${'select'.tr} ${'preferences'.tr.toLowerCase()}',
             items: controller.preferences,
-            width: ContainerSize.baseButtonWidth,
           ),
           AppSpacing.spacingVertical24,
           MultiDropdown(
@@ -38,7 +40,6 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
             title: 'restrictions'.tr,
             hintText: '${'select'.tr} ${'restrictions'.tr.toLowerCase()}',
             items: controller.restrictions,
-            width: ContainerSize.baseButtonWidth,
           ),
           AppSpacing.spacingVertical24,
           MultiDropdown(
@@ -46,7 +47,6 @@ class FoodConditionsForm extends GetView<RegisterPatientController> {
             title: 'allergies'.tr,
             hintText: '${'select'.tr} ${'allergies'.tr.toLowerCase()}',
             items: controller.allergies,
-            width: ContainerSize.baseButtonWidth,
           ),
         ],
       ),

@@ -91,8 +91,7 @@
     "health_conditions_saved": "Condiciones de salud guardadas",
     "food_conditions_saved": "Condiciones alimentarias guardadas",
     "go_to_login": "Ir a inicio",
-    "email_copied": "Correo electrónico copiado",
-    "password_copied": "Contraseña copiada",
+    "copied": "Copiado",
     "no_routine": "No hay una rutina disponible",
     "no_meals": "No hay una comidas disponibles",
     "breakfast": "Desayuno",
@@ -155,5 +154,10 @@
     "preferences": "Preferencias",
     "restrictions": "Restriciones",
     "allergies": "Alergias",
-    "select": "Seleccionar"
+    "select": "Seleccionar",
+    "select_an_option": "Selecciona una opción",
+    "diet_type": "Tipo de dieta",
+    "select_a_diet_type": "Selecciona un tipo de dieta",
+    "physical_activity": "Actividad física",
+    "select_a_physical_activity": "Selecciona una actividad física"
 }

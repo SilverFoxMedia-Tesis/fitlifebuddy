@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:fitlifebuddy/domain/enum/health_conditions_cases.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
+import 'package:fitlifebuddy/core/utils/datetime_utils.dart';
+import 'package:fitlifebuddy/domain/enum/health_conditions_cases.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/domain/api/food_condition_api.dart';
 import 'package:fitlifebuddy/domain/api/health_condition_api.dart';
@@ -46,8 +47,7 @@ class RegisterPatientController extends GetxController{
 
   final firstnameController = TextEditingController().obs;
   final lastnameController = TextEditingController().obs;
-  final birthday = ''.obs;
-  final birthdayController = TextEditingController().obs;
+  final birtdateController = TextEditingController().obs;
   final heightController = TextEditingController().obs;
   final weightController = TextEditingController().obs;
   final absPerimeterController = TextEditingController().obs;
@@ -60,6 +60,8 @@ class RegisterPatientController extends GetxController{
   final allergiesController = MultiSelectController<String>([]).obs;
 
   final genders = Gender.values.map((e) => e.label).toList();
+  final diettypes = DietType.values.map((e) => e.label).toList();
+  final physicalactivities = PhysicalActivity.values.map((e) => e.label).toList();
   final surgeries = Surgery.values.map((e) => e.label).toList();
   final illnesses = Illness.values.map((e) => e.label).toList();
   final preferences = FoodCategory.values.map((e) => e.label).toList();
@@ -67,15 +69,19 @@ class RegisterPatientController extends GetxController{
   final allergies = FoodCategory.values.map((e) => e.label).toList();
 
   final currentPatient = Patient().obs;
-  var _selectedGender = Gender.values.first.label;
+  var _selectedBirthdate = DateTime.now();
+  var _selectedGender = '';
+  var _selectedDietType = '';
+  var _selectedPhysicalActivity = '';
   var patientHistory = PatientHistory();
   var healthConditions = <HealthCondition>[];
   var foodConditions= <FoodCondition>[];
+  var _hasDiabetes = false;
 
   final loading = false.obs;
 
-  void onChangedPage(int pageIndex) {
-    pageController.animateToPage(
+  Future<void> onChangedPage(int pageIndex) async {
+    await pageController.animateToPage(
       pageIndex, 
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
@@ -87,25 +93,21 @@ class RegisterPatientController extends GetxController{
     _selectedGender = value;
   }
 
-  void onTapDateTime() async {
-    var selectedDate = DateTime.now();
-    if (birthdayController.value.text.isNotEmpty) {
-      selectedDate = DateTime.parse(currentPatient.value.birthDate!);
+  void onChangeBirthDate(DateTime? value) {
+    if (value != null) {
+      _selectedBirthdate = value;
     }
-    await showDatePicker(
-      context: Get.context!,
-      initialDate: selectedDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) return;
-        selectedDate = pickedDate;
-        birthday.value = fromDateToInitial(selectedDate);
-        birthdayController.value.text = fromStringToBirthday(birthday.value);
-    });
+  }
+  
+  void onChangedDietType(String value) {
+    _selectedDietType = value;
   }
 
-  void savePersonalInfo() {
+  void onChangedPhysicalActivity(String value) {
+    _selectedPhysicalActivity = value;
+  }
+
+  Future<void> savePersonalInfo() async {
     if (_formValidationService.validateForm(personalInfoFormKey)) {
       _savePerson();
       _savePatient();
@@ -114,7 +116,7 @@ class RegisterPatientController extends GetxController{
         message: 'personal_info_saved'.tr,
         type: ToastificationType.success,
       );
-      onChangedPage(1);
+      await onChangedPage(1);
     }
   }
 
@@ -127,20 +129,10 @@ class RegisterPatientController extends GetxController{
   }
 
   void _savePatient() {
-    if (birthdayController.value.text.isNotEmpty) {
-      currentPatient.value.birthDate = birthday.value;
-      patientHistory.age = _calculateAge(birthday.value);
+    if (birtdateController.value.text.isNotEmpty) {
+      currentPatient.value.birthDate = fromDateToInitial(_selectedBirthdate);
+      patientHistory.age = calculateAge(_selectedBirthdate);
     }
-  }
-
-  int _calculateAge(String birthDate) {
-    final date = DateTime.parse(birthDate);
-    final now = DateTime.now();
-    var age = now.year - date.year;
-    if (now.month < date.month || (now.month == date.month && now.day < date.day)) {
-      age--;
-    }
-    return age;
   }
 
   void _savePatientHistory() {
@@ -148,35 +140,28 @@ class RegisterPatientController extends GetxController{
     patientHistory.height = num.parse(heightController.value.text);
     patientHistory.weight = num.parse(weightController.value.text);
     patientHistory.abdominalCircumference = num.parse(absPerimeterController.value.text);
+    patientHistory.dietType = EnumExtension.getLabel(DietType.values, _selectedDietType);
+    patientHistory.physicalActivity = EnumExtension.getLabel(PhysicalActivity.values, _selectedPhysicalActivity);
   }
 
-  void saveHealthConditions() {
-    saveAsHealthConditionList(surgeriesController.value.value, HealthConditionType.surgery);
-    saveAsHealthConditionList(illnessesController.value.value, HealthConditionType.illness);
+  Future<void> saveHealthConditions() async {
+    _saveAsHealthConditionList(surgeriesController.value.value, HealthConditionType.surgery);
+    _saveAsHealthConditionList(illnessesController.value.value, HealthConditionType.illness);
+    _savePatientHistoryHealthConditionType();
     _appToast.showToast(
       message: 'health_conditions_saved'.tr,
       type: ToastificationType.success,
     );
-    onChangedPage(2);
+    await onChangedPage(2);
   }
 
-  Future<void> saveFoodConditions() async {
-    saveAsFoodConditionList(preferencesController.value.value, FoodConditionType.preference);
-    saveAsFoodConditionList(restrictionsController.value.value, FoodConditionType.restriction);
-    saveAsFoodConditionList(allergiesController.value.value, FoodConditionType.allergy);
-    _appToast.showToast(
-      message: 'food_conditions_saved'.tr,
-      type: ToastificationType.success,
-    );
-    await register();
-  }
-
-  void saveAsHealthConditionList(List<String> items, HealthConditionType type) {
+  void _saveAsHealthConditionList(List<String> items, HealthConditionType type) {
     final list = (type == HealthConditionType.surgery) ? Surgery.values : Illness.values;
     healthConditions.addAll(
       items.map((item) {
         dynamic e = EnumExtension.getLabel(list, item);
         var value = e.value;
+        if(value.contains('diabetes')) _hasDiabetes = true;
         return HealthCondition(
           id: 0,
           name: value, 
@@ -187,7 +172,30 @@ class RegisterPatientController extends GetxController{
     );
   }
 
-  void saveAsFoodConditionList(List<String> items, FoodConditionType type) {
+  void _savePatientHistoryHealthConditionType() {
+    if (healthConditions.isEmpty) {
+      patientHistory.typeHealthCondition = HealthConditionType.no;
+      return;
+    }
+    if (_hasDiabetes == true) {
+      patientHistory.typeHealthCondition = HealthConditionType.diabetes;
+      return;
+    }
+    patientHistory.typeHealthCondition = HealthConditionType.no;
+  }
+
+  Future<void> saveFoodConditions() async {
+    _saveAsFoodConditionList(preferencesController.value.value, FoodConditionType.preference);
+    _saveAsFoodConditionList(restrictionsController.value.value, FoodConditionType.restriction);
+    _saveAsFoodConditionList(allergiesController.value.value, FoodConditionType.allergy);
+    _appToast.showToast(
+      message: 'food_conditions_saved'.tr,
+      type: ToastificationType.success,
+    );
+    await register();
+  }
+
+  void _saveAsFoodConditionList(List<String> items, FoodConditionType type) {
     foodConditions.addAll(
       items.map((item) {
         dynamic e = EnumExtension.getLabel(FoodCategory.values, item);
@@ -207,9 +215,9 @@ class RegisterPatientController extends GetxController{
   Future<void> register() async {
     try {
       loading(true);
-      await registerPatient();
-      await registerHealthConditions();
-      await registerFoodConditions();
+      await _registerPatient();
+      await _registerHealthConditions();
+      await _registerFoodConditions();
       Get.toNamed(AppRoutes.successfulRegister);
       _appToast.showToast(
         message: 'successful_registration'.tr,
@@ -222,7 +230,7 @@ class RegisterPatientController extends GetxController{
     }
   }
 
-  Future<void> registerHealthConditions() async {
+  Future<void> _registerHealthConditions() async {
     try {
       for (var i = 0; i < healthConditions.length; i++) {
         var condition = healthConditions[i];
@@ -234,7 +242,7 @@ class RegisterPatientController extends GetxController{
     }
   }
 
-  Future<void> registerFoodConditions() async {
+  Future<void> _registerFoodConditions() async {
     try {
       for (var i = 0; i < foodConditions.length; i++) {
         var condition = foodConditions[i];
@@ -246,10 +254,10 @@ class RegisterPatientController extends GetxController{
     }
   }
 
-  Future<void> registerPatient() async {
+  Future<void> _registerPatient() async {
     try {
       if (currentPatient.value.person != null) {
-        currentPatient.value.person?.password = generatePassword();
+        currentPatient.value.person?.password = _generatePassword();
         final newPerson = await _personApi.createPerson(currentPatient.value.person!);
         if (newPerson.id != null) {
           currentPatient.value.person = newPerson;
@@ -257,9 +265,6 @@ class RegisterPatientController extends GetxController{
           if (newPatient.id != null) {
             currentPatient.value = newPatient;
             patientHistory.patient = currentPatient.value;
-            patientHistory.dietType = DietType.omnivore;
-            patientHistory.physicalActivity = PhysicalActivity.no;
-            patientHistory.typeHealthCondition = HealthConditionType.no;
             await _patientHistoryApi.createPatientHistory(patientHistory, patientHistory.patient!.id!);
           }
         }
@@ -269,33 +274,25 @@ class RegisterPatientController extends GetxController{
     }
   }
 
-  String generatePassword() {
-    const caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()-_=+';
+  String _generatePassword() {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()-_=+';
     final random = Random();
     final buffer = StringBuffer();
     for (var i = 0; i < 8; i++) {
-      final indice = random.nextInt(caracteres.length);
-      buffer.write(caracteres[indice]);
+      final index = random.nextInt(characters.length);
+      buffer.write(characters[index]);
     }
     return buffer.toString();
   }
 
-  void copyEmail() {
-    Clipboard.setData(ClipboardData(
-      text: currentPatient.value.person?.emailAddress ?? '',
-    ),);
-    _appToast.showToast(
-      message: 'email_copied'.tr,
-      type: ToastificationType.success,
+  void copy(String value) {
+    Clipboard.setData(
+      ClipboardData(
+        text: value,
+      ),
     );
-  }
-
-  void copyPassword() {
-    Clipboard.setData(ClipboardData(
-      text: currentPatient.value.person?.password ?? '',
-    ),);
     _appToast.showToast(
-      message: 'password_copied'.tr,
+      message: 'copied'.tr,
       type: ToastificationType.success,
     );
   }

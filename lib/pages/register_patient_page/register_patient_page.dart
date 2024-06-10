@@ -35,14 +35,18 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
               controller: controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: pages.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (_, index) {
                 return Padding(
                   padding: AppPadding.padding32,
                   child: Column(
                     children: [
                       buildProgressIndicator(),
                       AppSpacing.spacingVertical24,
-                      Expanded(child: SingleChildScrollView(child: pages[index])),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: pages[index],
+                        ),
+                      ),
                       AppSpacing.spacingVertical24,
                       buildNavegationButtons(),
                     ],
@@ -64,11 +68,13 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
         constraints: const BoxConstraints(
           maxWidth: ContainerSize.baseButtonWidth,
         ),
-        child: LinearProgressIndicator(
-          value: controller.currentPage.value / (pages.length),
-          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
-          backgroundColor: AppColors.disabled,
-          minHeight: Space.space8,
+        child: Obx(
+          () => LinearProgressIndicator(
+            value: controller.currentPage.value / (pages.length),
+            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
+            backgroundColor: AppColors.disabled,
+            minHeight: Space.space8,
+          ),
         ),
       ),
     );
@@ -82,12 +88,12 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
           if (controller.currentPage.value == 0)
             BaseButton(
               text: 'Siguiente',
-              onTap: () => controller.savePersonalInfo(),
+              onTap: () async => await controller.savePersonalInfo(),
             ),
           if (controller.currentPage.value == 1)
             BaseButton(
               text: 'Siguiente',
-              onTap: () => controller.saveHealthConditions(),
+              onTap: () async => await controller.saveHealthConditions(),
             ),
           if (controller.currentPage.value == 2)
             BaseButton(

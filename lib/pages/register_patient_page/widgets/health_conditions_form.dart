@@ -11,35 +11,38 @@ class HealthConditionsForm extends GetView<RegisterPatientController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'register_pacient_title'.tr,
-          style: AppTextStyle.robotoSemibold24,
-        ),
-        AppSpacing.spacingVertical32,
-        Text(
-          'register_pacient_2_title'.tr,
-          style: AppTextStyle.robotoSemibold16,
-        ),
-        AppSpacing.spacingVertical24,
-        MultiDropdown(
-          controller: controller.surgeriesController.value,
-          title: 'surgeries'.tr,
-          hintText: '${'select'.tr} ${'surgeries'.tr.toLowerCase()}',
-          items: controller.surgeries,
-          width: ContainerSize.baseButtonWidth,
-        ),
-        AppSpacing.spacingVertical24,
-        MultiDropdown(
-          controller: controller.illnessesController.value,
-          title: 'illnesses'.tr,
-          hintText: '${'select'.tr} ${'illnesses'.tr.toLowerCase()}',
-          items: controller.illnesses,
-          width: ContainerSize.baseButtonWidth,
-        ),
-      ],
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: ContainerSize.baseButtonWidth,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'register_pacient_title'.tr,
+            style: AppTextStyle.robotoSemibold24,
+          ),
+          AppSpacing.spacingVertical32,
+          Text(
+            'register_pacient_2_title'.tr,
+            style: AppTextStyle.robotoSemibold16,
+          ),
+          AppSpacing.spacingVertical24,
+          MultiDropdown(
+            controller: controller.surgeriesController.value,
+            title: 'surgeries'.tr,
+            hintText: '${'select'.tr} ${'surgeries'.tr.toLowerCase()}',
+            items: controller.surgeries,
+          ),
+          AppSpacing.spacingVertical24,
+          MultiDropdown(
+            controller: controller.illnessesController.value,
+            title: 'illnesses'.tr,
+            hintText: '${'select'.tr} ${'illnesses'.tr.toLowerCase()}',
+            items: controller.illnesses,
+          ),
+        ],
+      ),
     );
   }
 }

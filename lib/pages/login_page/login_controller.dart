@@ -13,18 +13,17 @@ import 'package:toastification/toastification.dart';
 class LoginController extends GetxController {
   final _personApi = Get.find<PersonApi>();
   final _patientApi = Get.find<PatientApi>();
+
+  final _appToast = Get.find<AppToast>();
+  final _formValidationService = Get.find<FormValidationService>();
   final _patientService = Get.find<PatientService>();
 
-  final _formValidationService = Get.find<FormValidationService>();
-  final _appToast = Get.find<AppToast>();
-
   final loginFormKey = GlobalKey<FormState>();
-
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
-  
+
   final obscurePassword = true.obs;
-  final isloading = false.obs;
+  final loading = false.obs;
 
   void setObscurePassword() {
     obscurePassword.value = !obscurePassword.value;
@@ -33,7 +32,7 @@ class LoginController extends GetxController {
   Future<void> login() async {
     if (_formValidationService.validateForm(loginFormKey)) {
       try {
-        isloading.value = true;
+        loading(true);
         var person = await _personApi.getPersonByEmailAddress(emailController.value.text);
         if (person == null || person.password != passwordController.value.text) {
           _appToast.showToast(
@@ -51,34 +50,25 @@ class LoginController extends GetxController {
       } catch (e) {
         displayErrorToast(e);
       } finally {
-        isloading.value = false;
+        loading(false);
+        reset();
       }
     }
   }
 
   Future<void> setPatient(int personId) async {
     try {
-    var patients = await _patientApi.getPatients();
-    if (patients.isNotEmpty) {
-      for (var i = 0; i < patients.length; i++) {
-        var id = patients[i].person?.id;
-        if (id == personId) {
-          UserPreferences.setPatientId(patients[i].id.toString());
-          _patientService.setPatient(patients[i]);
+      var patients = await _patientApi.getPatients();
+      if (patients.isNotEmpty) {
+        final patient = patients.firstWhereOrNull((p) => p.person?.id == personId);
+        if (patient != null) {
+          UserPreferences.setPatientId(patient.id.toString());
+          _patientService.setPatient(patient);
         }
       }
+    } catch (e) {
+      displayErrorToast(e);
     }
-  } catch (e) {
-    displayErrorToast(e);
-  }
-  }
-
-  void forgotPassword() {
-    Get.toNamed(AppRoutes.recoverPassword);
-  }
-
-  void register() {
-    Get.toNamed(AppRoutes.registerPatient);
   }
 
   void reset() {

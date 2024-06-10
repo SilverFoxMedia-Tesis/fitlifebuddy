@@ -23,6 +23,7 @@ dependencies:
   shared_preferences: ^2.2.3
   responsive_framework: ^1.4.0
   animated_custom_dropdown: ^3.1.0
+  flutter_form_builder: ^9.3.0
 
 dev_dependencies:
   flutter_test:
