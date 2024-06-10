@@ -1,7 +1,6 @@
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
-import 'package:fitlifebuddy/core/utils/input_validator.dart';
 import 'package:fitlifebuddy/pages/recover_password_page/recover_password_controller.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/fields/app_textfield.dart';
@@ -34,16 +33,14 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             ),
           ),
           AppSpacing.spacingVertical24,
-          AppTextField.textField(
+          AppTextField.emailField(
             title: 'email'.tr,
             controller: controller.emailController.value,
-            inputType: TextInputType.emailAddress,
-            validator: validateRequiredEmail,
           ),
           AppSpacing.spacingVertical24,
           BaseButton(
             text: 'recover_password'.tr,
-            onTap: controller.sendRecoverLink,
+            onTap: () async => await controller.sendRecoverLink(),
           ),
         ],
       ),

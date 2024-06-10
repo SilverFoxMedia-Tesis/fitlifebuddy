@@ -8,7 +8,7 @@ class AppRoutes {
   static const routine = "/routine";
   static const meal = "/meal";
   static const profile = "/profile";
-  static const successfulRegister = "/succesful-register";
+  static const successfulRegister = "/successful-register";
   static const settings = "/settings";
   static const questions = "/q&a";
   // static const notifications = "/notifications";

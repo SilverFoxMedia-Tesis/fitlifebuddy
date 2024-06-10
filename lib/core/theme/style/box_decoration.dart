@@ -10,4 +10,17 @@ class AppBoxDecoration {
       borderRadius: AppBorderRadius.borderRadiusXl,
       boxShadow: [AppBoxShadow.secondary25Blur8],
     );
+  static const lightRadius14 =
+    BoxDecoration(
+      color: AppColors.light,
+      borderRadius: AppBorderRadius.borderRadius14,
+      boxShadow: [AppBoxShadow.secondary25Blur8],
+    );
+
+  static const lightRadius24 =
+    BoxDecoration(
+      color: AppColors.light,
+      borderRadius: AppBorderRadius.borderRadius24,
+      boxShadow: [AppBoxShadow.secondary25Blur8],
+    );
 }

@@ -65,9 +65,7 @@ class RegisterPatientPage extends GetView<RegisterPatientController> {
     return ClipRRect(
       borderRadius: AppBorderRadius.borderRadius14,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: ContainerSize.baseButtonWidth,
-        ),
+        constraints: const BoxConstraints(maxWidth: ContainerSize.baseContainerdWidth),
         child: Obx(
           () => LinearProgressIndicator(
             value: controller.currentPage.value / (pages.length),

@@ -21,7 +21,7 @@ class NotificationsView extends StatelessWidget {
         width: 496,
         height: 560,
         padding: AppPadding.padding32,
-        decoration: AppBoxDecoration.baseBoxDecoration,
+        decoration: AppBoxDecoration.lightRadius14,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

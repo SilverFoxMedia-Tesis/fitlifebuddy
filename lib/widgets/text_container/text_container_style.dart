@@ -1,0 +1,1 @@
+enum TextContainerStyle{ type1, type2 }
