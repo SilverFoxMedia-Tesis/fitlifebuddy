@@ -77,7 +77,8 @@ class PatientProfilePage extends GetView<PatientProfileController> {
             visible: controller.isEditing,
             child: BaseButton(
               text: 'save'.tr,
-              onTap: controller.handleProfileUpdate,
+              loading: controller.isPersonalInfoUpdating.value,
+              onTap: () async => await controller.updatePersonalInfo(),
             ),
           ),
         ),

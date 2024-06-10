@@ -159,5 +159,7 @@
     "diet_type": "Tipo de dieta",
     "select_a_diet_type": "Selecciona un tipo de dieta",
     "physical_activity": "Actividad física",
-    "select_a_physical_activity": "Selecciona una actividad física"
+    "select_a_physical_activity": "Selecciona una actividad física",
+    "edit_health_conditions": "Editar condiciones de salud",
+    "edit_food_conditions": "Editar condiciones alimentarias"
 }

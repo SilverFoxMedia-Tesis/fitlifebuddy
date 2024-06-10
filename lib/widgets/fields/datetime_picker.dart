@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 class DateTimePicker extends StatelessWidget {
   final String title;
   final TextEditingController? controller;
+  final DateTime? initialDate;
   final Function(DateTime?)? onChanged;
   final double? width;
   final bool enabled;
@@ -21,6 +22,7 @@ class DateTimePicker extends StatelessWidget {
     super.key,
     required this.title,
     this.controller,
+    this.initialDate,
     this.onChanged,
     this.width = ContainerSize.baseContainerdWidth, // corregir
     this.enabled = true,
@@ -40,6 +42,7 @@ class DateTimePicker extends StatelessWidget {
         FormBuilderDateTimePicker(
           name: title,
           controller: controller,
+          initialDate: initialDate,
           onChanged: onChanged,
           validator: (value) {
             if (value == null) return "validator_empty".tr;
@@ -50,7 +53,7 @@ class DateTimePicker extends StatelessWidget {
           lastDate: DateTime.now(),
           decoration: InputDecoration(
             // hint text
-            hintText: "Seleccionar fecha",
+            hintText:  controller?.text != '' ? controller?.text : "Seleccionar fecha",
             hintStyle: _buildTextStyle(),
             // error text
             errorStyle: AppTextStyle.robotoRegular14.copyWith(

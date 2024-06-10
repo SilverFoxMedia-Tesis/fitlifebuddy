@@ -28,25 +28,23 @@ class TextContainer extends StatelessWidget {
       ),
       padding: AppPadding.padding16,
       decoration: buildBoxDecoration(),
-      child: Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              text,
-              style: buildTextStyle(),
-            ),
-            if (icon != null)
-              InkWell(
-                onTap: onIconPressed,
-                child: Icon( 
-                  icon,
-                  size: ContainerSize.iconSize,
-                  color: AppColors.secondary,
-                ),
+      child: Row(
+        mainAxisAlignment: buildMainAlignment(),
+        children: [
+          Text(
+            text,
+            style: buildTextStyle(),
+          ),
+          if (icon != null)
+            InkWell(
+              onTap: onIconPressed,
+              child: Icon( 
+                icon,
+                size: ContainerSize.iconSize,
+                color: AppColors.secondary,
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -57,6 +55,15 @@ class TextContainer extends StatelessWidget {
         return AppTextStyle.robotoSemibold14;
       default:
       return AppTextStyle.robotoRegular14;
+    }
+  }
+
+  MainAxisAlignment buildMainAlignment() {
+    switch (style) {
+      case TextContainerStyle.type2:
+        return MainAxisAlignment.center;
+      default:
+      return MainAxisAlignment.spaceBetween;
     }
   }
 

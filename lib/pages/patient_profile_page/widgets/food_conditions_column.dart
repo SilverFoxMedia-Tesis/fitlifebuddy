@@ -31,7 +31,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
               Obx(
                 () => AppIconButton(
                   iconData: Icons.edit_rounded,
-                  onTap: controller.onEditFoodConditionsPressed,
+                  onTap: () async => await controller.openEditFoodConditionsDialog(),
                   enabled: !controller.isEditing,
                 ),
               ),
