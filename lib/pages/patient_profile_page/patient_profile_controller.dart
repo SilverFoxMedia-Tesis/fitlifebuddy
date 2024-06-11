@@ -106,7 +106,10 @@ class PatientProfileController extends GetxController{
     try {
       final patientId = currentPatient.id;
       if (patientId != null) {
-        currentPatient = await _patientApi.getPatientById(patientId);
+        final list  = await _patientApi.getPatientsById(patientId);
+        if (list.isNotEmpty) {
+          currentPatient = list.first;
+        }
         _savePatientInfo();
         if (currentPatient.person != null) {
           _savePersonInfo();
