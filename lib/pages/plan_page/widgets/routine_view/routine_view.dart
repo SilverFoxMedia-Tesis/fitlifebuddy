@@ -4,6 +4,7 @@ import 'package:fitlifebuddy/core/utils/text_utils.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class RoutineView extends GetView<PlanController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: controller.viewRoutineDetails,
+              onTap: () => Get.toNamed(AppRoutes.routine),
               child: Text(
                 'workout_routine'.tr,
                 style: AppTextStyle.robotoSemibold20,

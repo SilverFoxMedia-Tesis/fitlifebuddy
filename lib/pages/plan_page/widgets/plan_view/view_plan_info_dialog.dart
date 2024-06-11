@@ -7,9 +7,9 @@ import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PlanInformationDialog extends StatelessWidget {
+class ViewPlanInfoDialog extends StatelessWidget {
   final Plan plan;
-  const PlanInformationDialog({
+  const ViewPlanInfoDialog({
     required this.plan,
     super.key, 
   });

@@ -8,34 +8,33 @@ import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/pages/meal_page/widgets/change_meal_dialog.dart';
-import 'package:fitlifebuddy/pages/meal_page/widgets/food_information_dialog.dart';
+import 'package:fitlifebuddy/pages/meal_page/widgets/view_food_info_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:get/get.dart';
 
 class MealController extends GetxController {
-  final getXDialog = Get.find<GetXDialog>();
   final mealApi = Get.find<MealApi>();
   final dailyApi = Get.find<DailyApi>();
+
+  final getXDialog = Get.find<GetXDialog>();
   final planService = Get.find<PlanService>();
+
   final currentMeal = Meal().obs;
   final availableMeals = <Meal>[].obs;
 
-  bool get hasFoods => currentMeal.value.foods?.isNotEmpty ?? false;
-  int get foodsLength => currentMeal.value.foods?.length ?? 0;
-  String get fullname => currentMeal.value.fullname ?? '';
-  String get timeMeal => currentMeal.value.timeMeal?.label ?? '';
-
-  final changingStatus = false.obs;
-
-  String get currentDateTime => fromDateToLong(planService.currentDailyDateTime.value);
-  bool get completed => planService.currentDaily.value.status?.label == Status.completed.label;
-
   final loading = false.obs;
+  final statusUpdating = false.obs;
 
   var selectedId = 0;
   final mealSelected = Meal().obs;
   final isSelected = false.obs;
 
+  String get currentDateTime => fromDateToLong(planService.currentDailyDateTime.value);
+  String get timeMeal => currentMeal.value.timeMeal?.label ?? '';
+  String get fullname => currentMeal.value.fullname ?? '';
+  bool get hasFoods => currentMeal.value.foods?.isNotEmpty ?? false;
+  int get foodsLength => currentMeal.value.foods?.length ?? 0;
+  bool get completed => planService.currentDaily.value.status?.label == Status.completed.label;
   bool get hasOptions => availableMeals.isNotEmpty;
 
   @override
@@ -47,7 +46,7 @@ class MealController extends GetxController {
   void loadData() {
     try {
       loading(true);
-      currentMeal(planService.currentMeal);
+      currentMeal.value = Get.arguments;
       currentMeal.value.foods?.forEach((food) {
         food.imageUrl = foodsURLMap[food.id];
       });
@@ -61,7 +60,7 @@ class MealController extends GetxController {
   
   Future<void> changeMealToCompleted() async {
     try {
-      changingStatus(true);
+      statusUpdating(true);
       final daily = planService.currentDaily.value;
       if (daily.id != null) {
         daily.status = Status.completed;
@@ -71,11 +70,11 @@ class MealController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      changingStatus(false);
+      statusUpdating(false);
     }
   }
 
-  Future<void> openFoodInformationDialog(Food food) async {
+  Future<void> openViewFoodInfoDialog(Food food) async {
     await getXDialog.showDialog(FoodInformationDialog(food: food), onClose: onDialogClose);
   }
 
@@ -84,14 +83,9 @@ class MealController extends GetxController {
     await getXDialog.showDialog(const ChangeMealDialog(), onClose: onDialogClose);
   }
 
-
   void onMealSelected(Meal meal) {
     isSelected.value = true;
     mealSelected.value = meal;
-  }
-
-  String translatedWord(int idFood) {
-    return translateFood(idFood);
   }
 
   bool onDialogClose() {

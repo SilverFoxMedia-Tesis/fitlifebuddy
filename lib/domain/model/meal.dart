@@ -8,16 +8,16 @@ import 'package:fitlifebuddy/domain/model/food.dart';
 class Meal {
   int? id;
   MealTime? timeMeal;
-  List<Food>? foods;
   Daily? daily;
+  List<Food>? foods;
   String? fullname;
   String? imageUrl;
 
   Meal({
     this.id,
     this.timeMeal,
-    this.foods,
     this.daily,
+    this.foods,
     this.fullname,
     this.imageUrl,
   });

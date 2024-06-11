@@ -46,7 +46,7 @@ class RoutinePage extends GetView<RoutineController> {
 
   Widget buildCustomBar() {
     return CustomBar(
-      title: '${'routine'.tr} | ',
+      title: 'routine'.tr,
       extraTitle: controller.currentDateTime,
       onBackPressed: () => Get.toNamed(AppRoutes.plan),
       actions: [

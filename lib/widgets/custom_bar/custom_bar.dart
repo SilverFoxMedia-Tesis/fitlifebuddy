@@ -41,7 +41,7 @@ class CustomBar extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: title,
+                    text: buildTitle(),
                     style: AppTextStyle.robotoSemibold24,
                   ),
                   TextSpan(
@@ -62,5 +62,10 @@ class CustomBar extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  String buildTitle() {
+    if (extraTitle != null && extraTitle != '') return '$title | ';
+    return title;
   }
 }

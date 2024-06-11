@@ -7,83 +7,90 @@ import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
 import 'package:fitlifebuddy/domain/api/routine_exercises_api.dart';
+import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/frecuency.dart';
+import 'package:fitlifebuddy/domain/enum/goal_type.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
-import 'package:fitlifebuddy/domain/service/person_service.dart';
+import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_dialog.dart';
-import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/plan_information_dialog.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/create_edit_plan_dialog.dart';
+import 'package:fitlifebuddy/pages/plan_page/widgets/plan_view/view_plan_info_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toastification/toastification.dart';
 
 class PlanController extends GetxController {
-  final dateTimeLineController = EasyInfiniteDateTimelineController();
-  final patientService = Get.find<PatientService>();
-  final planService = Get.find<PlanService>();
-  final getXDialog = Get.find<GetXDialog>();
-  final _appToast = Get.find<AppToast>();
+  final _patientApi = Get.find<PatientApi>();
+  final _planApi = Get.find<PlanApi>();
+  final _dailyApi = Get.find<DailyApi>();
+  final _mealApi = Get.find<MealApi>();
+  final _routineExerciseApi = Get.find<RoutineExerciseApi>();
 
-  final patientApi = Get.find<PatientApi>();
-  final planApi = Get.find<PlanApi>();
-  final dailyApi = Get.find<DailyApi>();
-  final mealApi = Get.find<MealApi>();
-  final routineExerciseApi = Get.find<RoutineExerciseApi>();
+  final _getXDialog = Get.find<GetXDialog>();
+  final _appToast = Get.find<AppToast>();
+  final _formValidationService = Get.find<FormValidationService>();
+  final _planService = Get.find<PlanService>();
+
+  final planFormKey = GlobalKey<FormState>();
+  
+  final dateTimeLineController = EasyInfiniteDateTimelineController();
 
   final currentDateTime = DateTime.now().obs;
-  final currentPlan = Plan().obs;
-  final dailies = <Daily>[].obs;
-  var routineExercises = <RoutineExercise>[];
+  final planDates = ''.obs;
   final meals = <Meal>[].obs;
   final exercises = <Exercise>[].obs;
 
-  final frequencies = Frecuency.values.map((e) => e.label).toList();
+  var currentPlan = Plan();
+  var selectedFrequency = '';
+  var selectedGoalType = '';
+  var dailies = <Daily>[];
+  var routineExercises = <RoutineExercise>[];
 
-  final selectedFrequency = Frecuency.monthly.label.obs;
+  final frequencies = Frecuency.values.map((e) => e.label).toList();
+  final goaltypes = GoalType.values.map((e) => e.label).toList();
+
+  final loading = false.obs;
+  final planLoading = false.obs;
+  final dailyLoading = false.obs;
 
   String? get patientId => UserPreferences.getPatientId();
   String get getCurrentDateTime => fromDateToLong(currentDateTime.value);
-  bool get hasPLan => currentPlan.value.id != null;
+  bool get hasPLan => currentPlan.id != null;
   bool get hasMeals => meals.isNotEmpty;
   bool get hasExercises => exercises.isNotEmpty;
-  
-  final firstdate = ''.obs;
-  final lastdate =  ''.obs;
-
-  final loading = false.obs;
-  final dailyLoading = false.obs;
-  final planLoading = false.obs;
 
   @override
   Future<void> onInit() async {
+    routineExercises = await _routineExerciseApi.getRoutineExercises(); //corregir
     await getPlan();
-    getFirstAndLastDate();
+    _setPlanDates();
     super.onInit();
   }
 
   Future<void> onDateChange(DateTime dateTime) async {
     currentDateTime.value = dateTime;
-    await getDailyInfo();
+    await _getDailyInfo();
   }
 
   Future<void> getPlan() async {
     try {
       loading(true);
-      if (patientId == null) return;
-      final list = await patientApi.getPlanByPatientId(int.parse(patientId!));
-      if (list.isNotEmpty) {
-        currentPlan.value = list.first;
-        planService.setPlan(currentPlan.value);
-        dailies.value = await planApi.getDailiesByPlanId(currentPlan.value.id!);
-        await getDailyInfo();
+      if (patientId != null) {
+        final list = await _patientApi.getPlansByPatientId(patientId!);
+        if (list.isNotEmpty) {
+          currentPlan = list.first;
+          selectedFrequency = currentPlan.frecuency?.label ?? '';
+          selectedGoalType = currentPlan.goalType?.label ?? '';
+          await _getDailies();
+        }
       }
     } catch (e) {
       displayErrorToast(e);
@@ -92,44 +99,49 @@ class PlanController extends GetxController {
     }
   }
 
-  void getFirstAndLastDate() {
-    final first = dailies.firstWhereOrNull((d) => d.dateNumber == 1);
-    if (first?.dateNumber != null) {
-      firstdate.value = fromDateToLong(DateTime.parse(first!.date!));
-    }
-    
-    int dateNumber;
-    switch (currentPlan.value.frecuency) {
-      case Frecuency.bimonthly:
-        dateNumber = 60;
-        break;
-      case Frecuency.quarterly:
-        dateNumber = 90;
-        break;
-      default:
-        dateNumber = 30;
-        break;
-    }
-
-    final last = dailies.firstWhereOrNull((d) => d.dateNumber == dateNumber);
-    if (last?.dateNumber != null) {
-      lastdate.value = fromDateToLong(DateTime.parse(last!.date!));
+  Future<void> _getDailies() async {
+    try {
+      if (currentPlan.id != null) {
+        dailies = await _planApi.getDailiesByPlanId(currentPlan.id!);
+        _setPlanDates();
+        await _getDailyInfo();
+      }
+    } catch (e) {
+      displayErrorToast(e);
     }
   }
 
-  Future<void> getDailyInfo() async {
+  void _setPlanDates() {
+    final first = dailies.firstWhereOrNull((d) => d.dateNumber == 1);
+    if (first?.date != null) {
+      planDates.value = fromDateToLong(DateTime.parse(first!.date!));
+    }
+    final dateNumber = _getDateNumber(currentPlan.frecuency!);
+    final last = dailies.firstWhereOrNull((d) => d.dateNumber == dateNumber);
+    if (last?.date != null) {
+      planDates.value += ' - ';
+      planDates.value += fromDateToLong(DateTime.parse(last!.date!));
+    }
+  }
+
+  int _getDateNumber(Frecuency frecuency) {
+    if (frecuency == Frecuency.bimonthly) return 60;
+    if (frecuency == Frecuency.quarterly) return 90;
+    return 30;
+  }
+
+  Future<void> _getDailyInfo() async {
     try {
       dailyLoading(true);
       meals.clear();
       exercises.clear();
       final date = fromDateToInitial(currentDateTime.value);
       final daily = dailies.firstWhereOrNull((d) => d.date == date);
-      if (daily != null) {
-        await getMeals(daily.id!);
-        routineExercises = await routineExerciseApi.getRoutineExercises();
-        await getExercises(daily.id!);
-        planService.setDaily(daily);
-        planService.setDailyDatetime(currentDateTime.value);
+      if (daily?.id != null) {
+        await _getMeals(daily!.id!);
+        await _getExercises(daily.id!);
+        _planService.setDaily(daily);
+        _planService.setDailyDatetime(currentDateTime.value); //corregir
       }
     } catch (e) {
       displayErrorToast(e);
@@ -138,23 +150,23 @@ class PlanController extends GetxController {
     }
   }
 
-  Future<void> getMeals(int dailyId) async {
+  Future<void> _getMeals(int dailyId) async {
     try {
-      final mealList = await dailyApi.getMealsByDailyId(dailyId);
-      if (mealList.isEmpty) return;
-
-      for (var meal in mealList) {
-        if (meal.id != null) {
-          final mealFoods = await mealApi.getMealFoodsByMealId(meal.id!);
-          if (mealFoods.isNotEmpty) {
-            meal.foods = mealFoods.map((mf) => mf.food!).toList();
-            meal.fullname = getName(meal.foods!);
-            meal.imageUrl = foodsURLMap[meal.foods?.first.id];
+      final mealList = await _dailyApi.getMealsByDailyId(dailyId);
+      if (mealList.isNotEmpty) {
+        for (var meal in mealList) {
+          if (meal.id != null) {
+            final mealFoods = await _mealApi.getMealFoodsByMealId(meal.id!);
+            if (mealFoods.isNotEmpty) {
+              meal.foods = mealFoods.map((mf) => mf.food!).toList();
+              meal.fullname = getName(meal.foods!);
+              meal.imageUrl = foodsURLMap[meal.foods?.first.id];
+            }
           }
         }
+        meals.addAll(mealList);
+        _planService.currentMeals(meals);
       }
-      meals.addAll(mealList);
-      planService.currentMeals(meals);
     } catch (e) {
       displayErrorToast(e);
     }
@@ -170,73 +182,72 @@ class PlanController extends GetxController {
     return '${names.sublist(0, names.length - 1).join(', ')} y ${names.last}'.capitalizeFirst ?? '';
   }
 
-  Future<void> getExercises(int dailyId) async {
+  Future<void> _getExercises(int dailyId) async { //corregir
     try {
-      final list = await dailyApi.getRoutinesByDailyId(dailyId);
-      if (list.isEmpty) return;
-      
-      final routine = list.first;
-      
-      final filteredList = routineExercises.where((i) => i.routine?.id == routine.id).toList();
-      var ids = <int, int>{};
-      for (var i in filteredList) { 
-        ids[i.exercise!.id!] = i.idRoutineExercise!;
+      final list = await _dailyApi.getRoutinesByDailyId(dailyId);
+      if (list.isNotEmpty) {
+        final routine = list.first;
+        final filteredList = routineExercises.where((i) => i.routine?.id == routine.id).toList();
+        var ids = <int, int>{};
+        for (var i in filteredList) { 
+          ids[i.exercise!.id!] = i.idRoutineExercise!;
+        }
+        _planService.setRoutineExerciseIds(ids);
+        _planService.setRoutine(filteredList.first.routine!);
+        final filteredExercises = filteredList.map((i) => i.exercise).whereType<Exercise>().toList();
+        for (var exercise in filteredExercises) {
+          exercise.imageUrl = exercisesURLMap[exercise.id];
+        }
+        exercises.addAll(filteredExercises);
+        _planService.setExercises(exercises);
       }
-      planService.setRoutineExerciseIds(ids);
-      planService.setRoutine(filteredList.first.routine!);
-      final filteredExercises = filteredList.map((i) => i.exercise).whereType<Exercise>().toList();
-      for (var exercise in filteredExercises) {
-        exercise.imageUrl = exercisesURLMap[exercise.id];
-      }
-      exercises.addAll(filteredExercises);
-      planService.setExercises(exercises);
     } catch (e) {
       displayErrorToast(e);
     }
   }
 
-  void viewMealDetails(index) {
-    planService.mealSelectedIndex(index);
-    Get.toNamed(AppRoutes.meal);
-  }
-
-  void viewRoutineDetails() {
-    Get.toNamed(AppRoutes.routine);
-  }
-
-  Future<void> openPlanInformationDialog() async {
-    await getXDialog.showDialog(PlanInformationDialog(plan: currentPlan.value), onClose: onDialogClose);
+  Future<void> openViewPlanInfoDialog() async {
+    await _getXDialog.showDialog(ViewPlanInfoDialog(plan: currentPlan), onClose: onDialogClose);
   }
 
   Future<void> openCreateEditPlanDialog({bool isEdit = false}) async {
-    await getXDialog.showDialog(PlanDialog(isEdit: isEdit), onClose: onDialogClose);
+    await _getXDialog.showDialog(CreateEditPlanDialog(isEdit: isEdit), onClose: onDialogClose);
   }
 
-  onChangeFrecuency(String? value) {
+  void onChangeFrecuency(String? value) {
     if (value != null && value != '') {
-      selectedFrequency.value = value;
+      selectedFrequency = value;
+    }
+  }
+
+  void onchangeGoalType(String? value) {
+    if (value != null && value != '') {
+      selectedGoalType = value;
     }
   }
 
   Future<void> createEditPlan(bool isEdit) async {
     try {
-      planLoading(true);
-      var plan = currentPlan.value;
-      plan.frecuency = Frecuency.values.firstWhere((e) => e.label == selectedFrequency.value);
-      if (isEdit) {
-        plan = await planApi.updatePlan(plan.id!, plan);
-      } 
-      plan = await planApi.createPlan(int.parse(patientId!), plan.frecuency!.value);
-      currentPlan.value = plan;
-      planService.setPlan(currentPlan.value);
-      onDialogClose();
-
-      final message = isEdit ? "plan_updated".tr : "plan_created".tr;
-      _appToast.showToast(
-        message: message,
-        type: ToastificationType.success,
-      );
-      await getDailyInfo();
+      if (_formValidationService.validateForm(planFormKey)) {
+        planLoading(true);
+        var plan = currentPlan;
+        plan.frecuency = EnumExtension.getLabel(Frecuency.values, selectedFrequency);
+        plan.goalType = EnumExtension.getLabel(GoalType.values, selectedGoalType);
+        if (isEdit) {
+          final updated = await _planApi.updatePlan(plan.id!, plan);
+          currentPlan = updated;
+        } else {
+          final created = await _planApi.createPlan(patientId!, plan.frecuency!.value, plan.goalType!.value);
+          currentPlan = created;
+        }
+        onDialogClose();
+        final message = isEdit ? "plan_updated".tr : "plan_created".tr;
+        _appToast.showToast(
+          message: message,
+          type: ToastificationType.success,
+        );
+        await _getDailyInfo();
+      }
     } catch (e) {
       displayErrorToast(e);
     } finally {

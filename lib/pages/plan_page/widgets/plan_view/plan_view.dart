@@ -59,7 +59,7 @@ class PlanView extends GetView<PlanController> {
           focusDate: controller.currentDateTime.value,
           lastDate: DateTime(2024, 12, 31),
           showTimelineHeader: false,
-          onDateChange: (value) => controller.onDateChange(value),
+          onDateChange: (value) async => await controller.onDateChange(value),
           itemBuilder: (_, date, isSelected, onTap) {
             final textColor = isSelected ? AppColors.light : AppColors.secondary;
             return InkWell(

@@ -1,6 +1,7 @@
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
+import 'package:fitlifebuddy/core/utils/maps.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
@@ -21,80 +22,74 @@ class MealPage extends GetView<MealController> {
     return LauncherPage(
       child: Padding(
         padding: AppPadding.paddingPage,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppSpacing.spacingVertical24,
-            buildCustomBar(),
-            AppSpacing.spacingVertical24,
-            Obx(
-              () => Text(
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacing.spacingVertical24,
+              buildCustomBar(),
+              AppSpacing.spacingVertical24,
+              Text(
                 controller.fullname,
                 style: AppTextStyle.robotoSemibold20,
               ),
-            ),
-            AppSpacing.spacingVertical24,
-            Text(
-              'ingredients'.tr,
-              style: AppTextStyle.robotoSemibold20,
-            ),
-            AppSpacing.spacingVertical24,
-            Obx(
-              () => LoadingWidget(
+              AppSpacing.spacingVertical24,
+              Text(
+                'ingredients'.tr,
+                style: AppTextStyle.robotoSemibold20,
+              ),
+              AppSpacing.spacingVertical24,
+              LoadingWidget(
                 isLoading: controller.loading.value,
                 child: controller.hasFoods
                   ? buildFoods()
                   : EmptyResult(message: 'no_foods'.tr),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget buildCustomBar() {
-    return Obx(
-      () => CustomBar(
-        title: '${controller.timeMeal} | ',
-        extraTitle: controller.currentDateTime,
-        onBackPressed: () => Get.toNamed(AppRoutes.plan),
-        actions: [
-          BaseButton(
-            text: 'edit_meal'.tr,
-            actionSeverity: ActionSeverity.warning,
-            onTap: () => controller.openChangeMealDialog(),
-            disabled: controller.completed,
-          ),
-          AppSpacing.spacingHorizontal16,
-          BaseButton(
-            text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
-            onTap: () async => await controller.changeMealToCompleted(),
-            loading: controller.changingStatus.value,
-            disabled: controller.completed,
-          ),
-        ],
-      ),
+    return CustomBar(
+      title: controller.timeMeal,
+      extraTitle: controller.currentDateTime,
+      onBackPressed: () => Get.offNamed(AppRoutes.plan),
+      actions: [
+        BaseButton(
+          text: 'edit_meal'.tr,
+          actionSeverity: ActionSeverity.warning,
+          onTap: () => controller.openChangeMealDialog(),
+          disabled: controller.completed,
+        ),
+        AppSpacing.spacingHorizontal16,
+        BaseButton(
+          text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
+          onTap: () async => await controller.changeMealToCompleted(),
+          loading: controller.statusUpdating.value,
+          disabled: controller.completed,
+        ),
+      ],
     );
   }
 
   Widget buildFoods() {
     return Expanded(
-      child: Obx(
-        () => Wrap(
+      child: Wrap(
           spacing: 24,
           runSpacing: 24,
           children: List.generate(controller.foodsLength, (index) {
               final food = controller.currentMeal.value.foods![index];
               return PlanItemCard(
-                text: controller.translatedWord(food.id!),
+                text: translateFood(food.id!),
                 image: food.imageUrl,
-                onTap: () => controller.openFoodInformationDialog(food),
+                onTap: () => controller.openViewFoodInfoDialog(food),
               );
             },
           ),
         ),
-      ),
     );
   }
 }

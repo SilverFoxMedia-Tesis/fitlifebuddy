@@ -3,6 +3,7 @@ import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
+import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/empty_result/empty_result.dart';
 import 'package:fitlifebuddy/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class MealsView extends GetView<PlanController> {
         PlanItemCard(
           text: meal.fullname ?? '', 
           image: meal.imageUrl,
-          onTap: () => controller.viewMealDetails(index),
+          onTap: () => Get.toNamed(AppRoutes.meal, arguments: meal),
         ),
       ],
     );

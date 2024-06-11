@@ -4,6 +4,7 @@ import 'package:fitlifebuddy/domain/enum/bmi_category.dart';
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/frecuency.dart';
+import 'package:fitlifebuddy/domain/enum/goal_type.dart';
 import 'package:fitlifebuddy/domain/enum/status.dart';
 import 'package:fitlifebuddy/domain/model/patient.dart';
 
@@ -29,6 +30,7 @@ class Plan {
   BMICategory? bmiCategory;
   DietType? dietType;
   Frecuency? frecuency;
+  GoalType? goalType;
   Status? status;
   Patient? patient;
 
@@ -54,6 +56,7 @@ class Plan {
     this.bmiCategory,
     this.dietType,
     this.frecuency,
+    this.goalType,
     this.status,
     this.patient,
   });
@@ -81,6 +84,7 @@ class Plan {
       "classificationIMC": bmiCategory?.value,
       'dietType': dietType?.value,
       'frecuently': frecuency?.value,
+      'goalType': goalType?.value,
       'status': status?.value,
       'pacient': patient?.toMap(),
     };
@@ -109,6 +113,7 @@ class Plan {
       bmiCategory: map['classificationIMC'] != null ? EnumExtension.getValue(BMICategory.values, map['classificationIMC']) : null,
       dietType: map['dietType'] != null ? EnumExtension.getValue(DietType.values, map['dietType']) : null,
       frecuency: map['frecuently'] != null ? EnumExtension.getValue(Frecuency.values, map['frecuently']) : null,
+      goalType: map['goalType'] != null ? EnumExtension.getValue(GoalType.values, map['goalType']) : null,
       status: map['status'] != null ? EnumExtension.getValue(Status.values, map['status']) : null,
       patient: map['pacient'] != null ? Patient.fromMap(map['pacient'] as Map<String, dynamic>) : null,
     );

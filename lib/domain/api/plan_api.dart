@@ -22,8 +22,8 @@ class PlanApi {
   }
 
   // Create Plan
-  Future<Plan> createPlan(int patientId, String frequency) async {
-    final response = await _apiBase.post('plans/$patientId', body: json.encode({'frecuently': frequency}));
+  Future<Plan> createPlan(String patientId, String frequency, String goalType) async {
+    final response = await _apiBase.post('plans/$patientId', body: json.encode({"frecuently": frequency, "goalType": goalType}));
     return Plan.fromJson(response.body);
   }
 
