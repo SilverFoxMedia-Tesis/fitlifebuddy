@@ -57,6 +57,7 @@ class RoutineView extends GetView<PlanController> {
       text: fixEncoding(exercise.workout ?? ''), 
       description: '${exercise.repsPerSet} repeticiones (${exercise.sets} sets)',
       image: exercise.imageUrl,
+      onTap: () => Get.toNamed(AppRoutes.routine),
     );
   }
 }
