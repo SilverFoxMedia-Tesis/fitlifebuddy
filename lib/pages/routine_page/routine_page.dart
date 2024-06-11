@@ -54,7 +54,7 @@ class RoutinePage extends GetView<RoutineController> {
           () => BaseButton(
             text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
             onTap: () async => await controller.changeRoutineToCompleted(),
-            loading: controller.changingStatus.value,
+            loading: controller.statusUpdating.value,
             disabled: controller.completed,
           ),
         ),

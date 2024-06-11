@@ -25,7 +25,7 @@ class Meal {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'idMeal': id,
-      "timeMeal": timeMeal,
+      "timeMeal": timeMeal?.value,
       'daily': daily?.toMap(),
     };
   }

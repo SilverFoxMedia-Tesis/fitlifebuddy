@@ -13,24 +13,28 @@ import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:get/get.dart';
 
 class RoutineController extends GetxController {
-  final getXDialog = Get.find<GetXDialog>();
-  final exerciseApi = Get.find<ExerciseApi>();
-  final routineExerciseApi = Get.find<RoutineExerciseApi>();
-  final dailyApi = Get.find<DailyApi>();
-  final planService = Get.find<PlanService>();
+  final _exerciseApi = Get.find<ExerciseApi>();
+  final _routineExerciseApi = Get.find<RoutineExerciseApi>();
+  final _dailyApi = Get.find<DailyApi>();
+  
+  final _getXDialog = Get.find<GetXDialog>();
+  final _planService = Get.find<PlanService>();
+
   final currentExercises = <Exercise>[].obs;
   final availableExercises = <Exercise>[].obs;
 
   final loading = false.obs;
-  final changeLoading = false.obs;
-  var selectedId = 0;
+  final statusUpdating = false.obs;
+  final changing = false.obs;
+
+  var _selectedId = 0;
   final exerciseSelected = Exercise().obs;
   final isSelected = false.obs;
-  final changingStatus = false.obs;
 
+  String get currentDateTime => fromDateToLong(_planService.currentDailyDateTime.value);
   bool get hasExercises => currentExercises.isNotEmpty;
-  String get currentDateTime => fromDateToLong(planService.currentDailyDateTime.value);
-  bool get completed => planService.currentDaily.value.status?.label == Status.completed.label;
+  bool get completed => _planService.currentDaily.value.status?.label == Status.completed.label;
+  bool get hasOptions => availableExercises.isNotEmpty;
 
   @override
   void onInit() {
@@ -41,7 +45,7 @@ class RoutineController extends GetxController {
   void loadData() {
     try {
       loading(true);
-      currentExercises(planService.currentExercises);
+      currentExercises(_planService.currentExercises);
     } catch (e) {
       displayErrorToast(e);
     } finally {
@@ -51,29 +55,33 @@ class RoutineController extends GetxController {
 
   Future<void> changeRoutineToCompleted() async {
     try {
-      changingStatus(true);
-      final daily = planService.currentDaily.value;
+      statusUpdating(true);
+      final daily = _planService.currentDaily.value;
       if (daily.id != null) {
         daily.status = Status.completed;
-        await dailyApi.updateDaily(daily.id!, daily);
-        planService.setDaily(daily);
+        await _dailyApi.updateDaily(daily.id!, daily);
+        _planService.setDaily(daily);
       }
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      changingStatus(false);
+      statusUpdating(false);
     }
   }
 
   Future<void> openChangeExerciseDialog(Exercise exercise) async {
+    await _getAvaliablesExercises(exercise);
+    await _getXDialog.showDialog(const ChangeExerciseDialog(), onClose: onDialogClose);
+  }
+
+  Future<void> _getAvaliablesExercises(Exercise exercise) async {
     if (exercise.type != null) {
-      selectedId = exercise.id!;
-      availableExercises.value = await exerciseApi.getExercisesByType(exercise.type!.value);
+      _selectedId = exercise.id!;
+      availableExercises.value = await _exerciseApi.getExercisesByType(exercise.type!.value);
       availableExercises.removeWhere((e) => e.id == exercise.id);
       for (var exercise in availableExercises) {
         exercise.imageUrl = exercisesURLMap[exercise.id];
       }
-      await getXDialog.showDialog(const ChangeExerciseDialog(), onClose: onDialogClose);
     }
   }
 
@@ -84,28 +92,28 @@ class RoutineController extends GetxController {
 
   Future<void> changeExercise() async {
     try {
-      changeLoading(true);
-      final id = planService.routineExerciseIds[selectedId];
+      changing(true);
+      final id = _planService.routineExerciseIds[_selectedId];
       if (id != null) {
         final routineExercise = RoutineExercise(
           idRoutineExercise: id,
-          routine: planService.currentRoutine.value,
+          routine: _planService.currentRoutine.value,
           exercise: exerciseSelected.value,
         );
-        var updated = await routineExerciseApi.updateRoutineExercise(id, routineExercise);
-        final index = planService.currentExercises.indexWhere((e) => e.id == selectedId);
+        var updated = await _routineExerciseApi.updateRoutineExercise(id, routineExercise);
+        final index = _planService.currentExercises.indexWhere((e) => e.id == _selectedId);
         if (index != -1) {
           updated.exercise?.imageUrl = exercisesURLMap[updated.exercise?.id];
-          planService.currentExercises[index] = updated.exercise!;
-          planService.routineExerciseIds[selectedId] = updated.idRoutineExercise!;
-          currentExercises(planService.currentExercises);
+          _planService.currentExercises[index] = updated.exercise!;
+          _planService.routineExerciseIds[_selectedId] = updated.idRoutineExercise!;
+          currentExercises(_planService.currentExercises);
         }
       }
       onDialogClose();
     } catch (e) {
       displayErrorToast(e);
     } finally {
-      changeLoading(true);
+      changing(true);
     }
   }
 

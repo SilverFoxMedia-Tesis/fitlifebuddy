@@ -1,5 +1,4 @@
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
-import 'package:fitlifebuddy/core/utils/maps.dart';
 import 'package:fitlifebuddy/pages/meal_page/meal_controller.dart';
 import 'package:fitlifebuddy/pages/plan_page/widgets/plan_item_card.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/app_dialog.dart';
@@ -15,14 +14,18 @@ class ChangeMealDialog extends GetView<MealController> {
   Widget build(BuildContext context) {
     return AppDialog(
       title: 'select_a_meal'.tr,
+      onClose: controller.onDialogClose,
       extraContent: controller.hasOptions
         ? buildOptions()
         : EmptyResult(message: 'no_options'.tr),
       actions: [
-        BaseButton(
-          text: 'edit_meal'.tr,
-          onTap: () {},
-          disabled: true,
+        Obx(
+          () => BaseButton(
+            text: 'edit_meal'.tr,
+            onTap: () async => await controller.changeMeal(),
+            loading: controller.changing.value,
+            disabled: !controller.isSelected.value,
+          ),
         ),
       ],
     );
@@ -39,11 +42,13 @@ class ChangeMealDialog extends GetView<MealController> {
             children: [
               InkWell(
                 onTap: () => controller.onMealSelected(meal),
-                child: PlanItemCard(
-                  text: foodsESMap[meal.foods?.first.id] ?? '',
-                  image: meal.imageUrl,
-                  border: (controller.mealSelected.value == meal)
-                    ? true : null,
+                child: Obx(
+                  () => PlanItemCard(
+                    text: meal.fullname ?? '',
+                    image: meal.imageUrl,
+                    border: (controller.mealSelected.value == meal)
+                      ? true : null,
+                  ),
                 ),
               ),
               AppSpacing.spacingVertical20,

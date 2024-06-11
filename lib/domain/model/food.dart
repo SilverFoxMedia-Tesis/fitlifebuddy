@@ -9,6 +9,7 @@ class Food {
   String? measure;
   num? grams;
   num? calories;
+  num? protein;
   num? fat;
   num? satFat;
   num? fiber;
@@ -21,6 +22,7 @@ class Food {
     this.name,
     this.measure,
     this.grams,
+    this.protein,
     this.calories,
     this.fat,
     this.satFat,
@@ -37,11 +39,12 @@ class Food {
       'measure': measure,
       'grams': grams,
       'calories': calories,
+      'protein': protein,
       'fat': fat,
       'satFat': satFat,
       'fiber': fiber,
       'carbs': carbs,
-      'categoryName': categoryName,
+      'categoryName': categoryName?.value,
     };
   }
 
@@ -52,6 +55,7 @@ class Food {
       measure: map['measure'] != null ? map['measure'] as String : null,
       grams: map['grams'] != null ? map['grams'] as num : null,
       calories: map['calories'] != null ? map['calories'] as num : null,
+      protein: map['protein'] != null ? map['protein'] as num : null,
       fat: map['fat'] != null ? map['fat'] as num : null,
       satFat: map['satFat'] != null ? map['satFat'] as num : null,
       fiber: map['fiber'] != null ? map['fiber'] as num : null,

@@ -44,4 +44,11 @@ class MealApi {
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map((i) => MealFood.fromMap(i)).toList();
   }
+
+  // Get RandomMeals
+  Future<List<Meal>> getRandomMeals(int planId, String timeMeal) async {
+    final response = await _apiBase.get('meals/randomMeals/$planId/$timeMeal');
+    final List<dynamic> jsonData = json.decode(response.body);
+    return jsonData.map((i) => Meal.fromMap(i)).toList();
+  }
 }

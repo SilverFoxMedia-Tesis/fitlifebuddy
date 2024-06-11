@@ -63,7 +63,7 @@ class MealsView extends GetView<PlanController> {
         PlanItemCard(
           text: meal.fullname ?? '', 
           image: meal.imageUrl,
-          onTap: () => Get.toNamed(AppRoutes.meal, arguments: meal),
+          onTap: () => Get.toNamed(AppRoutes.meal, arguments: {'meal': meal}),
         ),
       ],
     );

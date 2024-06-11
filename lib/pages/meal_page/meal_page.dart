@@ -29,9 +29,11 @@ class MealPage extends GetView<MealController> {
               AppSpacing.spacingVertical24,
               buildCustomBar(),
               AppSpacing.spacingVertical24,
-              Text(
-                controller.fullname,
-                style: AppTextStyle.robotoSemibold20,
+              Obx(
+                () => Text(
+                  controller.fullname,
+                  style: AppTextStyle.robotoSemibold20,
+                ),
               ),
               AppSpacing.spacingVertical24,
               Text(
@@ -61,15 +63,17 @@ class MealPage extends GetView<MealController> {
         BaseButton(
           text: 'edit_meal'.tr,
           actionSeverity: ActionSeverity.warning,
-          onTap: () => controller.openChangeMealDialog(),
+          onTap: () async => await controller.openChangeMealDialog(),
           disabled: controller.completed,
         ),
         AppSpacing.spacingHorizontal16,
-        BaseButton(
-          text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
-          onTap: () async => await controller.changeMealToCompleted(),
-          loading: controller.statusUpdating.value,
-          disabled: controller.completed,
+        Obx(
+          () => BaseButton(
+            text: controller.completed ? 'completed'.tr : "mark_as_completed".tr,
+            onTap: () async => await controller.changeMealToCompleted(),
+            loading: controller.statusUpdating.value,
+            disabled: controller.completed,
+          ),
         ),
       ],
     );
@@ -77,19 +81,21 @@ class MealPage extends GetView<MealController> {
 
   Widget buildFoods() {
     return Expanded(
-      child: Wrap(
-          spacing: 24,
-          runSpacing: 24,
-          children: List.generate(controller.foodsLength, (index) {
-              final food = controller.currentMeal.value.foods![index];
-              return PlanItemCard(
-                text: translateFood(food.id!),
-                image: food.imageUrl,
-                onTap: () => controller.openViewFoodInfoDialog(food),
-              );
-            },
+      child: Obx(
+        () => Wrap(
+            spacing: 24,
+            runSpacing: 24,
+            children: List.generate(controller.foodsLength, (index) {
+                final food = controller.currentMeal.value.foods![index];
+                return PlanItemCard(
+                  text: translateFood(food.id!),
+                  image: food.imageUrl,
+                  onTap: () => controller.openViewFoodInfoDialog(food),
+                );
+              },
+            ),
           ),
-        ),
+      ),
     );
   }
 }

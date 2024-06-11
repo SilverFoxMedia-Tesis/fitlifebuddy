@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fitlifebuddy/core/utils/date_format.dart';
 import 'package:fitlifebuddy/core/utils/error_utils.dart';
 import 'package:fitlifebuddy/core/utils/maps.dart';
+import 'package:fitlifebuddy/core/utils/text_utils.dart';
 import 'package:fitlifebuddy/domain/api/daily_api.dart';
 import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
@@ -12,7 +13,6 @@ import 'package:fitlifebuddy/domain/enum/frecuency.dart';
 import 'package:fitlifebuddy/domain/enum/goal_type.dart';
 import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
-import 'package:fitlifebuddy/domain/model/food.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
 import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
@@ -159,7 +159,7 @@ class PlanController extends GetxController {
             final mealFoods = await _mealApi.getMealFoodsByMealId(meal.id!);
             if (mealFoods.isNotEmpty) {
               meal.foods = mealFoods.map((mf) => mf.food!).toList();
-              meal.fullname = getName(meal.foods!);
+              meal.fullname = getMealFullname(meal.foods!);
               meal.imageUrl = foodsURLMap[meal.foods?.first.id];
             }
           }
@@ -170,16 +170,6 @@ class PlanController extends GetxController {
     } catch (e) {
       displayErrorToast(e);
     }
-  }
-
-  String getName(List<Food> foods) {
-    if (foods.isEmpty) return '';
-    final names = foods.map((food) => translateFood(food.id!)).toList();
-    if (names.isEmpty) return '';
-    if (names.length == 1) {
-      return names.first.capitalizeFirst ?? '';
-    }
-    return '${names.sublist(0, names.length - 1).join(', ')} y ${names.last}'.capitalizeFirst ?? '';
   }
 
   Future<void> _getExercises(int dailyId) async { //corregir
