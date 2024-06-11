@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:fitlifebuddy/domain/model/nutritionist.dart';
 import 'package:fitlifebuddy/domain/model/person.dart';
 
-
 class Patient {
   int? id;
   String? birthDate;

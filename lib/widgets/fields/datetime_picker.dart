@@ -43,6 +43,7 @@ class DateTimePicker extends StatelessWidget {
           name: title,
           controller: controller,
           initialDate: initialDate,
+          initialValue: initialDate,
           onChanged: onChanged,
           validator: (value) {
             if (value == null) return "validator_empty".tr;

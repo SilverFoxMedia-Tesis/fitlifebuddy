@@ -234,8 +234,8 @@ class PatientProfileController extends GetxController{
   Future<void> _updatePatient() async {
     try {
       var patient = currentPatient;
-      if (patient.id != null && birthdateController.value.text.isNotEmpty) {
-        patient.birthDate = birthdateController.value.text;
+      if (patient.id != null) {
+        patient.birthDate = fromDateToInitial(currentBirthDate.value);
         final updated = await _patientApi.updatePatient(patient.id!, patient);
         currentPatient = updated;
       }
