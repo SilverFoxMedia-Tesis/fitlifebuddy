@@ -25,7 +25,7 @@ class PatientApi {
   }
 
   // Get Patients by Id
-  Future<List<Patient>> getPatientsById(int id) async { // corregir
+  Future<List<Patient>> getPatientsById(int id) async { //TODO: corregir
     final response = await _apiBase.get('pacients/$id');
     final List<dynamic> jsonData = json.decode(response.body);
     return jsonData.map((i) => Patient.fromMap(i)).toList();

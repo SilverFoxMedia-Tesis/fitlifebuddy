@@ -15,7 +15,6 @@ class MealFoodApi {
   }
 
   Future<MealFood> updateMealFood(int id, MealFood mealFood) async {
-    print(mealFood.toJson());
     final response = await _apiBase.put('mealFoods/$id', body: mealFood.toJson());
     return MealFood.fromJson(response.body);
   }

@@ -34,7 +34,7 @@ class AppTextField extends StatelessWidget {
     this.suffixText,
     this.suffixIcon,
     this.onSuffixIconPressed,
-    this.width = ContainerSize.baseContainerdWidth, // corregir
+    this.width = ContainerSize.baseContainerdWidth, //TODO: corregir
     this.enabled = true,
     this.obscureText = false,
     this.inputType,
@@ -70,7 +70,7 @@ class AppTextField extends StatelessWidget {
       controller: controller,
       validator: validateWeightAndHeight,
       suffixText: suffixText,
-      width: width ?? ContainerSize.baseContainerdWidth, // corregir
+      width: width ?? ContainerSize.baseContainerdWidth, //TODO: corregir
       enabled: enabled ?? true,
       inputType: TextInputType.number,
       maxLength: 3,

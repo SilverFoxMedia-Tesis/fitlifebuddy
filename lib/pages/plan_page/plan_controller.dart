@@ -69,7 +69,7 @@ class PlanController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    routineExercises = await _routineExerciseApi.getRoutineExercises(); //corregir
+    routineExercises = await _routineExerciseApi.getRoutineExercises(); //TODO: corregir
     await getPlan();
     _setPlanDates();
     super.onInit();
@@ -141,7 +141,7 @@ class PlanController extends GetxController {
         await _getMeals(daily!.id!);
         await _getExercises(daily.id!);
         _planService.setDaily(daily);
-        _planService.setDailyDatetime(currentDateTime.value); //corregir
+        _planService.setDailyDatetime(currentDateTime.value); //TODO: corregir
       }
     } catch (e) {
       displayErrorToast(e);
@@ -172,7 +172,7 @@ class PlanController extends GetxController {
     }
   }
 
-  Future<void> _getExercises(int dailyId) async { //corregir
+  Future<void> _getExercises(int dailyId) async { //TODO: corregir
     try {
       final list = await _dailyApi.getRoutinesByDailyId(dailyId);
       if (list.isNotEmpty) {
