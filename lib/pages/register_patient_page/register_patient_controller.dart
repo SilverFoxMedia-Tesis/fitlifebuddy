@@ -15,6 +15,7 @@ import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/food_category.dart';
 import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
+import 'package:fitlifebuddy/domain/enum/health_risk.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
 import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
@@ -23,7 +24,9 @@ import 'package:fitlifebuddy/domain/model/patient.dart';
 import 'package:fitlifebuddy/domain/model/patient_history.dart';
 import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
+import 'package:fitlifebuddy/pages/register_patient_page/widgets/health_risk_dialog.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/app_dialog/getx_dialog.dart';
 import 'package:fitlifebuddy/widgets/app_toast/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +42,7 @@ class RegisterPatientController extends GetxController{
 
   final _formValidationService = Get.find<FormValidationService>();
   final _appToast = Get.find<AppToast>();
+  final _getXDialog = Get.find<GetXDialog>();
 
   final pageController = PageController(initialPage: 0);
   final currentPage = 0.obs;
@@ -227,6 +231,10 @@ class RegisterPatientController extends GetxController{
       displayErrorToast(e);
     } finally {
       loading(false);
+      final healthRisk = _calculateHealthRisk();
+      if (healthRisk != HealthRisk.low) {
+        _getXDialog.showDialog(HealthRiskDialog(healthRisk: healthRisk), onClose: onDialogClose);
+      }
     }
   }
 
@@ -285,6 +293,20 @@ class RegisterPatientController extends GetxController{
     return buffer.toString();
   }
 
+  HealthRisk _calculateHealthRisk() {
+    final measure = patientHistory.abdominalCircumference ?? 0;
+    final gender = patientHistory.gender;
+    if (gender == Gender.male) {
+      if (measure >= 102) return HealthRisk.veryHigh;
+      if (measure >= 94) return HealthRisk.high;
+      return HealthRisk.low;
+    } else {
+      if (measure >= 88) return HealthRisk.veryHigh;
+      if (measure >= 80) return HealthRisk.high;
+      return HealthRisk.low;
+    }
+  }
+
   void copy(String value) {
     Clipboard.setData(
       ClipboardData(
@@ -295,5 +317,10 @@ class RegisterPatientController extends GetxController{
       message: 'copied'.tr,
       type: ToastificationType.success,
     );
+  }
+
+  bool onDialogClose() {
+    Get.back();
+    return true;
   }
 }
