@@ -7,7 +7,7 @@ import 'package:fitlifebuddy/domain/api/daily_api.dart';
 import 'package:fitlifebuddy/domain/api/meal_api.dart';
 import 'package:fitlifebuddy/domain/api/patient_api.dart';
 import 'package:fitlifebuddy/domain/api/plan_api.dart';
-import 'package:fitlifebuddy/domain/api/routine_exercises_api.dart';
+import 'package:fitlifebuddy/domain/api/routine_api.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/frecuency.dart';
 import 'package:fitlifebuddy/domain/enum/goal_type.dart';
@@ -15,7 +15,6 @@ import 'package:fitlifebuddy/domain/model/daily.dart';
 import 'package:fitlifebuddy/domain/model/exercise.dart';
 import 'package:fitlifebuddy/domain/model/meal.dart';
 import 'package:fitlifebuddy/domain/model/plan.dart';
-import 'package:fitlifebuddy/domain/model/routine_exercise.dart';
 import 'package:fitlifebuddy/domain/service/form_validation_service.dart';
 import 'package:fitlifebuddy/domain/service/plan_service.dart';
 import 'package:fitlifebuddy/domain/service/shared_preferences.dart';
@@ -32,7 +31,7 @@ class PlanController extends GetxController {
   final _planApi = Get.find<PlanApi>();
   final _dailyApi = Get.find<DailyApi>();
   final _mealApi = Get.find<MealApi>();
-  final _routineExerciseApi = Get.find<RoutineExerciseApi>();
+  final _routineApi = Get.find<RoutineApi>();
 
   final _getXDialog = Get.find<GetXDialog>();
   final _appToast = Get.find<AppToast>();
@@ -52,7 +51,6 @@ class PlanController extends GetxController {
   var selectedFrequency = '';
   var selectedGoalType = '';
   var dailies = <Daily>[];
-  var routineExercises = <RoutineExercise>[];
 
   final frequencies = Frecuency.values.map((e) => e.label).toList();
   final goaltypes = GoalType.values.map((e) => e.label).toList();
@@ -69,7 +67,6 @@ class PlanController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    routineExercises = await _routineExerciseApi.getRoutineExercises(); //TODO: corregir
     await getPlan();
     _setPlanDates();
     super.onInit();
@@ -172,18 +169,18 @@ class PlanController extends GetxController {
     }
   }
 
-  Future<void> _getExercises(int dailyId) async { //TODO: corregir
+  Future<void> _getExercises(int dailyId) async {
     try {
       final list = await _dailyApi.getRoutinesByDailyId(dailyId);
       if (list.isNotEmpty) {
         final routine = list.first;
-        final filteredList = routineExercises.where((i) => i.routine?.id == routine.id).toList();
+        _planService.setRoutine(routine);
+        final filteredList = await _routineApi.getRoutineExercisesByRoutineId(routine.id!);
         var ids = <int, int>{};
         for (var i in filteredList) { 
           ids[i.exercise!.id!] = i.idRoutineExercise!;
         }
         _planService.setRoutineExerciseIds(ids);
-        _planService.setRoutine(filteredList.first.routine!);
         final filteredExercises = filteredList.map((i) => i.exercise).whereType<Exercise>().toList();
         for (var exercise in filteredExercises) {
           exercise.imageUrl = exercisesURLMap[exercise.id];
