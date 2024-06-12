@@ -41,7 +41,7 @@ class FoodInformationDialog extends StatelessWidget {
                   AppSpacing.spacingVertical8,
                   buildNutrient(
                     'protein'.tr,
-                    '${food.fiber} g',
+                    '${food.protein} g',
                   ),
                   AppSpacing.spacingVertical8,
                   buildNutrient(
