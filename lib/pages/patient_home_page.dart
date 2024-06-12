@@ -21,7 +21,7 @@ class PatientHomePage extends GetView {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBanner(text: 'phrase1'.tr),
+            const AppBanner(),
             AppSpacing.spacingVertical32,
             AppCard(
               title: 'my_current_plan'.tr, 

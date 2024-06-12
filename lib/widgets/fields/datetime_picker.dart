@@ -24,7 +24,7 @@ class DateTimePicker extends StatelessWidget {
     this.controller,
     this.initialDate,
     this.onChanged,
-    this.width = ContainerSize.baseContainerdWidth, //TODO: corregir
+    this.width = ContainerSize.baseContainerWidth, //TODO: corregir
     this.enabled = true,
   });
 

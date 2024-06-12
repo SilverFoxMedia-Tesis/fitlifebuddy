@@ -22,7 +22,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: ContainerSize.baseContainerdWidth,
+              width: ContainerSize.baseContainerWidth,
               child: Text(
                 'recover_password'.tr,
                 style: AppTextStyle.robotoSemibold24,
@@ -30,7 +30,7 @@ class RecoverPasswordForm extends GetView<RecoverPasswordController> {
             ),
             AppSpacing.spacingVertical24,
             SizedBox(
-              width: ContainerSize.baseContainerdWidth,
+              width: ContainerSize.baseContainerWidth,
               child: Text(
                 'recover_password_description'.tr,
                 style: AppTextStyle.robotoMedium14,

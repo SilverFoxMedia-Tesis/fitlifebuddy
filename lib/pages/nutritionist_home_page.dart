@@ -19,22 +19,20 @@ class NutritionistHomePage extends GetView {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBanner(
-              text: 'welcome_nutritionist'.tr,
-            ),
+            const AppBanner(),
             AppSpacing.spacingVertical32,
             Row(
               children: [
                 AppCard(
-                  title: 'my_patients'.tr, 
-                  description: 'my_patiens_description'.tr, 
+                  title: 'my_patients'.tr,
+                  description: 'my_patiens_description'.tr,
                   icon: AppIcons.person,
                   onTap: () => Get.toNamed(AppRoutes.patients),
                 ),
                 AppSpacing.spacingHorizontal16,
                 AppCard(
-                  title: 'register_patient'.tr, 
-                  description: 'register_patient_description'.tr, 
+                  title: 'register_patient'.tr,
+                  description: 'register_patient_description'.tr,
                   icon: AppIcons.person,
                   onTap: () => Get.toNamed(AppRoutes.registerPatient),
                 ),

@@ -25,7 +25,7 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
           ),
           AppSpacing.spacingVertical24,
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: ContainerSize.baseContainerdWidth),
+            constraints: const BoxConstraints(maxWidth: ContainerSize.baseContainerWidth),
             child: Text(
               'successful_registration_descripction'.tr,
               style: AppTextStyle.robotoSemibold14,
@@ -43,7 +43,7 @@ class SuccesfulRegisterContainer extends GetView<RegisterPatientController> {
           ),
           AppSpacing.spacingVertical24,
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: ContainerSize.baseContainerdWidth),
+            constraints: const BoxConstraints(maxWidth: ContainerSize.baseContainerWidth),
             child: Text(
               'successful_registration_warning'.tr,
               style: AppTextStyle.robotoSemibold14.copyWith(

@@ -81,7 +81,7 @@ class TextContainer extends StatelessWidget {
       case TextContainerStyle.type2:
         return 160;
       default:
-      return ContainerSize.baseContainerdWidth;
+      return ContainerSize.baseContainerWidth;
     }
   }
 }

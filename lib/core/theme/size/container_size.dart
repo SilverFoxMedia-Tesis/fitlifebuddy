@@ -15,7 +15,7 @@ class ContainerSize {
   static const notificationCardWidth = 400.0;
   static const notificationCardHeight = 112.0;
   static const baseTextfieldWidth = 348.0;
-  static const baseContainerdWidth = 348.0;
+  static const baseContainerWidth = 348.0;
   static const iconSize = 18.0;
   static const iconSizeLarge = 22.0;
   static const snackBarMaxWidth = 378.0;
@@ -26,4 +26,5 @@ class ContainerSize {
   static const confirmationDialogWidth = 380.0;
   static const loadingIndicator = 24.0;
   static const smallLoadingIndicator = 10.0;
+  static const tipContainerWidth = 700.0;
 }
