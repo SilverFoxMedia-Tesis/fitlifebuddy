@@ -233,7 +233,7 @@ class PlanController extends GetxController {
           message: message,
           type: ToastificationType.success,
         );
-        await _getDailyInfo();
+        await getPlan();
       }
     } catch (e) {
       displayErrorToast(e);
