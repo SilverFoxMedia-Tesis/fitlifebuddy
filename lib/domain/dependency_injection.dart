@@ -1,5 +1,6 @@
 import 'package:fitlifebuddy/domain/api/base_api.dart';
 import 'package:fitlifebuddy/domain/api/daily_api.dart';
+import 'package:fitlifebuddy/domain/api/email_api.dart';
 import 'package:fitlifebuddy/domain/api/exercise_api.dart';
 import 'package:fitlifebuddy/domain/api/feedback_api.dart';
 import 'package:fitlifebuddy/domain/api/food_api.dart';
@@ -53,6 +54,7 @@ class DependencyInjection {
     Get.lazyPut(() => RoutineApi(), fenix: true);
     Get.lazyPut(() => RoutineExerciseApi(), fenix: true);
     Get.lazyPut(() => MealFoodApi(), fenix: true);
+    Get.lazyPut(() => EmailApi(), fenix: true);
 
     //Services
     Get.lazyPut(() => FormValidationService(), fenix: true);
