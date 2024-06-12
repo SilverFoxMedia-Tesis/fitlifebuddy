@@ -148,6 +148,7 @@ class MealController extends GetxController {
 
   bool onDialogClose() {
     Get.back();
+    availableMeals.clear();
     return true;
   }
 }

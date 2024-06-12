@@ -52,6 +52,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
             AppSpacing.spacingVertical24,
             SingleDropdown(
               title: 'gender'.tr,
+              hintText: 'select_a_gender'.tr,
               initialItem: controller.currentGender.value,
               items: controller.genders,
               onChanged: (value) => controller.onChangedGender(value),
@@ -102,6 +103,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
             AppSpacing.spacingVertical24,
             SingleDropdown(
               title: 'diet_type'.tr,
+              hintText: 'select_a_diet_type'.tr,
               initialItem: controller.currentDietType.value,
               items: controller.diettypes,
               onChanged: (value) => controller.onChangedDietType(value),
@@ -111,6 +113,7 @@ class PersonalInfo extends GetView<PatientProfileController> {
             AppSpacing.spacingVertical24,
             SingleDropdown(
               title: 'physical_activity'.tr,
+              hintText: 'select_a_physical_activity'.tr,
               initialItem: controller.currentPhysicalActivity.value,
               items: controller.physicalactivities,
               onChanged: (value) => controller.onChangedPhysicalActivity(value),

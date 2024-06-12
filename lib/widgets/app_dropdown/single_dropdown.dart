@@ -44,9 +44,9 @@ class SingleDropdown extends StatelessWidget {
             maxWidth: width ?? double.infinity,
           ),
           child: CustomDropdown<String>(
-            hintText: hintText,
+            hintText: (initialItem == null || initialItem == '') ? hintText : null,
             items: items,
-            initialItem: initialItem,
+            initialItem: initialItem != '' ? initialItem : null,
             validator: (value) {
               if (value == null || value.isEmpty) return "select_an_option".tr;
               return null;

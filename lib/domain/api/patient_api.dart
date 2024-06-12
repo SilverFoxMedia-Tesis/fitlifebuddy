@@ -24,13 +24,6 @@ class PatientApi {
     return Patient.fromJson(response.body);
   }
 
-  // Get Patients by Id
-  Future<List<Patient>> getPatientsById(int id) async { //TODO: corregir
-    final response = await _apiBase.get('pacients/$id');
-    final List<dynamic> jsonData = json.decode(response.body);
-    return jsonData.map((i) => Patient.fromMap(i)).toList();
-  }
-
   // Create Patient
   Future<Patient> createPatient(Patient patient, int personId, int nutritionistId) async {
     final response = await _apiBase.post('pacients/$personId/$nutritionistId', body: patient.toJson());
