@@ -11,6 +11,7 @@ import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/food_category.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
+import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/health_conditions_cases.dart';
 import 'package:fitlifebuddy/domain/enum/physical_activity.dart';
 import 'package:fitlifebuddy/domain/model/food_condition.dart';
@@ -296,6 +297,21 @@ class PatientProfileController extends GetxController{
     } catch (e) {
       displayErrorToast(e);
     }
+  }
+
+  String getHealthConditionName(HealthCondition condition) {
+    if (condition.name == null) return '';
+    switch (condition.type) {
+      case HealthConditionType.illness:
+        return EnumExtension.getValue(Illness.values, condition.name)?.label ?? condition.name!;
+      default:
+        return EnumExtension.getValue(Surgery.values, condition.name)?.label ?? condition.name!;
+    }
+  }
+
+  String getFoodConditionName(FoodCondition condition) {
+    if (condition.name == null) return '';
+    return EnumExtension.getValue(FoodCategory.values, condition.name)?.label ?? condition.name!;
   }
 
   void cancel() {

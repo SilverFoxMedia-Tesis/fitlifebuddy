@@ -61,7 +61,7 @@ class HealthConditionsColumn extends GetView<PatientProfileController> {
                 ),
                 AppSpacing.spacingHorizontal14,
                 TextContainer(
-                  text: controller.currentHealthConditions[index].name ?? '',
+                  text: controller.getHealthConditionName(controller.currentHealthConditions[index]),
                 ),
               ],
             ),

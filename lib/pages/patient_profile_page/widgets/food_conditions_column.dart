@@ -61,7 +61,7 @@ class FoodConditionsColumn extends GetView<PatientProfileController> {
                 ),
                 AppSpacing.spacingHorizontal14,
                 TextContainer(
-                  text: controller.currentFoodConditions[index].name ?? '',
+                  text: controller.getFoodConditionName(controller.currentFoodConditions[index]),
                 ),
               ],
             ),

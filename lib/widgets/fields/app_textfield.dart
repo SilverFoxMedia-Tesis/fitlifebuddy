@@ -156,6 +156,7 @@ class AppTextField extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth: width ?? double.infinity,
             ),
+            counter: Container(),
           ),
           enabled: enabled,
           readOnly: !enabled,
