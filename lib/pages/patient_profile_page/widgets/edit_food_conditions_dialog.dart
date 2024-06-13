@@ -14,34 +14,37 @@ class EditFoodConditionsDialog extends GetView<PatientProfileController> {
     return AppDialog(
       title: 'edit_health_conditions'.tr,
       extraContent: Column(
-        children: [
-          MultiDropdown(
-            controller: controller.preferencesController.value,
-            title: 'preferences'.tr,
-            hintText: '${'select'.tr} ${'preferences'.tr.toLowerCase()}',
-            items: controller.preferences,
-          ),
-          AppSpacing.spacingVertical24,
-          MultiDropdown(
-            controller: controller.restrictionsController.value,
-            title: 'restrictions'.tr,
-            hintText: '${'select'.tr} ${'restrictions'.tr.toLowerCase()}',
-            items: controller.restrictions,
-          ),
-          AppSpacing.spacingVertical24,
-          MultiDropdown(
-            controller: controller.allergiesController.value,
-            title: 'allergies'.tr,
-            hintText: '${'select'.tr} ${'allergies'.tr.toLowerCase()}',
-            items: controller.allergies,
-          ),
-        ],
+          children: [
+            MultiDropdown(
+              controller: controller.preferencesController.value,
+              title: 'preferences'.tr,
+              hintText: '${'select'.tr} ${'preferences'.tr.toLowerCase()}',
+              items: controller.preferences,
+            ),
+            AppSpacing.spacingVertical24,
+            MultiDropdown(
+              controller: controller.restrictionsController.value,
+              title: 'restrictions'.tr,
+              hintText: '${'select'.tr} ${'restrictions'.tr.toLowerCase()}',
+              items: controller.restrictions,
+            ),
+            AppSpacing.spacingVertical24,
+            MultiDropdown(
+              controller: controller.allergiesController.value,
+              title: 'allergies'.tr,
+              hintText: '${'select'.tr} ${'allergies'.tr.toLowerCase()}',
+              items: controller.allergies,
+            ),
+          ],
       ),
       actions: [
-        BaseButton(
-          text: 'save'.tr,
-          onTap: () async => await controller.updateFoodConditions(),
-          disabled: true,
+        Obx(
+          () => BaseButton(
+            text: 'save'.tr,
+            loading: controller.isFoodCUpdating.value,
+            onTap: () async => await controller.updateFoodConditions(),
+            disabled: true,
+          ),
         ),
       ],
     );

@@ -31,10 +31,13 @@ class EditHealthConditionsDialog extends GetView<PatientProfileController> {
         ],
       ),
       actions: [
-        BaseButton(
-          text: 'save'.tr,
-          onTap: () async => await controller.updateHealthConditions(),
-          disabled: true,
+        Obx(
+          () => BaseButton(
+            text: 'save'.tr,
+            loading: controller.isHealthCUpdating.value,
+            onTap: () async => await controller.updateHealthConditions(),
+            disabled: true,
+          ),
         ),
       ],
     );

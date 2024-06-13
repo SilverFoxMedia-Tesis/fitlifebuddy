@@ -10,6 +10,7 @@ import 'package:fitlifebuddy/domain/api/person_api.dart';
 import 'package:fitlifebuddy/domain/enum/diet_type.dart';
 import 'package:fitlifebuddy/domain/enum/enum_extensions.dart';
 import 'package:fitlifebuddy/domain/enum/food_category.dart';
+import 'package:fitlifebuddy/domain/enum/food_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/gender.dart';
 import 'package:fitlifebuddy/domain/enum/health_condition_type.dart';
 import 'package:fitlifebuddy/domain/enum/health_conditions_cases.dart';
@@ -169,11 +170,59 @@ class PatientProfileController extends GetxController{
   void onEditPersonalInfoPressed() => isPersonalInfoEditing(true);
 
   Future<void> openEditHealthConditionsDialog() async {
+    _setHealthControllers();
     await _getXDialog.showDialog(const EditHealthConditionsDialog(), onClose: onDialogClose);
   }
 
+  void _setHealthControllers() {
+    surgeriesController.value.clear();
+    illnessesController.value.clear();
+    List<String> surgeryLabels = [];
+    List<String> illnessLabels = [];
+    for (final condition in currentHealthConditions) {
+      if (condition.type == HealthConditionType.surgery) {
+        final surgery = EnumExtension.getValue(Surgery.values, condition.name);
+        if (surgery?.label != null) {
+          surgeryLabels.add(surgery!.label);
+        }
+      } else if (condition.type == HealthConditionType.illness) {
+        final illness = EnumExtension.getValue(Illness.values, condition.name);
+        if (illness?.label != null) {
+          illnessLabels.add(illness!.label);
+        }
+      }
+    }
+    surgeriesController.value.value.addAll(surgeryLabels);
+    illnessesController.value.value.addAll(illnessLabels);
+  }
+
   Future<void> openEditFoodConditionsDialog() async {
+    _setFoodControllers();
     await _getXDialog.showDialog(const EditFoodConditionsDialog(), onClose: onDialogClose);
+  }
+
+  void _setFoodControllers() {
+    preferencesController.value.clear();
+    restrictionsController.value.clear();
+    allergiesController.value.clear();
+    List<String> preferences = [];
+    List<String> restrictions = [];
+    List<String> allergies = [];
+    for (final condition in currentFoodConditions) {
+      final foodCategory = EnumExtension.getValue(FoodCategory.values, condition.name);
+      if (foodCategory?.label != null) {
+        if (condition.type == FoodConditionType.preference) {
+          preferences.add(foodCategory!.label);
+        } else if (condition.type == FoodConditionType.restriction) {
+          restrictions.add(foodCategory!.label);
+        } else if (condition.type == FoodConditionType.allergy) {
+          allergies.add(foodCategory!.label);
+        }
+      }
+    }
+    preferencesController.value.value.addAll(preferences);
+    restrictionsController.value.value.addAll(restrictions);
+    allergiesController.value.value.addAll(allergies);
   }
 
   void onChangedGender(String? value) {
