@@ -12,7 +12,7 @@
     "home" : "Inicio",
     "my_profile" : "Mi perfil",
     "notifications" : "Notificaciones",
-    "settings" : "Ajustes",
+    "settings" : "Configuración",
     "help" : "Ayuda",
     "welcome_nutritionist" : "Bienvenido nutricionista!",
     "my_patiens" : "Mis pacientes",
@@ -169,5 +169,7 @@
     "go_to_the_doctor": "Te recomendamos visitar a tu médico para que revise tu estado de salud.",
     "goal": "Objetivo",
     "my_progress": "Mi progreso",
-    "my_progress_description": "Revisa tu progreso relacionado con tu plan actual y anteriores"
+    "my_progress_description": "Revisa tu progreso relacionado con tu plan actual y anteriores",
+    "email_notifications": "Notificaciones por correo electrónico",
+    "email_notifications_description": "Activa o desactiva las notificaciones por correo electrónico"
 }

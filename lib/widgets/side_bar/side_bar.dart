@@ -74,14 +74,13 @@ class SideBar extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // TODO: oculto, no hay ninguna funcionalidad relacionada con este boton aun
-                  // AppButton(
-                  //   icon: AppIcons.settings, 
-                  //   text: 'settings'.tr, 
-                  //   enableDarkColor: true,
-                  //   onTap: () => Get.toNamed(AppRoutes.settings),
-                  // ),
-                  // AppSpacing.spacingVertical32,
+                  AppButton(
+                    icon: AppIcons.settings, 
+                    text: 'settings'.tr, 
+                    enableDarkColor: true,
+                    onTap: () => Get.toNamed(AppRoutes.settings),
+                  ),
+                  AppSpacing.spacingVertical32,
                   AppButton(
                     icon: AppIcons.help, 
                     text: 'help'.tr, 

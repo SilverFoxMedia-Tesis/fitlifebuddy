@@ -1,12 +1,15 @@
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
+import 'package:fitlifebuddy/pages/settings_page/settings_controller.dart';
+import 'package:fitlifebuddy/pages/settings_page/widgets/email_notification.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
+import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends GetView<SettingsController> {
   const SettingsPage({super.key});
 
   @override
@@ -19,6 +22,12 @@ class SettingsPage extends StatelessWidget {
           children: [
             AppSpacing.spacingVertical24,
             buildCustomBar(),
+            AppSpacing.spacingVertical24,
+            const Column(
+              children: [
+                EmailNotifications(),
+              ],
+            ),
           ],
         ),
       ),
@@ -29,6 +38,15 @@ class SettingsPage extends StatelessWidget {
     return CustomBar(
       title: 'settings'.tr,
       onBackPressed: () => Get.offAllNamed(AppRoutes.home),
+      actions: [
+        Obx(
+          () => BaseButton(
+            text: "save".tr,
+            loading: controller.loading.value,
+            onTap:() async => await controller.saveSettings(),
+          ),
+        ),
+      ],
     );
   }
 }

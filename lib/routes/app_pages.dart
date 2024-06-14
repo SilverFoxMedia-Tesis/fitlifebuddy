@@ -19,7 +19,8 @@ import 'package:fitlifebuddy/pages/register_patient_page/register_patient_page.d
 import 'package:fitlifebuddy/pages/register_patient_page/succesful_register_page.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_binding.dart';
 import 'package:fitlifebuddy/pages/routine_page/routine_page.dart';
-import 'package:fitlifebuddy/pages/settings_page/setting_page.dart';
+import 'package:fitlifebuddy/pages/settings_page/settings_binding.dart';
+import 'package:fitlifebuddy/pages/settings_page/settings_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -79,6 +80,7 @@ final appPages = [
   GetPage(
     name: AppRoutes.settings,
     page: () => const SettingsPage(),
+    binding: SettingsBinding(),
     transition: Transition.noTransition,
   ),
   GetPage(
