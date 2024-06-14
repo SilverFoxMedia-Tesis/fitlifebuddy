@@ -2,7 +2,7 @@ import 'package:fitlifebuddy/core/theme/size/container_size.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
 import 'package:fitlifebuddy/pages/register_patient_page/register_patient_controller.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/single_dropdown.dart';
+import 'package:fitlifebuddy/widgets/dropdowns/single_dropdown.dart';
 import 'package:fitlifebuddy/widgets/fields/app_textfield.dart';
 import 'package:fitlifebuddy/widgets/fields/datetime_picker.dart';
 import 'package:flutter/material.dart';

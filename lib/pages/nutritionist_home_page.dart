@@ -3,7 +3,7 @@ import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/routes/app_routes.dart';
-import 'package:fitlifebuddy/widgets/app_card/app_card.dart';
+import 'package:fitlifebuddy/widgets/cards/app_card.dart';
 import 'package:fitlifebuddy/widgets/banner/app_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,7 +1,6 @@
 import 'package:fitlifebuddy/core/theme/colors/colors.dart';
 import 'package:fitlifebuddy/core/theme/size/container_size.dart';
-import 'package:fitlifebuddy/core/theme/style/box_shadows.dart';
-import 'package:fitlifebuddy/core/theme/style/border_radius.dart';
+import 'package:fitlifebuddy/core/theme/style/box_decoration.dart';
 import 'package:fitlifebuddy/core/theme/style/padding.dart';
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/core/theme/style/text_style.dart';
@@ -27,34 +26,33 @@ class AppCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        alignment: Alignment.center,
-        padding: AppPadding.paddingAppCard,
-        width: ContainerSize.appCardWidth,
+        padding: AppPadding.padding32,
         height: ContainerSize.appCardHeight,
-        decoration: const BoxDecoration(
-          color: AppColors.light,
-          borderRadius: AppBorderRadius.borderRadiusLg,
-          boxShadow: [AppBoxShadow.secondary25Blur8],
-        ),
+        constraints: const BoxConstraints(maxWidth: ContainerSize.appCardWidth),
+        decoration: AppBoxDecoration.lightRadius14,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyle.robotoSemibold24,
-                ),
-                AppSpacing.spacingVertical14,
-                Text(
-                  description,
-                  style: AppTextStyle.robotoMedium14.copyWith(
-                    color: AppColors.primary,
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 300),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyle.robotoSemibold20,
                   ),
-                ),
-              ],
+                  AppSpacing.spacingVertical8,
+                  Text(
+                    description,
+                    style: AppTextStyle.robotoMedium14.copyWith(
+                      color: AppColors.primary,
+                    ),
+                    maxLines: 2,
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: AppPadding.paddingHorizontal16,
@@ -68,7 +66,6 @@ class AppCard extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/plan_page/plan_controller.dart';
 import 'package:fitlifebuddy/widgets/app_dialog/app_dialog.dart';
-import 'package:fitlifebuddy/widgets/app_dropdown/single_dropdown.dart';
+import 'package:fitlifebuddy/widgets/dropdowns/single_dropdown.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

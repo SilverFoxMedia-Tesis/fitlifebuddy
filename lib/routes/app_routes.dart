@@ -11,5 +11,6 @@ class AppRoutes {
   static const successfulRegister = "/successful-register";
   static const settings = "/settings";
   static const questions = "/q&a";
+  static const progress = "/progress";
   // static const notifications = "/notifications";
 }

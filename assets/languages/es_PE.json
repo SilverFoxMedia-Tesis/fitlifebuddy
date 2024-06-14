@@ -167,5 +167,7 @@
     "your_health_risk_is": "De acuerdo con el perímetro abdominal que ingresaste, tu riesgo de salud es",
     "health_risk_description": "El perímetro abdominal es un criterio que establece el riesgo de aparición y/o complicaciones de enfermedades como: diabetes mellitus, hipertensi6n arterial, infartos cardiacos, entre otras.",
     "go_to_the_doctor": "Te recomendamos visitar a tu médico para que revise tu estado de salud.",
-    "goal": "Objetivo"
+    "goal": "Objetivo",
+    "my_progress": "Mi progreso",
+    "my_progress_description": "Revisa tu progreso relacionado con tu plan actual y anteriores"
 }
