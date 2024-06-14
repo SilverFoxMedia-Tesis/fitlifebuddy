@@ -16,7 +16,7 @@ class LoginController extends GetxController {
 
   final _appToast = Get.find<AppToast>();
   final _formValidationService = Get.find<FormValidationService>();
-  final _patientService = Get.find<PatientService>();
+  final _personService = Get.find<PersonService>();
 
   final loginFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController().obs;
@@ -33,7 +33,7 @@ class LoginController extends GetxController {
     if (_formValidationService.validateForm(loginFormKey)) {
       try {
         loading(true);
-        var person = await _personApi.getPersonByEmailAddress(emailController.value.text);
+        final person = await _personApi.getPersonByEmailAddress(emailController.value.text);
         if (person == null || person.password != passwordController.value.text) {
           _appToast.showToast(
             message: 'invalid_credentials'.tr,
@@ -41,6 +41,8 @@ class LoginController extends GetxController {
           );
           return;
         }
+        UserPreferences.setPersonId(person.id.toString());
+        _personService.setPerson(person);
         await setPatient(person.id!);
         _appToast.showToast(
           message: 'successful_login'.tr,
@@ -58,12 +60,11 @@ class LoginController extends GetxController {
 
   Future<void> setPatient(int personId) async {
     try {
-      var patients = await _patientApi.getPatients();
+      final patients = await _patientApi.getPatients();
       if (patients.isNotEmpty) {
         final patient = patients.firstWhereOrNull((p) => p.person?.id == personId);
         if (patient != null) {
           UserPreferences.setPatientId(patient.id.toString());
-          _patientService.setPatient(patient);
         }
       }
     } catch (e) {

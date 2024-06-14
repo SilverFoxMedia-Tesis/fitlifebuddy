@@ -26,4 +26,14 @@ class UserPreferences {
   static String? getPatientId() {
     return _getInstance().getString('patientId');
   }
+
+  // Setter para el ID del usuario
+  static Future<void> setPersonId(String personId) async {
+    await _getInstance().setString('personId', personId);
+  }
+
+  // Getter para el ID del usuario
+  static String? getPersonId() {
+    return _getInstance().getString('personId');
+  }
 }

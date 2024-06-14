@@ -58,7 +58,7 @@ class DependencyInjection {
 
     //Services
     Get.lazyPut(() => FormValidationService(), fenix: true);
-    Get.lazyPut(() => PatientService(), fenix: true);
+    Get.lazyPut(() => PersonService(), fenix: true);
     Get.lazyPut(() => PlanService(), fenix: true);
 
     Get.lazyPut(() => AppToast(), fenix: true);

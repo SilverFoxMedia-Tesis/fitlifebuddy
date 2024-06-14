@@ -3,7 +3,6 @@ import 'package:fitlifebuddy/core/theme/style/spacing.dart';
 import 'package:fitlifebuddy/pages/launcher_page.dart';
 import 'package:fitlifebuddy/pages/settings_page/settings_controller.dart';
 import 'package:fitlifebuddy/pages/settings_page/widgets/email_notification.dart';
-import 'package:fitlifebuddy/routes/app_routes.dart';
 import 'package:fitlifebuddy/widgets/buttons/base_button.dart';
 import 'package:fitlifebuddy/widgets/custom_bar/custom_bar.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ class SettingsPage extends GetView<SettingsController> {
   Widget buildCustomBar() {
     return CustomBar(
       title: 'settings'.tr,
-      onBackPressed: () => Get.offAllNamed(AppRoutes.home),
       actions: [
         Obx(
           () => BaseButton(

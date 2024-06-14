@@ -171,5 +171,6 @@
     "my_progress": "Mi progreso",
     "my_progress_description": "Revisa tu progreso relacionado con tu plan actual y anteriores",
     "email_notifications": "Notificaciones por correo electrónico",
-    "email_notifications_description": "Activa o desactiva las notificaciones por correo electrónico"
+    "email_notifications_description": "Activa o desactiva las notificaciones por correo electrónico",
+    "settings_saved": "Configuración guardada"
 }

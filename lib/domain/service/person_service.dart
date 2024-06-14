@@ -1,12 +1,10 @@
-import 'package:fitlifebuddy/domain/model/patient.dart';
+import 'package:fitlifebuddy/domain/model/person.dart';
 import 'package:get/get.dart';
 
-class PatientService {
-  final patient = Patient().obs;
-  
-  int get patientId => patient.value.id ?? -1;
+class PersonService {
+  final currentPerson = Person().obs;
 
-  void setPatient(Patient patient) {
-    this.patient.value = patient;
+  void setPerson(Person person) {
+    currentPerson.value = person;
   }
 }

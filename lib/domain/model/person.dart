@@ -6,6 +6,7 @@ class Person {
   String? lastname;
   String? emailAddress;
   String? password;
+  bool? acceptNotifications;
 
   Person({
     this.id,
@@ -13,6 +14,7 @@ class Person {
     this.lastname,
     this.emailAddress,
     this.password,
+    this.acceptNotifications,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +24,7 @@ class Person {
       'lastname': lastname,
       'emailAddress': emailAddress,
       'password': password,
+      'acceptsNotifications': acceptNotifications,
     };
   }
 
@@ -32,6 +35,7 @@ class Person {
       lastname: map['lastname'] != null ? map['lastname'] as String : null,
       emailAddress: map['emailAddress'] != null ? map['emailAddress'] as String : null,
       password: map['password'] != null ? map['password'] as String : null,
+      acceptNotifications: map['acceptsNotifications'] != null ? map['acceptsNotifications'] as bool : null,
     );
   }
 

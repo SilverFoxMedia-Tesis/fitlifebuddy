@@ -41,7 +41,7 @@ class PersonApi {
   Future<Person?> getPersonByEmailAddress(String emailAddress) async {
     final response = await _apiBase.get('persons/searchByEmailAddress/$emailAddress');
     final List<dynamic> jsonData = json.decode(response.body);
-    return Person.fromMap(jsonData.first as Map<String, dynamic>); //TODO: revertir a retornar una lista
+    return Person.fromMap(jsonData.first as Map<String, dynamic>); //TODO: corregir retornar uno debe ser unico el correo
   }
 
   // Get Persons by FullName
